@@ -1129,16 +1129,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "a07797b986671b0dc823885a81d5e3516b931599"
+                "reference": "5677cfe02397dd6b58c861870dfaa5d9007d3954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a07797b986671b0dc823885a81d5e3516b931599",
-                "reference": "a07797b986671b0dc823885a81d5e3516b931599",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/5677cfe02397dd6b58c861870dfaa5d9007d3954",
+                "reference": "5677cfe02397dd6b58c861870dfaa5d9007d3954",
                 "shasum": ""
             },
             "require": {
@@ -1151,11 +1151,13 @@
             "require-dev": {
                 "apigen/apigen": "^4.1",
                 "codeception/aspect-mock": "1.0.0",
+                "doctrine/annotations": "~1.2.0",
                 "goaop/framework": "1.0.0-alpha.2",
                 "ircmaxell/random-lib": "^1.1",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "mockery/mockery": "^0.9.4",
                 "moontoast/math": "^1.1",
+                "php-mock/php-mock-phpunit": "^0.3|^1.1",
                 "phpunit/phpunit": "^4.7|>=5.0 <5.4",
                 "satooshi/php-coveralls": "^0.6.1",
                 "squizlabs/php_codesniffer": "^2.3"
@@ -1205,7 +1207,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-10-02 15:51:17"
+            "time": "2016-11-22 19:21:44"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2510,12 +2512,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zachleigh/laravel.git",
-                "reference": "1bdeaa9e6e7064be783d4e37658e1de5f9b33168"
+                "reference": "3320e820bf50311eacbd8eec1b9051f27fac3f91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zachleigh/laravel/zipball/1bdeaa9e6e7064be783d4e37658e1de5f9b33168",
-                "reference": "1bdeaa9e6e7064be783d4e37658e1de5f9b33168",
+                "url": "https://api.github.com/repos/zachleigh/laravel/zipball/3320e820bf50311eacbd8eec1b9051f27fac3f91",
+                "reference": "3320e820bf50311eacbd8eec1b9051f27fac3f91",
                 "shasum": ""
             },
             "require": {
@@ -2571,7 +2573,7 @@
             "support": {
                 "source": "https://github.com/zachleigh/laravel/tree/larafolio5.3"
             },
-            "time": "2016-11-21 22:35:11"
+            "time": "2016-11-22 23:33:24"
         },
         {
             "name": "phpdocumentor/reflection-common",
