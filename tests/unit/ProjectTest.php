@@ -20,6 +20,7 @@ class ProjectTest extends TestCase
     {
         $data = [
             'name' => 'name',
+            'type' => 'site',
             'link' => 'link'
         ];
 

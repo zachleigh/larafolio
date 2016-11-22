@@ -62,6 +62,17 @@
                             v-model="link"
                         >
                     </div>
+                    <div id="projectType" class="form__section">
+                        <label class="form__label" for="name">Project Type</label>
+                        <input
+                            class="form__input"
+                            type="text"
+                            name="projectType"
+                            autocomplete="off"
+                            v-model="projectType"
+                            v-bind:class="{ form__errored: hasError('projectType') }"
+                        >
+                    </div>
                     <div class="form__label" for="name">Text Blocks</div>
                     <text-block
                         v-for="(block, index) in blocks"
@@ -133,6 +144,13 @@
                     {{ link }}
                 </div>
                 <div
+                    id="displayProjectType"
+                    class="project-form__display-area"
+                    v-bind:style="{ top: getHeight('projectType') }"
+                >
+                    {{ projectType }}
+                </div>
+                <div
                     v-for="(block, index) in blocks"
                     :key="block.id"
                     v-bind:id="getBlockId(index)"
@@ -160,6 +178,7 @@
         data: function () {
             return {
                 name: '',
+                projectType: '',
                 link: '',
                 blocks: [],
                 errors: {},
@@ -215,11 +234,13 @@
             changed () {
                 if (this.project) {
                     return this.project.name !== this.name ||
+                        this.project.type !== this.projectType ||
                         this.project.link !== this.link ||
                         this.blocksChanged;
                 }
 
                 return this.name !== '' ||
+                    this.projectType !== '' ||
                     this.link !== '' ||
                     this.blocksChanged;
 
@@ -254,6 +275,8 @@
              */
             setInitialValues () {
                 this.name = this.project.name;
+
+                this.projectType = this.project.type;
 
                 this.link = this.project.link;
 
@@ -330,6 +353,7 @@
             addProject () {
                 this.ajax.post(this.action, {
                     name: this.name,
+                    type: this.projectType,
                     link: this.link,
                     blocks: this.blocks
                 })
@@ -353,6 +377,7 @@
             updateProject () {
                 this.ajax.patch(this.action, {
                     name: this.name,
+                    type: this.projectType,
                     link: this.link,
                     blocks: this.blocks
                 })

@@ -13,7 +13,7 @@ class ProjectController extends Controller
      *
      * @var array
      */
-    protected $fields = ['name', 'link', 'blocks', 'visible'];
+    protected $fields = ['name', 'link', 'blocks', 'visible', 'type'];
 
     /**
      * Show the manager dashboard.
