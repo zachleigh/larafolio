@@ -20,7 +20,7 @@ html, body {
   background-color: #f7f9f9; }
 
 .content {
-  margin: 20px 40px;
+  margin: 20px 40px 50px;
   max-width: 1200px;
   -ms-grid-row-align: center;
   align-self: center; }
@@ -505,6 +505,8 @@ a {
   -webkit-box-pack: justify;
   justify-content: space-between;
   margin: 30px 0; }
+  .dashboard__item:last-child {
+    margin-bottom: 0; }
 
 .dashboard__item-controls {
   display: -webkit-box;
@@ -514,7 +516,8 @@ a {
   flex-direction: column;
   justify-content: space-around;
   min-width: 75px;
-  text-align: right; }
+  text-align: right;
+  margin-left: 15px; }
 
 .dashboard__item-info {
   display: -webkit-box;
@@ -542,7 +545,7 @@ a {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   flex-direction: column;
-  margin-top: 25px; }
+  margin-top: 40px; }
   .image-tile__body {
     display: -webkit-box;
     display: flex;

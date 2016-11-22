@@ -1,3 +1,5 @@
+$space: 15px
+
 .dashboard
 
     +ele(icon)
@@ -9,18 +11,22 @@
         justify-content: space-between
         margin: 30px 0
 
+        &:last-child
+            margin-bottom: 0
+
     +ele(item-controls)
         display: flex
         flex-direction: column
         justify-content: space-around
         min-width: 75px
         text-align: right
+        margin-left: $space
 
     +ele(item-info)
         display: flex
         flex-direction: column
         justify-content: space-between
-        margin-left: 15px
+        margin-left: $space
 
     +ele(item-name)
         margin: 0
