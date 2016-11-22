@@ -2,14 +2,13 @@
 
 namespace Larafolio\Models;
 
-use LaravelLaundromat\Washable;
 use Larafolio\Helpers\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
-    use Sluggable, SoftDeletes, Washable;
+    use Sluggable, SoftDeletes;
 
     /**
      * The table associated with the model.

@@ -19,7 +19,6 @@
     ],
 
     "require": {
-        "zachleigh/laravel-laundromat": "^1.0",
         "intervention/imagecache": "^2.3"
     },
 

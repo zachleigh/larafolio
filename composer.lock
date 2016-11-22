@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ec525bc5ce7cddac14eeadeb89c74fab",
-    "content-hash": "eb978e62afa21475e0519825f5f6c17e",
+    "hash": "c6b9b177bd81736f32e5ce24be3fa2a5",
+    "content-hash": "9d53af2c008e9d274981a070c327f28c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2089,47 +2089,6 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
-        },
-        {
-            "name": "zachleigh/laravel-laundromat",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zachleigh/laravel-laundromat.git",
-                "reference": "ba5c92eba8c779a1d4a2bb3d4df65c504157d42d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zachleigh/laravel-laundromat/zipball/ba5c92eba8c779a1d4a2bb3d4df65c504157d42d",
-                "reference": "ba5c92eba8c779a1d4a2bb3d4df65c504157d42d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "laravel/laravel": "5.2.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "LaravelLaundromat\\": "src/"
-                },
-                "files": []
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Zach Leigh",
-                    "email": "zachleigh@fastmail.jp"
-                }
-            ],
-            "description": "Clean up objects before sending them client-side.",
-            "time": "2016-10-18 22:35:38"
         }
     ],
     "packages-dev": [
