@@ -8,3 +8,4 @@ TODO:
   * Make command to publish and run migrations
   * Make command to publish resources 
 
+vendor:publish --provider="Larafolio\LarafolioServiceProvider" --force

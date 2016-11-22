@@ -119,6 +119,9 @@ class Image extends Model
         return collect(explode('/', $this->path()))->last();
     }
 
+    /**
+     * Generate image properties to be passed to js and save on object.
+     */
     public function generateProps()
     {
         $this->props = [

@@ -30,6 +30,12 @@
                     Content
                 </h2>
                 <section class="project__display-section">
+                    <h3 class="project__display-header">Type</h3>
+                    <div class="project__display-item">
+                        {{ $project->type() }}
+                    </div>
+                </section>
+                <section class="project__display-section">
                     <h3 class="project__display-header">Link</h3>
                     <a href="{{ $project->link() }}" class="project__display-item">
                         {{ $project->link() }}
