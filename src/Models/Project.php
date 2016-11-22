@@ -155,7 +155,7 @@ class Project extends Model
     }
 
     /**
-     * Get small route of set project image or first image in collection.
+     * Get small route of image with project name or first image in collection.
      *
      * @return string
      */
@@ -165,9 +165,47 @@ class Project extends Model
             ->where('name', $this->name())
             ->get();
 
-        if ($projectImage->isEmpty()) {
+        if (!$projectImage->isEmpty()) {
+            return $projectImage->first()->small();
+        } elseif ($this->hasImages()) {
             return $this->images()->first()->small();
         }
+    }
+
+    /**
+     * Get formatted text of block named description or first block.
+     *
+     * @return string
+     */
+    public function getProjectBlock()
+    {
+        $description = $this->block('description');
+
+        if ($description) {
+            return $description;
+        } elseif ($this->hasBlocks()) {
+            return $this->blocks()->first()->formattedText();
+        }
+    }
+
+    /**
+     * Return true if project has images.
+     *
+     * @return boolean
+     */
+    public function hasImages()
+    {
+        return !$this->images->isEmpty();
+    }
+
+    /**
+     * Return true if project has blocks.
+     *
+     * @return boolean
+     */
+    public function hasBlocks()
+    {
+        return !$this->blocks->isEmpty();
     }
 
     /**

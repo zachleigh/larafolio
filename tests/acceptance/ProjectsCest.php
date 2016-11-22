@@ -1,5 +1,6 @@
 <?php
 
+use Larafolio\Models\TextBlock;
 use Illuminate\Support\Facades\Artisan;
 
 class ProjectsCest
@@ -487,5 +488,27 @@ class ProjectsCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->click('#down1');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+    }
+
+    public function block_with_name_description_is_shown_on_dashboard(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $block = $project->blocks->last();
+
+        $I->wantTo('Set a block as the description and see it on the dashboard.');
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->fillField(['name' => 'name0'], 'dfsd');
+        $I->click('Update Project');
+        $I->wait(1);
+
+        $block = TextBlock::find($block->id());
+
+        $I->fillField(['name' => 'name'.$block->order()], 'description');
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->amOnPage('/manager');
+        $I->see($block->text());
     }
 }

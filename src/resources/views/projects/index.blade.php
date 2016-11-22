@@ -22,7 +22,7 @@
                                 <h2 class="dashboard__item-name">
                                     {{ $project->name() }}
                                 </h2>
-                                {!! $project->block('description') !!}
+                                {!! $project->getProjectBlock() !!}
                             </div>
                             <a href="{{ $project->link() }}">
                                 {{ $project->link() }}

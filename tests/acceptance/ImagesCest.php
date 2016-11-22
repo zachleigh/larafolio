@@ -109,4 +109,22 @@ class ImagesCest
         $I->fillField(['name' => 'caption'.$id], 'abc');
         $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
     }
+
+    public function image_with_project_name_is_default_image(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $image = $project->images->last();
+
+        $id = $image->id();
+
+        $I->wantTo('Set the default project image by saving the project name as its name.');
+        $I->login($I);
+        $I->amOnProjectPage($I, $project);
+        $I->fillField(['name' => 'name'.$id], $project->name());
+        $I->click('#button'.$id);
+        $I->wait(1);
+        $I->amOnPage('/manager');
+        $I->seeElement('//img[@src="'.$image->small().'"]');
+    }
 }

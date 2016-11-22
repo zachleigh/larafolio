@@ -79,4 +79,14 @@ class TextBlock extends Model
     {
         return $this->formatted_text;
     }
+
+    /**
+     * Return the text block order value.
+     *
+     * @return int
+     */
+    public function order()
+    {
+        return $this->order;
+    }
 }
