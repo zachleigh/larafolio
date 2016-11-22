@@ -2,9 +2,6 @@
 
 namespace Larafolio\Models;
 
-use Larafolio\Models\Image;
-use Larafolio\Models\Project;
-use Larafolio\Models\TextBlock;
 use Illuminate\Support\Facades\Storage;
 
 trait ManagesPortfolio
@@ -14,7 +11,7 @@ trait ManagesPortfolio
      *
      * @param array $data Array of data to save.
      *
-     * @return App\Project
+     * @return Larafolio\Models\Project
      */
     public function addProject(array $data)
     {
@@ -30,8 +27,8 @@ trait ManagesPortfolio
     /**
      * Update a project in the portfolio.
      *
-     * @param App\Project $project Project to update.
-     * @param array       $data    Array of data to save.
+     * @param Larafolio\Models\Project $project Project to update.
+     * @param array                    $data    Array of data to save.
      *
      * @return bool
      */
@@ -57,7 +54,7 @@ trait ManagesPortfolio
     /**
      * Get block data from data array with order reduced to minimum.
      *
-     * @param  array  $data Data array from request.
+     * @param array $data Data array from request.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -76,7 +73,7 @@ trait ManagesPortfolio
     /**
      * Remove a project from the portfolio.
      *
-     * @param App\Project $project Project to remove.
+     * @param Larafolio\Models\Project $project Project to remove.
      *
      * @return bool
      */
@@ -92,8 +89,8 @@ trait ManagesPortfolio
     /**
      * Add a text block to a project.
      *
-     * @param Project $project   Project to add text block to.
-     * @param array   $blockData Array of text block data.
+     * @param Larafolio\Models\Project $project   Project to add text block to.
+     * @param array                    $blockData Array of text block data.
      *
      * @return App\TextBlock
      */
@@ -105,8 +102,8 @@ trait ManagesPortfolio
     /**
      * Update a text block.
      *
-     * @param  TextBlock $textBlock Text block to update.
-     * @param  array     $blockData Array of text block data.
+     * @param Larafolio\Models\TextBlock $textBlock Text block to update.
+     * @param array                      $blockData Array of text block data.
      *
      * @return App\TextBlock
      */
@@ -119,7 +116,8 @@ trait ManagesPortfolio
 
     /**
      * Remove a text block from a project.
-     * @param  TextBlock $textBlock The text block to delete.
+     *
+     * @param Larafolio\Models\TextBlock $textBlock The text block to delete.
      *
      * @return bool
      */
@@ -131,8 +129,8 @@ trait ManagesPortfolio
     /**
      * Add image to a project.
      *
-     * @param App\Project $project   Project to add image to.
-     * @param array       $imageData Array of image infomation.
+     * @param Larafolio\Models\Project $project   Project to add image to.
+     * @param array                    $imageData Array of image infomation.
      *
      * @return App\Image
      */
@@ -144,8 +142,8 @@ trait ManagesPortfolio
     /**
      * Update image name and caption.
      *
-     * @param App\Image $image     Image to update.
-     * @param array     $imageData Array of inmage information.
+     * @param Larafolio\Models\Image $image     Image to update.
+     * @param array                  $imageData Array of inmage information.
      *
      * @return App\Image
      */
@@ -159,7 +157,7 @@ trait ManagesPortfolio
     /**
      * Remove image from storage and delete database info.
      *
-     * @param App\Image $image Image to remove.
+     * @param Larafolio\Models\Image $image Image to remove.
      *
      * @return bool
      */

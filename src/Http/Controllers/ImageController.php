@@ -11,7 +11,7 @@ class ImageController extends Controller
      * Update image name and caption.
      *
      * @param \Illuminate\Http\Request $request Request object.
-     * @param App\Image                $image   Image to be updated.
+     * @param Larafolio\Models\Image   $image   Image to be updated.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,7 +31,7 @@ class ImageController extends Controller
     /**
      * Remove image from portfolio.
      *
-     * @param  App\Image  $image Image to be removed.
+     * @param Larafolio\Models\Image $image Image to be removed.
      *
      * @return \Illuminate\Http\Response
      */

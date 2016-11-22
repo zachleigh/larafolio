@@ -38,7 +38,6 @@ $factory->define(Larafolio\Models\Project::class, function (Faker\Generator $fak
     ];
 });
 
-
 $factory->define(Larafolio\Models\Image::class, function (Faker\Generator $faker) {
     $project = factory(Larafolio\Models\Project::class)->create();
 

@@ -30,7 +30,7 @@ class ProjectController extends Controller
     /**
      * Show an individual project in the manager.
      *
-     * @param  string $slug Slug of the project to show.
+     * @param string $slug Slug of the project to show.
      *
      * @return \Illuminate\Http\Response
      */
@@ -47,7 +47,7 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.show', [
             'project' => $project,
-            'images' => $images
+            'images' => $images,
         ]);
     }
 
@@ -64,7 +64,7 @@ class ProjectController extends Controller
     /**
      * Add a new project to the portfolio.
      *
-     * @param App\Http\Requests\AddProjectRequest $request Form request.
+     * @param Larafolio\Http\Requests\AddProjectRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */
@@ -94,15 +94,15 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.edit', [
             'project' => $project,
-            'nextInOrder' => $nextInOrder
+            'nextInOrder' => $nextInOrder,
         ]);
     }
 
     /**
      * Update a project.
      *
-     * @param Illuminate\Http\Request $request Request data.
-     * @param App\Project             $project Project to update.
+     * @param \Illuminate\Http\Request $request Request data.
+     * @param Larafolio\Models\Project $project Project to update.
      *
      * @return \Illuminate\Http\Response
      */
@@ -120,8 +120,8 @@ class ProjectController extends Controller
     /**
      * Remove a project from the portfolio.
      *
-     * @param Illuminate\Http\Request $request Request data.
-     * @param App\Project $project Project to remove.
+     * @param \Illuminate\Http\Request $request Request data.
+     * @param Larafolio\Models\Project $project Project to remove.
      *
      * @return \Illuminate\Http\Response
      */

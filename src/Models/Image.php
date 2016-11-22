@@ -26,7 +26,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'path', 'name', 'caption'
+        'path', 'name', 'caption',
     ];
 
     /**
@@ -131,7 +131,7 @@ class Image extends Model
             'full' => $this->full(),
             'name' => $this->name(),
             'caption' => $this->caption(),
-            'id' => $this->id()
+            'id' => $this->id(),
         ];
     }
 }

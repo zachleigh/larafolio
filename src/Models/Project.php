@@ -39,7 +39,7 @@ class Project extends Model
      * @var array
      */
     protected $casts = [
-        'visible' => 'boolean'
+        'visible' => 'boolean',
     ];
 
     /**
@@ -71,7 +71,7 @@ class Project extends Model
     /**
      * A project has many text blocks.
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function blocks()
     {
@@ -81,7 +81,7 @@ class Project extends Model
     /**
      * A project has many images.
      *
-     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()
     {
@@ -141,7 +141,7 @@ class Project extends Model
     /**
      * Get a text block by name, if exists.
      *
-     * @param  string $name Name of text block to get.
+     * @param string $name Name of text block to get.
      *
      * @return string
      */
@@ -191,7 +191,7 @@ class Project extends Model
     /**
      * Return true if project has images.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasImages()
     {
@@ -201,7 +201,7 @@ class Project extends Model
     /**
      * Return true if project has blocks.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasBlocks()
     {
@@ -211,8 +211,8 @@ class Project extends Model
     /**
      * Get blocks sorted by order.
      *
-     * @param Builder $query Query builder.
-     * @param string  $slug  Project slug.
+     * @param \Builder $query Query builder.
+     * @param string   $slug  Project slug.
      *
      * @return Builder
      */

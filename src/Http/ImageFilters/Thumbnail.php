@@ -10,9 +10,9 @@ class Thumbnail implements FilterInterface
     /**
      * Apply thumbnail filter to image.
      *
-     * @param  Intervention\Image\Image  $image
+     * @param \Intervention\Image\Image $image
      *
-     * @return Intervention\Image\Image
+     * @return \Intervention\Image\Image
      */
     public function applyFilter(Image $image)
     {

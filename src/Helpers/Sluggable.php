@@ -2,8 +2,6 @@
 
 namespace Larafolio\Helpers;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait Sluggable
 {
     /**

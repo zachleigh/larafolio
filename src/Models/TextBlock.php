@@ -22,7 +22,7 @@ class TextBlock extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,7 +33,7 @@ class TextBlock extends Model
     /**
      * A text block belongs to a single project.
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function project()
     {

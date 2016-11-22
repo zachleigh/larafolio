@@ -12,7 +12,7 @@ class ProjectImageController extends Controller
     /**
      * Show images for project.
      *
-     * @param App\Project $project Project to show.
+     * @param Larafolio\Models\Project $project Project to show.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +38,7 @@ class ProjectImageController extends Controller
      * Add a new project to the portfolio.
      *
      * @param \Illuminate\Http\Request $request Form request.
-     * @param App\Project              $project The project to add the image too.
+     * @param Larafolio\Models\Project $project The project to add the image too.
      */
     public function store(Request $request, Project $project)
     {

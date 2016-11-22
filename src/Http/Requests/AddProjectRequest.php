@@ -2,7 +2,6 @@
 
 namespace Larafolio\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddProjectRequest extends FormRequest
@@ -26,7 +25,7 @@ class AddProjectRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:projects,name',
-            'blocks.*.text' => 'required'
+            'blocks.*.text' => 'required',
         ];
     }
 }

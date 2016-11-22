@@ -11,8 +11,7 @@ class GlobalComposer
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
-     * @return void
+     * @param /Illuminate\View\View $view
      */
     public function compose(View $view)
     {
