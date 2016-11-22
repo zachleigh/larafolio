@@ -1,0 +1,57 @@
+$formBorder: 1px solid $grey
+$formSectionSpace: 15px
+
+.form
+    color: $black
+
+    +ele(button-row)
+        display: flex
+        justify-content: space-between
+        margin-right: 2px
+
+        & .button:first-child
+            margin-right: 10px
+
+    +ele(errors)
+        margin: $formSectionSpace 0
+        color: $red
+
+    +ele(input)
+        color: $black
+        width: calc(100% - 14px)
+        padding: 5px
+        border: $formBorder
+
+    +ele(ghost-input)
+        background-color: $offWhite
+        border: none
+        padding-left: 0
+
+    +ele(label)
+        display: block
+        font-size: 1.1em
+        margin-bottom: 4px
+
+    +ele(section)
+        margin-bottom: $formSectionSpace
+
+    +ele(text)
+        min-height: 20px
+
+    +ele(textarea)
+        min-height: 150px
+        resize: none
+
+        +mod(short)
+            min-height: 75px
+
+        +mod(flexible)
+            
+
+    +ele(errored)
+        border-color: $red
+
+        &:focus
+            outline: none !important
+            border: 1px solid $red
+            box-shadow: 0 0 4px $red

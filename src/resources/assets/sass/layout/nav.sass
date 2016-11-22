@@ -1,0 +1,73 @@
+.nav
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 0 6em
+    background-color: $navColor
+
+    +ele(dropdown)
+        position: relative
+        display: inline-block
+
+        &:hover .nav__dropdown-content
+            display: block
+
+        &:hover .nav__item
+            color: $darkBlue
+
+    +ele(dropdown-content)
+        display: none
+        position: absolute
+        top: 2.5em
+        left: 1em
+        min-width: 150px
+        z-index: 10
+        background-color: $white
+        color: $blue
+        +card(1)
+
+    +ele(dropdown-item)
+        display: flex
+        align-items: center
+        height: 40px
+        color: $blue
+        transition: $hoverTransition
+
+        &:hover
+            background-color: $lightGrey
+
+    +ele(dropdown-item-text)
+        padding: 0 1em
+
+    +ele(icon)
+        height: 16px
+        margin-right: .5em
+
+        & svg
+            height: 16px
+
+        & g
+            transition: $hoverTransition
+            fill: $darkBlue
+
+    +ele(item)
+        display: flex
+        align-items: center 
+        color: $white
+        padding: 0 1em
+        height: 50px
+        cursor: pointer
+        transition: $hoverTransition
+
+        &:hover
+            color: $darkBlue
+            text-decoration: none
+
+    +ele(link)
+        &:hover
+            text-decoration: none
+
+    +ele(section)
+        display: flex
+
+        

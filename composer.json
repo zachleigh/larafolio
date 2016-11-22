@@ -1,0 +1,55 @@
+{
+    "name": "zachleigh/larafolio",
+    "description": "A portfolio management system for laravel.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zach Leigh",
+            "email": "zachleigh@fastmail.jp"
+        }
+    ],
+    "minimum-stability": "stable",
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/zachleigh/laravel"
+        }
+    ],
+
+    "require": {
+        "zachleigh/laravel-laundromat": "^1.0",
+        "intervention/imagecache": "^2.3"
+    },
+
+    "require-dev": {
+        "laravel/laravel": "dev-larafolio5.3",
+        "phpunit/phpunit": "~4.0",
+        "codeception/codeception": "^2.2",
+        "fzaninotto/faker": "~1.4"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Larafolio\\": "src/"
+        },
+
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    
+    "autoload-dev": {
+        "psr-4": {
+            "Larafolio\\tests\\": "tests/"
+        }
+    },
+
+    "scripts": {
+        "test": [
+            "phpunit",
+            "codecept run acceptance"
+        ]
+    }
+}

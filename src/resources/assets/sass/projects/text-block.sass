@@ -1,0 +1,44 @@
+.text-block
+
+    +ele(control)
+        display: flex
+        margin-bottom: 5px
+        margin-right: 2px
+
+    +ele(control-buttons)
+        display: flex
+        flex: 1 0
+        justify-content: flex-end
+        align-items: center
+        align-content: center
+
+    +ele(control-input)
+        flex: 1 0
+        border: none
+        border-bottom: 1px solid transparent
+        color: $black
+        font-weight: bold
+        background-color: $offWhite
+        padding: 2px
+
+        &:focus
+            outline: none
+            border-bottom: 1px solid $blue
+            box-shadow: none
+
+    +ele(icon)
+        display: flex
+        align-items: center
+        cursor: pointer
+        margin-right: 7px
+
+        &:last-child
+            margin-right: 0
+
+        & svg
+            height: 12px
+            width: 12px
+
+        & svg g
+            fill: $black
+        

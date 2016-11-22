@@ -1,0 +1,61 @@
+.button
+    display: inline-block
+    padding: 10px
+    background-color: $grey
+    color: $white
+    -webkit-appearance: none
+    border-style: none
+    border: none
+    border-radius: 1px
+    text-align: center
+    white-space: nowrap
+    text-decoration: none
+    cursor: pointer
+    transition: $hoverTransition
+    +card(1)
+    font-family: 'Lato', sans-serif
+    min-width: 38px
+
+    &:hover
+        text-decoration: none
+
+    &:disabled
+        background-color: $grey
+        +card(0)
+
+        &:hover
+            background-color: $grey
+            cursor: default
+
+    +mod(blue)
+        background-color: $blue
+
+        &:hover
+            background-color: $darkBlue
+
+    +mod(green)
+        background-color: $green
+
+        &:hover
+            background-color: $darkGreen
+
+    +mod(red)
+        background-color: $red
+
+        &:hover
+            background-color: $darkRed
+
+    +mod(secondary)
+        background-color: $white
+        color: $darkBlue
+
+        &:hover
+            background-color: $lightGrey
+
+    +mod(icon)
+        font-weight: bold
+        max-height: 25px
+        max-width: 25px
+        min-width: 25px
+        padding: 0
+

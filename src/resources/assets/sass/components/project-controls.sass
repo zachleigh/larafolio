@@ -1,0 +1,39 @@
+.project-controls
+    display: flex
+
+    +ele(group)
+        padding: 0 10px
+        border-right: $border
+
+        &:last-child
+            border-right: 0
+            padding-right: 0
+
+    +ele(icon)
+        display: flex
+        align-items: center
+        cursor: pointer
+        margin-left: 5px
+
+        & g
+            transition: $hoverTransition
+
+    +ele(section)
+        display: flex
+        align-items: center
+
+    +ele(red)
+        
+        & g
+            fill: $red
+
+            &:hover
+                fill: $darkRed
+    
+    +ele(green)
+
+        & g
+            fill: $green
+
+            &:hover
+                fill: $darkGreen

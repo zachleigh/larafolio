@@ -1,0 +1,70 @@
+Fonts
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+html, body
+    height: 100%
+    margin: 0
+    font-family: 'Lato', sans-serif
+    color: $black
+
+#app
+    height: 100%
+    overflow-y: scroll
+
+.container
+    display: flex
+    flex-direction: column
+    min-height: 100%
+    margin: auto
+    background-color: $offWhite
+
+.content
+    margin: 20px 40px
+    max-width: 1200px
+    align-self: center
+
+.top
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin: 40px 0
+
+    +ele(title-block)
+        display: flex
+        align-items: center
+
+    +ele(title)
+        margin: 0 0 0 10px
+
+
+.placeholder, ::-webkit-input-placeholder
+    font-style: italic
+    color: $grey
+    font-size: 1em
+    font-weight: normal
+
+::-moz-placeholder
+    font-style: italic
+    color: $grey
+    font-size: 1em
+
+:-ms-input-placeholder
+    font-style: italic
+    color: $grey
+    font-size: 1em
+
+:-moz-placeholder
+    font-style: italic
+    color: $grey
+    font-size: 1em
+
+a
+    color: $green
+    text-decoration: none
+    transition: $hoverTransition
+
+    &:hover
+        text-decoration: underline
+
+[v-cloak]
+    display: none

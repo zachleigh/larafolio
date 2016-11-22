@@ -1,0 +1,43 @@
+$leftMargin: 15px
+
+.flash-message
+    position: fixed
+    bottom: 20px
+    right: 30px
+    z-index: 100
+    background-color: $grey
+    width: 350px
+    height: 80px
+    color: $white
+    +card(1)
+
+    +mod(success)
+        background-color: $green
+
+    +ele(bottom)
+        display: flex
+        margin-left: $leftMargin
+
+    +ele(close)
+        position: absolute
+        top: 5px
+        right: 5px
+        color: $white
+        cursor: pointer
+
+    +ele(lines)
+        & .lines svg
+            height: 20px
+
+        & svg g
+            fill: $white
+
+    +ele(title)
+        font-size: 1.7em
+        margin-left: 10px
+
+    +ele(top)
+        display: flex
+        align-items: center
+        margin: 10px 0 10px $leftMargin
+

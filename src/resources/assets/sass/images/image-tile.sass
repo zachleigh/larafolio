@@ -1,0 +1,38 @@
+.image-tile
+    position: relative
+    display: flex
+    flex-direction: column
+    margin-top: 25px
+
+    +ele(body)
+        display: flex
+        height: 150px
+
+    +ele(buttons)
+        margin-top: 5px
+
+    +ele(caption)
+        height: 43px
+        resize: none
+        margin-top: 4px
+
+    +ele(controls)
+        position: absolute
+        top: 0
+        right: 0
+
+    +ele(image)
+        display: flex
+
+    +ele(input)
+        margin: 0 15px 0 5px
+        padding-bottom: 0
+
+    +ele(name)
+        display: flex
+        align-items: center
+        margin-bottom: 4px
+
+    +ele(right)
+        margin-left: 15px
+        width: 100%
