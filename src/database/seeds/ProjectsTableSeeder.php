@@ -15,7 +15,7 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(1, 3) as $i) {
+        foreach (range(1, 5) as $i) {
             $name = 'Project'.$i;
 
             factory(Project::class)

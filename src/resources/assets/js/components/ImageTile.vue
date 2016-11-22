@@ -2,7 +2,7 @@
     <div class="image-tile">
         <div class="image-tile__controls">
             <span
-                id="removeImage"
+                v-bind:id="elementId('remove')"
                 class="text-block__icon red-icon"
                 v-html="icons.remove"
                 @click.prevent="remove"
@@ -50,6 +50,7 @@
                 </div>
                 <div class="image-tile__buttons">
                     <button
+                        v-bind:id="elementId('button')"
                         class="button button--green"
                         :disabled="buttonState"
                         @click.prevent="update"

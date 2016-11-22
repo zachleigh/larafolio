@@ -66,7 +66,7 @@ class Acceptance extends \Codeception\Module
      * @param \AcceptanceTester $I
      * @param array             $project Project info array.
      */
-    public function addImage(\AcceptanceTester $I, Project $project, $file = 'girl.jpg')
+    public function addImage(\AcceptanceTester $I, Project $project, $file = 'new.jpg')
     {
         $I->amOnProjectPage($I, $project);
         $I->seeCurrentUrlEquals("/manager/{$project->slug()}");

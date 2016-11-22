@@ -11,6 +11,19 @@ use Illuminate\Filesystem\Filesystem;
 class ImagesTableSeeder extends Seeder
 {
     /**
+     * Lookup table to map images to projects.
+     *
+     * @var array
+     */
+    protected $projectLookup = [
+        'a' => 1,
+        'b' => 2,
+        'c' => 3,
+        'd' => 4,
+        'e' => 5,
+    ];
+
+    /**
      * Run the database seeds.
      */
     public function run()
@@ -22,11 +35,13 @@ class ImagesTableSeeder extends Seeder
         $images = $filesystem->allFiles($from);
 
         foreach ($images as $key => $image) {
-            $path = 'public/images/'.$image->getFilename();
+            $name = $image->getFilename();
+
+            $path = 'public/images/'.$name;
 
             $this->moveImage($image, $path, $filesystem);
 
-            $this->addToProject($key, $path);
+            $this->addToProject($name, $path);
         }
 
         chgrp(storage_path('app/public/images'), 'www-data');
@@ -59,12 +74,14 @@ class ImagesTableSeeder extends Seeder
     /**
      * Add image to a project.
      *
-     * @param int    $key  Key from image array.
+     * @param string $name Original filename.
      * @param string $path Path to image.
      */
-    protected function addToProject($key, $path)
+    protected function addToProject($name, $path)
     {
-        $project = Project::find($key + 1);
+        $key = $this->projectLookup[substr($name, 0, 1)];
+
+        $project = Project::find($key);
 
         $user = User::find(1);
 

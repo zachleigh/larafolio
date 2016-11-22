@@ -28,7 +28,7 @@ class ImagesCest
         $I->wantTo('Add an image to a project.');
         $I->login($I);
         $I->addImage($I, $project);
-        $I->seeInDatabase('images', ['path' => 'public/images/411e2a002b29beb934678763a1fb9211.jpeg']);
+        $I->seeInDatabase('images', ['path' => 'public/images/b9dc5a3f4e80d23072fdd43fd23ea635.jpeg']);
         $I->see('Image added to project');
     }
 
@@ -38,21 +38,23 @@ class ImagesCest
 
         $image = $I->getImageFromProjectArray($project);
 
+        $id = $image->id();
+
         $data = [
-            'name1' => 'image name',
-            'caption1' => 'image caption'
+            'name'.$id => 'image name',
+            'caption'.$id => 'image caption'
         ];
 
         $I->wantTo('Add a name and caption for an image.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
         $I->fillForm($I, $data);
-        $I->click('Update Image');
+        $I->click('#button'.$id);
         $I->wait(1);
         $I->seeInDatabase('images', [
             'path' => $image->path(),
-            'name' => $data['name1'],
-            'caption' => $data['caption1']
+            'name' => 'image name',
+            'caption' => 'image caption'
         ]);
         $I->see('Image information updated');
     }
@@ -63,11 +65,13 @@ class ImagesCest
 
         $image = $I->getImageFromProjectArray($project);
 
+        $id = $image->id();
+
         $I->wantTo('Remove an image from a project.');
         $I->login($I);
         $I->seeInDatabase('images', ['path' => $image->path()]);
         $I->amOnProjectPage($I, $project);
-        $I->click('#removeImage');
+        $I->click('#remove'.$id);
         $I->click('Remove Image');
         $I->wait(1);
         $I->dontSeeInDatabase('images', ['path' => $image->path()]);
@@ -78,23 +82,31 @@ class ImagesCest
     {
         $project = $I->getProject($I);
 
+        $image = $I->getImageFromProjectArray($project);
+
+        $id = $image->id();
+
         $I->wantTo('Be able to update an image if the name has changed.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
-        $I->seeElement('.button--green', ['disabled' => 'true']);
-        $I->fillField(['name' => 'name1'], 'abc');
-        $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->seeElement('#button'.$id, ['disabled' => 'true']);
+        $I->fillField(['name' => 'name'.$id], 'abc');
+        $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
     }
 
     public function update_button_disabled_until_caption_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
+        $image = $I->getImageFromProjectArray($project);
+
+        $id = $image->id();
+
         $I->wantTo('Be able to update an image if the caption has changed.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
-        $I->seeElement('.button--green', ['disabled' => 'true']);
-        $I->fillField(['name' => 'caption1'], 'abc');
-        $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->seeElement('#button'.$id, ['disabled' => 'true']);
+        $I->fillField(['name' => 'caption'.$id], 'abc');
+        $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
     }
 }
