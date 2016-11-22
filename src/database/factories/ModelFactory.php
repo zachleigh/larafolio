@@ -26,8 +26,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(Larafolio\Models\Project::class, function (Faker\Generator $faker) {
     $name = $faker->unique()->name;
 
+    $types = ['web', 'github', 'volunteer'];
+
+    $index = rand(0, 2);
+
     return [
         'name' => $name,
+        'type' => $types[$index],
         'link' => $faker->url,
         'slug' => strtolower(snake_case($name)),
     ];

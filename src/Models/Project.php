@@ -23,7 +23,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'link', 'slug', 'visible',
+        'name', 'link', 'slug', 'type', 'visible',
     ];
 
     /**
@@ -106,6 +106,16 @@ class Project extends Model
     public function name()
     {
         return $this->name;
+    }
+
+    /**
+     * Return the project type.
+     *
+     * @return string
+     */
+    public function type()
+    {
+        return $this->type();
     }
 
     /**

@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique()->index();
             $table->string('slug')->unique()->index();
+            $table->string('type')->nullable()->index();
             $table->boolean('visible')->default(false);
             $table->string('link')->nullable();
             $table->timestamp('deleted_at')->nullable();
