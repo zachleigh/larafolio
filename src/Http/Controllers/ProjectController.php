@@ -24,7 +24,19 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
 
-        return view('larafolio::projects.index', ['projects' => $projects]);
+        $images = $projects->mapWithKeys(function ($project) {
+            return [$project->name() => $project->getProjectImage()];
+        });
+
+        $blocks = $projects->mapWithKeys(function ($project) {
+            return [$project->name() => $project->getProjectBlock()];
+        });
+
+        return view('larafolio::projects.index', [
+            'projects' => $projects,
+            'images' => $images,
+            'blocks' => $blocks
+        ]);
     }
 
     /**

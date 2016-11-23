@@ -984,12 +984,15 @@ a {
   margin-right: 15px; }
 
 .dashboard__name {
-  margin: 0 0 15px; }
+  margin: 0 0 10px; }
 
 .dashboard__photo {
   display: -webkit-box;
   display: flex;
   margin-right: 15px; }
+
+.dashboard__visibility {
+  margin-bottom: 10px; }
 
 .dashboard__wrapper {
   display: block; }

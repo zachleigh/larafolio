@@ -1,5 +1,6 @@
 $horizontalSpace: 15px
 $verticalSpace: 25px
+$infoSpace: 10px 
 
 .dashboard
 
@@ -24,11 +25,14 @@ $verticalSpace: 25px
         margin-right: $horizontalSpace
 
     +ele(name)
-        margin: 0 0 15px
+        margin: 0 0 $infoSpace
 
     +ele(photo)
         display: flex
         margin-right: $horizontalSpace
+
+    +ele(visibility)
+        margin-bottom: $infoSpace
 
     +ele(wrapper)
         display: block
