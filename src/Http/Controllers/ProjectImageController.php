@@ -19,12 +19,7 @@ class ProjectImageController extends Controller
     public function index(Request $request, Project $project)
     {
         if ($request->ajax()) {
-            $images = $project->images
-                ->each(function ($image) {
-                    $image->generateProps();
-                })->map(function ($image) {
-                    return $image->props;
-                })->reverse()->values();
+            $images = $project->imagesWithProps();
 
             return response()->json($images);
         }

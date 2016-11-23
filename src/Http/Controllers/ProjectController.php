@@ -35,7 +35,7 @@ class ProjectController extends Controller
         return view('larafolio::projects.index', [
             'projects' => $projects,
             'images' => $images,
-            'blocks' => $blocks
+            'blocks' => $blocks,
         ]);
     }
 
@@ -50,12 +50,7 @@ class ProjectController extends Controller
     {
         $project = Project::withBlocks($slug);
 
-        $images = $project->images
-            ->each(function ($image) {
-                $image->generateProps();
-            })->map(function ($image) {
-                return $image->props;
-            })->reverse()->values();
+        $images = $project->imagesWithProps();
 
         return view('larafolio::projects.show', [
             'project' => $project,

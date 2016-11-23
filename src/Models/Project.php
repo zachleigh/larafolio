@@ -214,7 +214,7 @@ class Project extends Model
      * @param \Builder $query Query builder.
      * @param string   $slug  Project slug.
      *
-     * @return Builder
+     * @return \Builder
      */
     public function scopeWithBlocks($query, $slug)
     {
@@ -222,5 +222,18 @@ class Project extends Model
                 $query->orderBy('order');
             }])->where('slug', $slug)
             ->first();
+    }
+
+    /**
+     * Return images with all props needed for javascript.
+     *
+     * @return Collection
+     */
+    public function imagesWithProps()
+    {
+        return $this->images
+            ->map(function ($image) {
+                return $image->generateProps();
+            })->reverse()->values();
     }
 }

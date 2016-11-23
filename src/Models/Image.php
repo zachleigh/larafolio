@@ -7,13 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     /**
-     * Props to pass to vue.
-     *
-     * @var array
-     */
-    public $props = [];
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -121,10 +114,12 @@ class Image extends Model
 
     /**
      * Generate image properties to be passed to js and save on object.
+     *
+     * @return array
      */
     public function generateProps()
     {
-        $this->props = [
+        return [
             'thumbnail' => $this->thumbnail(),
             'small' => $this->small(),
             'medium' => $this->medium(),
