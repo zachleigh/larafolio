@@ -2,8 +2,6 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
-const jsDir = __dirname + '/resources/assets/js/';
-
 elixir((mix) => {
     mix.sass('./src/resources/assets/sass/larafolio.scss', './dist/css/')
         .styles([
@@ -15,5 +13,8 @@ elixir((mix) => {
         .version([
             './dist/css/larafolio-final.css',
             './dist/js/larafolio.js'
-        ], './dist/');
+        ], './dist/')
+        .copy('./dist/css', 'vendor/laravel/laravel/public/vendor/larafolio/css')
+        .copy('./dist/js', 'vendor/laravel/laravel/public/vendor/larafolio/js')
+        .copy('./dist/rev-manifest.json', 'vendor/laravel/laravel/public/vendor/larafolio/rev-manifest.json');
 });
