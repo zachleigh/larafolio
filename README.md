@@ -67,3 +67,21 @@ gulp watch
 ```
 php artisan migrate:refresh --seed
 ```
+
+#### Testing
+This project contains both phpunit tests and Codeception tests.    
+
+Run all tests:
+```
+composer test
+```
+
+Run phpunit tests:
+```
+phpunit
+```
+
+Run Codeception tests:
+```
+codecept run acceptance
+```
