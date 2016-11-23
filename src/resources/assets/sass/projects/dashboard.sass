@@ -1,4 +1,5 @@
-$space: 15px
+$horizontalSpace: 15px
+$verticalSpace: 25px
 
 .dashboard
 
@@ -8,28 +9,26 @@ $space: 15px
 
     +ele(item)
         display: flex
-        justify-content: space-between
-        margin: 30px 0
+        margin: $verticalSpace 0
+        padding-bottom: $verticalSpace
+        border-bottom: $border
 
         &:last-child
             margin-bottom: 0
 
-    +ele(item-controls)
-        display: flex
-        flex-direction: column
-        justify-content: space-around
-        min-width: 75px
-        text-align: right
-        margin-left: $space
-
-    +ele(item-info)
+    +ele(info)
         display: flex
         flex-direction: column
         justify-content: space-between
-        margin-left: $space
+        min-width: 220px
+        margin-right: $horizontalSpace
 
-    +ele(item-name)
-        margin: 0
+    +ele(name)
+        margin: 0 0 15px
+
+    +ele(photo)
+        display: flex
+        margin-right: $horizontalSpace
 
     +ele(wrapper)
         display: block

@@ -15,42 +15,41 @@
         <div class="project__main dashboard__wrapper">
             @foreach ($projects as $project)
                 <section class="dashboard__item">
-                    <div class="flex">
-                        <img src="{{ $project->getProjectImage() }}">
-                        <div class="dashboard__item-info">
-                            <div>
-                                <h2 class="dashboard__item-name">
-                                    {{ $project->name() }}
-                                </h2>
-                                {!! $project->getProjectBlock() !!}
-                            </div>
-                            <a href="{{ $project->link() }}">
-                                {{ $project->link() }}
+                    <div class="dashboard__info">
+                        <div>
+                            <h2 class="dashboard__name">
+                                {{ $project->name() }}
+                            </h2>
+                            @if ($project->visible)
+                                <div class="project-controls__section flex-end">
+                                    <span class="nav__icon green-icon"
+                                        {!! file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')) !!}
+                                    </span>
+                                    Visible
+                                </div>
+                            @else
+                                <div class="project-controls__section">
+                                    <span class="nav__icon red-icon">
+                                        {!! file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')) !!}                   
+                                    </span>
+                                    Hidden
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <a
+                                class="button button--blue"
+                                href="{{ route('show-project', ['project' => $project]) }}"
+                            >
+                                Manage
                             </a>
                         </div>
                     </div>
-                    <div class="dashboard__item-controls">
-                        @if ($project->visible)
-                            <div class="project-controls__section flex-end">
-                                Visible
-                                <span class="project-controls__icon nav__icon green-icon"
-                                    {!! file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')) !!}
-                                </span>
-                            </div>
-                        @else
-                            <div class="project-controls__section">
-                                Hidden
-                                <span class="project-controls__icon nav__icon red-icon">
-                                    {!! file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')) !!}                   
-                                </span>
-                            </div>
-                        @endif
-                        <a
-                            class="button button--blue"
-                            href="{{ route('show-project', ['project' => $project]) }}"
-                        >
-                            Manage
-                        </a>
+                    <div class="dashboard__photo">
+                        <img src="{{ $project->getProjectImage() }}">
+                    </div>
+                    <div class="dashboard__description">
+                        {!! $project->getProjectBlock() !!}
                     </div>
                 </section>
             @endforeach
