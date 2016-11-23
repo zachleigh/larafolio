@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c6b9b177bd81736f32e5ce24be3fa2a5",
-    "content-hash": "9d53af2c008e9d274981a070c327f28c",
+    "hash": "c157da9b08556800026bd3cb03440458",
+    "content-hash": "af7e546779439dabcd24c296e9d23fa2",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2508,20 +2508,19 @@
         },
         {
             "name": "laravel/laravel",
-            "version": "dev-larafolio5.3",
+            "version": "dev-larafolio-5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zachleigh/laravel.git",
-                "reference": "3320e820bf50311eacbd8eec1b9051f27fac3f91"
+                "reference": "60f20ee1b95cedc80a4d3714735856ce7bc11fd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zachleigh/laravel/zipball/3320e820bf50311eacbd8eec1b9051f27fac3f91",
-                "reference": "3320e820bf50311eacbd8eec1b9051f27fac3f91",
+                "url": "https://api.github.com/repos/zachleigh/laravel/zipball/60f20ee1b95cedc80a4d3714735856ce7bc11fd5",
+                "reference": "60f20ee1b95cedc80a4d3714735856ce7bc11fd5",
                 "shasum": ""
             },
             "require": {
-                "intervention/imagecache": "^2.3",
                 "laravel/framework": "5.3.*",
                 "php": ">=5.6.4"
             },
@@ -2571,9 +2570,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/zachleigh/laravel/tree/larafolio5.3"
+                "source": "https://github.com/zachleigh/laravel/tree/larafolio-5.3"
             },
-            "time": "2016-11-22 23:33:24"
+            "time": "2016-11-23 00:29:36"
         },
         {
             "name": "phpdocumentor/reflection-common",

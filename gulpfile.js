@@ -11,7 +11,6 @@ elixir((mix) => {
             '/../../../node_modules/dropzone/dist/min/dropzone.min.css',
             './dist/css/larafolio.css'
         ], './dist/css/larafolio-final.css')
-        // .browserSync({open: false, proxy: 'zachleigh.dev', notify: false})
         .webpack('./src/resources/assets/js/larafolio.js', './dist/js/')
         .version([
             './dist/css/larafolio-final.css',

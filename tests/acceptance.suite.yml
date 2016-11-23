@@ -10,9 +10,5 @@ modules:
         - WebDriver:
             url: http://127.0.0.1:8000
             browser: chrome
-        # - Laravel5:
-        #     part: ORM
-        #     bootstrap: vendor/laravel/laravel/bootstrap/app.php
-        #     cleanup: false # can't wrap into transaction
         - Db
         - \Helper\Acceptance 

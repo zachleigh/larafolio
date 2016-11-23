@@ -23,7 +23,7 @@
     },
 
     "require-dev": {
-        "laravel/laravel": "dev-larafolio5.3",
+        "laravel/laravel": "dev-larafolio-5.3",
         "phpunit/phpunit": "~4.0",
         "codeception/codeception": "^2.2",
         "fzaninotto/faker": "~1.4"
