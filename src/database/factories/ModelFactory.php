@@ -52,7 +52,7 @@ $factory->define(Larafolio\Models\TextBlock::class, function (Faker\Generator $f
     $text = $faker->paragraph(5, true);
 
     return [
-        'name' => $faker->name,
+        'name' => $faker->word,
         'text' => $text,
         'formatted_text' => $text,
         'order' => rand(0, 10)

@@ -21,8 +21,8 @@
                                 {{ $project->name() }}
                             </h2>
                             @if ($project->visible)
-                                <div class="project-controls__section flex-end">
-                                    <span class="nav__icon green-icon"
+                                <div class="project-controls__section">
+                                    <span class="nav__icon green-icon">
                                         {!! file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')) !!}
                                     </span>
                                     Visible
