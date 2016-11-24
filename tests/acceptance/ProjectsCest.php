@@ -315,14 +315,15 @@ class ProjectsCest
         $I->removeBlock($I, '#delete0');
         $I->click('+');
         $I->fillField('text1', 'block5');
+        $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
         $I->amOnPage("/manager/{$project->slug()}");
         $I->see('block4');
         $I->see('block5');
-        $I->dontSee($blocks[0]->name());
-        $I->dontSee($blocks[1]->name());
-        $I->dontSee($blocks[2]->name());
+        $I->dontSee($blocks[0]->text());
+        $I->dontSee($blocks[1]->text());
+        $I->dontSee($blocks[2]->text());
     }
 
     public function user_can_move_block_up_while_editing(AcceptanceTester $I)
