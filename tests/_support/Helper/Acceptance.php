@@ -1,4 +1,5 @@
 <?php
+
 namespace Helper;
 
 use Larafolio\Models\Project;
@@ -8,12 +9,12 @@ class Acceptance extends \Codeception\Module
     /**
      * Add a basic project record.
      *
-     * @param  \AcceptanceTester $I
-     * @param  string            $name
-     * @param  string            $description
-     * @param  string            $info
-     * @param  string            $link
-     * @param  string            $slug
+     * @param \AcceptanceTester $I
+     * @param string            $name
+     * @param string            $description
+     * @param string            $info
+     * @param string            $link
+     * @param string            $slug
      *
      * @return App\Project
      */
@@ -29,12 +30,12 @@ class Acceptance extends \Codeception\Module
         $order = $order ?? rand(1, 10);
 
         $id = $I->haveRecord('projects', [
-            'name' => $name,
+            'name'        => $name,
             'description' => $description,
-            'info' => $info,
-            'link' => $link,
-            'slug' => $name,
-            'order' => $order
+            'info'        => $info,
+            'link'        => $link,
+            'slug'        => $name,
+            'order'       => $order,
         ]);
 
         return Project::find($project['id']);
@@ -43,8 +44,8 @@ class Acceptance extends \Codeception\Module
     /**
      * Get a project from the database.
      *
-     * @param  \AcceptanceTester $I
-     * @param  integer           $id
+     * @param \AcceptanceTester $I
+     * @param int               $id
      *
      * @return App\Project
      */
@@ -56,7 +57,7 @@ class Acceptance extends \Codeception\Module
     /**
      * Login the admin user.
      *
-     * @param  \AcceptanceTester $I
+     * @param \AcceptanceTester $I
      */
     public function login(\AcceptanceTester $I)
     {
@@ -82,8 +83,8 @@ class Acceptance extends \Codeception\Module
     /**
      * Go to project page.
      *
-     * @param  \AcceptanceTester $I
-     * @param  array             $project Project info array.
+     * @param \AcceptanceTester $I
+     * @param array             $project Project info array.
      */
     public function amOnProjectPage(\AcceptanceTester $I, Project $project)
     {
@@ -93,8 +94,8 @@ class Acceptance extends \Codeception\Module
     /**
      * Go to project image page.
      *
-     * @param  \AcceptanceTester $I
-     * @param  array             $project Project info array.
+     * @param \AcceptanceTester $I
+     * @param array             $project Project info array.
      */
     public function amOnProjectImagePage(\AcceptanceTester $I, Project $project)
     {
@@ -104,7 +105,7 @@ class Acceptance extends \Codeception\Module
     /**
      * Go to add project page.
      *
-     * @param  \AcceptanceTester $I
+     * @param \AcceptanceTester $I
      */
     public function amOnAddPage(\AcceptanceTester $I)
     {
@@ -114,7 +115,7 @@ class Acceptance extends \Codeception\Module
     /**
      * Confirm that the current page is the add page.
      *
-     * @param  \AcceptanceTester $I
+     * @param \AcceptanceTester $I
      */
     public function confirmOnAddPage(\AcceptanceTester $I)
     {
@@ -124,7 +125,7 @@ class Acceptance extends \Codeception\Module
     /**
      * Get first image for project.
      *
-     * @param  array  $project Project info array.
+     * @param array $project Project info array.
      *
      * @return App\Image
      */
@@ -136,7 +137,7 @@ class Acceptance extends \Codeception\Module
     /**
      * Get all blocks for project.
      *
-     * @param  array  $project Project info array.
+     * @param array $project Project info array.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -148,8 +149,8 @@ class Acceptance extends \Codeception\Module
     /**
      * Fill in form fields with data from array.
      *
-     * @param  \AcceptanceTester $I
-     * @param  array             $data Array of form data.
+     * @param \AcceptanceTester $I
+     * @param array             $data Array of form data.
      */
     public function fillForm(\AcceptanceTester $I, array $data)
     {
@@ -161,8 +162,8 @@ class Acceptance extends \Codeception\Module
     /**
      * Remove a text block.
      *
-     * @param  \AcceptanceTester $I
-     * @param  string            $id Id of block to remove.
+     * @param \AcceptanceTester $I
+     * @param string            $id Id of block to remove.
      */
     public function removeBlock(\AcceptanceTester $I, $id)
     {

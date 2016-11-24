@@ -34,8 +34,8 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.index', [
             'projects' => $projects,
-            'images' => $images,
-            'blocks' => $blocks,
+            'images'   => $images,
+            'blocks'   => $blocks,
         ]);
     }
 
@@ -54,7 +54,7 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.show', [
             'project' => $project,
-            'images' => $images,
+            'images'  => $images,
         ]);
     }
 
@@ -100,7 +100,7 @@ class ProjectController extends Controller
         $nextInOrder = $project->blocks->pluck('order')->max() + 1;
 
         return view('larafolio::projects.edit', [
-            'project' => $project,
+            'project'     => $project,
             'nextInOrder' => $nextInOrder,
         ]);
     }

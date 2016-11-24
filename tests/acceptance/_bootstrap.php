@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
@@ -20,5 +19,5 @@ $app->make(EloquentFactory::class)->load(__DIR__.'/../../src/database/factories/
 Artisan::call('migrate:refresh');
 
 Artisan::call('db:seed', [
-    '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+    '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
 ]);

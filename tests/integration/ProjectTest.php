@@ -4,8 +4,6 @@ namespace Larafolio\tests\integration;
 
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectTest extends TestCase

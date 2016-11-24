@@ -24,7 +24,7 @@ class AddProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:projects,name',
+            'name'          => 'required|unique:projects,name',
             'blocks.*.text' => 'required',
         ];
     }

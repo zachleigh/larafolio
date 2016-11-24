@@ -5,7 +5,7 @@ namespace Larafolio;
 use View;
 use Illuminate\Support\ServiceProvider as BaseProvider;
 
-Class LarafolioServiceProvider extends BaseProvider
+class LarafolioServiceProvider extends BaseProvider
 {
     /**
      * Register bindings in the container.
@@ -26,7 +26,7 @@ Class LarafolioServiceProvider extends BaseProvider
     {
         View::composer('*', 'Larafolio\Http\ViewComposers\GlobalComposer');
 
-        if (! $this->app->routesAreCached()) {
+        if (!$this->app->routesAreCached()) {
             require __DIR__.'/routes/web.php';
         }
 

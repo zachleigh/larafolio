@@ -72,7 +72,7 @@ class TextBlock extends Model
 
     /**
      * Return the formatted block text.
-     * 
+     *
      * @return string
      */
     public function formattedText()

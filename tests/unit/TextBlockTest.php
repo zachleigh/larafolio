@@ -5,8 +5,6 @@ namespace Larafolio\tests\unit;
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
 use Larafolio\Models\TextBlock;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TextBlockTest extends TestCase
@@ -21,10 +19,10 @@ class TextBlockTest extends TestCase
         $project = factory(Project::class)->create();
 
         $data = [
-            'name' => 'text block name',
-            'text' => 'text block text',
+            'name'           => 'text block name',
+            'text'           => 'text block text',
             'formatted_text' => '<p>text block text</p>',
-            'order' => 0
+            'order'          => 0,
         ];
 
         $this->user->addBlockToProject($project, $data);
@@ -40,23 +38,23 @@ class TextBlockTest extends TestCase
     public function user_can_add_text_blocks_with_other_data()
     {
         $firstBlock = [
-            'name' => 'first text block name',
-            'text' => 'first text block text',
+            'name'           => 'first text block name',
+            'text'           => 'first text block text',
             'formatted_text' => '<p>first text block text</p>',
-            'order' => 0
+            'order'          => 0,
         ];
 
         $secondBlock = [
-            'name' => 'second text block name',
-            'text' => 'second text block text',
+            'name'           => 'second text block name',
+            'text'           => 'second text block text',
             'formatted_text' => '<p>second text block text</p>',
-            'order' => 1
+            'order'          => 1,
         ];
 
         $data = [
-            'name' => 'project name',
-            'link' => 'link',
-            'blocks' => [$firstBlock, $secondBlock]
+            'name'   => 'project name',
+            'link'   => 'link',
+            'blocks' => [$firstBlock, $secondBlock],
         ];
 
         $project = $this->user->addProject($data);
@@ -67,7 +65,7 @@ class TextBlockTest extends TestCase
         $this->seeInDatabase('text_blocks', $firstBlock);
         $this->seeInDatabase('text_blocks', $secondBlock);
     }
-    
+
     /**
      * @test
      */
@@ -76,22 +74,22 @@ class TextBlockTest extends TestCase
         $textBlock = factory(TextBlock::class)->create();
 
         $this->seeInDatabase('text_blocks', [
-            'id' => $textBlock->id(),
+            'id'   => $textBlock->id(),
             'name' => $textBlock->name(),
-            'text' => $textBlock->text()
+            'text' => $textBlock->text(),
         ]);
 
         $data = [
             'name' => 'updated name',
-            'text' => 'updated text'
+            'text' => 'updated text',
         ];
 
         $this->user->updateTextBlock($textBlock, $data);
 
         $this->seeInDatabase('text_blocks', [
-            'id' => $textBlock->id(),
+            'id'   => $textBlock->id(),
             'name' => $data['name'],
-            'text' => $data['text']
+            'text' => $data['text'],
         ]);
     }
 
@@ -103,23 +101,23 @@ class TextBlockTest extends TestCase
         $project = factory(Project::class)->create();
 
         $firstBlock = [
-            'name' => 'first text block name',
-            'text' => 'first text block text',
+            'name'           => 'first text block name',
+            'text'           => 'first text block text',
             'formatted_text' => '<p>first text block text</p>',
-            'order' => 0
+            'order'          => 0,
         ];
 
         $secondBlock = [
-            'name' => 'second text block name',
-            'text' => 'second text block text',
+            'name'           => 'second text block name',
+            'text'           => 'second text block text',
             'formatted_text' => '<p>second text block text</p>',
-            'order' => 1
+            'order'          => 1,
         ];
 
         $data = [
-            'name' => 'updated name',
-            'link' => 'updated link',
-            'blocks' => [$firstBlock, $secondBlock]
+            'name'   => 'updated name',
+            'link'   => 'updated link',
+            'blocks' => [$firstBlock, $secondBlock],
         ];
 
         $this->user->updateProject($project, $data);
@@ -141,21 +139,21 @@ class TextBlockTest extends TestCase
         $project = factory(Project::class)->create();
 
         $firstBlock = [
-            'name' => 'first text block name',
-            'text' => 'first text block text',
+            'name'           => 'first text block name',
+            'text'           => 'first text block text',
             'formatted_text' => '<p>first text block text</p>',
-            'order' => 5
+            'order'          => 5,
         ];
 
         $secondBlock = [
-            'name' => 'second text block name',
-            'text' => 'second text block text',
+            'name'           => 'second text block name',
+            'text'           => 'second text block text',
             'formatted_text' => '<p>second text block text</p>',
-            'order' => 10
+            'order'          => 10,
         ];
 
         $data = [
-            'blocks' => [$firstBlock, $secondBlock]
+            'blocks' => [$firstBlock, $secondBlock],
         ];
 
         $project = $this->user->updateProject($project, $data);
@@ -179,10 +177,10 @@ class TextBlockTest extends TestCase
         $textBlock = factory(TextBlock::class)->create();
 
         $this->seeInDatabase('text_blocks', [
-            'id' => $textBlock->id(),
-            'name' => $textBlock->name(),
-            'text' => $textBlock->text(),
-            'deleted_at' => null
+            'id'         => $textBlock->id(),
+            'name'       => $textBlock->name(),
+            'text'       => $textBlock->text(),
+            'deleted_at' => null,
         ]);
 
         $success = $this->user->removeTextBlock($textBlock);
@@ -190,16 +188,16 @@ class TextBlockTest extends TestCase
         $this->assertTrue($success);
 
         $this->seeInDatabase('text_blocks', [
-            'id' => $textBlock->id(),
+            'id'   => $textBlock->id(),
             'name' => $textBlock->name(),
-            'text' => $textBlock->text()
+            'text' => $textBlock->text(),
         ]);
 
         $this->dontSeeInDatabase('text_blocks', [
-            'id' => $textBlock->id(),
-            'name' => $textBlock->name(),
-            'text' => $textBlock->text(),
-            'deleted_at' => null
+            'id'         => $textBlock->id(),
+            'name'       => $textBlock->name(),
+            'text'       => $textBlock->text(),
+            'deleted_at' => null,
         ]);
     }
 }

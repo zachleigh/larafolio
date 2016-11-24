@@ -58,7 +58,7 @@ trait ManagesPortfolio
     /**
      * Update the order of projects in the portfolio.
      *
-     * @param  array  $data Array of data for projects.
+     * @param array $data Array of data for projects.
      */
     public function updateProjectOrder(array $data)
     {
@@ -76,7 +76,7 @@ trait ManagesPortfolio
      *
      * @param array $data Data array containing 'order' index.
      *
-     * @return  Collection
+     * @return Collection
      */
     public function setOrder(array $data)
     {

@@ -2,14 +2,9 @@
 
 namespace Larafolio\tests;
 
-use Gate;
-use Artisan;
 use App\User;
 use Larafolio\Models\Image;
 use Larafolio\Models\Project;
-use Illuminate\Filesystem\Filesystem;
-use Larafolio\LarafolioServiceProvider;
-use Larafolio\tests\stubs\ManagePortfolio;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
 
@@ -83,7 +78,7 @@ abstract class TestCase extends IlluminateTestCase
     protected function getMigrationPaths()
     {
         $path = __DIR__.'/../src/database/migrations/';
-        
+
         $directory = new \RecursiveDirectoryIterator($path);
 
         $iterator = new \RecursiveIteratorIterator($directory);
@@ -98,7 +93,7 @@ abstract class TestCase extends IlluminateTestCase
     /**
      * Get migration class name form the migration file path.
      *
-     * @param  string $path Migration file path.
+     * @param string $path Migration file path.
      *
      * @return string
      */

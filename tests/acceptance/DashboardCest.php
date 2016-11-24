@@ -10,7 +10,7 @@ class DashboardCest
         Artisan::call('migrate:refresh');
 
         Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
         ]);
     }
 
@@ -19,7 +19,7 @@ class DashboardCest
         Artisan::call('migrate:refresh');
 
         Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
         ]);
     }
 
@@ -33,8 +33,8 @@ class DashboardCest
             $I->click('#up'.$project->id());
         }
         $I->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'order' => 0
+            'id'    => $project->id(),
+            'order' => 0,
         ]);
     }
 
@@ -48,8 +48,8 @@ class DashboardCest
             $I->click('#down'.$project->id());
         }
         $I->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'order' => 4
+            'id'    => $project->id(),
+            'order' => 4,
         ]);
     }
 }

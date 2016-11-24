@@ -4,9 +4,6 @@ namespace Larafolio\tests\unit;
 
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectTest extends TestCase
@@ -21,7 +18,7 @@ class ProjectTest extends TestCase
         $data = [
             'name' => 'name',
             'type' => 'site',
-            'link' => 'link'
+            'link' => 'link',
         ];
 
         $project = $this->user->addProject($data);
@@ -40,18 +37,18 @@ class ProjectTest extends TestCase
             1 => [
                 'name' => 'name1',
                 'type' => 'site1',
-                'link' => 'link1'
+                'link' => 'link1',
             ],
             2 => [
                 'name' => 'name2',
                 'type' => 'site2',
-                'link' => 'link2'
+                'link' => 'link2',
             ],
             3 => [
                 'name' => 'name3',
                 'type' => 'site3',
-                'link' => 'link3'
-            ]
+                'link' => 'link3',
+            ],
         ];
 
         foreach ($dataArray as $key => $data) {
@@ -61,7 +58,6 @@ class ProjectTest extends TestCase
 
             $this->seeInDatabase('projects', $data);
         }
-
     }
 
     /**
@@ -71,7 +67,7 @@ class ProjectTest extends TestCase
     {
         $data = [
             'name' => 'project name',
-            'link' => 'link'
+            'link' => 'link',
         ];
 
         $project = $this->user->addProject($data);
@@ -109,8 +105,8 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'visible' => false
+            'id'      => $project->id(),
+            'visible' => false,
         ]);
 
         $data = [
@@ -120,8 +116,8 @@ class ProjectTest extends TestCase
         $this->user->updateProject($project, $data);
 
         $this->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'visible' => true
+            'id'      => $project->id(),
+            'visible' => true,
         ]);
     }
 
@@ -147,8 +143,8 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'deleted_at' => null
+            'id'         => $project->id(),
+            'deleted_at' => null,
         ]);
 
         $deleted = $this->user->removeProject($project);
@@ -156,12 +152,12 @@ class ProjectTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('projects', [
-            'id' => $project->id(),
-            'deleted_at' => null
+            'id'         => $project->id(),
+            'deleted_at' => null,
         ]);
 
         $this->seeInDatabase('projects', [
-            'id' => $project->id()
+            'id' => $project->id(),
         ]);
     }
 }
