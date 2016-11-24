@@ -10,7 +10,7 @@ class ProjectsCest
         Artisan::call('migrate:refresh');
 
         Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
         ]);
     }
 
@@ -19,17 +19,17 @@ class ProjectsCest
         Artisan::call('migrate:refresh');
 
         Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
         ]);
     }
 
     public function user_can_add_a_project(AcceptanceTester $I)
     {
         $data = [
-            'name' => 'Project Name',
-            'link' => 'Project link',
+            'name'        => 'Project Name',
+            'link'        => 'Project link',
             'projectType' => 'Project type',
-            'text0' => 'Project description',
+            'text0'       => 'Project description',
         ];
 
         $I->wantTo('Add a new project to the portfolio.');
@@ -75,8 +75,8 @@ class ProjectsCest
     public function user_can_add_new_text_block(AcceptanceTester $I)
     {
         $data = [
-            'name' => 'Project Name',
-            'link' => 'Project link',
+            'name'  => 'Project Name',
+            'link'  => 'Project link',
             'text0' => 'Project description',
             'text1' => 'Project info',
         ];
@@ -163,7 +163,7 @@ class ProjectsCest
         $data = [
             'text0' => 'block0',
             'text1' => 'block1',
-            'text2' => 'block2'
+            'text2' => 'block2',
         ];
 
         $I->wantTo('Move a text block up.');
@@ -186,7 +186,7 @@ class ProjectsCest
         $data = [
             'text0' => 'block0',
             'text1' => 'block1',
-            'text2' => 'block2'
+            'text2' => 'block2',
         ];
 
         $I->wantTo('Move a text block down.');
@@ -212,24 +212,24 @@ class ProjectsCest
         $I->amOnPage("/manager/{$project->slug()}");
         $I->see('Hidden');
         $I->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'visible' => false
+            'id'      => $project->id(),
+            'visible' => false,
         ]);
         $I->click('#makeVisible');
         $I->see('Visible');
         $I->see('Project is now publicly viewable');
         $I->dontSee('Hidden');
         $I->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'visible' => true
+            'id'      => $project->id(),
+            'visible' => true,
         ]);
         $I->click('#makeHidden');
         $I->see('Hidden');
         $I->see('Project is not publicly viewable');
         $I->dontSee('Visible');
         $I->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'visible' => false
+            'id'      => $project->id(),
+            'visible' => false,
         ]);
     }
 
@@ -240,16 +240,16 @@ class ProjectsCest
         $I->login($I);
         $I->amOnPage("/manager/{$project->slug()}");
         $I->seeInDatabase('projects', [
-            'id' => $project->id(),
-            'deleted_at' => null
+            'id'         => $project->id(),
+            'deleted_at' => null,
         ]);
         $I->click('#removeProject');
         $I->click('Remove Project');
         $I->wait(1);
         $I->seeInDatabase('projects', ['id' => $project->id()]);
         $I->dontseeInDatabase('projects', [
-            'id' => $project['id'],
-            'deleted_at' => null
+            'id'         => $project['id'],
+            'deleted_at' => null,
         ]);
         $I->see('Project removed from portfolio');
     }
@@ -257,15 +257,15 @@ class ProjectsCest
     public function user_can_update_a_project(AcceptanceTester $I)
     {
         $data = [
-            'name' => 'updated name',
-            'link' => 'updated link',
+            'name'        => 'updated name',
+            'link'        => 'updated link',
             'projectType' => 'updated type',
-            'name0' => 'updatedName0',
-            'text0' => 'updated0',
-            'name1' => 'updatedName1',
-            'text1' => 'updated1',
-            'name2' => 'updatedName2',
-            'text2' => 'updated2'
+            'name0'       => 'updatedName0',
+            'text0'       => 'updated0',
+            'name1'       => 'updatedName1',
+            'text1'       => 'updated1',
+            'name2'       => 'updatedName2',
+            'text2'       => 'updated2',
         ];
 
         $project = $I->getProject($I);
@@ -276,10 +276,10 @@ class ProjectsCest
         $I->click('Update Project');
         $I->wait(1);
         $I->seeInDatabase('projects', [
-            'id' => $project['id'],
+            'id'   => $project['id'],
             'name' => $data['name'],
             'link' => $data['link'],
-            'type' => $data['projectType']
+            'type' => $data['projectType'],
         ]);
         $I->seeInDatabase('text_blocks', [
             'name' => $data['name0'],
@@ -293,7 +293,7 @@ class ProjectsCest
             'name' => $data['name2'],
             'text' => $data['text2'],
         ]);
-        $I->seeCurrentUrlEquals("/manager/updated_name/edit");
+        $I->seeCurrentUrlEquals('/manager/updated_name/edit');
         $I->see('Project successfully updated');
     }
 

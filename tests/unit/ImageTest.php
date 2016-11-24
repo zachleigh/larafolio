@@ -5,9 +5,6 @@ namespace Larafolio\tests\unit;
 use Larafolio\Models\Image;
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ImageTest extends TestCase
@@ -22,9 +19,9 @@ class ImageTest extends TestCase
         $project = factory(Project::class)->create();
 
         $imageData = [
-            'path' => 'path1.jpg',
-            'name' => 'name1',
-            'subtitle' => 'subtitle'
+            'path'     => 'path1.jpg',
+            'name'     => 'name1',
+            'subtitle' => 'subtitle',
         ];
 
         $image = $this->user->addImageToProject($project, $imageData);

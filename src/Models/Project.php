@@ -23,7 +23,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'link', 'slug', 'type', 'visible', 'order'
+        'name', 'link', 'slug', 'type', 'visible', 'order',
     ];
 
     /**
@@ -229,8 +229,8 @@ class Project extends Model
     public function scopeWithBlocks($query, $slug)
     {
         return $query->with(['blocks' => function ($query) {
-                $query->orderBy('order');
-            }])->where('slug', $slug)
+            $query->orderBy('order');
+        }])->where('slug', $slug)
             ->first();
     }
 

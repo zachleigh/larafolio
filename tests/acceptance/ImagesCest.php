@@ -9,7 +9,7 @@ class ImagesCest
         Artisan::call('migrate:refresh');
 
         Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
         ]);
     }
 
@@ -18,7 +18,7 @@ class ImagesCest
         Artisan::call('migrate:refresh');
 
         Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder'
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
         ]);
     }
 
@@ -41,8 +41,8 @@ class ImagesCest
         $id = $image->id();
 
         $data = [
-            'name'.$id => 'image name',
-            'caption'.$id => 'image caption'
+            'name'.$id    => 'image name',
+            'caption'.$id => 'image caption',
         ];
 
         $I->wantTo('Add a name and caption for an image.');
@@ -52,9 +52,9 @@ class ImagesCest
         $I->click('#button'.$id);
         $I->wait(1);
         $I->seeInDatabase('images', [
-            'path' => $image->path(),
-            'name' => 'image name',
-            'caption' => 'image caption'
+            'path'    => $image->path(),
+            'name'    => 'image name',
+            'caption' => 'image caption',
         ]);
         $I->see('Image information updated');
     }

@@ -29,5 +29,3 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::post('/manager/session', 'Larafolio\Http\Controllers\SessionController@store')->name('store-session');
 });
-
-

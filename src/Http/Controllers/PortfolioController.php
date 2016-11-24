@@ -9,7 +9,7 @@ class PortfolioController extends Controller
     /**
      * Update project order in portfolio.
      *
-     * @param  Request $request Request data containing all projects.
+     * @param Request $request Request data containing all projects.
      */
     public function update(Request $request)
     {

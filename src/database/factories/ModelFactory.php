@@ -16,9 +16,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'name'           => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
@@ -31,11 +31,11 @@ $factory->define(Larafolio\Models\Project::class, function (Faker\Generator $fak
     $index = rand(0, 2);
 
     return [
-        'name' => $name,
-        'type' => $types[$index],
-        'link' => $faker->url,
-        'slug' => strtolower(snake_case($name)),
-        'order' => rand(0, 10)
+        'name'  => $name,
+        'type'  => $types[$index],
+        'link'  => $faker->url,
+        'slug'  => strtolower(snake_case($name)),
+        'order' => rand(0, 10),
     ];
 });
 
@@ -43,9 +43,9 @@ $factory->define(Larafolio\Models\Image::class, function (Faker\Generator $faker
     $project = factory(Larafolio\Models\Project::class)->create();
 
     return [
-        'path' => str_random(20).'.jpg',
-        'name' => $faker->word,
-        'project_id' => $project->id()
+        'path'       => str_random(20).'.jpg',
+        'name'       => $faker->word,
+        'project_id' => $project->id(),
     ];
 });
 
@@ -53,9 +53,9 @@ $factory->define(Larafolio\Models\TextBlock::class, function (Faker\Generator $f
     $text = $faker->paragraph(5, true);
 
     return [
-        'name' => $faker->word,
-        'text' => $text,
+        'name'           => $faker->word,
+        'text'           => $text,
         'formatted_text' => $text,
-        'order' => rand(0, 10)
+        'order'          => rand(0, 10),
     ];
 });

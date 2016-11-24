@@ -121,12 +121,12 @@ class Image extends Model
     {
         return [
             'thumbnail' => $this->thumbnail(),
-            'small' => $this->small(),
-            'medium' => $this->medium(),
-            'full' => $this->full(),
-            'name' => $this->name(),
-            'caption' => $this->caption(),
-            'id' => $this->id(),
+            'small'     => $this->small(),
+            'medium'    => $this->medium(),
+            'full'      => $this->full(),
+            'name'      => $this->name(),
+            'caption'   => $this->caption(),
+            'id'        => $this->id(),
         ];
     }
 }

@@ -13,9 +13,9 @@ class Flash
     public function message($title, $message)
     {
         session()->flash('flash_message', [
-            'title' => $title,
+            'title'   => $title,
             'message' => $message,
-            'type' => 'success',
+            'type'    => 'success',
         ]);
     }
 
@@ -28,9 +28,9 @@ class Flash
     public function error($title, $message)
     {
         session()->flash('flash_message', [
-            'title' => $title,
+            'title'   => $title,
             'message' => $message,
-            'type' => 'error',
+            'type'    => 'error',
         ]);
     }
 
@@ -43,9 +43,9 @@ class Flash
     public function info($title, $message)
     {
         session()->flash('flash_message', [
-            'title' => $title,
+            'title'   => $title,
             'message' => $message,
-            'type' => 'info',
+            'type'    => 'info',
         ]);
     }
 }
