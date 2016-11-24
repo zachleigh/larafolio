@@ -7,6 +7,8 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::post('/manager', 'Larafolio\Http\Controllers\ProjectController@store')->name('store-project');
 
+    Route::patch('/manager', 'Larafolio\Http\Controllers\PortfolioController@update')->name('update-portfolio');
+
     Route::get('/manager/{project}/edit', 'Larafolio\Http\Controllers\ProjectController@edit')->name('edit-project');
 
     Route::patch('/manager/{project}/update', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');

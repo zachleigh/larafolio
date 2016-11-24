@@ -15,6 +15,8 @@ trait ManagesPortfolio
      */
     public function addProject(array $data)
     {
+        $data['order'] = Project::all()->pluck('order')->max() + 1;
+
         $project = Project::create($data);
 
         foreach (collect($data)->get('blocks', []) as $block) {
@@ -36,7 +38,9 @@ trait ManagesPortfolio
     {
         $project->update($data);
 
-        $blockData = $this->getReducedBlockData($data);
+        $blockData = collect($data)->get('blocks', []);
+
+        $blockData = $this->setOrder($blockData);
 
         foreach ($blockData as $singleBlockData) {
             if (isset($singleBlockData['project_id'])) {
@@ -52,21 +56,35 @@ trait ManagesPortfolio
     }
 
     /**
-     * Get block data from data array with order reduced to minimum.
+     * Update the order of projects in the portfolio.
      *
-     * @param array $data Data array from request.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param  array  $data Array of data for projects.
      */
-    protected function getReducedBlockData(array $data)
+    public function updateProjectOrder(array $data)
     {
-        $blockData = collect($data)->get('blocks', []);
+        $projectData = $this->setOrder($data);
 
-        return collect($blockData)->sortBy('order')
-            ->map(function ($block, $key) {
-                $block['order'] = $key;
+        foreach ($projectData as $singleProjectData) {
+            $project = Project::find($singleProjectData['id']);
 
-                return $block;
+            $project->update($singleProjectData);
+        }
+    }
+
+    /**
+     * Set order of data based on order.
+     *
+     * @param array $data Data array containing 'order' index.
+     *
+     * @return  Collection
+     */
+    public function setOrder(array $data)
+    {
+        return collect($data)->sortBy('order')
+            ->map(function ($item, $key) {
+                $item['order'] = $key;
+
+                return $item;
             });
     }
 

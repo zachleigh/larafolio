@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration
             $table->string('type')->nullable()->index();
             $table->boolean('visible')->default(false);
             $table->string('link')->nullable();
+            $table->integer('order');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

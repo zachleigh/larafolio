@@ -23,14 +23,18 @@ class Acceptance extends \Codeception\Module
         $description = 'description',
         $info = 'info',
         $link = 'link',
-        $slug = 'name'
+        $slug = 'name',
+        $order = null
     ) {
+        $order = $order ?? rand(1, 10);
+
         $id = $I->haveRecord('projects', [
             'name' => $name,
             'description' => $description,
             'info' => $info,
             'link' => $link,
-            'slug' => $name
+            'slug' => $name,
+            'order' => $order
         ]);
 
         return Project::find($project['id']);

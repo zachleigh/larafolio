@@ -13,6 +13,7 @@
             </div>
         </div>
         <dashboard
+            action={{ route('update-portfolio')}}
             :blocks="{{ json_encode($blocks) }}"
             :icons="{{ json_encode([
                 'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),

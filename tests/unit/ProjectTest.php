@@ -34,6 +34,39 @@ class ProjectTest extends TestCase
     /**
      * @test
      */
+    public function order_value_is_set_to_next_avilable_value()
+    {
+        $dataArray = [
+            1 => [
+                'name' => 'name1',
+                'type' => 'site1',
+                'link' => 'link1'
+            ],
+            2 => [
+                'name' => 'name2',
+                'type' => 'site2',
+                'link' => 'link2'
+            ],
+            3 => [
+                'name' => 'name3',
+                'type' => 'site3',
+                'link' => 'link3'
+            ]
+        ];
+
+        foreach ($dataArray as $key => $data) {
+            $project = $this->user->addProject($data);
+
+            $data['order'] = $key;
+
+            $this->seeInDatabase('projects', $data);
+        }
+
+    }
+
+    /**
+     * @test
+     */
     public function slug_is_created_when_project_is_added()
     {
         $data = [

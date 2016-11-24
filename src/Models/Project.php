@@ -23,7 +23,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'link', 'slug', 'type', 'visible',
+        'name', 'link', 'slug', 'type', 'visible', 'order'
     ];
 
     /**
@@ -136,6 +136,16 @@ class Project extends Model
     public function slug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Return the project order value.
+     *
+     * @return int
+     */
+    public function order()
+    {
+        return $this->order;
     }
 
     /**

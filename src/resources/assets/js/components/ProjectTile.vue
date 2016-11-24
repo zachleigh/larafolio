@@ -1,5 +1,21 @@
 <template>
     <section class="dashboard__item">
+        <div class="dashboard__arrows">
+            <span
+                v-bind:id="elementId('up')"
+                class="nav__icon black-icon"
+                v-html="icons.up"
+                @click="moveUp"
+            >                 
+            </span>
+            <span
+                v-bind:id="elementId('down')"
+                class="nav__icon black-icon"
+                v-html="icons.down"
+                @click="moveDown"
+            >                 
+            </span>
+        </div>
         <div class="dashboard__info">
             <div>
                 <h2 class="dashboard__name">
@@ -67,6 +83,10 @@
                 type: String
             },
 
+            index: {
+                type: Number
+            },
+
             project: {
                 type: Object
             }
@@ -87,7 +107,17 @@
         },
 
         methods: {
-            //
+            elementId (element) {
+                return element + this.project.id;
+            },
+
+            moveDown () {
+                this.$emit('down', this.index);
+            },
+
+            moveUp () {
+                this.$emit('up', this.index);
+            }
         }
     };
 </script>

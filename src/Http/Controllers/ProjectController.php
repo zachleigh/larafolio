@@ -13,7 +13,7 @@ class ProjectController extends Controller
      *
      * @var array
      */
-    protected $fields = ['name', 'link', 'blocks', 'visible', 'type'];
+    protected $fields = ['name', 'link', 'blocks', 'visible', 'type', 'order'];
 
     /**
      * Show the manager dashboard.
@@ -22,7 +22,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::all()->sortBy('order')->values();
 
         $images = $projects->mapWithKeys(function ($project) {
             return [$project->name() => $project->getProjectImage()];

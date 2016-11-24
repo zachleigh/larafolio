@@ -957,6 +957,14 @@ a {
   .text-block__icon svg g {
     fill: #5a5a5a; }
 
+.dashboard__arrows {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  justify-content: space-around; }
+
 .dashboard__icon {
   display: -webkit-box;
   display: flex;
@@ -1037,6 +1045,11 @@ a {
   .image-tile__right {
     margin-left: 15px;
     width: 100%; }
+
+.black-icon {
+  cursor: pointer; }
+  .black-icon svg g {
+    fill: #5a5a5a; }
 
 .flex {
   display: -webkit-box;
