@@ -79,6 +79,16 @@ class Project extends Model
     }
 
     /**
+     * A project has many links.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function links()
+    {
+        return $this->hasMany(Link::class);
+    }
+
+    /**
      * A project has many images.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

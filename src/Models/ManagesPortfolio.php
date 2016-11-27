@@ -23,6 +23,10 @@ trait ManagesPortfolio
             $this->addBlockToProject($project, $block);
         }
 
+        foreach (collect($data)->get('links', []) as $link) {
+            $this->addLinkToProject($project, $link);
+        }
+
         return $project;
     }
 
@@ -38,6 +42,21 @@ trait ManagesPortfolio
     {
         $project->update($data);
 
+        $this->updateProjectTextBlocks($project, $data);
+
+        $this->updateProjectLinks($project, $data);
+
+        return $project;
+    }
+
+    /**
+     * Update project text blocks by adding new ones and updating existing ones.
+     *
+     * @param Larafolio\Models\Project $project Project that blocks belong to.
+     * @param array                    $data    Array of project information.
+     */
+    public function updateProjectTextBlocks(Project $project, array $data)
+    {
         $blockData = collect($data)->get('blocks', []);
 
         $blockData = $this->setOrder($blockData);
@@ -51,8 +70,27 @@ trait ManagesPortfolio
                 $this->addBlockToProject($project, $singleBlockData);
             }
         }
+    }
 
-        return $project;
+    /**
+     * Update project links by adding new ones and updating existing ones.
+     *
+     * @param Larafolio\Models\Project $project Project that links belong to.
+     * @param array                    $data    Array of project information.
+     */
+    public function updateProjectLinks(Project $project, array $data)
+    {
+        $linkData = collect($data)->get('links', []);
+
+        foreach ($linkData as $singleLinkData) {
+            if (isset($singleLinkData['project_id'])) {
+                $block = Link::find($singleLinkData['id']);
+
+                $this->updateLink($block, $singleLinkData);
+            } else {
+                $this->addLinkToProject($project, $singleLinkData);
+            }
+        }
     }
 
     /**
@@ -184,5 +222,43 @@ trait ManagesPortfolio
         Storage::delete($image->path());
 
         return $image->delete();
+    }
+
+    /**
+     * Add a link to a project.
+     *
+     * @param Larafolio\Models\Project $project  Project to add link to.
+     * @param array                    $linkData Array of link info.
+     */
+    public function addLinkToProject(Project $project, array $linkData)
+    {
+        return $project->links()->create($linkData);
+    }
+
+    /**
+     * Update a link.
+     *
+     * @param Larafolio\Models\Link $link     Link to update.
+     * @param array                 $linkData Array of link data.
+     *
+     * @return Larafolio\Models\Link
+     */
+    public function updateLink(Link $link, array $linkData)
+    {
+        $link->update($linkData);
+
+        return $link;
+    }
+
+    /**
+     * Remove link from a project.
+     *
+     * @param Larafolio\Models\Link $link Link to remove.
+     *
+     * @return bool
+     */
+    public function removeLink(Link $link)
+    {
+        return $link->delete();
     }
 }

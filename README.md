@@ -3,6 +3,9 @@
 
 This project is still under construction. Come back soon!
 
+TODO    
+  - Add seed command to seed test data
+
 ## Developing
 
 #### Getting Started
