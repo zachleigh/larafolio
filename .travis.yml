@@ -24,7 +24,7 @@ sudo: false
 before_install: 
     - phpenv config-rm xdebug.ini
     - mysql -e "create database IF NOT EXISTS larafolio;" -uroot
-    - mysql -u root -e "GRANT ALL PRIVILEGES ON ninja.* To 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
+    - mysql -u root -e "GRANT ALL PRIVILEGES ON larafolio.* To 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
 
 services:
     - mysql
