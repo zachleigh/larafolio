@@ -11,4 +11,10 @@ modules:
             url: http://127.0.0.1:8000
             browser: chrome
         - Db
-        - \Helper\Acceptance 
+        - \Helper\Acceptance
+env:
+    phantom:
+         modules:
+            config:
+                WebDriver:
+                    browser: 'phantomjs'

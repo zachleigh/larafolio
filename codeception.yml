@@ -17,6 +17,5 @@ modules:
         Db:
             dsn: 'mysql:host=localhost;dbname=larafolio'
             user: 'root'
-            password: 'password'
+            password: ''
             dump: tests/_data/dump.sql
-
