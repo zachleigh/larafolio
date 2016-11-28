@@ -117,11 +117,7 @@ a {
     .button--secondary:hover {
       background-color: #e6e6e6; }
   .button--icon {
-    font-weight: bold;
-    max-height: 25px;
-    max-width: 25px;
-    min-width: 25px;
-    padding: 0; }
+    padding: 0 3px; }
 
 .form {
   color: #5a5a5a; }
@@ -131,8 +127,10 @@ a {
     -webkit-box-pack: justify;
     justify-content: space-between;
     margin-right: 2px; }
-    .form__button-row .button:first-child {
+    .form__button-row .button {
       margin-right: 10px; }
+    .form__button-row .button:last-child {
+      margin-right: 0; }
   .form__errors {
     margin: 15px 0;
     color: #f44436; }
@@ -426,6 +424,9 @@ a {
 
 .project-form__display-filler {
   height: 30px; }
+
+.project-form__section-controls {
+  text-align: right; }
 
 .project-form__preview {
   text-align: center;

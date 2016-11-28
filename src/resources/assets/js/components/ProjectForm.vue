@@ -1,9 +1,9 @@
 <template>
     <div class="project-form content">
         <modal
-            :show="showRemoveModal"
+            :show="showRemoveBlockModal"
             :icons="icons"
-            @close="showRemoveModal = false"
+            @close="showRemoveBlockModal = false"
         >
             <h3 slot="header">
                 Sanity Check
@@ -15,7 +15,7 @@
                     <div class="modal__buttons">
                         <button
                             class="button button--secondary"
-                            @click.prevent="showRemoveModal = false"
+                            @click.prevent="showRemoveBlockModal = false"
                         >
                             Don't Remove
                         </button>
@@ -24,6 +24,34 @@
                             @click.prevent="removeBlock"
                         >
                             Remove Block
+                        </button>
+                    </div>
+                </div>
+        </modal>
+        <modal
+            :show="showRemoveLinkModal"
+            :icons="icons"
+            @close="showRemoveLinkModal = false"
+        >
+            <h3 slot="header">
+                Sanity Check
+            </h3>
+                <p slot="body">
+                    Remove this link and loose all changes?
+                </p>
+                <div slot="footer">
+                    <div class="modal__buttons">
+                        <button
+                            class="button button--secondary"
+                            @click.prevent="showRemoveLinkModal = false"
+                        >
+                            Don't Remove
+                        </button>
+                        <button
+                            class="button button--blue"
+                            @click.prevent="removeLink"
+                        >
+                            Remove Link
                         </button>
                     </div>
                 </div>
@@ -73,7 +101,24 @@
                             v-bind:class="{ form__errored: hasError('projectType') }"
                         >
                     </div>
-                    <div class="form__label" for="name">Text Blocks</div>
+                    <div class="form__label">Links</div>
+                    <project-link
+                        v-for="(link, index) in links"
+                        :link="link"
+                        :index="index"
+                        :icons="icons"
+                        @update="updateLinks"
+                        @remove="toggleRemoveLinkModal"
+                    >
+                    </project-link>
+                    <div class="project-form__section-controls">
+                        <button
+                            id="addLink"
+                            class="button button--secondary button--icon"
+                            @click.prevent="addLink"
+                        >+</button>
+                    </div>
+                    <div class="form__label">Text Blocks</div>
                     <text-block
                         v-for="(block, index) in blocks"
                         :key="block.id"
@@ -83,7 +128,7 @@
                         :icons="icons"
                         @up="moveBlockUp"
                         @down="moveBlockDown"
-                        @remove="toggleRemoveModal"
+                        @remove="toggleRemoveBlockModal"
                         @blockInput="updateBlocks"
                     ></text-block>
                     <div class="form__button-row">
@@ -111,12 +156,13 @@
                                 Finished
                             </a>
                         </div>
-                        <button
-                            class="button button--secondary button--icon"
-                            @click.prevent="addBlock"
-                        >
-                            +
-                        </button>
+                        <div class="project-form__section-controls">
+                            <button
+                                id="addBlock"
+                                class="button button--secondary button--icon"
+                                @click.prevent="addBlock"
+                            >+</button>
+                        </div>
                     </div>
                     <div class="form__errors" v-for="formField in errors">
                         <div class="form__error" v-for="error in formField">
@@ -132,7 +178,7 @@
                 <h2
                     id="displayName"
                     class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('name') }"
+                    v-bind:style="{ top: getHeight('name', -2) }"
                 >
                     {{ name }}
                 </h2>
@@ -151,11 +197,22 @@
                     {{ projectType }}
                 </div>
                 <div
+                    v-for="(link, index) in links"
+                    :key="link.key"
+                    :id="getLinkId(index)"
+                    class="project-form__display-area"
+                    v-bind:style="{ top: getHeight('link' + index, 4) }"
+                > 
+                    <a v-bind:href="link.url">
+                    {{ link.url }}
+                    </a>
+                </div>
+                <div
                     v-for="(block, index) in blocks"
                     :key="block.id"
                     v-bind:id="getBlockId(index)"
                     class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('block' + index) }"
+                    v-bind:style="{ top: getHeight('block' + index, 4) }"
                     v-html="block.formatted_text"
                 >
                 </div>
@@ -168,10 +225,11 @@
     import Ajax from './../mixins/Ajax.js';
     import Flash from './../mixins/Flash.js';
     import Modal from './Modal.vue';
+    import ProjectLink from './ProjectLink.vue';
     import TextBlock from './TextBlock.vue';
 
     export default {
-        components: { Modal, TextBlock },
+        components: { Modal, ProjectLink, TextBlock },
 
         mixins: [ Ajax, Flash ],
 
@@ -180,20 +238,19 @@
                 name: '',
                 projectType: '',
                 link: '',
+                links: [],
                 blocks: [],
                 errors: {},
-                blocksChanged: false,
-                nextOrder: 0,
+                componentChanged: false,
+                nextBlock: 0,
                 heights: {},
                 currentBlock: '',
-                showRemoveModal: false
+                showRemoveBlockModal: false,
+                showRemoveLinkModal: false
             }
         },
 
         props: {
-            /**
-             * Form action.
-             */
             action: {
                 type: String
             },
@@ -206,14 +263,11 @@
                 type: String
             },
 
-            /**
-             * Object containing icons.
-             */
             icons: {
                 type: Object
             },
 
-            nextInOrder: {
+            nextBlockOrder: {
                 type: Number
             },
 
@@ -236,13 +290,13 @@
                     return this.project.name !== this.name ||
                         this.project.type !== this.projectType ||
                         this.project.link !== this.link ||
-                        this.blocksChanged;
+                        this.componentChanged;
                 }
 
                 return this.name !== '' ||
                     this.projectType !== '' ||
                     this.link !== '' ||
-                    this.blocksChanged;
+                    this.componentChanged;
 
             },
 
@@ -254,11 +308,13 @@
         },
 
         created () {
-            if (typeof this.nextInOrder !== 'undefined') {
-                this.nextOrder = this.nextInOrder;
+            if (typeof this.nextBlockOrder !== 'undefined') {
+                this.nextBlock = this.nextBlockOrder;
             }
    
             this.addBlock();
+
+            this.addLink();
 
             if (typeof this.project !== 'undefined') {
                 this.setInitialValues();
@@ -281,6 +337,10 @@
                 this.link = this.project.link;
 
                 this.blocks = this.project.blocks;
+
+                if (this.project.links.length >= 1) {
+                    this.links = this.project.links;
+                }
             },
 
             /**
@@ -337,14 +397,17 @@
             /**
              * Get form element registered from heights object.
              *
-             * @param  {String} id ID of form element.
+             * @param  {String}  id       ID of form element.
+             * @param  {Number}  padding  Additional padding if necessary.
              *
              * @return {String}    Height in px.
              */
-            getHeight (id) {
+            getHeight (id, padding) {
                 this.setHeights();
 
-                return (this.heights[id] + 24) + 'px';
+                padding = typeof padding === 'undefined' ? 0 : padding;
+
+                return (this.heights[id] + 24 + padding) + 'px';
             },
 
             /**
@@ -355,6 +418,7 @@
                     name: this.name,
                     type: this.projectType,
                     link: this.link,
+                    links: this.links,
                     blocks: this.blocks
                 })
                 .then(function (response) {
@@ -379,12 +443,13 @@
                     name: this.name,
                     type: this.projectType,
                     link: this.link,
+                    links: this.links,
                     blocks: this.blocks
                 })
                 .then(function (response) {
                     let slug = response.data.project.slug;
 
-                    this.blocksChanged = false;
+                    this.componentChanged = false;
 
                     this.postFlash({
                         title: 'Updated',
@@ -415,9 +480,16 @@
              */
             addBlock () {
                 this.blocks.push({
-                    order: this.nextOrder,
-                    id: this.nextOrder++
+                    order: this.nextBlock,
+                    id: this.nextBlock++
                 });
+            },
+
+            /**
+             * Add a new link to the project.
+             */
+            addLink () {
+                this.links.push({});
             },
 
             /**
@@ -428,7 +500,7 @@
             moveBlockUp (currentBlock) {
                 let index = currentBlock.index;
 
-                this.blocksChanged = true;
+                this.componentChanged = true;
 
                 if (index > 0) {
                     let block = this.blocks.splice(index, 1);
@@ -445,7 +517,7 @@
             moveBlockDown (currentBlock) {
                 let index = currentBlock.index;
 
-                this.blocksChanged = true;
+                this.componentChanged = true;
 
                 let block = this.blocks.splice(index, 1);
 
@@ -453,14 +525,24 @@
             },
 
             /**
-             * Set currentBlock on object and show remove confirmation modal.
+             * Set currentBlock and show remove block confirmation modal.
              *
              * @param  {Object} currentBlock Block object received through event.
              */
-            toggleRemoveModal (currentBlock) {
+            toggleRemoveBlockModal (currentBlock) {
                 this.currentBlock = currentBlock;
 
-                this.showRemoveModal = !this.showRemoveModal;
+                this.showRemoveBlockModal = !this.showRemoveBlockModal;
+            },
+
+            /**
+             * Set currentLink and show remove link confirmation modal.
+             * @param  {Object} currentLink Link object received through event.
+             */
+            toggleRemoveLinkModal (currentLink) {
+                this.currentLink = currentLink;
+
+                this.showRemoveLinkModal = !this.showRemoveLinkModal;
             },
 
             /**
@@ -471,7 +553,7 @@
                     this.destroyBlock(this.currentBlock.id);
                 }
 
-                this.showRemoveModal = false;
+                this.showRemoveBlockModal = false;
                 
                 let index = this.currentBlock.index;
 
@@ -486,7 +568,29 @@
             destroyBlock (id) {
                 this.ajax.delete('/manager/blocks/'+id)
                 .then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
+                })
+                .catch(function (error) {
+                    this.errors = error.data;
+                });
+            },
+
+            removeLink () {
+                if (typeof this.currentLink.project_id !== 'undefined') {
+                    this.destroyLink(this.currentLink.id);
+                }
+
+                this.showRemoveLinkModal = false;
+                
+                let index = this.currentLink.index;
+
+                this.links.splice(index, 1);
+            },
+
+            destroyLink (id) {
+                this.ajax.delete('/manager/links/'+id)
+                .then(function (response) {
+                    // console.log(response.data);
                 })
                 .catch(function (error) {
                     this.errors = error.data;
@@ -503,7 +607,20 @@
 
                 this.blocks.splice(index, 1, currentBlock);
 
-                this.blocksChanged = true;
+                this.componentChanged = true;
+            },
+
+            /**
+             * Update currentLink in the links array.
+             *
+             * @param  {Object} currentLink The link that was updated.
+             */
+            updateLinks (currentLink) {
+                let index = currentLink.index;
+
+                this.links.splice(index, 1, currentLink);
+
+                this.componentChanged = true;
             },
 
             /**
@@ -515,6 +632,17 @@
              */
             getBlockId (index) {
                 return 'displayBlock' + index;
+            },
+
+            /**
+             * Get the link ID from the block index.
+             *
+             * @param  {Number} index Link index.
+             *
+             * @return {String}
+             */
+            getLinkId (index) {
+                return 'displayLink' + index;
             },
 
             /**

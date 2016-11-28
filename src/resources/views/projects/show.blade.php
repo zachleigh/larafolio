@@ -41,6 +41,18 @@
                         {{ $project->link() }}
                     </a>
                 </section>
+                @foreach ($project->links as $link)
+                    <section class="project__display-section">
+                        <h3 class="project__display-header">
+                            Link: {{ $link->key() }}
+                        </h3>
+                        <div class="project__display-item">
+                            <a href="{{ $link->url() }}">
+                                {{ $link->url() }}
+                            </a>
+                        </div>
+                    </section>
+                @endforeach
                 @foreach ($project->blocks as $block)
                     <section class="project__display-section">
                         <h3 class="project__display-header">

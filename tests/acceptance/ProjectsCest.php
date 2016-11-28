@@ -84,7 +84,7 @@ class ProjectsCest
         $I->wantTo('Add a new text block to a project being created.');
         $I->login($I);
         $I->amOnAddPage($I);
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillForm($I, $data);
         $I->click('Add Project');
         $I->wait(1);
@@ -104,7 +104,7 @@ class ProjectsCest
         $I->wantTo('Remove a text block from a project being created.');
         $I->login($I);
         $I->amOnAddPage($I);
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillForm($I, $data);
         $I->see('Project description');
         $I->see('Project info');
@@ -121,36 +121,36 @@ class ProjectsCest
         $I->fillField(['name' => 'text0'], 'block0');
         $I->see('block0');
         // add and fill 1
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField(['name' => 'text1'], 'block1');
         $I->see('block1');
         // add and fill 2
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField(['name' => 'text2'], 'block2');
         $I->see('block2');
         // delete 1
         $I->removeBlock($I, '#delete1');
         $I->dontSee('block1');
         // add and fill 3
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField(['name' => 'text2'], 'block3');
         $I->see('block3');
         // delete 0
         $I->removeBlock($I, '#delete0');
         $I->dontSee('block0');
         // add and fill 4
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField(['name' => 'text2'], 'block4');
         $I->see('block4');
         // add and fill 5
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField(['name' => 'text3'], 'block5');
         $I->see('block5');
         // delete 5
         $I->removeBlock($I, '#delete3');
         $I->dontSee('block5');
         // add and fill 6
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField(['name' => 'text3'], 'block6');
         $I->see('block6');
         $I->see('block2');
@@ -169,8 +169,8 @@ class ProjectsCest
         $I->wantTo('Move a text block up.');
         $I->login($I);
         $I->amOnAddPage($I);
-        $I->click('+');
-        $I->click('+');
+        $I->click('#addBlock');
+        $I->click('#addBlock');
         $I->fillForm($I, $data);
         $I->click('#up2');
         $I->click('#up1');
@@ -192,8 +192,8 @@ class ProjectsCest
         $I->wantTo('Move a text block down.');
         $I->login($I);
         $I->amOnAddPage($I);
-        $I->click('+');
-        $I->click('+');
+        $I->click('#addBlock');
+        $I->click('#addBlock');
         $I->fillForm($I, $data);
         $I->click('#down0');
         $I->click('#down1');
@@ -308,12 +308,12 @@ class ProjectsCest
         $I->wantTo('Add and delete text blocks from a project when editing.');
         $I->login($I);
         $I->amOnPage("/manager/{$project->slug()}/edit");
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField('text3', 'block4');
         $I->removeBlock($I, '#delete2');
         $I->removeBlock($I, '#delete1');
         $I->removeBlock($I, '#delete0');
-        $I->click('+');
+        $I->click('#addBlock');
         $I->fillField('text1', 'block5');
         $I->wait(1);
         $I->click('Update Project');

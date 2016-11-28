@@ -95,13 +95,13 @@ class ProjectController extends Controller
      */
     public function edit($slug)
     {
-        $project = Project::withBlocks($slug);
+        $project = Project::full($slug);
 
-        $nextInOrder = $project->blocks->pluck('order')->max() + 1;
+        $nextBlock = $project->blocks->pluck('order')->max() + 1;
 
         return view('larafolio::projects.edit', [
             'project'     => $project,
-            'nextInOrder' => $nextInOrder,
+            'nextBlock' => $nextBlock,
         ]);
     }
 

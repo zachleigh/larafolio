@@ -245,6 +245,22 @@ class Project extends Model
     }
 
     /**
+     * Get full project info (blocks sorted by order, links).
+     *
+     * @param  \Builder $query Query builder.
+     * @param  string   $slug  Project slug.
+     *
+     * @return \Builder
+     */
+    public function scopeFull($query, $slug)
+    {
+        return $query->with(['blocks' => function ($query) {
+            $query->orderBy('order');
+        }])->with('links')->where('slug', $slug)
+            ->first();
+    }
+
+    /**
      * Return images with all props needed for javascript.
      *
      * @return Collection

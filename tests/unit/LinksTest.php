@@ -20,7 +20,7 @@ class LinksTest extends TestCase
 
         $data = [
             'key' => 'key',
-            'link' => 'link'
+            'url' => 'url'
         ];
 
         $this->user->addLinkToProject($project, $data);
@@ -37,17 +37,16 @@ class LinksTest extends TestCase
     {
         $firstLink = [
             'key'  => 'first link key',
-            'link' => 'first link',
+            'url' => 'first link url',
         ];
 
         $secondLink = [
             'key'  => 'second link key',
-            'link' => 'second link',
+            'url' => 'second link url',
         ];
 
         $data = [
             'name'   => 'project name',
-            'link'   => 'link',
             'links' => [$firstLink, $secondLink],
         ];
 
@@ -69,12 +68,12 @@ class LinksTest extends TestCase
 
         $this->seeInDatabase('links', [
             'key'   => $link->key(),
-            'link' => $link->link(),
+            'url' => $link->url(),
         ]);
 
         $data = [
             'key'   => 'new key',
-            'link' => 'new link',
+            'url' => 'new url',
         ];
 
         $this->user->updateLink($link, $data);
@@ -82,7 +81,7 @@ class LinksTest extends TestCase
         $this->seeInDatabase('links', [
             'id' => $link->id(),
             'key'   => $data['key'],
-            'link' => $data['link'],
+            'url' => $data['url'],
         ]);
     }
 
@@ -95,17 +94,16 @@ class LinksTest extends TestCase
 
         $firstLink = [
             'key'  => 'first link key',
-            'link' => 'first link',
+            'url' => 'first link url',
         ];
 
         $secondLink = [
             'key'  => 'second link key',
-            'link' => 'second link',
+            'url' => 'second link url',
         ];
 
         $data = [
             'name'   => 'updated name',
-            'link'   => 'updated link',
             'links' => [$firstLink, $secondLink],
         ];
 
@@ -129,7 +127,7 @@ class LinksTest extends TestCase
 
         $this->seeInDatabase('links', [
             'key'   => $link->key(),
-            'link' => $link->link(),
+            'url' => $link->url(),
             'deleted_at' => null,
         ]);
 
@@ -139,12 +137,12 @@ class LinksTest extends TestCase
 
         $this->seeInDatabase('links', [
             'key'   => $link->key(),
-            'link' => $link->link(),
+            'url' => $link->url(),
         ]);
 
         $this->dontSeeInDatabase('links', [
             'key'   => $link->key(),
-            'link' => $link->link(),
+            'url' => $link->url(),
             'deleted_at' => null,
         ]);
     }

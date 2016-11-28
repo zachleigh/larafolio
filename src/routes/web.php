@@ -23,6 +23,8 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::delete('/manager/blocks/{block}', 'Larafolio\Http\Controllers\TextBlockController@destroy')->name('remove-block');
 
+    Route::delete('/manager/links/{link}', 'Larafolio\Http\Controllers\LinkController@destroy')->name('remove-link');
+
     Route::patch('/manager/images/{image}', 'Larafolio\Http\Controllers\ImageController@update')->name('update-image');
 
     Route::delete('/manager/images/{image}', 'Larafolio\Http\Controllers\ImageController@destroy')->name('remove-image');

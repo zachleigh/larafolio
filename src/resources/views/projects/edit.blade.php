@@ -13,7 +13,7 @@
             'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),
             'up' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-up.svg'))
         ]) }}"
-        :next-in-order="{{ $nextInOrder }}"
+        :next-block-order="{{ $nextBlock }}"
         :project="{{ json_encode($project) }}"
         title="Edit Project: {{ $project->name() }}"
         type="update"
