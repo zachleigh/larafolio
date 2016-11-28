@@ -8,11 +8,12 @@ language: php
 php:
     - 5.6
     - 7.0
+    - 7.1
 
 matrix:
     fast_finish: true
     allow_failures:
-        - php: 7.0
+        - php: 7.1
 
 
 # We don't want to run linux commands as super user
@@ -22,13 +23,14 @@ sudo: false
 # Disable x-debug to speed up things
 before_install: 
     - phpenv config-rm xdebug.ini
-    - mysql -e "create database IF NOT EXISTS test;" -uroot
+    - mysql -e "create database IF NOT EXISTS larafolio;" -uroot
+    - mysql -u root -e "GRANT ALL PRIVILEGES ON ninja.* To 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
 
 services:
     - mysql
 
 env:
-    - DB_HOST=localhost DB_DATABASE=test DB_USERNAME=travis DB_PASSWORD=
+    - DB_HOST=localhost DB_DATABASE=larafolio DB_USERNAME=root DB_PASSWORD=
 
 # Install packages those will be required during build
 install:
