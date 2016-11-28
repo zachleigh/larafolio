@@ -79,7 +79,7 @@ class ProjectsCest
             'text1' => 'Project info',
         ];
 
-        $I->wantTo('Add a new text block to a project being created.');
+        $I->wantTo('Add a new text block to a project being added.');
         $I->login($I);
         $I->amOnAddPage($I);
         $I->click('#addBlock');
@@ -110,9 +110,9 @@ class ProjectsCest
         $I->dontSee('Project info');
     }
 
-    public function user_can_add_and_delete_blocks_like_crazy(AcceptanceTester $I)
+    public function user_can_add_and_remove_blocks_like_crazy(AcceptanceTester $I)
     {
-        $I->wantTo('Add and delete a bunch of random text blocks.');
+        $I->wantTo('Add and remove a bunch of random text blocks.');
         $I->login($I);
         $I->amOnAddPage($I);
         // fill 0
@@ -436,6 +436,18 @@ class ProjectsCest
         $I->amOnPage("/manager/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'projectType'], 'abc');
+        $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+    }
+
+    public function update_button_disabled_until_link_changed(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $I->wantTo('Be able to update a project if a link was changed.');
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->seeElement('.button--green', ['disabled' => 'true']);
+        $I->fillField(['name' => 'url0'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
     }
 

@@ -2,6 +2,7 @@
 
 namespace Larafolio\database\seeds;
 
+use Larafolio\Models\Link;
 use Larafolio\Models\Project;
 use Illuminate\Database\Seeder;
 use Larafolio\Models\TextBlock;
@@ -22,6 +23,8 @@ class ProjectsTableSeeder extends Seeder
                 ->create(['name' => $name])
                 ->each(function ($project) {
                     $project->blocks()->save(factory(TextBlock::class)->make());
+
+                    $project->links()->save(factory(Link::class)->make());
                 });
         }
     }

@@ -92,9 +92,12 @@ class ProjectController extends Controller
 
         $nextBlock = $project->blocks->pluck('order')->max() + 1;
 
+        $nextLink = $project->links->pluck('id')->max() + 1;
+
         return view('larafolio::projects.edit', [
             'project'     => $project,
             'nextBlock' => $nextBlock,
+            'nextLink' => $nextLink
         ]);
     }
 

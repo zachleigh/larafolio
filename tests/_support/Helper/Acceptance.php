@@ -171,4 +171,17 @@ class Acceptance extends \Codeception\Module
         $I->click('Remove Block');
         $I->wait(1);
     }
+
+    /**
+     * Remove a link.
+     *
+     * @param \AcceptanceTester $I
+     * @param string            $id Id of link to remove.
+     */
+    public function removeLink(\AcceptanceTester $I, $id)
+    {
+        $I->click($id);
+        $I->click('Remove Link');
+        $I->wait(1);
+    }
 }

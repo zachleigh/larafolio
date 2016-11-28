@@ -94,6 +94,7 @@
                     <div class="form__label">Links</div>
                     <project-link
                         v-for="(link, index) in links"
+                        :key="link.id"
                         :link="link"
                         :index="index"
                         :icons="icons"
@@ -181,7 +182,7 @@
                 </div>
                 <div
                     v-for="(link, index) in links"
-                    :key="link.key"
+                    :key="link.id"
                     :id="getLinkId(index)"
                     class="project-form__display-area"
                     v-bind:style="{ top: getHeight('link' + index, 4) }"
@@ -225,6 +226,7 @@
                 errors: {},
                 componentChanged: false,
                 nextBlock: 0,
+                nextLink: 0,
                 heights: {},
                 currentBlock: '',
                 showRemoveBlockModal: false,
@@ -250,6 +252,10 @@
             },
 
             nextBlockOrder: {
+                type: Number
+            },
+
+            nextLinkId: {
                 type: Number
             },
 
@@ -290,6 +296,10 @@
         created () {
             if (typeof this.nextBlockOrder !== 'undefined') {
                 this.nextBlock = this.nextBlockOrder;
+            }
+
+            if (typeof this.nextLinkId !== 'undefined') {
+                this.nextLink = this.nextLinkId;
             }
    
             this.addBlock();
@@ -465,7 +475,9 @@
              * Add a new link to the project.
              */
             addLink () {
-                this.links.push({});
+                this.links.push({
+                    id: this.nextLink++
+                });
             },
 
             /**

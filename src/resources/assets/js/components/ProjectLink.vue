@@ -4,11 +4,10 @@
             <div>
                 <label v-bind:for="elementId('key')">Key: </label>
                 <input
-                    :id="elementId('key')"
                     class="text-block__control-input"
                     type="text"
                     autocomplete="off"
-                    name="key"
+                    :name="elementId('key')"
                     v-model="key"
                     v-on:input="update()"
                     placeholder="None"
@@ -26,10 +25,9 @@
         </div>
         <div class="link__fields">
             <input
-                v-bind:id="elementId('url')"
                 class="form__input link__url"
                 type="text"
-                name="url"
+                :name="elementId('url')"
                 autocomplete="off"
                 v-model="url"
                 v-on:input="update()"
@@ -57,6 +55,7 @@
             icons: {
                 type: Object
             },
+
             index: {
                 type: Number
             },
