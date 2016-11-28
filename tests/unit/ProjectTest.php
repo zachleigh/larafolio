@@ -32,16 +32,18 @@ class ProjectTest extends TestCase
      */
     public function order_value_is_set_to_next_avilable_value()
     {
+        $max = Project::all()->pluck('order')->max() + 1;
+
         $dataArray = [
-            1 => [
+            $max => [
                 'name' => 'name1',
                 'type' => 'site1',
             ],
-            2 => [
+            $max + 1 => [
                 'name' => 'name2',
                 'type' => 'site2',
             ],
-            3 => [
+            $max + 2 => [
                 'name' => 'name3',
                 'type' => 'site3',
             ],

@@ -1,0 +1,92 @@
+# Config file for https://travis-ci.org/
+# Validate this file here - http://lint.travis-ci.org/
+
+# Tell Travis CI we are using PHP
+language: php
+
+# Define the php versions against we want to test our code
+php:
+    - 5.6
+    - 7.0
+    - 7.1
+
+matrix:
+    fast_finish: true
+    allow_failures:
+        - php: 7.1
+
+
+# We don't want to run linux commands as super user
+#false means Travis will run this in a container
+sudo: required
+
+dist: trusty
+
+addons:
+    apt:
+        packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+
+# Disable x-debug to speed up things
+before_install: 
+    - export CHROME_BIN=/usr/bin/google-chrome
+    - export DISPLAY=:99.0 
+    - sh -e /etc/init.d/xvfb start
+    - sudo apt-get update
+    - sudo apt-get install -y libappindicator1 fonts-liberation
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - sudo dpkg -i google-chrome*.deb
+    - phpenv config-rm xdebug.ini
+    - mysql -e "create database IF NOT EXISTS larafolio;" -uroot
+    - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+
+services:
+    - mysql
+
+env:
+    - DB_HOST=127.0.0.1 DB_DATABASE=larafolio DB_USERNAME=root DB_PASSWORD=password
+
+# Install packages those will be required during build
+install:
+    - composer install --no-interaction
+    - echo "Download and Install codecept.phar"
+    - wget -c -nc --retry-connrefused --tries=0 http://codeception.com/codecept.phar
+    - chmod +x codecept.phar
+    - php codecept.phar --version
+
+# Prepare test environment
+before_script:
+    - echo "Download selenium-server-standalone jar file"
+    - wget -c -nc --retry-connrefused --tries=0 https://goo.gl/Lyo36k -O selenium-server-standalone.jar
+    - echo "Download chromedriver"
+    - wget -c -nc --retry-connrefused --tries=0 http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip -O chromedriver.zip
+    - echo "Unpack chromedriver"
+    - unzip chromedriver.zip
+    - echo "Push package resources to Laravel install"
+    - php artisan vendor:publish --provider="Larafolio\LarafolioServiceProvider" --force
+    - echo "Add user to www-data group"
+    - sudo -E su $USER -c 'sudo usermod -a -G www-data $USER'
+    - groups $USER
+    - echo "Run selenium server - background process"
+    - nohup bash -c "java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
+    - echo "Run php in-built server - background process"
+    - nohup bash -c "php artisan serve &" && sleep 1; cat nohup.out
+
+# Run main commands
+script:
+    - phpunit
+    - php codecept.phar run acceptance --no-interaction
+
+#after_script:
+
+#after_success:
+
+#after_failure:
+
+# Cache folder, you can delete cache from Travis CI web interface
+cache:
+    directories:
+        - vendor
+        - $HOME/.composer/cache

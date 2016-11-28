@@ -19,11 +19,13 @@
     ],
 
     "require": {
-        "intervention/imagecache": "^2.3"
+        "intervention/imagecache": "^2.3",
+        "vlucas/phpdotenv": "^2.4"
     },
 
     "require-dev": {
         "laravel/laravel": "dev-larafolio-5.3",
+        "laravel/framework": "5.3.*",
         "phpunit/phpunit": "~4.0",
         "codeception/codeception": "^2.2",
         "fzaninotto/faker": "~1.4"

@@ -32,6 +32,7 @@ class DashboardCest
         foreach (range(0, 4) as $time) {
             $I->click('#up'.$project->id());
         }
+        $I->wait(1);
         $I->seeInDatabase('projects', [
             'id'    => $project->id(),
             'order' => 0,

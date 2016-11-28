@@ -21,7 +21,7 @@ class ImageTest extends TestCase
         $imageData = [
             'path'     => 'path1.jpg',
             'name'     => 'name1',
-            'subtitle' => 'subtitle',
+            'caption' => 'caption',
         ];
 
         $image = $this->user->addImageToProject($project, $imageData);

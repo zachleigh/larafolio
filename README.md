@@ -1,4 +1,8 @@
-# Larafolio  
+# Larafolio
+[![Build Status](https://travis-ci.org/zachleigh/larafolio.svg?branch=master)](https://travis-ci.org/zachleigh/larafolio)
+[![Latest Stable Version](https://poser.pugx.org/zachleigh/larafolio/version.svg)](//packagist.org/packages/zachleigh/larafolio)
+[![StyleCI](https://styleci.io/repos/74421920/shield?style=flat)](https://styleci.io/repos/74421920)
+[![License](https://poser.pugx.org/zachleigh/larafolio/license.svg)](//packagist.org/packages/zachleigh/larafolio)  
 ##### Turn a Laravel app into a portfolio site in minutes. 
 
 This project is still under construction. Come back soon!
