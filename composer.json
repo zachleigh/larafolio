@@ -20,7 +20,8 @@
 
     "require": {
         "intervention/imagecache": "^2.3",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "laravel/framework": "5.3.*"
     },
 
     "require-dev": {
