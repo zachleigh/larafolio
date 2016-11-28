@@ -24,6 +24,9 @@ before_install:
     - phpenv config-rm xdebug.ini
     - mysql -e "create database IF NOT EXISTS test;" -uroot
 
+services:
+    - mysql
+
 env:
     - DB_HOST=localhost DB_DATABASE=test DB_USERNAME=travis DB_PASSWORD=
 
