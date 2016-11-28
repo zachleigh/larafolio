@@ -20,7 +20,12 @@ matrix:
 sudo: false
 
 # Disable x-debug to speed up things
-before_install: phpenv config-rm xdebug.ini
+before_install: 
+    - phpenv config-rm xdebug.ini
+    - mysql -e "create database IF NOT EXISTS test;" -uroot
+
+env:
+    - DB_HOST=localhost DB_DATABASE=test DB_USERNAME=travis DB_PASSWORD=
 
 # Install packages those will be required during build
 install:
