@@ -24,13 +24,13 @@ sudo: false
 before_install: 
     - phpenv config-rm xdebug.ini
     - mysql -e "create database IF NOT EXISTS larafolio;" -uroot
-    - mysql -u root -e "GRANT ALL PRIVILEGES ON larafolio.* To 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
+    - mysql -u root -e "GRANT ALL PRIVILEGES ON larafolio.* To 'root'@'127.0.0.1' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
 
 services:
     - mysql
 
 env:
-    - DB_HOST=localhost DB_DATABASE=larafolio DB_USERNAME=root DB_PASSWORD=
+    - DB_HOST=127.0.0.1 DB_DATABASE=larafolio DB_USERNAME=root DB_PASSWORD=
 
 # Install packages those will be required during build
 install:
@@ -50,7 +50,7 @@ before_script:
     - echo "Run selenium server - background process"
     - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
     - echo "Run php in-built server - background process"
-    - nohup bash -c "php -S localhost:8000 2>&1 -t app &" && sleep 1; cat nohup.out
+    - nohup bash -c "php -S 127.0.0.1:8000 2>&1 -t app &" && sleep 1; cat nohup.out
 
 # Run main commands
 script:

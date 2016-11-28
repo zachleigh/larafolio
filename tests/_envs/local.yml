@@ -1,4 +1,0 @@
-modules:
-    config:
-        DB:
-            password: 'password'
