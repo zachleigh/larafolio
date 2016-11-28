@@ -19,7 +19,8 @@
     ],
 
     "require": {
-        "intervention/imagecache": "^2.3"
+        "intervention/imagecache": "^2.3",
+        "vlucas/phpdotenv": "^2.4"
     },
 
     "require-dev": {

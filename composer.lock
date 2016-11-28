@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c157da9b08556800026bd3cb03440458",
-    "content-hash": "af7e546779439dabcd24c296e9d23fa2",
+    "hash": "1a8cc25ceba86c10b29bcc2ac55ebcc6",
+    "content-hash": "a900109d88a1b262b118ab6394f52cf2",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2512,12 +2512,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zachleigh/laravel.git",
-                "reference": "be255215db9afa32018475a75312986626766eea"
+                "reference": "c83825d7102960f595267f553051a134452d0f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zachleigh/laravel/zipball/be255215db9afa32018475a75312986626766eea",
-                "reference": "be255215db9afa32018475a75312986626766eea",
+                "url": "https://api.github.com/repos/zachleigh/laravel/zipball/c83825d7102960f595267f553051a134452d0f8f",
+                "reference": "c83825d7102960f595267f553051a134452d0f8f",
                 "shasum": ""
             },
             "require": {
@@ -2573,7 +2573,7 @@
             "support": {
                 "source": "https://github.com/zachleigh/laravel/tree/larafolio-5.3"
             },
-            "time": "2016-11-28 13:22:45"
+            "time": "2016-11-28 22:28:21"
         },
         {
             "name": "phpdocumentor/reflection-common",
