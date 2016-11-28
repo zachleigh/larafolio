@@ -80,16 +80,6 @@
                             v-bind:class="{ form__errored: hasError('name') }"
                         >
                     </div>
-                    <div id="link" class="form__section">
-                        <label class="form__label" for="name">External Link</label>
-                        <input
-                            class="form__input"
-                            type="text"
-                            name="link"
-                            autocomplete="off"
-                            v-model="link"
-                        >
-                    </div>
                     <div id="projectType" class="form__section">
                         <label class="form__label" for="name">Project Type</label>
                         <input
@@ -183,13 +173,6 @@
                     {{ name }}
                 </h2>
                 <div
-                    id="displayLink"
-                    class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('link') }"
-                >
-                    {{ link }}
-                </div>
-                <div
                     id="displayProjectType"
                     class="project-form__display-area"
                     v-bind:style="{ top: getHeight('projectType') }"
@@ -237,7 +220,6 @@
             return {
                 name: '',
                 projectType: '',
-                link: '',
                 links: [],
                 blocks: [],
                 errors: {},
@@ -289,13 +271,11 @@
                 if (this.project) {
                     return this.project.name !== this.name ||
                         this.project.type !== this.projectType ||
-                        this.project.link !== this.link ||
                         this.componentChanged;
                 }
 
                 return this.name !== '' ||
                     this.projectType !== '' ||
-                    this.link !== '' ||
                     this.componentChanged;
 
             },
@@ -333,8 +313,6 @@
                 this.name = this.project.name;
 
                 this.projectType = this.project.type;
-
-                this.link = this.project.link;
 
                 this.blocks = this.project.blocks;
 
@@ -417,7 +395,6 @@
                 this.ajax.post(this.action, {
                     name: this.name,
                     type: this.projectType,
-                    link: this.link,
                     links: this.links,
                     blocks: this.blocks
                 })
@@ -442,7 +419,6 @@
                 this.ajax.patch(this.action, {
                     name: this.name,
                     type: this.projectType,
-                    link: this.link,
                     links: this.links,
                     blocks: this.blocks
                 })

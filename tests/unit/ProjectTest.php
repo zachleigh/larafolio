@@ -18,7 +18,6 @@ class ProjectTest extends TestCase
         $data = [
             'name' => 'name',
             'type' => 'site',
-            'link' => 'link',
         ];
 
         $project = $this->user->addProject($data);
@@ -37,17 +36,14 @@ class ProjectTest extends TestCase
             1 => [
                 'name' => 'name1',
                 'type' => 'site1',
-                'link' => 'link1',
             ],
             2 => [
                 'name' => 'name2',
                 'type' => 'site2',
-                'link' => 'link2',
             ],
             3 => [
                 'name' => 'name3',
                 'type' => 'site3',
-                'link' => 'link3',
             ],
         ];
 
@@ -67,7 +63,6 @@ class ProjectTest extends TestCase
     {
         $data = [
             'name' => 'project name',
-            'link' => 'link',
         ];
 
         $project = $this->user->addProject($data);
@@ -87,7 +82,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $data = [
-            'link' => 'new link',
+            'type' => 'new link',
         ];
 
         $this->user->updateProject($project, $data);

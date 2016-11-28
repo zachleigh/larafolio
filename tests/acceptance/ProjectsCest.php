@@ -27,7 +27,6 @@ class ProjectsCest
     {
         $data = [
             'name'        => 'Project Name',
-            'link'        => 'Project link',
             'projectType' => 'Project type',
             'text0'       => 'Project description',
         ];
@@ -76,7 +75,6 @@ class ProjectsCest
     {
         $data = [
             'name'  => 'Project Name',
-            'link'  => 'Project link',
             'text0' => 'Project description',
             'text1' => 'Project info',
         ];
@@ -258,7 +256,6 @@ class ProjectsCest
     {
         $data = [
             'name'        => 'updated name',
-            'link'        => 'updated link',
             'projectType' => 'updated type',
             'name0'       => 'updatedName0',
             'text0'       => 'updated0',
@@ -278,7 +275,6 @@ class ProjectsCest
         $I->seeInDatabase('projects', [
             'id'   => $project['id'],
             'name' => $data['name'],
-            'link' => $data['link'],
             'type' => $data['projectType'],
         ]);
         $I->seeInDatabase('text_blocks', [
@@ -428,18 +424,6 @@ class ProjectsCest
         $I->amOnPage("/manager/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'name'], 'abc');
-        $I->dontSeeElement('.button--green', ['disabled' => 'true']);
-    }
-
-    public function update_button_disabled_until_link_changed(AcceptanceTester $I)
-    {
-        $project = $I->getProject($I);
-
-        $I->wantTo('Be able to update a project if the link was changed.');
-        $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
-        $I->seeElement('.button--green', ['disabled' => 'true']);
-        $I->fillField(['name' => 'link'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
     }
 

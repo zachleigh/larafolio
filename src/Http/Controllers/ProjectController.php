@@ -9,13 +9,6 @@ use Larafolio\Http\Requests\AddProjectRequest;
 class ProjectController extends Controller
 {
     /**
-     * Allowed project request fields.
-     *
-     * @var array
-     */
-    protected $fields = ['name', 'link', 'blocks', 'visible', 'type', 'order'];
-
-    /**
      * Show the manager dashboard.
      *
      * @return \Illuminate\Http\Response

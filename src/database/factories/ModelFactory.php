@@ -33,7 +33,6 @@ $factory->define(Larafolio\Models\Project::class, function (Faker\Generator $fak
     return [
         'name'  => $name,
         'type'  => $types[$index],
-        'link'  => $faker->url,
         'slug'  => strtolower(snake_case($name)),
         'order' => rand(0, 10),
     ];
