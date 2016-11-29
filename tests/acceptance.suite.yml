@@ -10,11 +10,6 @@ modules:
         - WebDriver:
             url: http://127.0.0.1:8000
             browser: chrome
+            window_size: 1300x800
         - Db
         - \Helper\Acceptance
-env:
-    phantom:
-         modules:
-            config:
-                WebDriver:
-                    browser: 'phantomjs'

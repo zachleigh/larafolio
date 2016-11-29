@@ -40,12 +40,12 @@ abstract class TestCase extends IlluminateTestCase
     {
         parent::setUp();
 
-        $this->app['config']->set('database.default', 'sqlite');
+        // $this->app['config']->set('database.default', 'sqlite');
 
-        $this->app['config']->set(
-            'database.connections.sqlite.database',
-            ':memory:'
-        );
+        // $this->app['config']->set(
+        //     'database.connections.sqlite.database',
+        //     ':memory:'
+        // );
 
         $this->migrate();
 
