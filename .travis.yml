@@ -67,7 +67,7 @@ before_script:
     - echo "Push package resources to Laravel install"
     - php artisan vendor:publish --provider="Larafolio\LarafolioServiceProvider" --force
     - echo "Add user to www-data group"
-    - sudo -E su $USER -c 'usermod -a -G www-data $USER'
+    - sudo -E su $USER -c 'sudo usermod -a -G www-data $USER'
     - echo "Run selenium server - background process"
     - nohup bash -c "java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
     - echo "Run php in-built server - background process"
