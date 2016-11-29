@@ -22,7 +22,7 @@ sudo: false
 
 # Disable x-debug to speed up things
 before_install: 
-    - sudo apt-get install -y unzip
+    # - sudo apt-get install -y unzip
     - phpenv config-rm xdebug.ini
     - mysql -e "create database IF NOT EXISTS larafolio;" -uroot
     - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
