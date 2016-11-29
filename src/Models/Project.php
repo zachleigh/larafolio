@@ -237,8 +237,8 @@ class Project extends Model
     /**
      * Get full project info (blocks sorted by order, links).
      *
-     * @param  \Builder $query Query builder.
-     * @param  string   $slug  Project slug.
+     * @param \Builder $query Query builder.
+     * @param string   $slug  Project slug.
      *
      * @return \Builder
      */
