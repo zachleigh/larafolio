@@ -28,3 +28,9 @@ Laravel development server started on http://localhost:8000/
 [Tue Nov 29 09:36:13 2016] 127.0.0.1:46252 [200]: /vendor/larafolio/css/larafolio-final.css
 [Tue Nov 29 09:36:13 2016] 127.0.0.1:46254 [200]: /vendor/larafolio/js/larafolio.js
 [Tue Nov 29 09:36:13 2016] 127.0.0.1:46272 [200]: /favicon.ico
+[Tue Nov 29 09:43:49 2016] 127.0.0.1:46388 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:43:49 2016] 127.0.0.1:46390 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:43:49 2016] 127.0.0.1:46402 [200]: /favicon.ico
+[Tue Nov 29 09:43:52 2016] 127.0.0.1:46446 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:43:52 2016] 127.0.0.1:46448 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:43:52 2016] 127.0.0.1:46450 [200]: /favicon.ico
