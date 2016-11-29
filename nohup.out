@@ -1,0 +1,30 @@
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46106 [200]: /manager
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46118 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46120 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46122 [404]: /manager/images/small/e3.jpg - No such file or directory
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46124 [404]: /manager/images/small/c1.jpg - No such file or directory
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46126 [404]: /manager/images/small/d2.jpg - No such file or directory
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46132 [404]: /manager/images/small/a2.jpg - No such file or directory
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46136 [404]: /manager/images/small/b1.jpg - No such file or directory
+[Tue Nov 29 09:33:58 2016] 127.0.0.1:46140 [200]: /favicon.ico
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46144 [200]: /manager
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46156 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46158 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46160 [404]: /manager/images/small/c1.jpg - No such file or directory
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46162 [404]: /manager/images/small/e3.jpg - No such file or directory
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46164 [404]: /manager/images/small/d2.jpg - No such file or directory
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46170 [404]: /manager/images/small/a2.jpg - No such file or directory
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46174 [404]: /manager/images/small/b1.jpg - No such file or directory
+[Tue Nov 29 09:34:00 2016] 127.0.0.1:46178 [200]: /favicon.ico
+[Tue Nov 29 09:34:05 2016] 127.0.0.1:46182 [200]: /manager/project1
+[Tue Nov 29 09:34:05 2016] 127.0.0.1:46194 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:34:05 2016] 127.0.0.1:46196 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:34:05 2016] 127.0.0.1:46198 [404]: /manager/images/small/a2.jpg - No such file or directory
+[Tue Nov 29 09:34:05 2016] 127.0.0.1:46200 [200]: /favicon.ico
+Laravel development server started on http://localhost:8000/
+[Tue Nov 29 09:36:11 2016] 127.0.0.1:46224 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:36:11 2016] 127.0.0.1:46226 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:36:11 2016] 127.0.0.1:46238 [200]: /favicon.ico
+[Tue Nov 29 09:36:13 2016] 127.0.0.1:46252 [200]: /vendor/larafolio/css/larafolio-final.css
+[Tue Nov 29 09:36:13 2016] 127.0.0.1:46254 [200]: /vendor/larafolio/js/larafolio.js
+[Tue Nov 29 09:36:13 2016] 127.0.0.1:46272 [200]: /favicon.ico
