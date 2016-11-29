@@ -22,6 +22,13 @@ sudo: required
 
 dist: trusty
 
+addons:
+    apt:
+        packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+
 # Disable x-debug to speed up things
 before_install: 
     - export CHROME_BIN=/usr/bin/google-chrome
