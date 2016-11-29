@@ -28,9 +28,19 @@ Or, if you like pain and suffering:
 npm install
 ```
 
-###### Create a .env file
-You need to go into vendor/laravel/laravel and create a .env file. Enter in your database info. Hopefully this process will be made easier in the future.   
+###### Set up database connections
+Currently, database credentials are in two places (yeah, this sucks...):
+  - /vendor/laravel/laravel/.env.testing
+  - codeception.yml   
 
+Before submitting a pull request, please change codeception.yml back to its original values:
+```yml
+dsn: 'mysql:host=127.0.0.1;dbname=larafolio'
+user: 'root'
+password: 'password'
+```
+
+###### Artisan
 There is an artisan file in the Larafolio directory that points to the laravel instance in vendor. This gives you access to all of the artisan commands you would normally use.
 
 ###### Publish the resources from the service provider:
