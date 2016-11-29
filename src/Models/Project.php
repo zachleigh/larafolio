@@ -165,7 +165,7 @@ class Project extends Model
     }
 
     /**
-     * Get small route of image with project name or first image in collection.
+     * Get url of small image with project name or first image in collection.
      *
      * @return string
      */

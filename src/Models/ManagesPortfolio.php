@@ -110,7 +110,7 @@ trait ManagesPortfolio
     }
 
     /**
-     * Set order of data based on order.
+     * Set order of data based on order value.
      *
      * @param array $data Data array containing 'order' index.
      *
@@ -148,7 +148,7 @@ trait ManagesPortfolio
      * @param Larafolio\Models\Project $project   Project to add text block to.
      * @param array                    $blockData Array of text block data.
      *
-     * @return App\TextBlock
+     * @return Larafolio\Models\TextBlock
      */
     public function addBlockToProject(Project $project, array $blockData)
     {
@@ -161,7 +161,7 @@ trait ManagesPortfolio
      * @param Larafolio\Models\TextBlock $textBlock Text block to update.
      * @param array                      $blockData Array of text block data.
      *
-     * @return App\TextBlock
+     * @return Larafolio\Models\TextBlock
      */
     public function updateTextBlock(TextBlock $textBlock, array $blockData)
     {
@@ -188,7 +188,7 @@ trait ManagesPortfolio
      * @param Larafolio\Models\Project $project   Project to add image to.
      * @param array                    $imageData Array of image infomation.
      *
-     * @return App\Image
+     * @return Larafolio\Models\Image
      */
     public function addImageToProject(Project $project, array $imageData)
     {
@@ -201,7 +201,7 @@ trait ManagesPortfolio
      * @param Larafolio\Models\Image $image     Image to update.
      * @param array                  $imageData Array of inmage information.
      *
-     * @return App\Image
+     * @return Larafolio\Models\Image
      */
     public function updateImageInfo(Image $image, array $imageData)
     {

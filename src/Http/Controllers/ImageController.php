@@ -22,7 +22,7 @@ class ImageController extends Controller
         $this->user->updateImageInfo($image, $imageData);
 
         if ($request->ajax()) {
-            return;
+            return response()->json(true);
         }
 
         return back();
@@ -40,7 +40,7 @@ class ImageController extends Controller
         $this->user->removeImage($image);
 
         if ($request->ajax()) {
-            return;
+            return response()->json(true);
         }
 
         return back();

@@ -41,7 +41,7 @@ class Link extends Model
     }
 
     /**
-     * Return link id.
+     * Return the link id.
      *
      * @return int
      */
@@ -61,7 +61,7 @@ class Link extends Model
     }
 
     /**
-     * Return the url.
+     * Return the link url.
      *
      * @return string
      */

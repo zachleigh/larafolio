@@ -113,7 +113,7 @@ class Image extends Model
     }
 
     /**
-     * Generate image properties to be passed to js and save on object.
+     * Return image properties to be passed to js.
      *
      * @return array
      */

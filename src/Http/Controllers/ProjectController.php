@@ -133,7 +133,7 @@ class ProjectController extends Controller
         $this->user->removeProject($project);
 
         if ($request->ajax()) {
-            return;
+            return response()->json(true);
         }
 
         return redirect(route('dashboard'));

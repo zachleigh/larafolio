@@ -12,6 +12,7 @@ class ProjectImageController extends Controller
     /**
      * Show images for project.
      *
+     * @param \Illuminate\Http\Request $request Request from user.
      * @param Larafolio\Models\Project $project Project to show.
      *
      * @return \Illuminate\Http\Response

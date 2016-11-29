@@ -10,9 +10,13 @@ class PortfolioController extends Controller
      * Update project order in portfolio.
      *
      * @param Request $request Request data containing all projects.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $this->user->updateProjectOrder($request->get('projects'));
+        $updated = $this->user->updateProjectOrder($request->get('projects'));
+
+        return response()->json($updated);
     }
 }
