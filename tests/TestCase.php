@@ -5,6 +5,7 @@ namespace Larafolio\tests;
 use App\User;
 use Larafolio\Models\Image;
 use Larafolio\Models\Project;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
 
@@ -40,67 +41,69 @@ abstract class TestCase extends IlluminateTestCase
     {
         parent::setUp();
 
+        Artisan::call('migrate:refresh');
+
         $this->makeAdminUser();
     }
 
-    /**
-     * Run all application migrations.
-     */
-    protected function migrate()
-    {
-        $paths = $this->getMigrationPaths();
+    // /**
+    //  * Run all application migrations.
+    //  */
+    // protected function migrate()
+    // {
+    //     $paths = $this->getMigrationPaths();
 
-        collect(iterator_to_array($paths))->flatten()
-            ->sort()
-            ->each(function ($path) {
-                require_once $path;
+    //     collect(iterator_to_array($paths))->flatten()
+    //         ->sort()
+    //         ->each(function ($path) {
+    //             require_once $path;
 
-                $className = $this->getClassNameFromPath($path);
+    //             $className = $this->getClassNameFromPath($path);
 
-                (new $className())->up();
-            });
-    }
+    //             (new $className())->up();
+    //         });
+    // }
 
-    /**
-     * Get all migration file paths from migrations folder.
-     *
-     * @return array
-     */
-    protected function getMigrationPaths()
-    {
-        $path = __DIR__.'/../src/database/migrations/';
+    // /**
+    //  * Get all migration file paths from migrations folder.
+    //  *
+    //  * @return array
+    //  */
+    // protected function getMigrationPaths()
+    // {
+    //     $path = __DIR__.'/../src/database/migrations/';
 
-        $directory = new \RecursiveDirectoryIterator($path);
+    //     $directory = new \RecursiveDirectoryIterator($path);
 
-        $iterator = new \RecursiveIteratorIterator($directory);
+    //     $iterator = new \RecursiveIteratorIterator($directory);
 
-        return new \RegexIterator(
-            $iterator,
-            '/^.+\.php$/i',
-            \RecursiveRegexIterator::GET_MATCH
-        );
-    }
+    //     return new \RegexIterator(
+    //         $iterator,
+    //         '/^.+\.php$/i',
+    //         \RecursiveRegexIterator::GET_MATCH
+    //     );
+    // }
 
-    /**
-     * Get migration class name form the migration file path.
-     *
-     * @param string $path Migration file path.
-     *
-     * @return string
-     */
-    protected function getClassNameFromPath($path)
-    {
-        $pathArray = explode('/', $path);
+    // /**
+    //  * Get migration class name form the migration file path.
+    //  *
+    //  * @param string $path Migration file path.
+    //  *
+    //  * @return string
+    //  */
+    // protected function getClassNameFromPath($path)
+    // {
+    //     $pathArray = explode('/', $path);
 
-        $fileName = array_pop($pathArray);
+    //     $fileName = array_pop($pathArray);
 
-        $snakeClassName = collect(explode('_', $fileName))
-            ->filter(function ($value) {
-                return !is_numeric($value);
-            })->implode('_');
+    //     $snakeClassName = collect(explode('_', $fileName))
+    //         ->filter(function ($value) {
+    //             return !is_numeric($value);
+    //         })->implode('_');
 
-        return str_replace('.php', '', studly_case($snakeClassName));
-    }
+    //     return str_replace('.php', '', studly_case($snakeClassName));
+    // }
 
     /**
      * Make a new admin user with ID of 1.
