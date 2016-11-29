@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
+require __DIR__.'/../../vendor/laravel/laravel/bootstrap/autoload.php';
+
 $app = require __DIR__.'/../../vendor/laravel/laravel/bootstrap/app.php';
 
 $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
