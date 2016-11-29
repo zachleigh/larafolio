@@ -25,14 +25,14 @@ class DashboardCest
 
     public function projects_can_be_moved_up(AcceptanceTester $I)
     {
-        $project = Project::all()->sortBy('order')->last();
-
         $I->wantTo('Move a project up.');
         $I->login($I);
+        $project = Project::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
             $I->click('#up'.$project->id());
+            $I->wait(1);
         }
-        $I->wait(1);
+        $I->amOnPage('/manager');
         $I->seeInDatabase('projects', [
             'id'    => $project->id(),
             'order' => 0,
@@ -41,10 +41,9 @@ class DashboardCest
 
     public function projects_can_be_moved_down(AcceptanceTester $I)
     {
-        $project = Project::all()->sortBy('order')->first();
-
         $I->wantTo('Move a project down.');
         $I->login($I);
+        $project = Project::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
             $I->click('#down'.$project->id());
         }
