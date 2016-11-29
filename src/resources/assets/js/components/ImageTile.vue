@@ -165,7 +165,11 @@
                     this.passedImage.caption = this.caption;
                 })
                 .catch(function (error) {
-                    
+                    this.flash({
+                        title: 'Error',
+                        message: 'Could not update image',
+                        type: 'error'
+                    });
                 });
             },
 

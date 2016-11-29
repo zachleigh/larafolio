@@ -175,7 +175,11 @@
              * @param  {Object} message Error object received from server.
              */
             uploadErrored (message) {
-                console.log(message);
+                this.flash({
+                    title: 'Error',
+                    message: 'Could not upload image',
+                    type: 'error'
+                });
             },
 
             /**
@@ -189,7 +193,11 @@
                     this.passedImages = response.data;
                 })
                 .catch(function (error) {
-                    
+                    this.flash({
+                        title: 'Error',
+                        message: 'Could not fetch updated images',
+                        type: 'error'
+                    });
                 });
             },
 
@@ -223,7 +231,11 @@
                     this.passedImages.splice(index, 1);
                 })
                 .catch(function (error) {
-                    
+                    this.flash({
+                        title: 'Error',
+                        message: 'Could not remove image',
+                        type: 'error'
+                    });
                 });
             }
         }

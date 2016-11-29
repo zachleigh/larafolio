@@ -134,7 +134,11 @@
                     //
                 })
                 .catch(function (error) {
-                    // this.errors = error.data;
+                    this.flash({
+                        title: 'Error',
+                        message: 'Could not update project order',
+                        type: 'error'
+                    });
                 });
             }
         }

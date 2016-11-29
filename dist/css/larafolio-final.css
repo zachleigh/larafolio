@@ -819,6 +819,8 @@ a {
   height: 80px;
   color: white;
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
+  .flash-message--error {
+    background-color: #f44436; }
   .flash-message--success {
     background-color: #49c965; }
   .flash-message__bottom {

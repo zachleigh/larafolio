@@ -150,7 +150,11 @@
                     });
                 })
                 .catch(function (error) {
-                    
+                    this.flash({
+                        title: 'Error',
+                        message: 'Could not change project visibility',
+                        type: 'error'
+                    });
                 });
             },
 
@@ -167,7 +171,11 @@
                     }, '/manager');
                 })
                 .catch(function (error) {
-                    
+                    this.flash({
+                        title: 'Error',
+                        message: 'Could not remove project',
+                        type: 'error'
+                    });
                 });
             }
         }
