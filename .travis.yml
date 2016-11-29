@@ -59,8 +59,6 @@ install:
 
 # Prepare test environment
 before_script:
-    - "sh -e /etc/init.d/xvfb start"
-    - sleep 3 # give xvfb some time to start
     - echo "Download selenium-server-standalone jar file"
     - wget -c -nc --retry-connrefused --tries=0 https://goo.gl/Lyo36k -O selenium-server-standalone.jar
     - echo "Download chromedriver"
