@@ -96,8 +96,8 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.edit', [
             'project'     => $project,
-            'nextBlock' => $nextBlock,
-            'nextLink' => $nextLink
+            'nextBlock'   => $nextBlock,
+            'nextLink'    => $nextLink,
         ]);
     }
 
