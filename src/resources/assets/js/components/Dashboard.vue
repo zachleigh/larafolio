@@ -26,42 +26,50 @@
 
         data: function () {
             return {
+                /**
+                 * Projects received from prop.
+                 *
+                 * @type {Array}
+                 */
                 passedProjects: this.projects
             }
         },
 
         props: {
+            /**
+             * Update project order action.
+             */
             action: {
                 type: String
             },
 
+            /**
+             * Blocks, keyed by project name.
+             */
             blocks: {
                 type: Object
             },
 
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * Images, keyed by project name.
+             */
             images: {
                 type: Object
             },
 
+            /**
+             * Array of all projects in portfolio.
+             */
             projects: {
                 type: Array
             }
-        },
-
-        computed: {
-            //
-        },
-
-        created () {
-            //
-        },
-
-        mounted () {
-            //
         },
 
         methods: {

@@ -58,22 +58,54 @@
 
         data: function () {
             return {
+                /**
+                 * Block object passed from props.
+                 *
+                 * @type {Object}
+                 */
                 passedBlock: this.block,
+
+                /**
+                 * Block name.
+                 *
+                 * @type {String}
+                 */
                 name: '',
+
+                /**
+                 * Block text.
+                 *
+                 * @type {String}
+                 */
                 text: '',
             }
         },
 
         props: {
+            /**
+             * This block.
+             */
             block: {
                 type: Object
             },
+
+            /**
+             * Form errors, keyed by field name.
+             */
             errors: {
                 type: Object
             },
+
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
+
+            /**
+             * Index of this block in blocks array on parent.
+             */
             index: {
                 Type: Number
             }
@@ -104,7 +136,7 @@
             },
 
             /**
-             * Remove block.
+             * Emit event to remove block.
              */
             remove () {
                 this.updatePassedBlock();
@@ -113,7 +145,7 @@
             },
 
             /**
-             * Move block up.
+             * Emit event to move block up in blocks array.
              */
             up () {
                 this.updatePassedBlock();
@@ -122,7 +154,7 @@
             },
 
             /**
-             * Move block down.
+             * Emit event to move block down in blocks array.
              */
             down () {
                 this.updatePassedBlock();

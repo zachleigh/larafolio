@@ -62,7 +62,7 @@
 
         methods: {
             /**
-             * Close the current modal.
+             * Emit event to close the current modal.
              */
             close () {
                 this.$emit('close');

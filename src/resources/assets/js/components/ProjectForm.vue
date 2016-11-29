@@ -219,60 +219,156 @@
 
         data: function () {
             return {
+                /**
+                 * Name of project.
+                 *
+                 * @type {String}
+                 */
                 name: '',
+
+                /**
+                 * Type of project.
+                 *
+                 * @type {String}
+                 */
                 projectType: '',
+
+                /**
+                 * Array of links for project.
+                 *
+                 * @type {Array}
+                 */
                 links: [],
+
+                /**
+                 * Array of blocks for project.
+                 *
+                 * @type {Array}
+                 */
                 blocks: [],
+
+                /**
+                 * Form errors, keyed by field name.
+                 *
+                 * @type {Object}
+                 */
                 errors: {},
+
+                /**
+                 * If true, components (links, blocks) have changed.
+                 *
+                 * @type {Boolean}
+                 */
                 componentChanged: false,
+
+                /**
+                 * Next block order value.
+                 *
+                 * @type {Number}
+                 */
                 nextBlock: 0,
+
+                /**
+                 * Next link id.
+                 *
+                 * @type {Number}
+                 */
                 nextLink: 0,
+
+                /**
+                 * Heights of form fields, keyed by id.
+                 *
+                 * @type {Object}
+                 */
                 heights: {},
+
+                /**
+                 * The currently selected block, if any.
+                 *
+                 * @type {String}
+                 */
                 currentBlock: '',
+
+                /**
+                 * If true, show the remove block modal.
+                 *
+                 * @type {Boolean}
+                 */
                 showRemoveBlockModal: false,
+
+                /**
+                 * If true, show the remove link modal.
+                 *
+                 * @type {Boolean}
+                 */
                 showRemoveLinkModal: false
             }
         },
 
         props: {
+            /**
+             * Add project action.
+             */
             action: {
                 type: String
             },
 
-            buttonText: {
-                type: String
-            },
-
+            /**
+             * Cancel form action.
+             */
             cancelAction: {
                 type: String
             },
 
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * Next block order value.
+             */
             nextBlockOrder: {
                 type: Number
             },
 
+            /**
+             * Next link id value.
+             */
             nextLinkId: {
                 type: Number
             },
 
+            /**
+             * The project to edit, if type is update.
+             */
             project: {
                 type: Object
             },
 
+            /**
+             * Page title.
+             */
             title: {
                 type: String
             },
 
+            /**
+             * Form type: add, update.
+             */
             type: {
                 type: String
             }
         },
 
         computed: {
+            /**
+             * Return true if project form has changed.
+             *
+             * @return {Boolean}
+             */
             changed () {
                 if (this.project) {
                     return this.project.name !== this.name ||
@@ -286,6 +382,11 @@
 
             },
 
+            /**
+             * Update/Add button state. If form has changed, remove disabled.
+             *
+             * @return {String}
+             */
             buttonState () {
                 if (!this.changed) {
                     return 'disabled';
@@ -444,7 +545,7 @@
                     }, '/manager/'+slug+'/edit');
                 })
                 .catch(function (error) {
-                    // this.errors = error.data;
+                    this.errors = error.data;
                 });
             },
 
@@ -563,6 +664,22 @@
                 });
             },
 
+            /**
+             * Update currentBlock in the blocks array.
+             *
+             * @param  {Object} currentBlock The block that was updated.
+             */
+            updateBlocks (currentBlock) {
+                let index = currentBlock.index;
+
+                this.blocks.splice(index, 1, currentBlock);
+
+                this.componentChanged = true;
+            },
+            
+            /**
+             * Remove a link from the project.
+             */
             removeLink () {
                 if (typeof this.currentLink.project_id !== 'undefined') {
                     this.destroyLink(this.currentLink.id);
@@ -575,6 +692,11 @@
                 this.links.splice(index, 1);
             },
 
+            /**
+             * Destroy a link on the server.
+             *
+             * @param  {Number} id Id of link to destroy.
+             */
             destroyLink (id) {
                 this.ajax.delete('/manager/links/'+id)
                 .then(function (response) {
@@ -583,19 +705,6 @@
                 .catch(function (error) {
                     this.errors = error.data;
                 });
-            },
-
-            /**
-             * Update currentBlock in the blocks array.
-             *
-             * @param  {Object} currentBlock The block that was updated.
-             */
-            updateBlocks (currentBlock) {
-                let index = currentBlock.index;
-
-                this.blocks.splice(index, 1, currentBlock);
-
-                this.componentChanged = true;
             },
 
             /**

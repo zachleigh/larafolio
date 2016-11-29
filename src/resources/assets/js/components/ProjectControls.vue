@@ -76,35 +76,43 @@
 
         data: function () {
             return {
+                /**
+                 * When true, show the remove project modal.
+                 *
+                 * @type {Boolean}
+                 */
                 showRemoveModal: false,
+
+                /**
+                 * When true, project is visible.
+                 *
+                 * @type {Boolean}
+                 */
                 visible: this.project.visible
             }
         },
 
         props: {
+            /**
+             * Action for updating project.
+             */
             updateAction: {
                 type: String
             },
 
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * Project object.
+             */
             project: {
                 type: Object
             }
-        },
-
-        computed: {
-            //
-        },
-
-        created () {
-
-        },
-
-        mounted () {
-            //
         },
 
         methods: {

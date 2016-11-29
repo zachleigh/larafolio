@@ -60,10 +60,6 @@
 
 <script>
     export default {
-        components: {},
-
-        mixins: [],
-
         data: function () {
             return {
                 //
@@ -71,22 +67,37 @@
         },
 
         props: {
+            /**
+             * This projects mian block formatted text.
+             */
             block: {
                 type: String
             },
 
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * This projects main image small url.
+             */
             image: {
                 type: String
             },
 
+            /**
+             * This projects index in projects array on parent.
+             */
             index: {
                 type: Number
             },
 
+            /**
+             * This project.
+             */
             project: {
                 type: Object
             }
@@ -98,23 +109,27 @@
             }
         },
 
-        created () {
-            //
-        },
-
-        mounted () {
-            //
-        },
-
         methods: {
+            /**
+             * Make unique id for given element.
+             *
+             * @param  {[type]} element [description]
+             * @return {[type]}         [description]
+             */
             elementId (element) {
                 return element + this.project.id;
             },
 
+            /**
+             * Emit event to move this project down in the projects array.
+             */
             moveDown () {
                 this.$emit('down', this.index);
             },
 
+            /**
+             * Emit event to move this project up in the projects array.
+             */
             moveUp () {
                 this.$emit('up', this.index);
             }

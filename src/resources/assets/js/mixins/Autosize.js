@@ -5,6 +5,9 @@ export default {
 
     data: function () {
         return {
+            /**
+             * Autosize form fields.
+             */
             autosize: autosize
         }
     }

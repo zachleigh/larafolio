@@ -65,35 +65,72 @@
 
         data: function () {
             return {
+                /**
+                 * Array of images passed from prop.
+                 *
+                 * @type {Array}
+                 */
                 passedImages: this.images,
+
+                /**
+                 * The currently seleted image, if any.
+                 *
+                 * @type {Object}
+                 */
                 currentImage: null,
+
+                /**
+                 * When true, show the remove image modal.
+                 *
+                 * @type {Boolean}
+                 */
                 showRemoveModal: false
             }
         },
 
         props: {
+            /**
+             * Store image action.
+             */
             action: {
                 type: String
             },
 
+            /**
+             * Fetch images action.
+             */
             fetchAction: {
                 type: String
             },
 
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * Array of project images.
+             */
             images: {
                 type: Array
             },
 
+            /**
+             * Csrf token for dropbox input.
+             */
             token: {
                 type: String
             }
         },
 
         computed: {
+            /**
+             * Return the thumbnail url for the currently selected image.
+             *
+             * @return {String}
+             */
             currentThumbnail () {
                 if (this.currentImage) {
                     return this.currentImage.thumbnail;
@@ -109,8 +146,11 @@
             Dropzone.options.myAwesomeDropzone = {
                 dictDefaultMessage: 'Drop images here to add to project',
                 init: function() {
-                    this.on("complete", function(file) {
+                    this.on('success', function (file) {
                         instance.uploaded();
+                    });
+                    this.on('error', function (message) {
+                        instance.uploadErrored(message);
                     });
                 }
             };
@@ -127,6 +167,15 @@
                 });
 
                 this.fetchImages();
+            },
+
+            /**
+             * Called when image upload errored.
+             *
+             * @param  {Object} message Error object received from server.
+             */
+            uploadErrored (message) {
+                console.log(message);
             },
 
             /**

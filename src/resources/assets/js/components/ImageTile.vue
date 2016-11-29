@@ -72,28 +72,61 @@
 
         data: function () {
             return {
+                /**
+                 * Image object from prop.
+                 *
+                 * @type {Object}
+                 */
                 passedImage: this.image,
+
+                /**
+                 * Image caption.
+                 *
+                 * @type {String}
+                 */
                 caption: this.image.caption,
+
+                /**
+                 * Image name.
+                 *
+                 * @type {String}
+                 */
                 name: this.image.name,
             }
         },
 
         props: {
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * Image object with paths for different image sizes.
+             */
             image: {
                 type: Object
             }
         },
 
         computed: {
+            /**
+             * Return true when component data has changed.
+             *
+             * @return {Boolean}
+             */
             changed () {
                 return this.caption !== this.passedImage.caption ||
                     this.name !== this.passedImage.name;
             },
 
+            /**
+             * Update button state. Removes 'disabled' when component has changed.
+             *
+             * @return {String}
+             */
             buttonState () {
                 if (!this.changed) {
                     return 'disabled';
@@ -137,7 +170,7 @@
             },
 
             /**
-             * Fire remove image event.
+             * Emit remove image event.
              */
             remove () {
                 this.$emit('remove', this.passedImage);

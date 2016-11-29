@@ -64,14 +64,23 @@
         },
 
         props: {
+            /**
+             * Flash message title.
+             */
             title: {
                 type: String
             },
 
+            /**
+             * Body of flash message.
+             */
             message: {
                 type: String
             },
 
+            /**
+             * Flash message type: success.
+             */
             type: {
                 type: String
             }
@@ -79,7 +88,7 @@
 
         computed: {
             /**
-             * Return class for styleing flash type.
+             * Return class for styling flash type.
              *
              * @return {String}
              */

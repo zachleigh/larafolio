@@ -39,57 +39,76 @@
 
 <script>
     export default {
-        components: {},
-
-        mixins: [],
-
         data () {
             return {
+                /**
+                 * Link key.
+                 *
+                 * @type {String}
+                 */
                 key: this.link.key,
+
+                /**
+                 * Link from props.
+                 *
+                 * @type {Object}
+                 */
                 passedLink: this.link,
+
+                /**
+                 * Link url.
+                 *
+                 * @type {String}
+                 */
                 url: this.link.url
             }
         },
 
         props: {
+            /**
+             * Icons object.
+             */
             icons: {
                 type: Object
             },
 
+            /**
+             * Index of this link in links array on parent.
+             */
             index: {
                 type: Number
             },
 
+            /**
+             * Link object.
+             */
             link: {
                 type: Object
             }
         },
 
-        computed: {
-            //
-        },
-
-        created () {
-            //
-        },
-
-        mounted () {
-            //
-        },
-
         methods: {
+            /**
+             * Emit event to update the link.
+             */
             update () {
                 this.updatePassedLink();
 
                 this.$emit('update', this.passedLink);
             },
 
+            /**
+             * Update the data in the passed link object.
+             */
             updatePassedLink () {
                 this.passedLink.url = this.url,
                 this.passedLink.key = this.key,
                 this.passedLink.index = this.index
             },
 
+            /**
+             * Emit event to remove link.
+             */
             remove () {
                 this. updatePassedLink();
 
