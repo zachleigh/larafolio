@@ -51,7 +51,7 @@ before_script:
     - echo "Run selenium server - background process"
     - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
     - echo "Run php in-built server - background process"
-    - nohup bash -c "php -S 127.0.0.1:8000 2>&1 -t app &" && sleep 1; cat nohup.out
+    - php artisan serve
 
 # Run main commands
 script:
