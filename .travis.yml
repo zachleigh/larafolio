@@ -76,7 +76,8 @@ before_script:
 
 # Run main commands
 script:
-    - php codecept.phar run --no-interaction
+    - php codecept.phar run acceptance --no-interaction
+    - phpunit
 
 #after_script:
 
