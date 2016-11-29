@@ -35,6 +35,7 @@ env:
 # Install packages those will be required during build
 install:
     - composer install --no-interaction
+    - composer dumpautoload
     - echo "Download and Install codecept.phar"
     - wget -c -nc --retry-connrefused --tries=0 http://codeception.com/codecept.phar
     - chmod +x codecept.phar
