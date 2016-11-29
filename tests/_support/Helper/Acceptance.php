@@ -3,9 +3,22 @@
 namespace Helper;
 
 use Larafolio\Models\Project;
+use Illuminate\Support\Facades\Artisan;
 
 class Acceptance extends \Codeception\Module
 {
+    /**
+     * Migrate and seed the database.
+     */
+    public function migrate()
+    {
+        Artisan::call('migrate:refresh');
+
+        Artisan::call('db:seed', [
+            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
+        ]);
+    }
+
     /**
      * Add a basic project record.
      *

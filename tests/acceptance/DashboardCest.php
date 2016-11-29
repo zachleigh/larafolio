@@ -1,26 +1,12 @@
 <?php
 
 use Larafolio\Models\Project;
-use Illuminate\Support\Facades\Artisan;
 
 class DashboardCest
 {
     public function _before(\AcceptanceTester $I)
     {
-        Artisan::call('migrate:refresh');
-
-        Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
-        ]);
-    }
-
-    public function _after(\AcceptanceTester $I)
-    {
-        Artisan::call('migrate:refresh');
-
-        Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
-        ]);
+        $I->migrate();
     }
 
     public function projects_can_be_moved_up(AcceptanceTester $I)
@@ -30,7 +16,6 @@ class DashboardCest
         $project = Project::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
             $I->click('#up'.$project->id());
-            $I->wait(1);
         }
         $I->amOnPage('/manager');
         $I->seeInDatabase('projects', [

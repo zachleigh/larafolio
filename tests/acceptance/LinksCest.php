@@ -1,25 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
-
 class LinksCest
 {
     public function _before(\AcceptanceTester $I)
     {
-        Artisan::call('migrate:refresh');
-
-        Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
-        ]);
-    }
-
-    public function _after(\AcceptanceTester $I)
-    {
-        Artisan::call('migrate:refresh');
-
-        Artisan::call('db:seed', [
-            '--class' => 'Larafolio\database\seeds\DatabaseSeeder',
-        ]);
+        $I->migrate();
     }
 
     public function user_can_add_link_to_project(AcceptanceTester $I)
