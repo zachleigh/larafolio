@@ -22,6 +22,7 @@ sudo: false
 
 # Disable x-debug to speed up things
 before_install: 
+    - sudo apt-get install -y unzip
     - phpenv config-rm xdebug.ini
     - mysql -e "create database IF NOT EXISTS larafolio;" -uroot
     - echo "USE mysql;\nUPDATE user SET password=PASSWORD('password') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
@@ -51,7 +52,6 @@ before_script:
     - echo "Download chromedriver"
     - wget -c -nc --retry-connrefused --tries=0 http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip -O chromedriver.zip
     - echo "Unpack chromedriver"
-    - sudo apt-get install unzip
     - unzip chromedriver.zip
     - echo "Run selenium server - background process"
     - nohup bash -c "java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
