@@ -44,7 +44,7 @@ class ImagesTableSeeder extends Seeder
             $this->addToProject($name, $path);
         }
 
-        chgrp(storage_path('app/public/images'), 'www-data');
+        // chgrp(storage_path('app/public/images'), 'www-data');
 
         $old = umask(0);
 
