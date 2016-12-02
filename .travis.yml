@@ -59,7 +59,7 @@ before_script:
     - sudo -E su $USER -c 'sudo usermod -a -G www-data $USER'
     - groups $USER
     - echo "Run selenium server - background process"
-    - nohup bash -c "java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
+    - nohup bash -c "/usr/lib/jvm/java-8-oracle/jre/bin/java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
     - echo "Run php in-built server - background process"
     - nohup bash -c "php artisan serve &" && sleep 1; cat nohup.out
 
