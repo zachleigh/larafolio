@@ -157,4 +157,112 @@ class ProjectTest extends TestCase
             'id' => $project->id(),
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function all_visible_static_returns_all_visible_projects()
+    {
+        $project1 = factory(Project::class)->create();
+        $project2 = factory(Project::class)->create();
+        $project3 = factory(Project::class)->create();
+
+        $this->user->updateProject($project1, ['visible' => true]);
+
+        $projects = Project::allVisible()->flatten(1);
+
+        $projects->each(function ($project) {
+            $this->assertTrue($project->visible);
+        });
+
+        $this->assertCount(1, $projects);
+    }
+
+    /**
+     * @test
+     */
+    public function all_visible_static_groups_visible_projects_by_type()
+    {
+        $this->makeProjectsForAllVisibleTest();
+
+        $visible = Project::allVisible();
+
+        $this->assertCount(1, $visible);
+
+        $this->assertEquals('web', array_keys($visible->all())[0]);
+
+        $this->user->updateProject(Project::first(), [
+            'type' => 'open source'
+        ]);
+
+        $visible = Project::allVisible();
+
+        $this->assertCount(2, $visible);
+
+        $possible = ['web', 'open source'];
+
+        $this->assertContains(array_keys($visible->all())[0], $possible);
+
+        $key = array_search(array_keys($visible->all())[0], $possible);
+
+        unset($possible[$key]);
+
+        $this->assertContains(array_keys($visible->all())[1], $possible);
+    }
+
+    /**
+     * @test
+     */
+    public function all_visible_static_grouping_can_be_turned_off()
+    {
+        $this->makeProjectsForAllVisibleTest();
+
+        $visible = Project::allVisible(false);
+
+        $this->assertCount(4, $visible); 
+    }
+
+    /**
+     * @test
+     */
+    public function all_visible_static_conditionally_orders_visible_projects_by_order()
+    {
+        $this->makeProjectsForAllVisibleTest();
+        $this->makeProjectsForAllVisibleTest();
+        $this->makeProjectsForAllVisibleTest();
+        $this->makeProjectsForAllVisibleTest();
+
+        $unordered = Project::allVisible(false, false)->pluck('order');
+
+        $ordered = Project::allVisible(false, true)->pluck('order');
+
+        $current = 0;
+
+        $ordered->each(function ($order) use ($current) {
+            $this->assertTrue($order >= $current);
+
+            if ($order != $current) {
+                $current++;
+            }
+        });
+
+        $this->assertNotEquals($unordered, $ordered);
+    }
+
+    /**
+     * Make four projects for allVisible tests.
+     */
+    public function makeProjectsForAllVisibleTest()
+    {
+        foreach (range(0, 3) as $time) {
+            factory(Project::class)->create();
+        }
+        
+        Project::all()->each(function ($project) {
+            $this->user->updateProject($project, [
+                'type' => 'web',
+                'visible' => true
+            ]); 
+        });
+    }
 }

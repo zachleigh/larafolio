@@ -59,6 +59,29 @@ class Project extends Model
     }
 
     /**
+     * Return all visible projects.
+     *
+     * @param  boolean $group If true, group projects by 'type'.
+     * @param  boolean $order If true, order projects by 'order'.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function allVisible($group = true, $order = true)
+    {
+        $query = static::where('visible', true);
+
+        if ($order) {
+            $query->orderBy('order');
+        }
+
+        if ($group) {
+            return $query->get()->groupBy('type');
+        }
+
+        return $query->get();
+    }
+
+    /**
      * Get the route key for the model.
      *
      * @return string
