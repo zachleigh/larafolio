@@ -200,4 +200,42 @@ class TextBlockTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function user_can_get_formatted_block_text_from_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->blocks()->create([
+            'name'           => 'name',
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $formattedText = $project->blockText('name');
+
+        $this->assertEquals('formatted', $formattedText);
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_unformatted_block_text_from_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->blocks()->create([
+            'name'           => 'name',
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $unformattedText = $project->blockText('name', false);
+
+        $this->assertEquals('text', $unformattedText);
+    }
 }

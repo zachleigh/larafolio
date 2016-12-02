@@ -31,7 +31,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $with = ['images'];
+    protected $with = ['blocks', 'images'];
 
     /**
      * The attributes that should be casted to native types.
@@ -41,6 +41,16 @@ class Project extends Model
     protected $casts = [
         'visible' => 'boolean',
     ];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * Bootstrap model.
@@ -61,8 +71,8 @@ class Project extends Model
     /**
      * Return all visible projects.
      *
-     * @param  boolean $group If true, group projects by 'type'.
-     * @param  boolean $order If true, order projects by 'order'.
+     * @param bool $group If true, group projects by 'type'.
+     * @param bool $order If true, order projects by 'order'.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -70,6 +80,61 @@ class Project extends Model
     {
         $query = static::where('visible', true);
 
+        return static::orderAndGroupQuery($query, $group, $order);
+    }
+
+    /**
+     * Return all hidden projects.
+     *
+     * @param bool $group If true, group projects by 'type'.
+     * @param bool $order If true, order projects by 'order'.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function allHidden($group = true, $order = true)
+    {
+        $query = static::where('visible', false);
+
+        return static::orderAndGroupQuery($query, $group, $order);
+    }
+
+    /**
+     * Return all projects grouped by 'type'.
+     *
+     * @param  boolean $order If true, order projects by 'order'.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function allGrouped($order = true)
+    {
+        $query = static::query();
+
+        return static::orderAndGroupQuery($query, true, $order);
+    }
+
+    /**
+     * Return all projects ordered by 'order'.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function allOrdered()
+    {
+        $query = static::query();
+
+        return static::orderAndGroupQuery($query, false, true);
+    }
+
+    /**
+     * Order and group query, return results.
+     *
+     * @param Builder $query Query to be ordered.
+     * @param bool    $group If true, group projects by 'type'.
+     * @param bool    $order If true, order projects by 'order'.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected static function orderAndGroupQuery($query, $group, $order)
+    {
         if ($order) {
             $query->orderBy('order');
         }
@@ -79,16 +144,6 @@ class Project extends Model
         }
 
         return $query->get();
-    }
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 
     /**
@@ -176,15 +231,70 @@ class Project extends Model
      *
      * @param string $name Name of text block to get.
      *
-     * @return string
+     * @return Larafolio\Models\TextBlock
      */
     public function block($name)
     {
         $block = $this->blocks->where('name', $name);
 
-        if (!$block->isEmpty()) {
+        if ($block->isEmpty()) {
+            return null;
+        }
+
+        return $block->first();
+    }
+
+    /**
+     * Get block text by block name, if block exists.
+     *
+     * @param string $name Name of text block to get.
+     * @param bool $formatted If true, return formmated text.
+     *
+     * @return string
+     */
+    public function blockText($name, $formatted = true)
+    {
+        $block = $this->blocks->where('name', $name);
+
+        if ($block->isEmpty()) {
+            return null;
+        }
+
+        if ($formatted) {
             return $block->first()->formattedText();
         }
+
+        return $block->first()->text();
+    }
+
+    /**
+     * Return true if project has blocks.
+     *
+     * @return bool
+     */
+    public function hasBlocks()
+    {
+        return !$this->blocks->isEmpty();
+    }
+
+    /**
+     * Return true if project has images.
+     *
+     * @return bool
+     */
+    public function hasImages()
+    {
+        return !$this->images->isEmpty();
+    }
+
+    /**
+     * Return true if project has links.
+     *
+     * @return bool
+     */
+    public function hasLinks()
+    {
+        return !$this->links->isEmpty();
     }
 
     /**
@@ -221,26 +331,6 @@ class Project extends Model
         } elseif ($this->hasBlocks()) {
             return $this->blocks()->first()->formattedText();
         }
-    }
-
-    /**
-     * Return true if project has images.
-     *
-     * @return bool
-     */
-    public function hasImages()
-    {
-        return !$this->images->isEmpty();
-    }
-
-    /**
-     * Return true if project has blocks.
-     *
-     * @return bool
-     */
-    public function hasBlocks()
-    {
-        return !$this->blocks->isEmpty();
     }
 
     /**

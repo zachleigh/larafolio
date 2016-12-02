@@ -4,6 +4,7 @@ namespace Larafolio\tests\unit;
 
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
+use Illuminate\Support\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectTest extends TestCase
@@ -236,6 +237,70 @@ class ProjectTest extends TestCase
 
         $ordered = Project::allVisible(false, true)->pluck('order');
 
+        $this->assertOrder($ordered);
+
+        $this->assertNotEquals($unordered, $ordered);
+    }
+
+    /**
+     * @test
+     */
+    public function all_hidden_static_returns_all_hidden_projects()
+    {
+        $project1 = factory(Project::class)->create();
+        $project2 = factory(Project::class)->create();
+        $project3 = factory(Project::class)->create();
+
+        $this->user->updateProject($project1, ['visible' => true]);
+
+        $projects = Project::allHidden()->flatten(1);
+
+        $projects->each(function ($project) {
+            $this->assertFalse($project->visible);
+        });
+
+        $this->assertCount(2, $projects);
+    }
+
+    /**
+     * @test
+     */
+    public function all_grouped_static_returns_all_projects_grouped()
+    {
+        $this->makeProjectsForAllVisibleTest();
+        $this->makeProjectsForAllVisibleTest(false);
+
+        $projects = Project::allGrouped();
+
+        $this->assertCount(1, $projects);
+
+        $this->assertEquals('web', array_keys($projects->all())[0]);
+
+        $this->assertCount(8, $projects->flatten(1));
+    }
+
+    /**
+     * @test
+     */
+    public function all_ordered_static_returns_all_projects_ordered()
+    {
+        $this->makeProjectsForAllVisibleTest();
+        $this->makeProjectsForAllVisibleTest(false);
+        $this->makeProjectsForAllVisibleTest(false, 'github');
+        $this->makeProjectsForAllVisibleTest(true, 'github');
+
+        $ordered = Project::allOrdered()->pluck('order');
+
+        $this->assertOrder($ordered);
+    }
+
+    /**
+     * Assert a collection is ordered.
+     *
+     * @param  \Illuminate\Support\Collection $ordered Collection of numbers.
+     */
+    protected function assertOrder(Collection $ordered)
+    {
         $current = 0;
 
         $ordered->each(function ($order) use ($current) {
@@ -245,24 +310,25 @@ class ProjectTest extends TestCase
                 $current++;
             }
         });
-
-        $this->assertNotEquals($unordered, $ordered);
     }
 
     /**
      * Make four projects for allVisible tests.
      */
-    public function makeProjectsForAllVisibleTest()
+    protected function makeProjectsForAllVisibleTest($makeVisible = true, $type = 'web')
     {
         foreach (range(0, 3) as $time) {
             factory(Project::class)->create();
         }
+
+        $conditions = ['type' => $type];
+
+        if ($makeVisible) {
+            $conditions['visible'] = true;
+        }
         
-        Project::all()->each(function ($project) {
-            $this->user->updateProject($project, [
-                'type' => 'web',
-                'visible' => true
-            ]); 
+        Project::all()->each(function ($project) use ($conditions) {
+            $this->user->updateProject($project, $conditions); 
         });
     }
 }
