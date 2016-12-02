@@ -66,4 +66,48 @@ class ImageTest extends TestCase
             $this->dontSeeInDatabase('images', ['id' => $image->id()]);
         });
     }
+
+    /**
+     * @test
+     */
+    public function user_can_get_an_image_from_project()
+    {
+        $project = $this->makeProjectWithImages();
+
+        $firstImage = $project->images()->first();
+
+        $image = $project->image($firstImage->name());
+
+        $this->assertInstanceOf(Image::class, $image);
+
+        $this->assertEquals($firstImage->name(), $image->name());
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_image_url_from_project()
+    {
+        $project = $this->makeProjectWithImages();
+
+        $firstImage = $project->images()->first();
+
+        $url = $project->imageUrl($firstImage->name(), 'small');
+
+        $this->assertEquals($firstImage->small(), $url);
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_image_caption_from_project()
+    {
+        $project = $this->makeProjectWithImages();
+
+        $firstImage = $project->images()->first();
+
+        $caption = $project->imageCaption($firstImage->name());
+
+        $this->assertEquals($firstImage->caption(), $caption);
+    }
 }

@@ -2,13 +2,13 @@
     <div v-bind:id="elementId('link')" class="link form__section">
         <div class="link__control text-block__control">
             <div>
-                <label v-bind:for="elementId('key')">Key: </label>
+                <label v-bind:for="elementId('linkName')">Name: </label>
                 <input
                     class="text-block__control-input"
                     type="text"
                     autocomplete="off"
-                    :name="elementId('key')"
-                    v-model="key"
+                    :name="elementId('linkName')"
+                    v-model="name"
                     v-on:input="update()"
                     placeholder="None"
                 >
@@ -42,11 +42,11 @@
         data () {
             return {
                 /**
-                 * Link key.
+                 * Link name.
                  *
                  * @type {String}
                  */
-                key: this.link.key,
+                name: this.link.name,
 
                 /**
                  * Link from props.
@@ -102,7 +102,7 @@
              */
             updatePassedLink () {
                 this.passedLink.url = this.url,
-                this.passedLink.key = this.key,
+                this.passedLink.name = this.name,
                 this.passedLink.index = this.index
             },
 

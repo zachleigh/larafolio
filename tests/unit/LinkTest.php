@@ -7,7 +7,7 @@ use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class LinksTest extends TestCase
+class LinkTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -19,7 +19,7 @@ class LinksTest extends TestCase
         $project = factory(Project::class)->create();
 
         $data = [
-            'key' => 'key',
+            'name' => 'name',
             'url' => 'url'
         ];
 
@@ -36,12 +36,12 @@ class LinksTest extends TestCase
     public function user_can_add_links_with_other_data()
     {
         $firstLink = [
-            'key'  => 'first link key',
+            'name'  => 'first link name',
             'url' => 'first link url',
         ];
 
         $secondLink = [
-            'key'  => 'second link key',
+            'name'  => 'second link name',
             'url' => 'second link url',
         ];
 
@@ -67,12 +67,12 @@ class LinksTest extends TestCase
         $link = factory(Link::class)->create();
 
         $this->seeInDatabase('links', [
-            'key'   => $link->key(),
+            'name'   => $link->name(),
             'url' => $link->url(),
         ]);
 
         $data = [
-            'key'   => 'new key',
+            'name'   => 'new name',
             'url' => 'new url',
         ];
 
@@ -80,7 +80,7 @@ class LinksTest extends TestCase
 
         $this->seeInDatabase('links', [
             'id' => $link->id(),
-            'key'   => $data['key'],
+            'name'   => $data['name'],
             'url' => $data['url'],
         ]);
     }
@@ -93,12 +93,12 @@ class LinksTest extends TestCase
         $project = factory(Project::class)->create();
 
         $firstLink = [
-            'key'  => 'first link key',
+            'name'  => 'first link name',
             'url' => 'first link url',
         ];
 
         $secondLink = [
-            'key'  => 'second link key',
+            'name'  => 'second link name',
             'url' => 'second link url',
         ];
 
@@ -126,7 +126,7 @@ class LinksTest extends TestCase
         $link = factory(Link::class)->create();
 
         $this->seeInDatabase('links', [
-            'key'   => $link->key(),
+            'name'   => $link->name(),
             'url' => $link->url(),
             'deleted_at' => null,
         ]);
@@ -136,12 +136,12 @@ class LinksTest extends TestCase
         $this->assertTrue($success);
 
         $this->seeInDatabase('links', [
-            'key'   => $link->key(),
+            'name'   => $link->name(),
             'url' => $link->url(),
         ]);
 
         $this->dontSeeInDatabase('links', [
-            'key'   => $link->key(),
+            'name'   => $link->name(),
             'url' => $link->url(),
             'deleted_at' => null,
         ]);

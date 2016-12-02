@@ -11,7 +11,7 @@ class LinksCest
     {
         $data = [
             'name'  => 'Project Name',
-            'key0' => 'Link key',
+            'linkName0' => 'Link name',
             'url0' => 'Link url',
             'text0' => 'Project description'
         ];
@@ -25,7 +25,7 @@ class LinksCest
         $I->seeCurrentUrlEquals('/manager/project_name');
         $I->seeInDatabase('projects', ['name' => $data['name']]);
         $I->seeInDatabase('links', [
-            'key' => $data['key0'],
+            'name' => $data['linkName0'],
             'url' => $data['url0']
         ]);
     }
@@ -33,7 +33,7 @@ class LinksCest
     public function user_can_update_a_link(AcceptanceTester $I)
     {
         $data = [
-            'key0'       => 'updated key0',
+            'linkName0'       => 'updated name0',
             'url0'       => 'updated url0',
         ];
 
@@ -46,7 +46,7 @@ class LinksCest
         $I->wait(1);
         $I->seeInDatabase('links', [
             'project_id'   => $project['id'],
-            'key' => $data['key0'],
+            'name' => $data['linkName0'],
             'url' => $data['url0']
         ]);
     }
@@ -54,9 +54,9 @@ class LinksCest
     public function user_can_remove_link_from_project(AcceptanceTester $I)
     {
         $data = [
-            'key0' => 'Link key 0',
+            'linkName0' => 'Link name 0',
             'url0' => 'Link url 0',
-            'key1' => 'Link key 1',
+            'linkName1' => 'Link name 1',
             'url1' => 'Link url 1',
         ];
 
@@ -147,7 +147,7 @@ class LinksCest
     {
         $data = [
             'name'  => 'Project Name',
-            'key0' => 'Link key',
+            'linkName0' => 'Link name',
             'text0' => 'Project description'
         ];
 
@@ -158,7 +158,7 @@ class LinksCest
         $I->click('Add Project');
         $I->wait(1);
         $I->dontSeeInDatabase('links', [
-            'key' => $data['key0'],
+            'name' => $data['linkName0'],
         ]);
     }
 }

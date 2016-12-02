@@ -198,8 +198,6 @@ class ProjectTest extends TestCase
 
         $visible = Project::allVisible();
 
-        $this->assertCount(2, $visible);
-
         $possible = ['web', 'open source'];
 
         $this->assertContains(array_keys($visible->all())[0], $possible);
@@ -220,7 +218,9 @@ class ProjectTest extends TestCase
 
         $visible = Project::allVisible(false);
 
-        $this->assertCount(4, $visible); 
+        $visible->each(function ($project) {
+            $this->assertInstanceOf(Project::class, $project);
+        });
     }
 
     /**
@@ -259,7 +259,9 @@ class ProjectTest extends TestCase
             $this->assertFalse($project->visible);
         });
 
-        $this->assertCount(2, $projects);
+        $hiddenProjects = Project::where('visible', false);
+
+        $this->assertCount($hiddenProjects->count(), $projects);
     }
 
     /**
@@ -276,7 +278,9 @@ class ProjectTest extends TestCase
 
         $this->assertEquals('web', array_keys($projects->all())[0]);
 
-        $this->assertCount(8, $projects->flatten(1));
+        $count = Project::all()->count();
+
+        $this->assertCount($count, $projects->flatten(1));
     }
 
     /**

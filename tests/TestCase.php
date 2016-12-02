@@ -31,8 +31,6 @@ abstract class TestCase extends IlluminateTestCase
 
         $app->make(EloquentFactory::class)->load(__DIR__.'/../src/database/factories/');
 
-        Artisan::call('migrate:refresh');
-
         return $app;
     }
 
@@ -42,6 +40,8 @@ abstract class TestCase extends IlluminateTestCase
     public function setUp()
     {
         parent::setUp();
+
+        Artisan::call('migrate');
 
         $this->makeAdminUser();
     }

@@ -5,6 +5,7 @@ namespace Larafolio\tests\unit;
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
 use Larafolio\Models\TextBlock;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TextBlockTest extends TestCase
@@ -204,16 +205,23 @@ class TextBlockTest extends TestCase
     /**
      * @test
      */
+    public function user_can_get_a_text_block_from_project()
+    {
+        $project = $this->createProjectWithBlock();
+
+        $block = $project->block('name');
+
+        $this->assertInstanceOf(TextBlock::class, $block);
+
+        $this->assertEquals('name', $block->name());
+    }
+
+    /**
+     * @test
+     */
     public function user_can_get_formatted_block_text_from_project()
     {
-        $project = factory(Project::class)->create();
-
-        $project->blocks()->create([
-            'name'           => 'name',
-            'text'           => 'text',
-            'formatted_text' => 'formatted',
-            'order' => 5
-        ]);
+        $project = $this->createProjectWithBlock();
 
         $formattedText = $project->blockText('name');
 
@@ -225,6 +233,20 @@ class TextBlockTest extends TestCase
      */
     public function user_can_get_unformatted_block_text_from_project()
     {
+        $project = $this->createProjectWithBlock();
+
+        $unformattedText = $project->blockText('name', false);
+
+        $this->assertEquals('text', $unformattedText);
+    }
+
+    /**
+     * Create a project with a single block.
+     *
+     * @return Larafolio\Models\Project
+     */
+    public function createProjectWithBlock()
+    {
         $project = factory(Project::class)->create();
 
         $project->blocks()->create([
@@ -234,8 +256,6 @@ class TextBlockTest extends TestCase
             'order' => 5
         ]);
 
-        $unformattedText = $project->blockText('name', false);
-
-        $this->assertEquals('text', $unformattedText);
+        return $project;
     }
 }

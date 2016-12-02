@@ -101,7 +101,7 @@ class Project extends Model
     /**
      * Return all projects grouped by 'type'.
      *
-     * @param  boolean $order If true, order projects by 'order'.
+     * @param bool $order If true, order projects by 'order'.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -227,6 +227,16 @@ class Project extends Model
     }
 
     /**
+     * Return true if project has blocks.
+     *
+     * @return bool
+     */
+    public function hasBlocks()
+    {
+        return !$this->blocks->isEmpty();
+    }
+
+    /**
      * Get a text block by name, if exists.
      *
      * @param string $name Name of text block to get.
@@ -235,46 +245,44 @@ class Project extends Model
      */
     public function block($name)
     {
-        $block = $this->blocks->where('name', $name);
-
-        if ($block->isEmpty()) {
-            return null;
-        }
-
-        return $block->first();
+        return $this->getFromRelationshipByName('blocks', $name);
     }
 
     /**
      * Get block text by block name, if block exists.
      *
-     * @param string $name Name of text block to get.
-     * @param bool $formatted If true, return formmated text.
+     * @param string $name      Name of text block to get.
+     * @param bool   $formatted If true, return formmated text.
      *
      * @return string
      */
     public function blockText($name, $formatted = true)
     {
-        $block = $this->blocks->where('name', $name);
-
-        if ($block->isEmpty()) {
-            return null;
+        if (!$block = $this->block($name)) {
+            return;
         }
 
         if ($formatted) {
-            return $block->first()->formattedText();
+            return $block->formattedText();
         }
 
-        return $block->first()->text();
+        return $block->text();
     }
 
     /**
-     * Return true if project has blocks.
+     * Get formatted text of block named description or first block.
      *
-     * @return bool
+     * @return string
      */
-    public function hasBlocks()
+    public function getProjectBlock()
     {
-        return !$this->blocks->isEmpty();
+        $description = $this->block('description');
+
+        if ($description) {
+            return $description->formattedText();
+        } elseif ($this->hasBlocks()) {
+            return $this->blocks()->first()->formattedText();
+        }
     }
 
     /**
@@ -288,13 +296,44 @@ class Project extends Model
     }
 
     /**
-     * Return true if project has links.
+     * Get image by name, if exists.
      *
-     * @return bool
+     * @param string $name Name of image to get.
+     *
+     * @return Larafolio\Models\Image|null
      */
-    public function hasLinks()
+    public function image($name)
     {
-        return !$this->links->isEmpty();
+        return $this->getFromRelationshipByName('images', $name);
+    }
+
+    /**
+     * Get image url for given size. 
+     *
+     * @param string $name Name of image to get url for.
+     * @param string $size Size of image.
+     *
+     * @return string|null
+     */
+    public function imageUrl($name, $size = 'medium')
+    {
+        $image = $this->image($name);
+
+        return $image->{$size}();
+    }
+
+    /**
+     * Get image caption for image.
+     *
+     * @param  string $name Name of image to get caption for.
+     *
+     * @return string|null
+     */
+    public function imageCaption($name)
+    {
+        $image = $this->image($name);
+
+        return $image->caption();
     }
 
     /**
@@ -306,31 +345,47 @@ class Project extends Model
      */
     public function getProjectImage($size = 'small')
     {
-        $projectImage = $this->images()
-            ->where('name', $this->name())
-            ->get();
+        $projectImage = $this->image($this->name());
 
-        if (!$projectImage->isEmpty()) {
-            return $projectImage->first()->{$size}();
+        if ($projectImage) {
+            return $projectImage->{$size}();
         } elseif ($this->hasImages()) {
             return $this->images()->first()->{$size}();
         }
     }
 
     /**
-     * Get formatted text of block named description or first block.
+     * Return true if project has links.
      *
-     * @return string
+     * @return bool
      */
-    public function getProjectBlock()
+    public function hasLinks()
     {
-        $description = $this->block('description');
+        return !$this->links->isEmpty();
+    }
 
-        if ($description) {
-            return $description;
-        } elseif ($this->hasBlocks()) {
-            return $this->blocks()->first()->formattedText();
+    public function link($name)
+    {
+        return $this->getFromRelationshipByName('links', $name);
+    }
+
+    /**
+     * Get a model from a relationship by model name.
+     *
+     * @param  string $relationship Name of relationship.
+     * @param  string $name         Name of model to get.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    protected function getFromRelationshipByName($relationship, $name)
+    {
+        $items = $this->{$relationship}->where('name', $name);
+
+        if ($items->isEmpty()) {
+            return null;
         }
+
+        return $items->first();
     }
 
     /**

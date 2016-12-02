@@ -38,7 +38,7 @@
                 @foreach ($project->links as $link)
                     <section class="project__display-section">
                         <h3 class="project__display-header">
-                            Link: {{ $link->key() }}
+                            Link: {{ $link->name() }}
                         </h3>
                         <div class="project__display-item">
                             <a href="{{ $link->url() }}">
