@@ -69,7 +69,7 @@ class Image extends Model
      */
     public function thumbnail()
     {
-        return '/manager/images/thumbnail/'.$this->fileName();
+        return $this->imageRoute('thumbnail');
     }
 
     /**
@@ -79,7 +79,7 @@ class Image extends Model
      */
     public function small()
     {
-        return '/manager/images/small/'.$this->fileName();
+        return $this->imageRoute('small');
     }
 
     /**
@@ -89,7 +89,7 @@ class Image extends Model
      */
     public function medium()
     {
-        return '/manager/images/medium/'.$this->fileName();
+        return $this->imageRoute('medium');
     }
 
     /**
@@ -99,7 +99,19 @@ class Image extends Model
      */
     public function full()
     {
-        return '/manager/images/full/'.$this->fileName();
+        return $this->imageRoute('full');
+    }
+
+    /**
+     * Get route for given template image.
+     *
+     * @param  string $templateName Name of image cache template.
+     *
+     * @return string
+     */
+    public function imageRoute($templateName)
+    {
+        return "/manager/images/{$templateName}/{$this->fileName()}";
     }
 
     /**

@@ -15,39 +15,53 @@
 
 #### Larafolio\Models\Project.php
 
-###### public static function allVisible($group = true, $order = true) 
+###### static allVisible($group = true, $order = true) 
 
-###### public static function allHidden($group = true, $order = true)
+###### static allHidden($group = true, $order = true)
 
-###### public static function allGrouped($order = true)
+###### static allGrouped($order = true)
 
-###### public static function allOrdered()
+###### static allOrdered()
 
-###### public function blocks()
+###### blocks()
 
-###### public function links()
+###### links()
 
-###### public function images()
+###### images()
 
-###### public function hasBlocks()
+###### hasBlocks()
 
-###### public function block($name)
+###### block($name)
 
-###### public function blockText($name, $formatted = true)
+###### blockText($name, $formatted = true)
 
-###### public function hasImages()
+###### hasImages()
 
-###### public function image($name)
+###### image($name)
 
-###### public function imageUrl($name, $size = 'medium')
+###### imageUrl($name, $size = 'medium')
 
-###### public function imageCaption($name)
+###### imageCaption($name)
 
-###### public function hasLinks()
+###### hasLinks()
 
-###### public function link($name)
+###### link($name)
 
-###### public function linkUrl($name)
+###### linkUrl($name)
+
+#### Larafolio\Models\Image
+
+###### thumbnail()
+
+###### small()
+
+###### medium()
+
+###### full()
+
+###### imageRoute($templateName)
+
+###### fileName()
 
 ## Developing
 
