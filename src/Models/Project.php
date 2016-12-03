@@ -254,12 +254,12 @@ class Project extends Model
      * @param string $name      Name of text block to get.
      * @param bool   $formatted If true, return formmated text.
      *
-     * @return string
+     * @return string|null
      */
     public function blockText($name, $formatted = true)
     {
         if (!$block = $this->block($name)) {
-            return;
+            return null;
         }
 
         if ($formatted) {
@@ -272,7 +272,7 @@ class Project extends Model
     /**
      * Get formatted text of block named description or first block.
      *
-     * @return string
+     * @return Larafolio\Models\TextBlock
      */
     public function getProjectBlock()
     {
@@ -317,13 +317,15 @@ class Project extends Model
      */
     public function imageUrl($name, $size = 'medium')
     {
-        $image = $this->image($name);
+        if (!$image = $this->image($name)) {
+            return null;
+        }
 
         return $image->{$size}();
     }
 
     /**
-     * Get image caption for image.
+     * Get caption for image.
      *
      * @param  string $name Name of image to get caption for.
      *
@@ -331,7 +333,9 @@ class Project extends Model
      */
     public function imageCaption($name)
     {
-        $image = $this->image($name);
+        if (!$image = $this->image($name)) {
+            return null;
+        }
 
         return $image->caption();
     }
@@ -364,9 +368,32 @@ class Project extends Model
         return !$this->links->isEmpty();
     }
 
+    /**
+     * Get link by name, if exists.
+     *
+     * @param  string $name Name of link to get.
+     *
+     * @return Larafolio\Models\Link|null
+     */
     public function link($name)
     {
         return $this->getFromRelationshipByName('links', $name);
+    }
+
+    /**
+     * Get link url.
+     *
+     * @param  string $name Name of link.
+     *
+     * @return string|null
+     */
+    public function linkUrl($name)
+    {
+        if (!$link = $this->link($name)) {
+            return null;
+        }
+
+        return $link->url();
     }
 
     /**

@@ -146,4 +146,55 @@ class LinkTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function user_can_get_a_link_from_project()
+    {
+        $project = $this->makeProjectWithLink();
+
+        $link = $project->link('name');
+
+        $this->assertInstanceOf(Link::class, $link);
+
+        $this->assertEquals('name', $link->name());
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_a_link_url_from_project()
+    {
+        $project = $this->makeProjectWithLink();
+
+        $url = $project->linkUrl('name');
+
+        $this->assertEquals('url', $url);
+    }
+
+    /**
+     * Make a project with a link.
+     *
+     * @param  string $name Name of link.
+     *
+     * @return Larafolio\Models\Project
+     */
+    protected function makeProjectWithLink($name = 'name', $url = 'url')
+    {
+        $project = factory(Project::class)->create();
+
+        $link = [
+            'name'  => $name,
+            'url' => $url,
+        ];
+
+        $data = [
+            'links' => [$link],
+        ];
+
+        $this->user->updateProject($project, $data);
+
+        return $project;
+    }
 }
