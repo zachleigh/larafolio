@@ -1,6 +1,7 @@
 {
     "name": "zachleigh/larafolio",
-    "description": "A portfolio management system for laravel.",
+    "description": "A portfolio management system for Laravel.",
+    "keywords": ["portfolio", "laravel", "cms"],
     "type": "project",
     "license": "MIT",
     "authors": [
