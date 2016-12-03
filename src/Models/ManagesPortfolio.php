@@ -50,47 +50,19 @@ trait ManagesPortfolio
     }
 
     /**
-     * Update project text blocks by adding new ones and updating existing ones.
+     * Remove a project from the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project that blocks belong to.
-     * @param array                    $data    Array of project information.
-     */
-    public function updateProjectTextBlocks(Project $project, array $data)
-    {
-        $blockData = collect($data)->get('blocks', []);
-
-        $blockData = $this->setOrder($blockData);
-
-        foreach ($blockData as $singleBlockData) {
-            if (isset($singleBlockData['project_id'])) {
-                $block = TextBlock::find($singleBlockData['id']);
-
-                $this->updateTextBlock($block, $singleBlockData);
-            } else {
-                $this->addBlockToProject($project, $singleBlockData);
-            }
-        }
-    }
-
-    /**
-     * Update project links by adding new ones and updating existing ones.
+     * @param Larafolio\Models\Project $project Project to remove.
      *
-     * @param Larafolio\Models\Project $project Project that links belong to.
-     * @param array                    $data    Array of project information.
+     * @return bool
      */
-    public function updateProjectLinks(Project $project, array $data)
+    public function removeProject(Project $project)
     {
-        $linkData = collect($data)->get('links', []);
-
-        foreach ($linkData as $singleLinkData) {
-            if (isset($singleLinkData['project_id'])) {
-                $block = Link::find($singleLinkData['id']);
-
-                $this->updateLink($block, $singleLinkData);
-            } else {
-                $this->addLinkToProject($project, $singleLinkData);
-            }
+        foreach ($project->images as $image) {
+            $this->removeImage($image);
         }
+
+        return $project->delete();
     }
 
     /**
@@ -116,7 +88,7 @@ trait ManagesPortfolio
      *
      * @return Collection
      */
-    public function setOrder(array $data)
+    protected function setOrder(array $data)
     {
         return collect($data)->sortBy('order')
             ->map(function ($item, $key) {
@@ -124,22 +96,6 @@ trait ManagesPortfolio
 
                 return $item;
             });
-    }
-
-    /**
-     * Remove a project from the portfolio.
-     *
-     * @param Larafolio\Models\Project $project Project to remove.
-     *
-     * @return bool
-     */
-    public function removeProject(Project $project)
-    {
-        foreach ($project->images as $image) {
-            $this->removeImage($image);
-        }
-
-        return $project->delete();
     }
 
     /**
@@ -168,6 +124,29 @@ trait ManagesPortfolio
         $textBlock->update($blockData);
 
         return $textBlock;
+    }
+
+    /**
+     * Update project text blocks by adding new ones and updating existing ones.
+     *
+     * @param Larafolio\Models\Project $project Project that blocks belong to.
+     * @param array                    $data    Array of project information.
+     */
+    public function updateProjectTextBlocks(Project $project, array $data)
+    {
+        $blockData = collect($data)->get('blocks', []);
+
+        $blockData = $this->setOrder($blockData);
+
+        foreach ($blockData as $singleBlockData) {
+            if (isset($singleBlockData['project_id'])) {
+                $block = TextBlock::find($singleBlockData['id']);
+
+                $this->updateTextBlock($block, $singleBlockData);
+            } else {
+                $this->addBlockToProject($project, $singleBlockData);
+            }
+        }
     }
 
     /**
@@ -236,7 +215,7 @@ trait ManagesPortfolio
             return $project->links()->create($linkData);
         }
     }
-
+    
     /**
      * Update a link.
      *
@@ -250,6 +229,27 @@ trait ManagesPortfolio
         $link->update($linkData);
 
         return $link;
+    }
+
+    /**
+     * Update project links by adding new ones and updating existing ones.
+     *
+     * @param Larafolio\Models\Project $project Project that links belong to.
+     * @param array                    $data    Array of project information.
+     */
+    public function updateProjectLinks(Project $project, array $data)
+    {
+        $linkData = collect($data)->get('links', []);
+
+        foreach ($linkData as $singleLinkData) {
+            if (isset($singleLinkData['project_id'])) {
+                $block = Link::find($singleLinkData['id']);
+
+                $this->updateLink($block, $singleLinkData);
+            } else {
+                $this->addLinkToProject($project, $singleLinkData);
+            }
+        }
     }
 
     /**
