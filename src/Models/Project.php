@@ -259,7 +259,7 @@ class Project extends Model
     public function blockText($name, $formatted = true)
     {
         if (!$block = $this->block($name)) {
-            return null;
+            return;
         }
 
         if ($formatted) {
@@ -308,7 +308,7 @@ class Project extends Model
     }
 
     /**
-     * Get image url for given size. 
+     * Get image url for given size.
      *
      * @param string $name Name of image to get url for.
      * @param string $size Size of image.
@@ -318,7 +318,7 @@ class Project extends Model
     public function imageUrl($name, $size = 'medium')
     {
         if (!$image = $this->image($name)) {
-            return null;
+            return;
         }
 
         return $image->{$size}();
@@ -327,14 +327,14 @@ class Project extends Model
     /**
      * Get caption for image.
      *
-     * @param  string $name Name of image to get caption for.
+     * @param string $name Name of image to get caption for.
      *
      * @return string|null
      */
     public function imageCaption($name)
     {
         if (!$image = $this->image($name)) {
-            return null;
+            return;
         }
 
         return $image->caption();
@@ -371,7 +371,7 @@ class Project extends Model
     /**
      * Get link by name, if exists.
      *
-     * @param  string $name Name of link to get.
+     * @param string $name Name of link to get.
      *
      * @return Larafolio\Models\Link|null
      */
@@ -383,14 +383,14 @@ class Project extends Model
     /**
      * Get link url.
      *
-     * @param  string $name Name of link.
+     * @param string $name Name of link.
      *
      * @return string|null
      */
     public function linkUrl($name)
     {
         if (!$link = $this->link($name)) {
-            return null;
+            return;
         }
 
         return $link->url();
@@ -399,8 +399,8 @@ class Project extends Model
     /**
      * Get a model from a relationship by model name.
      *
-     * @param  string $relationship Name of relationship.
-     * @param  string $name         Name of model to get.
+     * @param string $relationship Name of relationship.
+     * @param string $name         Name of model to get.
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
@@ -409,7 +409,7 @@ class Project extends Model
         $items = $this->{$relationship}->where('name', $name);
 
         if ($items->isEmpty()) {
-            return null;
+            return;
         }
 
         return $items->first();
