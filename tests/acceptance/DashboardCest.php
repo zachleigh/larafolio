@@ -31,6 +31,7 @@ class DashboardCest
         $project = Project::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
             $I->click('#down'.$project->id());
+            $I->wait(1);
         }
         $I->seeInDatabase('projects', [
             'id'    => $project->id(),
