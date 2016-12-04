@@ -215,7 +215,7 @@ trait ManagesPortfolio
             return $project->links()->create($linkData);
         }
     }
-    
+
     /**
      * Update a link.
      *

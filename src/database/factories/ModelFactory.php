@@ -44,13 +44,13 @@ $factory->define(Larafolio\Models\TextBlock::class, function (Faker\Generator $f
         'name'           => $faker->word,
         'text'           => $text,
         'formatted_text' => $text,
-        'order'          => rand(0, 10)
+        'order'          => rand(0, 10),
     ];
 });
 
 $factory->define(Larafolio\Models\Link::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,
-        'url' => $faker->url,
+        'url'  => $faker->url,
     ];
 });

@@ -105,7 +105,7 @@ class Image extends Model
     /**
      * Get route for given template image.
      *
-     * @param  string $templateName Name of image cache template.
+     * @param string $templateName Name of image cache template.
      *
      * @return string
      */
