@@ -140,7 +140,11 @@ class Project extends Model
         }
 
         if ($group) {
-            return $query->get()->groupBy('type');
+            return $query->get()
+                ->each(function ($project, $key) {
+                    $project->index = $key;
+                })
+                ->groupBy('type');
         }
 
         return $query->get();
