@@ -507,23 +507,23 @@ html, body {
 
 .placeholder, ::-webkit-input-placeholder {
   font-style: italic;
-  color: #c8c8c8;
+  color: rgc(150, 150, 150);
   font-size: 1em;
   font-weight: normal; }
 
 ::-moz-placeholder {
   font-style: italic;
-  color: #c8c8c8;
+  color: rgc(150, 150, 150);
   font-size: 1em; }
 
 :-ms-input-placeholder {
   font-style: italic;
-  color: #c8c8c8;
+  color: rgc(150, 150, 150);
   font-size: 1em; }
 
 :-moz-placeholder {
   font-style: italic;
-  color: #c8c8c8;
+  color: rgc(150, 150, 150);
   font-size: 1em; }
 
 a {

@@ -208,6 +208,7 @@
 <script>
     import Ajax from './../mixins/Ajax.js';
     import Flash from './../mixins/Flash.js';
+    import FormErrors from './../mixins/FormErrors.js';
     import Modal from './Modal.vue';
     import ProjectLink from './ProjectLink.vue';
     import TextBlock from './TextBlock.vue';
@@ -215,7 +216,7 @@
     export default {
         components: { Modal, ProjectLink, TextBlock },
 
-        mixins: [ Ajax, Flash ],
+        mixins: [ Ajax, Flash, FormErrors ],
 
         data: function () {
             return {
@@ -246,13 +247,6 @@
                  * @type {Array}
                  */
                 blocks: [],
-
-                /**
-                 * Form errors, keyed by field name.
-                 *
-                 * @type {Object}
-                 */
-                errors: {},
 
                 /**
                  * If true, components (links, blocks) have changed.
@@ -468,7 +462,7 @@
              * Set the bottom margin on a form element if the corresponding
              * display element is longer.
              *
-             * @param {Element} section For section element.
+             * @param {Element} section Form section element.
              * @param {Element} display Display element.
              */
             setMarginBottom (section, display) {
@@ -550,19 +544,6 @@
             },
 
             /**
-             * Return true if field has error and is empty.
-             *
-             * @param  {String}  field
-             *
-             * @return {Boolean}
-             */
-            hasError (field) {
-                if (field in this.errors && !this[field]) {
-                    return true;
-                }
-            },
-
-            /**
              * Add a new text block to the project.
              */
             addBlock () {
@@ -626,6 +607,7 @@
 
             /**
              * Set currentLink and show remove link confirmation modal.
+             *
              * @param  {Object} currentLink Link object received through event.
              */
             toggleRemoveLinkModal (currentLink) {
@@ -751,23 +733,6 @@
              */
             capitalizeFirstLetter (string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
-            },
-
-            /**
-             * Format text block errors before display.
-             *
-             * @param  {String} error Error to format.
-             *
-             * @return {String}
-             */
-            formatError (error) {
-                if (error.includes('.text')) {
-                    let errorArray = error.split('.');
-
-                    return 'The block ' + errorArray[2] + '.';
-                }
-
-                return error;
             }
         }
     };
