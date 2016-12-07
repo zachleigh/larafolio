@@ -31,7 +31,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $with = ['blocks', 'images'];
+    protected $with = ['blocks', 'images', 'links'];
 
     /**
      * The attributes that should be casted to native types.
@@ -161,16 +161,6 @@ class Project extends Model
     }
 
     /**
-     * A project has many links.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function links()
-    {
-        return $this->hasMany(Link::class);
-    }
-
-    /**
      * A project has many images.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -178,6 +168,16 @@ class Project extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    /**
+     * A project has many links.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function links()
+    {
+        return $this->hasMany(Link::class);
     }
 
     /**
