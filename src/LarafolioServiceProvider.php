@@ -24,7 +24,7 @@ class LarafolioServiceProvider extends BaseProvider
      */
     public function boot()
     {
-        View::composer('*', 'Larafolio\Http\ViewComposers\GlobalComposer');
+        View::composer('larafolio::*', 'Larafolio\Http\ViewComposers\GlobalComposer');
 
         if (!$this->app->routesAreCached()) {
             require __DIR__.'/routes/web.php';
