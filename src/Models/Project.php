@@ -151,6 +151,58 @@ class Project extends Model
     }
 
     /**
+     * Get all projects with given block name.
+     *
+     * @param  string $blockName Name of block.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function hasBlockNamed($blockName)
+    {
+        return static::hasRelationshipNamed('text_blocks', $blockName);
+    }
+
+    /**
+     * Get all projects with given image name.
+     *
+     * @param  string $imageName Name of image.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function hasImageNamed($imageName)
+    {
+        return static::hasRelationshipNamed('images', $imageName);
+    }
+
+    /**
+     * Get all projects with given link name.
+     *
+     * @param  string $linkName Name of link.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function hasLinkNamed($linkName)
+    {
+        return static::hasRelationshipNamed('links', $linkName);
+    }
+
+    /**
+     * Get all projects with relationship on table that has given name.
+     *
+     * @param  string  $table Name of table relationship is on.
+     * @param  string  $name  Relationship name.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected static function hasRelationshipNamed($table, $name)
+    {
+        return static::join($table, 'projects.id', '=', "{$table}.project_id")
+            ->where("{$table}.name", '=', $name)
+            ->select('projects.*')
+            ->get();
+    }
+
+    /**
      * A project has many text blocks.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -61,11 +61,32 @@ abstract class TestCase extends IlluminateTestCase
     }
 
     /**
+     * Create a project with a single block.
+     *
+     * @param string $name Name of block.
+     *
+     * @return Larafolio\Models\Project
+     */
+    public function createProjectWithBlock($name = 'name')
+    {
+        $project = factory(Project::class)->create();
+
+        $project->blocks()->create([
+            'name'           => $name,
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        return $project;
+    }
+
+    /**
      * Make a new project with the given number of images.
      *
      * @param int $imageCount The number of images to attach to project.
      *
-     * @return Project
+     * @return Larafolio\Models\Project
      */
     protected function makeProjectWithImages($imageCount = 3)
     {
@@ -74,6 +95,49 @@ abstract class TestCase extends IlluminateTestCase
         foreach (range(1, $imageCount) as $i) {
             $project->images()->save(factory(Image::class)->make());
         }
+
+        return $project;
+    }
+
+    /**
+     * Make a single project with an image.
+     *
+     * @param  string $name Image name.
+     *
+     * @return Larafolio\Models\Project
+     */
+    protected function makeProjectWithImage($name = 'name')
+    {
+        $project = factory(Project::class)->create();
+
+        $project->images()->save(factory(Image::class)->make([
+            'name' => $name
+        ]));
+
+        return $project;
+    }
+
+    /**
+     * Make a project with a link.
+     *
+     * @param  string $name Name of link.
+     *
+     * @return Larafolio\Models\Project
+     */
+    protected function makeProjectWithLink($name = 'name', $url = 'url')
+    {
+        $project = factory(Project::class)->create();
+
+        $link = [
+            'name'  => $name,
+            'url' => $url,
+        ];
+
+        $data = [
+            'links' => [$link],
+        ];
+
+        $this->user->updateProject($project, $data);
 
         return $project;
     }

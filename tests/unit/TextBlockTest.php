@@ -239,23 +239,4 @@ class TextBlockTest extends TestCase
 
         $this->assertEquals('text', $unformattedText);
     }
-
-    /**
-     * Create a project with a single block.
-     *
-     * @return Larafolio\Models\Project
-     */
-    public function createProjectWithBlock()
-    {
-        $project = factory(Project::class)->create();
-
-        $project->blocks()->create([
-            'name'           => 'name',
-            'text'           => 'text',
-            'formatted_text' => 'formatted',
-            'order' => 5
-        ]);
-
-        return $project;
-    }
 }

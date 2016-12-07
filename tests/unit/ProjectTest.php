@@ -299,6 +299,69 @@ class ProjectTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function user_can_get_all_projects_that_have_block_name()
+    {
+        $project = $this->createProjectWithBlock('block name');
+        $project = $this->createProjectWithBlock('block name');
+        $project = $this->createProjectWithBlock('block name');
+        $project = $this->createProjectWithBlock('other name');
+
+        $projects = Project::hasBlockNamed('block name');
+
+        $this->assertCount(3, $projects);
+
+        $projects->each(function ($project) {
+            $block = $project->blocks[0];
+
+            $this->assertEquals('block name', $block->name());
+        });
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_all_projects_that_have_image_name()
+    {
+        $project = $this->makeProjectWithImage('image name');
+        $project = $this->makeProjectWithImage('image name');
+        $project = $this->makeProjectWithImage('image name');
+        $project = $this->makeProjectWithImage('other name');
+
+        $projects = Project::hasImageNamed('image name');
+
+        $this->assertCount(3, $projects);
+
+        $projects->each(function ($project) {
+            $image = $project->images[0];
+
+            $this->assertEquals('image name', $image->name());
+        });
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_all_projects_that_have_link_name()
+    {
+        $project = $this->makeProjectWithLink('link name');
+        $project = $this->makeProjectWithLink('link name');
+        $project = $this->makeProjectWithLink('link name');
+        $project = $this->makeProjectWithLink('other name');
+
+        $projects = Project::hasLinkNamed('link name');
+
+        $this->assertCount(3, $projects);
+
+        $projects->each(function ($project) {
+            $link = $project->links[0];
+
+            $this->assertEquals('link name', $link->name());
+        });
+    }
+
+    /**
      * Assert a collection is ordered.
      *
      * @param  \Illuminate\Support\Collection $ordered Collection of numbers.

@@ -23,6 +23,12 @@
 
 ###### static allOrdered()
 
+###### static hasBlockNamed($blockName)
+
+###### static hasImageNamed($imageName)
+
+###### static hasLinkNamed($linkName)
+
 ###### blocks()
 
 ###### links()
@@ -49,6 +55,7 @@
 
 ###### linkUrl($name)
 
+
 #### Larafolio\Models\Image
 
 ###### thumbnail()
@@ -62,6 +69,7 @@
 ###### imageRoute($templateName)
 
 ###### fileName()
+
 
 ## Developing
 

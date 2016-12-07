@@ -172,29 +172,4 @@ class LinkTest extends TestCase
 
         $this->assertEquals('url', $url);
     }
-
-    /**
-     * Make a project with a link.
-     *
-     * @param  string $name Name of link.
-     *
-     * @return Larafolio\Models\Project
-     */
-    protected function makeProjectWithLink($name = 'name', $url = 'url')
-    {
-        $project = factory(Project::class)->create();
-
-        $link = [
-            'name'  => $name,
-            'url' => $url,
-        ];
-
-        $data = [
-            'links' => [$link],
-        ];
-
-        $this->user->updateProject($project, $data);
-
-        return $project;
-    }
 }
