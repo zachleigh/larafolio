@@ -183,7 +183,7 @@
                 <div
                     v-for="(link, index) in links"
                     :key="link.id"
-                    :id="getLinkId(index)"
+                    :id="'displayLink' + index"
                     class="project-form__display-area"
                     v-bind:style="{ top: getHeight('link' + index, 4) }"
                 > 
@@ -194,7 +194,7 @@
                 <div
                     v-for="(block, index) in blocks"
                     :key="block.id"
-                    v-bind:id="getBlockId(index)"
+                    v-bind:id="'displayBlock' + index"
                     class="project-form__display-area"
                     v-bind:style="{ top: getHeight('block' + index, 4) }"
                     v-html="block.formatted_text"
@@ -209,6 +209,7 @@
     import Ajax from './../mixins/Ajax.js';
     import Flash from './../mixins/Flash.js';
     import FormErrors from './../mixins/FormErrors.js';
+    import Helpers from './../mixins/Helpers.js';
     import Modal from './Modal.vue';
     import ProjectLink from './ProjectLink.vue';
     import TextBlock from './TextBlock.vue';
@@ -216,7 +217,7 @@
     export default {
         components: { Modal, ProjectLink, TextBlock },
 
-        mixins: [ Ajax, Flash, FormErrors ],
+        mixins: [ Ajax, Flash, FormErrors, Helpers ],
 
         data: function () {
             return {
@@ -554,22 +555,24 @@
             },
 
             /**
-             * Add a new link to the project.
+             * Update currentBlock in the blocks array.
+             *
+             * @param  {Object} currentBlock The block that was updated.
              */
-            addLink () {
-                this.links.push({
-                    id: this.nextLink++
-                });
+            updateBlocks (currentBlock) {
+                let index = currentBlock.index;
+
+                this.blocks.splice(index, 1, currentBlock);
+
+                this.componentChanged = true;
             },
 
             /**
              * Move current block up one position in list.
              *
-             * @param  {Object} currentBlock Block object received through event.
+             * @param  {Number} index Index of block object to move.
              */
-            moveBlockUp (currentBlock) {
-                let index = currentBlock.index;
-
+            moveBlockUp (index) {
                 this.componentChanged = true;
 
                 if (index > 0) {
@@ -582,11 +585,9 @@
             /**
              * Move current block down one position in list.
              *
-             * @param  {Object} currentBlock Block object received through event.
+             * @param  {Number} index Index of block object to move.
              */
-            moveBlockDown (currentBlock) {
-                let index = currentBlock.index;
-
+            moveBlockDown (index) {
                 this.componentChanged = true;
 
                 let block = this.blocks.splice(index, 1);
@@ -603,17 +604,6 @@
                 this.currentBlock = currentBlock;
 
                 this.showRemoveBlockModal = !this.showRemoveBlockModal;
-            },
-
-            /**
-             * Set currentLink and show remove link confirmation modal.
-             *
-             * @param  {Object} currentLink Link object received through event.
-             */
-            toggleRemoveLinkModal (currentLink) {
-                this.currentLink = currentLink;
-
-                this.showRemoveLinkModal = !this.showRemoveLinkModal;
             },
 
             /**
@@ -647,16 +637,36 @@
             },
 
             /**
-             * Update currentBlock in the blocks array.
-             *
-             * @param  {Object} currentBlock The block that was updated.
+             * Add a new link to the project.
              */
-            updateBlocks (currentBlock) {
-                let index = currentBlock.index;
+            addLink () {
+                this.links.push({
+                    id: this.nextLink++
+                });
+            },
 
-                this.blocks.splice(index, 1, currentBlock);
+            /**
+             * Update currentLink in the links array.
+             *
+             * @param  {Object} currentLink The link that was updated.
+             */
+            updateLinks (currentLink) {
+                let index = currentLink.index;
+
+                this.links.splice(index, 1, currentLink);
 
                 this.componentChanged = true;
+            },
+
+            /**
+             * Set currentLink and show remove link confirmation modal.
+             *
+             * @param  {Object} currentLink Link object received through event.
+             */
+            toggleRemoveLinkModal (currentLink) {
+                this.currentLink = currentLink;
+
+                this.showRemoveLinkModal = !this.showRemoveLinkModal;
             },
             
             /**
@@ -687,52 +697,6 @@
                 .catch(function (error) {
                     this.errors = error.data;
                 });
-            },
-
-            /**
-             * Update currentLink in the links array.
-             *
-             * @param  {Object} currentLink The link that was updated.
-             */
-            updateLinks (currentLink) {
-                let index = currentLink.index;
-
-                this.links.splice(index, 1, currentLink);
-
-                this.componentChanged = true;
-            },
-
-            /**
-             * Get the block ID from the block index.
-             *
-             * @param  {Number} index Block index.
-             *
-             * @return {String}
-             */
-            getBlockId (index) {
-                return 'displayBlock' + index;
-            },
-
-            /**
-             * Get the link ID from the block index.
-             *
-             * @param  {Number} index Link index.
-             *
-             * @return {String}
-             */
-            getLinkId (index) {
-                return 'displayLink' + index;
-            },
-
-            /**
-             * Capitalize the first letter of a string.
-             *
-             * @param  {String} string
-             *
-             * @return {String}
-             */
-            capitalizeFirstLetter (string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
             }
         }
     };

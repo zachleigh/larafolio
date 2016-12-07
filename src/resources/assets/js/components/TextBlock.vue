@@ -150,7 +150,7 @@
             up () {
                 this.updatePassedBlock();
 
-                this.$emit('up', this.passedBlock);
+                this.$emit('up', this.passedBlock.index);
             },
 
             /**
@@ -159,7 +159,7 @@
             down () {
                 this.updatePassedBlock();
 
-                this.$emit('down', this.passedBlock);
+                this.$emit('down', this.passedBlock.index);
             },
 
             /**
