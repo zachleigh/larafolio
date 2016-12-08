@@ -286,24 +286,4 @@ class LinksCest
         $I->dontSee($data['url0']);
         $I->dontSee($data['url1']);
     }
-
-    public function link_with_no_url_is_not_saved(AcceptanceTester $I)
-    {
-        $data = [
-            'name'      => 'Project Name',
-            'linkName0' => 'Link name',
-            'linkText0' => 'Link text',
-            'text0'     => 'Project description'
-        ];
-
-        $I->wantTo('Make sure empty links arent saved.');
-        $I->login($I);
-        $I->amOnAddPage($I);
-        $I->fillForm($I, $data);
-        $I->click('Add Project');
-        $I->wait(1);
-        $I->dontSeeInDatabase('links', [
-            'name' => $data['linkName0'],
-        ]);
-    }
 }

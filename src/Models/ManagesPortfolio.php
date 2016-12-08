@@ -211,9 +211,7 @@ trait ManagesPortfolio
      */
     public function addLinkToProject(Project $project, array $linkData)
     {
-        if (isset($linkData['url'])) {
-            return $project->links()->create($linkData);
-        }
+        return $project->links()->create($linkData);
     }
 
     /**
