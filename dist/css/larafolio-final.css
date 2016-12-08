@@ -960,6 +960,13 @@ a {
   .text-block__icon svg g {
     fill: #5a5a5a; }
 
+.link__display-text {
+  min-height: 30px;
+  margin-bottom: 5px; }
+
+.link__text {
+  margin-bottom: 5px; }
+
 .dashboard__arrows {
   display: -webkit-box;
   display: flex;

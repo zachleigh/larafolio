@@ -41,6 +41,9 @@
                             Link: {{ $link->name() }}
                         </h3>
                         <div class="project__display-item">
+                            {{ $link->text() }}
+                        </div>
+                        <div class="project__display-item">
                             <a href="{{ $link->url() }}">
                                 {{ $link->url() }}
                             </a>

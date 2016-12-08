@@ -28,7 +28,7 @@ class Link extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'url'];
+    protected $fillable = ['name', 'text', 'url'];
 
     /**
      * A link belongs to a single project.
@@ -58,6 +58,16 @@ class Link extends Model
     public function name()
     {
         return $this->name;
+    }
+
+    /**
+     * Return the link text.
+     *
+     * @return string
+     */
+    public function text()
+    {
+        return $this->text;
     }
 
     /**

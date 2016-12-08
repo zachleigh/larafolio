@@ -1,28 +1,4 @@
 export default {
-    components: {},
-
-    data: function () {
-        return {
-            //
-        }
-    },
-
-    props: {
-        //
-    },
-
-    computed: {
-        //
-    },
-
-    created () {
-        //
-    },
-
-    mounted () {
-        //
-    },
-
     methods: {
         /**
          * Capitalize the first letter of a string.

@@ -20,6 +20,7 @@ class LinkTest extends TestCase
 
         $data = [
             'name' => 'name',
+            'text' => 'text',
             'url' => 'url'
         ];
 
@@ -36,17 +37,19 @@ class LinkTest extends TestCase
     public function user_can_add_links_with_other_data()
     {
         $firstLink = [
-            'name'  => 'first link name',
-            'url' => 'first link url',
+            'name' => 'first link name',
+            'text' => 'first link text',
+            'url'  => 'first link url',
         ];
 
         $secondLink = [
-            'name'  => 'second link name',
-            'url' => 'second link url',
+            'name' => 'second link name',
+            'text' => 'second link text',
+            'url'  => 'second link url',
         ];
 
         $data = [
-            'name'   => 'project name',
+            'name'  => 'project name',
             'links' => [$firstLink, $secondLink],
         ];
 
@@ -67,21 +70,22 @@ class LinkTest extends TestCase
         $link = factory(Link::class)->create();
 
         $this->seeInDatabase('links', [
-            'name'   => $link->name(),
-            'url' => $link->url(),
+            'name' => $link->name(),
+            'url'  => $link->url(),
         ]);
 
         $data = [
-            'name'   => 'new name',
-            'url' => 'new url',
+            'name' => 'new name',
+            'text' => 'new text',
+            'url'  => 'new url',
         ];
 
         $this->user->updateLink($link, $data);
 
         $this->seeInDatabase('links', [
-            'id' => $link->id(),
-            'name'   => $data['name'],
-            'url' => $data['url'],
+            'id'   => $link->id(),
+            'name' => $data['name'],
+            'url'  => $data['url'],
         ]);
     }
 
@@ -93,17 +97,19 @@ class LinkTest extends TestCase
         $project = factory(Project::class)->create();
 
         $firstLink = [
-            'name'  => 'first link name',
-            'url' => 'first link url',
+            'name' => 'first link name',
+            'text' => 'first link text',
+            'url'  => 'first link url',
         ];
 
         $secondLink = [
-            'name'  => 'second link name',
-            'url' => 'second link url',
+            'name' => 'second link name',
+            'text' => 'second link text',
+            'url'  => 'second link url',
         ];
 
         $data = [
-            'name'   => 'updated name',
+            'name'  => 'updated name',
             'links' => [$firstLink, $secondLink],
         ];
 
@@ -126,8 +132,9 @@ class LinkTest extends TestCase
         $link = factory(Link::class)->create();
 
         $this->seeInDatabase('links', [
-            'name'   => $link->name(),
-            'url' => $link->url(),
+            'name'       => $link->name(),
+            'text'       => $link->text(),
+            'url'        => $link->url(),
             'deleted_at' => null,
         ]);
 
@@ -136,13 +143,14 @@ class LinkTest extends TestCase
         $this->assertTrue($success);
 
         $this->seeInDatabase('links', [
-            'name'   => $link->name(),
-            'url' => $link->url(),
+            'name' => $link->name(),
+            'url'  => $link->url(),
         ]);
 
         $this->dontSeeInDatabase('links', [
-            'name'   => $link->name(),
-            'url' => $link->url(),
+            'name'       => $link->name(),
+            'text'       => $link->text(),
+            'url'        => $link->url(),
             'deleted_at' => null,
         ]);
     }

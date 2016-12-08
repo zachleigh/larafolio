@@ -51,6 +51,7 @@ $factory->define(Larafolio\Models\TextBlock::class, function (Faker\Generator $f
 $factory->define(Larafolio\Models\Link::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,
+        'text' => $faker->sentence,
         'url'  => $faker->url,
     ];
 });

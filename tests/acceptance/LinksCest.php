@@ -10,10 +10,11 @@ class LinksCest
     public function user_can_add_link_to_project(AcceptanceTester $I)
     {
         $data = [
-            'name'  => 'Project Name',
+            'name'      => 'Project Name',
             'linkName0' => 'Link name',
-            'url0' => 'Link url',
-            'text0' => 'Project description'
+            'linkText0' => 'Link text',
+            'url0'      => 'Link url',
+            'text0'     => 'Project description'
         ];
 
         $I->wantTo('Save a link when a new project is added.');
@@ -26,15 +27,17 @@ class LinksCest
         $I->seeInDatabase('projects', ['name' => $data['name']]);
         $I->seeInDatabase('links', [
             'name' => $data['linkName0'],
-            'url' => $data['url0']
+            'text' => $data['linkText0'],
+            'url'  => $data['url0']
         ]);
     }
 
     public function user_can_update_a_link(AcceptanceTester $I)
     {
         $data = [
-            'linkName0'       => 'updated name0',
-            'url0'       => 'updated url0',
+            'linkName0' => 'updated name0',
+            'linkText0' => 'Link text0',
+            'url0'      => 'updated url0',
         ];
 
         $project = $I->getProject($I);
@@ -45,9 +48,10 @@ class LinksCest
         $I->click('Update Project');
         $I->wait(1);
         $I->seeInDatabase('links', [
-            'project_id'   => $project['id'],
-            'name' => $data['linkName0'],
-            'url' => $data['url0']
+            'project_id' => $project['id'],
+            'name'       => $data['linkName0'],
+            'text'       => $data['linkText0'],
+            'url'        => $data['url0'],
         ]);
     }
 
@@ -55,9 +59,11 @@ class LinksCest
     {
         $data = [
             'linkName0' => 'Link name 0',
-            'url0' => 'Link url 0',
+            'linkText0' => 'Link text0',
+            'url0'      => 'Link url 0',
             'linkName1' => 'Link name 1',
-            'url1' => 'Link url 1',
+            'linkText1' => 'Link text1',
+            'url1'      => 'Link url 1',
         ];
 
         $I->wantTo('Remove a link from a project being added.');
@@ -76,8 +82,8 @@ class LinksCest
         $I->login($I);
         $I->amOnAddPage($I);
         // fill 0
-        $I->fillField(['name' => 'url0'], 'link0');
-        $I->see('link0');
+        $I->fillField(['name' => 'url0'], 'url0');
+        $I->see('url0');
         // add and fill 1
         $I->click('#addLink');
         $I->fillField(['name' => 'url1'], 'url1');
@@ -146,9 +152,10 @@ class LinksCest
     public function link_with_no_url_is_not_saved(AcceptanceTester $I)
     {
         $data = [
-            'name'  => 'Project Name',
+            'name'      => 'Project Name',
             'linkName0' => 'Link name',
-            'text0' => 'Project description'
+            'linkText0' => 'Link text',
+            'text0'     => 'Project description'
         ];
 
         $I->wantTo('Make sure empty links arent saved.');

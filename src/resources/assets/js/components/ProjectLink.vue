@@ -25,6 +25,15 @@
         </div>
         <div class="link__fields">
             <input
+                class="form__input link__text"
+                type="text"
+                :name="elementId('linkText')"
+                autocomplete="off"
+                v-model="text"
+                v-on:input="update()"
+                placeholder="Text"
+            >
+            <input
                 class="form__input link__url"
                 type="text"
                 :name="elementId('url')"
@@ -54,6 +63,13 @@
                  * @type {Object}
                  */
                 passedLink: this.link,
+
+                /**
+                 * Link text.
+                 *
+                 * @type {String}
+                 */
+                text: this.link.text,
 
                 /**
                  * Link url.
@@ -103,6 +119,7 @@
             updatePassedLink () {
                 this.passedLink.url = this.url,
                 this.passedLink.name = this.name,
+                this.passedLink.text = this.text,
                 this.passedLink.index = this.index
             },
 

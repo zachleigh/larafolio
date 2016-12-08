@@ -186,7 +186,8 @@
                     :id="'displayLink' + index"
                     class="project-form__display-area"
                     v-bind:style="{ top: getHeight('link' + index, 4) }"
-                > 
+                >
+                    <div class="link__display-text" v-html="link.text"></div>
                     <a v-bind:href="link.url">
                     {{ link.url }}
                     </a>
