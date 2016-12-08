@@ -5,7 +5,7 @@
                 v-bind:id="elementId('remove')"
                 class="text-block__icon red-icon"
                 v-html="icons.remove"
-                @click.prevent="remove"
+                @click.prevent="$emit('remove', passedImage)"
             ></span>
         </div>
         <div class="image-tile__top">
@@ -188,13 +188,6 @@
                     });
                 });
             },
-
-            /**
-             * Emit remove image event.
-             */
-            remove () {
-                this.$emit('remove', this.passedImage);
-            }
         }
     };
 </script>

@@ -5,14 +5,14 @@
                 v-bind:id="elementId('up')"
                 class="nav__icon black-icon"
                 v-html="icons.up"
-                @click="moveUp"
+                @click="$emit('up', index)"
             >                 
             </span>
             <span
                 v-bind:id="elementId('down')"
                 class="nav__icon black-icon"
                 v-html="icons.down"
-                @click="moveDown"
+                @click="$emit('down', index)"
             >                 
             </span>
         </div>
@@ -119,20 +119,6 @@
             elementId (element) {
                 return element + this.project.id;
             },
-
-            /**
-             * Emit event to move this project down in the projects array.
-             */
-            moveDown () {
-                this.$emit('down', this.index);
-            },
-
-            /**
-             * Emit event to move this project up in the projects array.
-             */
-            moveUp () {
-                this.$emit('up', this.index);
-            }
         }
     };
 </script>

@@ -3,7 +3,11 @@
         <div class="modal__mask" v-show="show">
             <div class="modal__wrapper">
                 <div class="modal__container">
-                    <div class="modal__close" @click="close" v-html="closeButton">
+                    <div
+                        class="modal__close"
+                        @click="$emit('close')"
+                        v-html="closeButton"
+                    >
                     </div>
                     <div class="modal__header">
                         <slot name="header">
@@ -59,14 +63,5 @@
                 return '&#215';
             }
         },
-
-        methods: {
-            /**
-             * Emit event to close the current modal.
-             */
-            close () {
-                this.$emit('close');
-            }
-        }
     };
 </script>
