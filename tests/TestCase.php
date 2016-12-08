@@ -106,12 +106,13 @@ abstract class TestCase extends IlluminateTestCase
      *
      * @return Larafolio\Models\Project
      */
-    protected function makeProjectWithImage($name = 'name')
+    protected function makeProjectWithImage($name = 'name', $alt = 'alt')
     {
         $project = factory(Project::class)->create();
 
         $project->images()->save(factory(Image::class)->make([
-            'name' => $name
+            'name' => $name,
+            'alt'  => $alt,
         ]));
 
         return $project;
@@ -124,13 +125,14 @@ abstract class TestCase extends IlluminateTestCase
      *
      * @return Larafolio\Models\Project
      */
-    protected function makeProjectWithLink($name = 'name', $url = 'url')
+    protected function makeProjectWithLink($name = 'name', $url = 'url', $text = 'text')
     {
         $project = factory(Project::class)->create();
 
         $link = [
-            'name'  => $name,
-            'url' => $url,
+            'name' => $name,
+            'url'  => $url,
+            'text' => $text,
         ];
 
         $data = [

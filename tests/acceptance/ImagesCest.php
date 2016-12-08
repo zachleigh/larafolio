@@ -17,7 +17,7 @@ class ImagesCest
         $I->see('Image added to project');
     }
 
-    public function user_can_update_image_name_and_caption(AcceptanceTester $I)
+    public function user_can_update_image_name_caption_and_alt(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -28,9 +28,10 @@ class ImagesCest
         $data = [
             'name'.$id    => 'image name',
             'caption'.$id => 'image caption',
+            'alt'.$id     => 'image alt',
         ];
 
-        $I->wantTo('Add a name and caption for an image.');
+        $I->wantTo('Add a name, caption and alt for an image.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
         $I->fillForm($I, $data);
@@ -40,6 +41,7 @@ class ImagesCest
             'path'    => $image->path(),
             'name'    => 'image name',
             'caption' => 'image caption',
+            'alt'     => 'image alt',
         ]);
         $I->see('Image information updated');
     }
@@ -76,6 +78,22 @@ class ImagesCest
         $I->amOnProjectPage($I, $project);
         $I->seeElement('#button'.$id, ['disabled' => 'true']);
         $I->fillField(['name' => 'name'.$id], 'abc');
+        $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
+    }
+
+    public function update_button_disabled_until_alt_changed(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $image = $I->getImageFromProjectArray($project);
+
+        $id = $image->id();
+
+        $I->wantTo('Be able to update an image if the alt text has changed.');
+        $I->login($I);
+        $I->amOnProjectPage($I, $project);
+        $I->seeElement('#button'.$id, ['disabled' => 'true']);
+        $I->fillField(['name' => 'alt'.$id], 'abc');
         $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
     }
 

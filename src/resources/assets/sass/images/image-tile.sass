@@ -8,18 +8,17 @@
         display: flex
         height: 150px
 
-    +ele(buttons)
-        margin-top: 5px
-
     +ele(caption)
-        height: 43px
+        height: 50px
         resize: none
-        margin-top: 4px
 
     +ele(controls)
         position: absolute
         top: 0
         right: 0
+
+    +ele(form-section)
+        display: flex
 
     +ele(image)
         display: flex
@@ -34,5 +33,8 @@
         margin-bottom: 4px
 
     +ele(right)
+        display: flex
+        flex-direction: column
+        justify-content: space-between
         margin-left: 15px
         width: 100%

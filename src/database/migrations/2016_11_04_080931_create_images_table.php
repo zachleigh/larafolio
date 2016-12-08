@@ -18,6 +18,7 @@ class CreateImagesTable extends Migration
             $table->string('path')->unique();
             $table->string('name')->nullable()->index();
             $table->text('caption')->nullable();
+            $table->string('alt')->nullable();
             $table->integer('project_id')->unsigned()->index();
             $table->timestamps();
 

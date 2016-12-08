@@ -17,7 +17,7 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        $imageData = $request->only(['name', 'caption']);
+        $imageData = $request->only(['name', 'caption', 'alt']);
 
         $this->user->updateImageInfo($image, $imageData);
 

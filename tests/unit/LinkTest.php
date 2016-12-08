@@ -183,4 +183,16 @@ class LinkTest extends TestCase
 
         $this->assertEquals('url', $url);
     }
+
+    /**
+     * @test
+     */
+    public function user_can_get_a_link_text_from_project()
+    {
+        $project = $this->makeProjectWithLink();
+
+        $text = $project->linkText('name');
+
+        $this->assertEquals('text', $text);
+    }
 }

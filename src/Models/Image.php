@@ -18,9 +18,7 @@ class Image extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'path', 'name', 'caption',
-    ];
+    protected $fillable = ['path', 'name', 'caption', 'alt'];
 
     /**
      * Return the image id.
@@ -60,6 +58,16 @@ class Image extends Model
     public function caption()
     {
         return $this->caption;
+    }
+
+    /**
+     * Return the alt value.
+     *
+     * @return string
+     */
+    public function alt()
+    {
+        return $this->alt;
     }
 
     /**
@@ -138,6 +146,7 @@ class Image extends Model
             'full'      => $this->full(),
             'name'      => $this->name(),
             'caption'   => $this->caption(),
+            'alt'       => $this->alt(),
             'id'        => $this->id(),
         ];
     }

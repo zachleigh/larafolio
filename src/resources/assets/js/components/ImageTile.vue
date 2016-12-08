@@ -8,6 +8,24 @@
                 @click.prevent="remove"
             ></span>
         </div>
+        <div class="image-tile__top">
+            <div class="image-tile__form-section image-tile__name">
+                <label
+                    class="image-tile__label"
+                    v-bind:for="elementId('name')"
+                >
+                    Name:
+                </label>
+                <input
+                    v-bind:id="elementId('name')"
+                    v-bind:name="elementId('name')"
+                    class="text-block__control-input image-tile__input"
+                    type="text"
+                    placeholder="None"
+                    v-model="name"
+                >
+            </div>
+        </div>
         <div class="image-tile__body">
             <a
                 class="image-tile__image"
@@ -16,35 +34,23 @@
                 <img v-bind:src="image.small">
             </a>
             <div class="image-tile__right">
-                <div class="image-tile__form-section image-tile__name">
-                    <label
-                        class="image-tile__label"
-                        v-bind:for="elementId('name')"
-                    >
-                        Name:
-                    </label>
+                <div class="image-tile__form-section image-tile__alt">
                     <input
-                        v-bind:id="elementId('name')"
-                        v-bind:name="elementId('name')"
-                        class="text-block__control-input image-tile__input"
+                        v-bind:id="elementId('alt')"
+                        v-bind:name="elementId('alt')"
+                        class="form__input"
                         type="text"
-                        placeholder="None"
-                        v-model="name"
+                        placeholder="Alt text"
+                        v-model="alt"
                     >
                 </div>
                 <div class="image-tile__form-section">
-                    <label
-                        class="image-tile__label"
-                        v-bind:for="elementId('caption')"
-                    >
-                        Caption
-                    </label>
                     <textarea
                         v-bind:id="elementId('caption')"
                         v-bind:name="elementId('caption')"
                         class="form__input image-tile__caption"
                         type="text"
-                        placeholder="None"
+                        placeholder="Caption"
                         v-model="caption"
                     ></textarea>
                 </div>
@@ -92,6 +98,13 @@
                  * @type {String}
                  */
                 name: this.image.name,
+
+                /**
+                 * Image alt text.
+                 *
+                 * @type {String}
+                 */
+                alt: this.image.alt,
             }
         },
 
@@ -119,7 +132,8 @@
              */
             changed () {
                 return this.caption !== this.passedImage.caption ||
-                    this.name !== this.passedImage.name;
+                    this.name !== this.passedImage.name ||
+                    this.alt !== this.passedImage.alt;
             },
 
             /**
@@ -152,7 +166,8 @@
             update () {
                 this.ajax.patch('/manager/images/'+this.image.id, {
                     name: this.name,
-                    caption: this.caption
+                    caption: this.caption,
+                    alt: this.alt
                 })
                 .then(function (response) {
                     this.flash({
@@ -163,6 +178,7 @@
 
                     this.passedImage.name = this.name;
                     this.passedImage.caption = this.caption;
+                    this.passedImage.alt = this.alt;
                 })
                 .catch(function (error) {
                     this.flash({

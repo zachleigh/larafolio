@@ -315,7 +315,7 @@ class Project extends Model
     public function blockText($name, $formatted = true)
     {
         if (!$block = $this->block($name)) {
-            return;
+            return null;
         }
 
         if ($formatted) {
@@ -374,7 +374,7 @@ class Project extends Model
     public function imageUrl($name, $size = 'medium')
     {
         if (!$image = $this->image($name)) {
-            return;
+            return null;
         }
 
         return $image->{$size}();
@@ -390,10 +390,26 @@ class Project extends Model
     public function imageCaption($name)
     {
         if (!$image = $this->image($name)) {
-            return;
+            return null;
         }
 
         return $image->caption();
+    }
+
+    /**
+     * Get alt for image.
+     *
+     * @param  string $name Name of image to get caption for.
+     *
+     * @return string|null
+     */
+    public function imageAlt($name)
+    {
+        if (!$image = $this->image($name)) {
+            return null;
+        }
+
+        return $image->alt();
     }
 
     /**
@@ -446,10 +462,26 @@ class Project extends Model
     public function linkUrl($name)
     {
         if (!$link = $this->link($name)) {
-            return;
+            return null;
         }
 
         return $link->url();
+    }
+
+    /**
+     * Get link text.
+     *
+     * @param string $name Name of link.
+     *
+     * @return string|null
+     */
+    public function linkText($name)
+    {
+        if (!$link = $this->link($name)) {
+            return null;
+        }
+
+        return $link->text();
     }
 
     /**

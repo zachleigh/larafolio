@@ -19,9 +19,10 @@ class ImageTest extends TestCase
         $project = factory(Project::class)->create();
 
         $imageData = [
-            'path'     => 'path1.jpg',
-            'name'     => 'name1',
+            'path'    => 'path1.jpg',
+            'name'    => 'name1',
             'caption' => 'caption',
+            'alt'     => 'alt',
         ];
 
         $image = $this->user->addImageToProject($project, $imageData);
@@ -42,7 +43,11 @@ class ImageTest extends TestCase
 
         $image = $project->images->first();
 
-        $imageData = ['name' => 'new name', 'caption' => 'new caption'];
+        $imageData = [
+            'name'    => 'new name',
+            'caption' => 'new caption',
+            'alt'     => 'new alt',
+        ];
 
         $this->user->updateImageInfo($image, $imageData);
 
@@ -109,5 +114,19 @@ class ImageTest extends TestCase
         $caption = $project->imageCaption($firstImage->name());
 
         $this->assertEquals($firstImage->caption(), $caption);
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_get_image_alt_from_project()
+    {
+        $project = $this->makeProjectWithImages();
+
+        $firstImage = $project->images()->first();
+
+        $alt = $project->imageAlt($firstImage->name());
+
+        $this->assertEquals($firstImage->alt(), $alt);
     }
 }
