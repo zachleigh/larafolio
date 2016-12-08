@@ -28,7 +28,7 @@ class Link extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'text', 'url'];
+    protected $fillable = ['name', 'text', 'url', 'order'];
 
     /**
      * A link belongs to a single project.
@@ -78,5 +78,15 @@ class Link extends Model
     public function url()
     {
         return $this->url;
+    }
+
+    /**
+     * Return the link order value.
+     *
+     * @return int
+     */
+    public function order()
+    {
+        return $this->order;
     }
 }

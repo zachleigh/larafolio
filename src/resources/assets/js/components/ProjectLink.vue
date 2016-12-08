@@ -15,6 +15,20 @@
             </div>
             <div class="text-block__control-buttons">
                 <span
+                    v-bind:id="elementId('upLink')"
+                    class="text-block__icon"
+                    v-html="icons.up"
+                    @click.prevent="$emit('up', index)"
+                    alt="Up"
+                ></span>
+                <span
+                    v-bind:id="elementId('downLink')"
+                    class="text-block__icon"
+                    v-html="icons.down"
+                    @click.prevent="$emit('down', index)"
+                    alt="Down"
+                ></span>
+                <span
                     :id="elementId('deleteLink')"
                     class="text-block__icon red-icon"
                     v-html="icons.remove"
@@ -127,7 +141,7 @@
              * Emit event to remove link.
              */
             remove () {
-                this. updatePassedLink();
+                this.updatePassedLink();
 
                 this.$emit('remove', this.passedLink);
             },

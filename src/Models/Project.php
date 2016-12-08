@@ -488,7 +488,7 @@ class Project extends Model
     }
 
     /**
-     * Get full project info (blocks sorted by order, links).
+     * Get full project info (blocks and links sorted by order).
      *
      * @param \Builder $query Query builder.
      * @param string   $slug  Project slug.
@@ -499,8 +499,10 @@ class Project extends Model
     {
         return $query->with(['blocks' => function ($query) {
             $query->orderBy('order');
-        }])->with('links')->where('slug', $slug)
-            ->first();
+        }])->with(['links' => function ($query) {
+            $query->orderBy('order');
+        }])->where('slug', $slug)
+           ->first();
     }
 
     /**

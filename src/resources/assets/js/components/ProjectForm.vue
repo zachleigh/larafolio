@@ -98,6 +98,8 @@
                         :link="link"
                         :index="index"
                         :icons="icons"
+                        @up="moveLinkUp"
+                        @down="moveLinkDown"
                         @update="updateLinks"
                         @remove="toggleRemoveLinkModal"
                     >
@@ -113,7 +115,7 @@
                     <text-block
                         v-for="(block, index) in blocks"
                         :key="block.id"
-                        v-bind:index="index"
+                        :index="index"
                         :block="block"
                         :errors="errors"
                         :icons="icons"
@@ -286,6 +288,13 @@
                 currentBlock: '',
 
                 /**
+                 * The currently selected link, if any.
+                 *
+                 * @type {String}
+                 */
+                currentLink: '',
+
+                /**
                  * If true, show the remove block modal.
                  *
                  * @type {Boolean}
@@ -333,7 +342,7 @@
             /**
              * Next link id value.
              */
-            nextLinkId: {
+            nextLinkOrder: {
                 type: Number
             },
 
@@ -395,8 +404,8 @@
                 this.nextBlock = this.nextBlockOrder;
             }
 
-            if (typeof this.nextLinkId !== 'undefined') {
-                this.nextLink = this.nextLinkId;
+            if (typeof this.nextLinkOrder !== 'undefined') {
+                this.nextLink = this.nextLinkOrder;
             }
    
             this.addBlock();
@@ -642,6 +651,7 @@
              */
             addLink () {
                 this.links.push({
+                    order: this.nextLink,
                     id: this.nextLink++
                 });
             },
@@ -698,7 +708,35 @@
                 .catch(function (error) {
                     this.errors = error.data;
                 });
-            }
+            },
+
+            /**
+             * Move current block up one position in list.
+             *
+             * @param  {Number} index Index of block object to move.
+             */
+            moveLinkUp (index) {
+                this.componentChanged = true;
+
+                if (index > 0) {
+                    let link = this.links.splice(index, 1);
+
+                    this.links.splice(index - 1, 0, link[0]); 
+                }
+            },
+
+            /**
+             * Move current block down one position in list.
+             *
+             * @param  {Number} index Index of block object to move.
+             */
+            moveLinkDown (index) {
+                this.componentChanged = true;
+
+                let link = this.links.splice(index, 1);
+
+                this.links.splice(index + 1, 0, link[0]);
+            },
         }
     };
 </script>

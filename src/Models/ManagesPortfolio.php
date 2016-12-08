@@ -44,7 +44,7 @@ trait ManagesPortfolio
 
         $this->updateProjectTextBlocks($project, $data);
 
-        $this->updateProjectLinks($project, $data);
+            $this->updateProjectLinks($project, $data);
 
         return $project;
     }
@@ -241,11 +241,13 @@ trait ManagesPortfolio
     {
         $linkData = collect($data)->get('links', []);
 
+        $linkData = $this->setOrder($linkData);
+
         foreach ($linkData as $singleLinkData) {
             if (isset($singleLinkData['project_id'])) {
-                $block = Link::find($singleLinkData['id']);
+                $link = Link::find($singleLinkData['id']);
 
-                $this->updateLink($block, $singleLinkData);
+                $this->updateLink($link, $singleLinkData);
             } else {
                 $this->addLinkToProject($project, $singleLinkData);
             }

@@ -122,6 +122,52 @@ class LinksCest
         $I->see('url4');
     }
 
+    public function user_can_move_link_up(AcceptanceTester $I)
+    {
+        $data = [
+            'url0' => 'link0',
+            'url1' => 'link1',
+            'url2' => 'link2',
+        ];
+
+        $I->wantTo('Move a link up.');
+        $I->login($I);
+        $I->amOnAddPage($I);
+        $I->click('#addLink');
+        $I->click('#addLink');
+        $I->fillForm($I, $data);
+        $I->click('#upLink2');
+        $I->click('#upLink1');
+        $I->removeLink($I, '#deleteLink2');
+        $I->removeLink($I, '#deleteLink1');
+        $I->see('link2');
+        $I->dontSee('link0');
+        $I->dontSee('link1');
+    }
+
+    public function user_can_move_text_block_down(AcceptanceTester $I)
+    {
+        $data = [
+            'url0' => 'link0',
+            'url1' => 'link1',
+            'url2' => 'link2',
+        ];
+
+        $I->wantTo('Move a link down.');
+        $I->login($I);
+        $I->amOnAddPage($I);
+        $I->click('#addLink');
+        $I->click('#addLink');
+        $I->fillForm($I, $data);
+        $I->click('#downLink0');
+        $I->click('#downLink1');
+        $I->removeLink($I, '#deleteLink1');
+        $I->removeLink($I, '#deleteLink0');
+        $I->see('link0');
+        $I->dontSee('link1');
+        $I->dontSee('link2');
+    }
+
     public function user_can_add_and_delete_links_when_editing(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
@@ -147,6 +193,98 @@ class LinksCest
         $I->dontSee($links[0]->url());
         $I->dontSee($links[1]->url());
         $I->dontSee($links[2]->url());
+    }
+    public function user_can_move_link_up_while_editing(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+        $data = [
+            'url0' => 'updatedUrl0',
+            'url1' => 'updatedUrl1',
+            'url2' => 'updatedUrl2',
+        ];
+
+        $I->wantTo('Move a link up while editing a project.');
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->wait(1);
+        $I->fillForm($I, $data);
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->click('#upLink2');
+        $I->wait(1);
+        $I->click('#upLink1');
+        $I->wait(1);
+        $I->removeLink($I, '#deleteLink2');
+        $I->removeLink($I, '#deleteLink1');
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->see($data['url2']);
+        $I->dontSee($data['url0']);
+        $I->dontSee($data['url1']);
+    }
+
+    public function user_can_move_link_down_while_editing(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+        $data = [
+            'url0' => 'updatedUrl0',
+            'url1' => 'updatedUrl1',
+            'url2' => 'updatedUrl2',
+        ];
+
+        $I->wantTo('Move a link down while editing a project.');
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->wait(1);
+        $I->fillForm($I, $data);
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->click('#downLink0');
+        $I->wait(1);
+        $I->click('#downLink1');
+        $I->wait(1);
+        $I->removeLink($I, '#deleteLink1');
+        $I->removeLink($I, '#deleteLink0');
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->see($data['url0']);
+        $I->dontSee($data['url2']);
+        $I->dontSee($data['url1']);
+    }
+
+    public function order_is_remembered_when_moving_links(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+        $data = [
+            'url0' => 'updatedUrl0',
+            'url1' => 'updatedUrl1',
+            'url2' => 'updatedUrl2',
+        ];
+
+        $I->wantTo('Change the order of links and have that order remembered.');
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->wait(1);
+        $I->fillForm($I, $data);
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->click('#downLink0');
+        $I->wait(1);
+        $I->click('#upLink2');
+        $I->wait(1);
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->click('Edit Project');
+        $I->removeLink($I, '#deleteLink2');
+        $I->removeLink($I, '#deleteLink0');
+        $I->wait(1);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->see($data['url2']);
+        $I->dontSee($data['url0']);
+        $I->dontSee($data['url1']);
     }
 
     public function link_with_no_url_is_not_saved(AcceptanceTester $I)

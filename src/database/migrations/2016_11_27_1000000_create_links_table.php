@@ -18,6 +18,7 @@ class CreateLinksTable extends Migration
             $table->string('name')->nullable()->index();
             $table->string('url');
             $table->string('text')->nullable();
+            $table->integer('order');
             $table->integer('project_id')->nullable()->unsigned()->index();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

@@ -53,5 +53,6 @@ $factory->define(Larafolio\Models\Link::class, function (Faker\Generator $faker)
         'name' => $faker->word,
         'text' => $faker->sentence,
         'url'  => $faker->url,
+        'order' => rand(0, 10),
     ];
 });

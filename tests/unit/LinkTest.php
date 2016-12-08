@@ -19,9 +19,10 @@ class LinkTest extends TestCase
         $project = factory(Project::class)->create();
 
         $data = [
-            'name' => 'name',
-            'text' => 'text',
-            'url' => 'url'
+            'name'  => 'name',
+            'text'  => 'text',
+            'url'   => 'url',
+            'order' => 0,
         ];
 
         $this->user->addLinkToProject($project, $data);
@@ -37,15 +38,17 @@ class LinkTest extends TestCase
     public function user_can_add_links_with_other_data()
     {
         $firstLink = [
-            'name' => 'first link name',
-            'text' => 'first link text',
-            'url'  => 'first link url',
+            'name'  => 'first link name',
+            'text'  => 'first link text',
+            'url'   => 'first link url',
+            'order' => 0,
         ];
 
         $secondLink = [
-            'name' => 'second link name',
-            'text' => 'second link text',
-            'url'  => 'second link url',
+            'name'  => 'second link name',
+            'text'  => 'second link text',
+            'url'   => 'second link url',
+            'order' => 1,
         ];
 
         $data = [
