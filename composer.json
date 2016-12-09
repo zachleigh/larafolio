@@ -49,7 +49,7 @@
     },
 
     "scripts": {
-        "post-update-cmd": [
+        "post-package-update": [
             "php artisan vendor:publish --provider='Larafolio\\LarafolioServiceProvider' --tag=public --force"
         ],
         "test": [
