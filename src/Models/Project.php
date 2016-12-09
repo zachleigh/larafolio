@@ -153,7 +153,7 @@ class Project extends Model
     /**
      * Get all projects with given block name.
      *
-     * @param  string $blockName Name of block.
+     * @param string $blockName Name of block.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -165,7 +165,7 @@ class Project extends Model
     /**
      * Get all projects with given image name.
      *
-     * @param  string $imageName Name of image.
+     * @param string $imageName Name of image.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -177,7 +177,7 @@ class Project extends Model
     /**
      * Get all projects with given link name.
      *
-     * @param  string $linkName Name of link.
+     * @param string $linkName Name of link.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -189,8 +189,8 @@ class Project extends Model
     /**
      * Get all projects with relationship on table that has given name.
      *
-     * @param  string  $table Name of table relationship is on.
-     * @param  string  $name  Relationship name.
+     * @param string $table Name of table relationship is on.
+     * @param string $name  Relationship name.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -315,7 +315,7 @@ class Project extends Model
     public function blockText($name, $formatted = true)
     {
         if (!$block = $this->block($name)) {
-            return null;
+            return;
         }
 
         if ($formatted) {
@@ -374,7 +374,7 @@ class Project extends Model
     public function imageUrl($name, $size = 'medium')
     {
         if (!$image = $this->image($name)) {
-            return null;
+            return;
         }
 
         return $image->{$size}();
@@ -390,7 +390,7 @@ class Project extends Model
     public function imageCaption($name)
     {
         if (!$image = $this->image($name)) {
-            return null;
+            return;
         }
 
         return $image->caption();
@@ -399,14 +399,14 @@ class Project extends Model
     /**
      * Get alt for image.
      *
-     * @param  string $name Name of image to get caption for.
+     * @param string $name Name of image to get caption for.
      *
      * @return string|null
      */
     public function imageAlt($name)
     {
         if (!$image = $this->image($name)) {
-            return null;
+            return;
         }
 
         return $image->alt();
@@ -462,7 +462,7 @@ class Project extends Model
     public function linkUrl($name)
     {
         if (!$link = $this->link($name)) {
-            return null;
+            return;
         }
 
         return $link->url();
@@ -478,7 +478,7 @@ class Project extends Model
     public function linkText($name)
     {
         if (!$link = $this->link($name)) {
-            return null;
+            return;
         }
 
         return $link->text();

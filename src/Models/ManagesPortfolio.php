@@ -44,7 +44,7 @@ trait ManagesPortfolio
 
         $this->updateProjectTextBlocks($project, $data);
 
-            $this->updateProjectLinks($project, $data);
+        $this->updateProjectLinks($project, $data);
 
         return $project;
     }
