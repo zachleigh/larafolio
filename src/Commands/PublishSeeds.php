@@ -51,6 +51,8 @@ class PublishSeeds extends Command
 
         $this->copyImageSeeder($filesystem);
 
+        $this->copyFactories($filesystem);
+
         foreach ($this->seeds as $seed) {
             $this->copySeed($filesystem, $seed);
         }
@@ -132,5 +134,17 @@ class PublishSeeds extends Command
     protected function removeNamespace($file)
     {
         return str_replace("namespace Larafolio\database\seeds;\n\n", '', $file);
+    }
+
+    /**
+     * Copy model factories to app.
+     *
+     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     */
+    public function copyFactories(Filesystem $filesystem)
+    {
+        $file = $filesystem->get(__DIR__.'/../database/factories/ModelFactory.php');
+
+        $filesystem->put(database_path('factories/ModelFactory.php'), $file);
     }
 }

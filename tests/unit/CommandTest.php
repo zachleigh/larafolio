@@ -13,9 +13,7 @@ class CommandTest extends TestCase
      */
     public function publish_seeds_command_moves_seeders_to_app()
     {
-        $filesystem = new Filesystem();
-
-        $filesystem->cleanDirectory($this->getSeedFilePath());
+        $this->cleanDirectories();
 
         $this->assertFilesDontExist();
 
@@ -23,7 +21,7 @@ class CommandTest extends TestCase
 
         $this->assertFilesExist();
 
-        $filesystem->cleanDirectory($this->getSeedFilePath());
+        $this->cleanDirectories();
     }
 
     /**
@@ -40,6 +38,8 @@ class CommandTest extends TestCase
         $this->assertFileNotExists($this->getSeedFilePath('TextBlocksTableSeeder.php'));
 
         $this->assertFileNotExists($this->getSeedFilePath('UsersTableSeeder.php'));
+
+        $this->assertFileNotExists(database_path('factories/ModelFactory.php'));
     }
 
     /**
@@ -56,6 +56,8 @@ class CommandTest extends TestCase
         $this->assertFileExists($this->getSeedFilePath('TextBlocksTableSeeder.php'));
 
         $this->assertFileExists($this->getSeedFilePath('UsersTableSeeder.php'));
+
+        $this->assertFileExists(database_path('factories/ModelFactory.php'));
     }
 
     /**
@@ -65,12 +67,24 @@ class CommandTest extends TestCase
      *
      * @return string
      */
-    public function getSeedFilePath($fileName = null)
+    protected function getSeedFilePath($fileName = null)
     {
         if (!$fileName) {
             return database_path('seeds');
         }
         
         return database_path("seeds/{$fileName}");
+    }
+
+    /**
+     * Clean all seeds and factories directories.
+     */
+    protected function cleanDirectories()
+    {
+        $filesystem = new Filesystem();
+
+        $filesystem->cleanDirectory($this->getSeedFilePath());
+
+        $filesystem->cleanDirectory(database_path('factories'));
     }
 }
