@@ -83,8 +83,8 @@ class PublishSeeds extends Command
 
         $file = $this->removeNamespace($file);
 
-        $file = str_replace(__DIR__.'/../../../tests/_data/images',
-            __DIR__.'/../../vendor/zachleigh/larafolio/tests/_data/images',
+        $file = str_replace('/../../../tests/_data/images',
+            '/../../vendor/zachleigh/larafolio/tests/_data/images',
             $file
         );
 
