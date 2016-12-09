@@ -3,6 +3,7 @@
 namespace Larafolio;
 
 use View;
+use Larafolio\Commands\PublishSeeds;
 use Illuminate\Support\ServiceProvider as BaseProvider;
 
 class LarafolioServiceProvider extends BaseProvider
@@ -43,5 +44,11 @@ class LarafolioServiceProvider extends BaseProvider
         $this->publishes([
             __DIR__.'/config/imagecache.php' => config_path('imagecache.php'),
         ]);
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                PublishSeeds::class,
+            ]);
+        }
     }
 }
