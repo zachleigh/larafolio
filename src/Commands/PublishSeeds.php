@@ -23,7 +23,7 @@ class PublishSeeds extends Command
 
     /**
      * Normal seed files to copy.
-     * 
+     *
      * @var array
      */
     protected $seeds = [
