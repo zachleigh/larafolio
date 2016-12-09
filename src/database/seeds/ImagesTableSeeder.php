@@ -2,7 +2,6 @@
 
 namespace Larafolio\database\seeds;
 
-use Storage;
 use App\User;
 use Larafolio\Models\Project;
 use Illuminate\Database\Seeder;
@@ -62,7 +61,7 @@ class ImagesTableSeeder extends Seeder
     {
         $imageFile = $filesystem->get($image->getPathname());
 
-        Storage::put($path, $imageFile);
+        \Storage::put($path, $imageFile);
 
         $fullPath = storage_path('app/'.$path);
     }
