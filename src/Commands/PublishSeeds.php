@@ -21,6 +21,11 @@ class PublishSeeds extends Command
      */
     protected $description = 'Move Larafolio seeders into local project';
 
+    /**
+     * Normal seed files to copy.
+     * 
+     * @var array
+     */
     protected $seeds = [
         'ProjectsTableSeeder.php',
         'TextBlocksTableSeeder.php',
