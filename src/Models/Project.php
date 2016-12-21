@@ -139,6 +139,10 @@ class Project extends Model
             $query->orderBy('order');
         }
 
+        $query->orderRelationship('links');
+
+        $query->orderRelationship('blocks');
+
         if ($group) {
             return $query->get()
                 ->each(function ($project, $key) {
@@ -146,10 +150,6 @@ class Project extends Model
                 })
                 ->groupBy('type');
         }
-
-        $query->orderRelationship('links');
-
-        $query->orderRelationship('blocks');
 
         return $query->get();
     }
