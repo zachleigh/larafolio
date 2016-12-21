@@ -139,7 +139,7 @@ class PublishSeeds extends Command
     /**
      * Copy model factories to app.
      *
-     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
     public function copyFactories(Filesystem $filesystem)
     {
