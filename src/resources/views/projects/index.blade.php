@@ -12,6 +12,15 @@
                 <h1 class="top__title">Dashboard</h1>
             </div>
         </div>
+        @if ($projects->isEmpty())
+            <h2>You have not added any projects yet.</h2>
+            <a
+                class="button button--blue"
+                href="{{ route('add-project') }}"
+            >
+                Add a Project
+            </a>
+        @endif
         <dashboard
             action={{ route('update-portfolio')}}
             :blocks="{{ json_encode($blocks) }}"
