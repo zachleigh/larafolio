@@ -1,2 +1,0 @@
-Project:
-    - Make this better: $groupedProjects = Project::all()->sortBy('order')->groupBy('type');
