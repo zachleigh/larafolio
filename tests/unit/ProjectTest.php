@@ -362,6 +362,74 @@ class ProjectTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function ordered_project_blocks_are_ordered_by_block_order()
+    {
+        $project = $this->createProjectWithBlock('block name');
+
+        $data1 = [
+            'name'           => 'text block name',
+            'text'           => 'text block text',
+            'formatted_text' => '<p>text block text</p>',
+            'order'          => 3,
+        ];
+
+        $project->blocks()->create($data1);
+
+        $data2 = [
+            'name'           => 'text block name',
+            'text'           => 'text block text',
+            'formatted_text' => '<p>text block text</p>',
+            'order'          => 2,
+        ];
+
+        $project->blocks()->create($data1);
+
+        $projects = Project::allOrdered();
+
+        foreach ($projects as $project) {
+            $blocks = $project->blocks;
+
+            $this->assertOrder($blocks->pluck('order'));
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function ordered_projects_links_are_ordered_by_link_order()
+    {
+        $project = $this->makeProjectWithLink('link name');
+
+        $data1 = [
+            'name'  => 'new name',
+            'text'  => 'new text',
+            'url'   => 'new url',
+            'order' => 3
+        ];
+
+        $project->links()->create($data1);
+
+        $data2 = [
+            'name'  => 'new name',
+            'text'  => 'new text',
+            'url'   => 'new url',
+            'order' => 2
+        ];
+
+        $project->links()->create($data2);
+
+        $projects = Project::allOrdered();
+
+        foreach ($projects as $project) {
+            $links = $project->links;
+
+            $this->assertOrder($links->pluck('order'));
+        }
+    }
+
+    /**
      * Assert a collection is ordered.
      *
      * @param  \Illuminate\Support\Collection $ordered Collection of numbers.
@@ -370,11 +438,11 @@ class ProjectTest extends TestCase
     {
         $current = 0;
 
-        $ordered->each(function ($order) use ($current) {
+        $ordered->each(function ($order) use (&$current) {
             $this->assertTrue($order >= $current);
 
             if ($order != $current) {
-                $current++;
+                $current = $order;
             }
         });
     }
@@ -393,9 +461,9 @@ class ProjectTest extends TestCase
         if ($makeVisible) {
             $conditions['visible'] = true;
         }
-        
+
         Project::all()->each(function ($project) use ($conditions) {
-            $this->user->updateProject($project, $conditions); 
+            $this->user->updateProject($project, $conditions);
         });
     }
 }

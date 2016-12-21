@@ -147,6 +147,10 @@ class Project extends Model
                 ->groupBy('type');
         }
 
+        $query->orderRelationship('links');
+
+        $query->orderRelationship('blocks');
+
         return $query->get();
     }
 
@@ -513,9 +517,8 @@ class Project extends Model
      */
     public function scopeWithBlocks($query, $slug)
     {
-        return $query->with(['blocks' => function ($query) {
-            $query->orderBy('order');
-        }])->where('slug', $slug)
+        return $query->orderRelationship('blocks')
+            ->where('slug', $slug)
             ->first();
     }
 
@@ -529,12 +532,10 @@ class Project extends Model
      */
     public function scopeFull($query, $slug)
     {
-        return $query->with(['blocks' => function ($query) {
-            $query->orderBy('order');
-        }])->with(['links' => function ($query) {
-            $query->orderBy('order');
-        }])->where('slug', $slug)
-           ->first();
+        return $query->orderRelationship('blocks')
+            ->orderRelationship('links')
+            ->where('slug', $slug)
+            ->first();
     }
 
     /**
@@ -548,5 +549,20 @@ class Project extends Model
             ->map(function ($image) {
                 return $image->generateProps();
             })->reverse()->values();
+    }
+
+    /**
+     * Order given relationship by order value.
+     *
+     * @param \Builder $query        Query builder.
+     * @param string   $relationship Name of relationship to order.
+     *
+     * @return \Builder
+     */
+    public function scopeOrderRelationship($query, $relationship)
+    {
+        return $query->with([$relationship => function ($query) {
+            $query->orderBy('order');
+        }]);
     }
 }
