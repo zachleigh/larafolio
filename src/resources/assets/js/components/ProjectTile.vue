@@ -47,7 +47,7 @@
                     </span>
                     Hidden
                 </div>
-                <div>
+                <div class="dashboard__type" v-show="project.type">
                     Type: {{ project.type }}
                 </div>
             </div>
