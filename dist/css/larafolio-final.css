@@ -493,7 +493,7 @@ html, body {
       width: 95%; } }
   @media only screen and (max-width: 1000px) {
     .content {
-      margin: 50px auto 50px; } }
+      margin: 70px auto 50px; } }
 
 .top {
   display: -webkit-box;
@@ -740,8 +740,11 @@ a {
       z-index: 10;
       border-bottom: 0;
       padding: 50px 0 0;
-      box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
-      overflow: hidden; }
+      box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12); }
+      .nav__dropdown-content {
+        top: 0;
+        left: 120px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16); }
       .nav__left {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
@@ -755,7 +758,7 @@ a {
       .nav__toggle {
         display: block;
         position: absolute;
-        top: 0;
+        top: 5px;
         left: 0;
         cursor: pointer; }
         .nav__toggle svg, .nav__toggle svg g {

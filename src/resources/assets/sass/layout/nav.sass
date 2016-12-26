@@ -92,7 +92,11 @@ $mobileNavLeft: $mobileNavWidth + 10px
         border-bottom: 0
         padding: 50px 0 0
         +card(1)
-        overflow: hidden
+
+        +ele(dropdown-content)
+            top: 0
+            left: 120px
+            +card(2)
 
         +ele(left)
             flex-direction: column
@@ -105,7 +109,7 @@ $mobileNavLeft: $mobileNavWidth + 10px
         +ele(toggle)
             display: block
             position: absolute
-            top: 0
+            top: 5px
             left: 0
             cursor: pointer
 

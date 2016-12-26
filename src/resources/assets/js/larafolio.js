@@ -34,6 +34,9 @@ const app = new Vue({
     },
 
     methods: {
+        /**
+         * Toggle mobile menu.
+         */
         toggleMenu () {
             this.showMenu = !this.showMenu;
         }
