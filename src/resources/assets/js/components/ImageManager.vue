@@ -24,7 +24,7 @@
                             Don't Remove
                         </button>
                         <button
-                            class="button button--blue"
+                            class="button button--primary"
                             @click.prevent="removeImage"
                         >
                             Remove Image

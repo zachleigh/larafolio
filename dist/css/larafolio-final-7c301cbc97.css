@@ -574,9 +574,9 @@ a {
     .button:disabled:hover {
       background-color: #c8c8c8;
       cursor: default; }
-  .button--blue {
+  .button--primary {
     background-color: #67aeca; }
-    .button--blue:hover {
+    .button--primary:hover {
       background-color: #2e6b84; }
   .button--green {
     background-color: #49c965; }

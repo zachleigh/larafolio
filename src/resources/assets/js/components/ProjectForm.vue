@@ -20,7 +20,7 @@
                             Don't Remove
                         </button>
                         <button
-                            class="button button--blue"
+                            class="button button--primary"
                             @click.prevent="removeBlock"
                         >
                             Remove Block
@@ -48,7 +48,7 @@
                             Don't Remove
                         </button>
                         <button
-                            class="button button--blue"
+                            class="button button--primary"
                             @click.prevent="removeLink"
                         >
                             Remove Link

@@ -3,7 +3,7 @@
     align-items: center
     justify-content: space-between
     padding: 0 6em
-    background-color: $navColor
+    background-color: $primaryColor
 
     +ele(dropdown)
         position: relative
@@ -13,7 +13,7 @@
             display: block
 
         &:hover .nav__item
-            color: $darkBlue
+            color: $primaryColorDark
 
     +ele(dropdown-content)
         display: none
@@ -23,14 +23,14 @@
         min-width: 150px
         z-index: 10
         background-color: $white
-        color: $blue
+        color: $primaryColor
         +card(1)
 
     +ele(dropdown-item)
         display: flex
         align-items: center
         height: 40px
-        color: $blue
+        color: $primaryColor
         transition: $hoverTransition
 
         &:hover
@@ -48,7 +48,7 @@
 
         & g
             transition: $hoverTransition
-            fill: $darkBlue
+            fill: $primaryColorDark
 
     +ele(item)
         display: flex
@@ -60,7 +60,7 @@
         transition: $hoverTransition
 
         &:hover
-            color: $darkBlue
+            color: $primaryColorDark
             text-decoration: none
 
     +ele(link)

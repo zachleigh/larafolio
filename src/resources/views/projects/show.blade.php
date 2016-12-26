@@ -69,7 +69,7 @@
                 </section>
                 <section class="project__display-section">
                     <a
-                        class="button button--blue"
+                        class="button button--primary"
                         href="{{ route('edit-project', ['project' => $project]) }}"
                     >
                         Edit Project

@@ -55,7 +55,7 @@
                     </div>
                     <div>
                         <a
-                            class="button button--blue"
+                            class="button button--primary"
                             v-bind:href="link"
                         >
                             Manage
