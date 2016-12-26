@@ -38,4 +38,26 @@ class DashboardCest
             'order' => 4,
         ]);
     }
+
+    public function user_can_toggle_visibility_from_dashboard(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $I->wantTo('Toggle project visibility from the dashboard.');
+        $I->login($I);
+        $I->click('#makeVisible'.$project->id());
+        $I->wait(1);
+        $I->see('Project Visible');
+        $I->seeInDatabase('projects', [
+            'id'      => $project->id(),
+            'visible' => true,
+        ]);
+        $I->click('#makeHidden'.$project->id());
+        $I->wait(1);
+        $I->see('Project Hidden');
+        $I->seeInDatabase('projects', [
+            'id'      => $project->id(),
+            'visible' => false,
+        ]);
+    }
 }

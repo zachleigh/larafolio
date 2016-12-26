@@ -23,17 +23,27 @@
                 </h2>
                 <div
                     class="project-controls__section dashboard__visibility"
-                    v-show="project.visible"
+                    v-show="visible"
                 >
-                    <span class="nav__icon green-icon" v-html="icons.visible">
+                    <span
+                        :id="elementId('makeHidden')"
+                        class="nav__icon green-icon"
+                        v-html="icons.visible"
+                        @click.prevent="changeVisibility(false)"
+                    >
                     </span>
                     Visible
                 </div>
                 <div
                     class="project-controls__section dashboard__visibility"
-                    v-show="!project.visible"
+                    v-show="!visible"
                 >
-                    <span class="nav__icon red-icon" v-html="icons.hidden">                 
+                    <span
+                        :id="elementId('makeVisible')"
+                        class="nav__icon red-icon"
+                        v-html="icons.hidden"
+                        @click.prevent="changeVisibility(true)"
+                    >                 
                     </span>
                     Hidden
                 </div>
@@ -59,7 +69,13 @@
 </template>
 
 <script>
+    import Ajax from './../mixins/Ajax.js';
+    import Flash from './../mixins/Flash.js';
+    import Visibility from './../mixins/Visibility.js';
+
     export default {
+        mixins: [ Ajax, Flash, Visibility ],
+
         data: function () {
             return {
                 //

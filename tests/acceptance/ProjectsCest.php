@@ -56,7 +56,7 @@ class ProjectsCest
         ]);
         $I->click('#makeVisible');
         $I->see('Visible');
-        $I->see('Project is now publicly viewable');
+        $I->see($project->name().' is now publicly viewable');
         $I->dontSee('Hidden');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
@@ -64,7 +64,7 @@ class ProjectsCest
         ]);
         $I->click('#makeHidden');
         $I->see('Hidden');
-        $I->see('Project is not publicly viewable');
+        $I->see($project->name().' is not publicly viewable');
         $I->dontSee('Visible');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),

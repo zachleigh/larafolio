@@ -547,7 +547,8 @@ a {
   margin-right: 15px; }
 
 .dashboard__visibility {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  cursor: pointer; }
 
 .dashboard__wrapper {
   display: block; }
