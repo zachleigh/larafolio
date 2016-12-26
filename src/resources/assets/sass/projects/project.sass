@@ -43,4 +43,21 @@
     +ele(main)
         position: relative
         display: flex
-        min-width: 1200px
+        min-width: 1150px
+
+    +medium()
+
+        +ele(main)
+            min-width: $widthMedium
+            width: $widthMedium
+            margin: auto
+
+    +small()
+
+        +ele(main)
+            width: $widthSmall
+
+    +tiny()
+
+        +ele(main)
+            width: 100%

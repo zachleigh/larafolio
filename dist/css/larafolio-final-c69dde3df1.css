@@ -488,6 +488,10 @@ html, body {
   max-width: 1200px;
   -ms-grid-row-align: center;
   align-self: center; }
+  @media only screen and (max-width: 1200px) {
+    .content {
+      margin: 20px auto 50px;
+      width: 95%; } }
 
 .top {
   display: -webkit-box;
@@ -504,6 +508,13 @@ html, body {
     align-items: center; }
   .top__title {
     margin: 0 0 0 10px; }
+  @media only screen and (max-width: 1200px) {
+    .top {
+      margin: auto;
+      width: 80%; } }
+  @media only screen and (max-width: 1000px) {
+    .top {
+      width: 90%; } }
 
 .placeholder, ::-webkit-input-placeholder {
   font-style: italic;
@@ -900,7 +911,21 @@ a {
   position: relative;
   display: -webkit-box;
   display: flex;
-  min-width: 1200px; }
+  min-width: 1150px; }
+
+@media only screen and (max-width: 1200px) {
+  .project__main {
+    min-width: 80%;
+    width: 80%;
+    margin: auto; } }
+
+@media only screen and (max-width: 1000px) {
+  .project__main {
+    width: 90%; } }
+
+@media only screen and (max-width: 800px) {
+  .project__main {
+    width: 100%; } }
 
 .project-form__display-area {
   position: absolute;
@@ -995,6 +1020,14 @@ a {
   flex-direction: column;
   justify-content: space-around; }
 
+.dashboard__flex-medium {
+  display: -webkit-box;
+  display: flex; }
+
+.dashboard__flex-tiny {
+  display: -webkit-box;
+  display: flex; }
+
 .dashboard__icon {
   display: -webkit-box;
   display: flex;
@@ -1040,6 +1073,30 @@ a {
 
 .dashboard__wrapper {
   display: block; }
+
+@media only screen and (max-width: 1200px) {
+  .dashboard__description {
+    margin-top: 25px; }
+  .dashboard__flex-medium {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column; } }
+
+@media only screen and (max-width: 800px) {
+  .dashboard__flex-tiny {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column; }
+  .dashboard__info {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 90%; }
+  .dashboard__photo {
+    -webkit-box-pack: center;
+    justify-content: center; } }
 
 .image-manager__dropzone {
   border: 1px solid #c8c8c8; }

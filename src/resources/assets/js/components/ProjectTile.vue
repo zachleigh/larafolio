@@ -16,54 +16,58 @@
             >                 
             </span>
         </div>
-        <div class="dashboard__info">
-            <div>
-                <h2 class="dashboard__name">
-                    {{ project.name }}
-                </h2>
-                <div
-                    class="project-controls__section dashboard__visibility"
-                    v-show="visible"
-                >
-                    <span
-                        :id="elementId('makeHidden')"
-                        class="nav__icon green-icon"
-                        v-html="icons.visible"
-                        @click.prevent="changeVisibility(false)"
-                    >
-                    </span>
-                    Visible
+        <div class="dashboard__flex-medium">
+            <div class="dashboard__flex-tiny">
+                <div class="dashboard__info">
+                    <div>
+                        <h2 class="dashboard__name">
+                            {{ project.name }}
+                        </h2>
+                        <div
+                            class="project-controls__section dashboard__visibility"
+                            v-show="visible"
+                        >
+                            <span
+                                :id="elementId('makeHidden')"
+                                class="nav__icon green-icon"
+                                v-html="icons.visible"
+                                @click.prevent="changeVisibility(false)"
+                            >
+                            </span>
+                            Visible
+                        </div>
+                        <div
+                            class="project-controls__section dashboard__visibility"
+                            v-show="!visible"
+                        >
+                            <span
+                                :id="elementId('makeVisible')"
+                                class="nav__icon red-icon"
+                                v-html="icons.hidden"
+                                @click.prevent="changeVisibility(true)"
+                            >                 
+                            </span>
+                            Hidden
+                        </div>
+                        <div class="dashboard__type" v-show="project.type">
+                            Type: {{ project.type }}
+                        </div>
+                    </div>
+                    <div>
+                        <a
+                            class="button button--blue"
+                            v-bind:href="link"
+                        >
+                            Manage
+                        </a>
+                    </div>
                 </div>
-                <div
-                    class="project-controls__section dashboard__visibility"
-                    v-show="!visible"
-                >
-                    <span
-                        :id="elementId('makeVisible')"
-                        class="nav__icon red-icon"
-                        v-html="icons.hidden"
-                        @click.prevent="changeVisibility(true)"
-                    >                 
-                    </span>
-                    Hidden
-                </div>
-                <div class="dashboard__type" v-show="project.type">
-                    Type: {{ project.type }}
+                <div class="dashboard__photo">
+                    <img v-bind:src="image">
                 </div>
             </div>
-            <div>
-                <a
-                    class="button button--blue"
-                    v-bind:href="link"
-                >
-                    Manage
-                </a>
+            <div class="dashboard__description" v-html="block">
             </div>
-        </div>
-        <div class="dashboard__photo">
-            <img v-bind:src="image">
-        </div>
-        <div class="dashboard__description" v-html="block">
         </div>
     </section>
 </template>

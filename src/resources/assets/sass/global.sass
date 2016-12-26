@@ -23,6 +23,10 @@ html, body
     max-width: 1200px
     align-self: center
 
+    +medium()
+        margin: 20px auto 50px
+        width: 95%
+
 .top
     display: flex
     align-items: center
@@ -35,6 +39,13 @@ html, body
 
     +ele(title)
         margin: 0 0 0 10px
+
+    +medium()
+        margin: auto
+        width: $widthMedium
+
+    +small()
+        width: $widthSmall
 
 
 .placeholder, ::-webkit-input-placeholder

@@ -9,6 +9,12 @@ $infoSpace: 10px
         flex-direction: column
         justify-content: space-around
 
+    +ele(flex-medium)
+        display: flex
+
+    +ele(flex-tiny)
+        display: flex
+
     +ele(icon)
         display: flex
         align-items: center
@@ -48,3 +54,24 @@ $infoSpace: 10px
 
     +ele(wrapper)
         display: block
+
+    +medium()
+
+        +ele(description)
+            margin-top: $verticalSpace
+
+        +ele(flex-medium)
+            flex-direction: column
+
+    +tiny()
+
+        +ele(flex-tiny)
+            flex-direction: column
+
+        +ele(info)
+            flex-direction: row
+            justify-content: space-between
+            width: 90%
+
+        +ele(photo)
+            justify-content: center
