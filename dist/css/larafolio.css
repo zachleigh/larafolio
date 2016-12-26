@@ -611,12 +611,15 @@ a {
   display: block; }
 
 @media only screen and (max-width: 1200px) {
+  .dashboard__arrows {
+    width: 25px; }
   .dashboard__description {
     margin-top: 25px; }
   .dashboard__flex-medium {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    flex-direction: column; } }
+    flex-direction: column;
+    width: calc(100% - 25px); } }
 
 @media only screen and (max-width: 800px) {
   .dashboard__flex-tiny {
@@ -629,10 +632,12 @@ a {
     flex-direction: row;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    width: 90%; }
+    margin-right: 0; }
   .dashboard__photo {
     -webkit-box-pack: center;
-    justify-content: center; } }
+    justify-content: center; }
+    .dashboard__photo img {
+      max-width: 100%; } }
 
 .image-manager__dropzone {
   border: 1px solid #c8c8c8; }

@@ -10,6 +10,7 @@ elixir((mix) => {
             './dist/css/larafolio.css'
         ], './dist/css/larafolio-final.css')
         .webpack('./src/resources/assets/js/larafolio.js', './dist/js/')
+        .browserSync({open: false, proxy: 'http://localhost:8000/', notify: false})
         .version([
             './dist/css/larafolio-final.css',
             './dist/js/larafolio.js'

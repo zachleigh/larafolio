@@ -2,6 +2,8 @@ $horizontalSpace: 15px
 $verticalSpace: 25px
 $infoSpace: 10px
 
+$arrowWidth: 25px
+
 .dashboard
 
     +ele(arrows)
@@ -57,11 +59,15 @@ $infoSpace: 10px
 
     +medium()
 
+        +ele(arrows)
+            width: $arrowWidth
+
         +ele(description)
             margin-top: $verticalSpace
 
         +ele(flex-medium)
             flex-direction: column
+            width: calc(100% - #{$arrowWidth})
 
     +tiny()
 
@@ -71,7 +77,10 @@ $infoSpace: 10px
         +ele(info)
             flex-direction: row
             justify-content: space-between
-            width: 90%
+            margin-right: 0
 
         +ele(photo)
             justify-content: center
+
+            & img
+                max-width: 100%
