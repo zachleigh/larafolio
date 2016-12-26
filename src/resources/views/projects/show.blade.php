@@ -30,36 +30,43 @@
                     Content
                 </h2>
                 <section class="project__display-section">
-                    <h3 class="project__display-header">Type</h3>
+                    <h3 class="project__display-header">Project Type</h3>
                     <div class="project__display-item">
-                        {{ $project->type() }}
+                        <b>{{ $project->type() }}</b>
                     </div>
                 </section>
-                @foreach ($project->links as $link)
-                    <section class="project__display-section">
-                        <h3 class="project__display-header">
-                            Link: {{ $link->name() }}
-                        </h3>
-                        <div class="project__display-item">
-                            {{ $link->text() }}
+                <section class="project__display-section">
+                    <h3 class="project__display-header">Project Links</h3>
+                    @foreach ($project->links as $link)
+                        <div class="project__display-subsection">
+                            <div class="">
+                                Name: <b>{{ $link->name() }}</b>
+                            </div>
+                            <div class="project__display-item">
+                                Text: {{ $link->text() }}
+                            </div>
+                            <div class="project__display-item">
+                                URL: 
+                                <a href="{{ $link->url() }}">
+                                    {{ $link->url() }}
+                                </a>
+                            </div>
                         </div>
-                        <div class="project__display-item">
-                            <a href="{{ $link->url() }}">
-                                {{ $link->url() }}
-                            </a>
+                    @endforeach
+                </section>
+                <section class="project__display-section">
+                    <h3 class="project__display-header">Project Blocks</h3>
+                    @foreach ($project->blocks as $block)
+                        <div class="project__display-subsection">
+                            <div class="">
+                                Name: <b>{{ $block->name() }}</b>
+                            </div>
+                            <div class="project__display-item">
+                                {!! $block->formattedText() !!}
+                            </div>
                         </div>
-                    </section>
-                @endforeach
-                @foreach ($project->blocks as $block)
-                    <section class="project__display-section">
-                        <h3 class="project__display-header">
-                            Block: {{ $block->name() }}
-                        </h3>
-                        <div class="project__display-item">
-                            {!! $block->formattedText() !!}
-                        </div>
-                    </section>
-                @endforeach
+                    @endforeach
+                </section>
                 <section class="project__display-section">
                     <a
                         class="button button--blue"

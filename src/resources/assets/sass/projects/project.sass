@@ -6,9 +6,20 @@
 
     +ele(display-item)
         margin-left: 15px
+        padding-top: 5px
 
     +ele(display-section)
-        margin-bottom: 15px
+        margin-bottom: 20px
+
+        &:last-child
+            margin-bottom: 0
+
+    +ele(display-subsection)
+        border-bottom: $border
+        padding: 10px 0
+
+        &:last-child
+            border-bottom: 0
 
     +ele(error)
         text-align: center

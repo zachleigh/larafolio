@@ -864,10 +864,19 @@ a {
   color: #67aeca; }
 
 .project__display-item {
-  margin-left: 15px; }
+  margin-left: 15px;
+  padding-top: 5px; }
 
 .project__display-section {
-  margin-bottom: 15px; }
+  margin-bottom: 20px; }
+  .project__display-section:last-child {
+    margin-bottom: 0; }
+
+.project__display-subsection {
+  border-bottom: 1px solid #c8c8c8;
+  padding: 10px 0; }
+  .project__display-subsection:last-child {
+    border-bottom: 0; }
 
 .project__error {
   text-align: center; }
