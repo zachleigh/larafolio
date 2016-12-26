@@ -611,6 +611,18 @@ a {
     display: block;
     font-size: 1.1em;
     margin-bottom: 4px; }
+  .form__name-input {
+    -webkit-box-flex: 1;
+    flex: 1 0;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #5a5a5a;
+    font-weight: bold;
+    background-color: #f7f9f9; }
+    .form__name-input:focus {
+      outline: none;
+      border-bottom: 1px solid #67aeca;
+      box-shadow: none; }
   .form__section {
     margin-bottom: 15px; }
   .form__text {
@@ -1035,6 +1047,8 @@ a {
     display: -webkit-box;
     display: flex;
     height: 150px; }
+  .image-tile__buttons {
+    margin-top: 10px; }
   .image-tile__caption {
     height: 50px;
     resize: none; }
@@ -1044,7 +1058,10 @@ a {
     right: 0; }
   .image-tile__form-section {
     display: -webkit-box;
-    display: flex; }
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column; }
   .image-tile__image {
     display: -webkit-box;
     display: flex; }

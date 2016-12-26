@@ -35,6 +35,19 @@ $formSectionSpace: 15px
         font-size: 1.1em
         margin-bottom: 4px
 
+    +ele(name-input)
+        flex: 1 0
+        border: none
+        border-bottom: 1px solid transparent
+        color: $black
+        font-weight: bold
+        background-color: $offWhite
+
+        &:focus
+            outline: none
+            border-bottom: 1px solid $blue
+            box-shadow: none
+
     +ele(section)
         margin-bottom: $formSectionSpace
 

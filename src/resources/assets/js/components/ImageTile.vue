@@ -9,7 +9,7 @@
             ></span>
         </div>
         <div class="image-tile__top">
-            <div class="image-tile__form-section image-tile__name">
+            <div class="image-tile__name">
                 <label
                     class="image-tile__label"
                     v-bind:for="elementId('name')"
@@ -19,7 +19,7 @@
                 <input
                     v-bind:id="elementId('name')"
                     v-bind:name="elementId('name')"
-                    class="text-block__control-input image-tile__input"
+                    class="form__name-input image-tile__input"
                     type="text"
                     placeholder="None"
                     v-model="name"
@@ -35,6 +35,12 @@
             </a>
             <div class="image-tile__right">
                 <div class="image-tile__form-section image-tile__alt">
+                    <label
+                        class="form__label"
+                        :for="elementId('alt')"
+                    >
+                        Alt text
+                    </label>
                     <input
                         v-bind:id="elementId('alt')"
                         v-bind:name="elementId('alt')"
@@ -45,6 +51,12 @@
                     >
                 </div>
                 <div class="image-tile__form-section">
+                    <label
+                        class="form__label"
+                        :for="elementId('caption')"
+                    >
+                        Caption
+                    </label>
                     <textarea
                         v-bind:id="elementId('caption')"
                         v-bind:name="elementId('caption')"
@@ -54,17 +66,18 @@
                         v-model="caption"
                     ></textarea>
                 </div>
-                <div class="image-tile__buttons">
-                    <button
-                        v-bind:id="elementId('button')"
-                        class="button button--green"
-                        :disabled="buttonState"
-                        @click.prevent="update"
-                    >
-                        Update Image
-                    </button>
-                </div>
+
             </div>
+        </div>
+        <div class="image-tile__buttons">
+            <button
+                v-bind:id="elementId('button')"
+                class="button button--green"
+                :disabled="buttonState"
+                @click.prevent="update"
+            >
+                Update Image
+            </button>
         </div>
     </div>
 </template>
