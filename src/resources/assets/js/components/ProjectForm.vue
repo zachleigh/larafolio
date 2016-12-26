@@ -70,9 +70,13 @@
                     action=""
                 >
                     <div id="name" class="form__section">
-                        <label class="form__label" for="name">Project Name</label>
+                        <h3 class="project-form__section-header">
+                            <label for="name">
+                                Project Name
+                            </label>
+                        </h3>
                         <input
-                            class="form__input"
+                            class="form__input project-form__input"
                             type="text"
                             name="name"
                             autocomplete="off"
@@ -81,9 +85,13 @@
                         >
                     </div>
                     <div id="projectType" class="form__section">
-                        <label class="form__label" for="name">Project Type</label>
+                        <h3 class="project-form__section-header">
+                            <label for="name">
+                                Project Type
+                            </label>
+                        </h3>
                         <input
-                            class="form__input"
+                            class="form__input project-form__input"
                             type="text"
                             name="projectType"
                             autocomplete="off"
@@ -91,7 +99,7 @@
                             v-bind:class="{ form__errored: hasError('projectType') }"
                         >
                     </div>
-                    <div class="form__label">Links</div>
+                    <h3 class="project-form__section-header">Links</h3>
                     <project-link
                         v-for="(link, index) in links"
                         :key="link.id"
@@ -111,7 +119,7 @@
                             @click.prevent="addLink"
                         >+</button>
                     </div>
-                    <div class="form__label">Text Blocks</div>
+                    <h3 class="project-form__section-header">Text Blocks</h3>
                     <text-block
                         v-for="(block, index) in blocks"
                         :key="block.id"
@@ -171,14 +179,14 @@
                 <h2
                     id="displayName"
                     class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('name', -2) }"
+                    v-bind:style="{ top: getHeight('name', 4) }"
                 >
                     {{ name }}
                 </h2>
                 <div
                     id="displayProjectType"
                     class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('projectType') }"
+                    v-bind:style="{ top: getHeight('projectType', 6) }"
                 >
                     {{ projectType }}
                 </div>
@@ -191,7 +199,7 @@
                 >
                     <div class="link__display-text" v-html="link.text"></div>
                     <a v-bind:href="link.url">
-                    {{ link.url }}
+                        {{ link.url }}
                     </a>
                 </div>
                 <div
@@ -501,7 +509,11 @@
 
                 padding = typeof padding === 'undefined' ? 0 : padding;
 
-                return (this.heights[id] + 24 + padding) + 'px';
+                if (id === 'name' || id === 'projectType') {
+                    return (this.heights[id] + 24 + padding) + 'px';
+                }
+
+                return (this.heights[id] + 46 + padding) + 'px';
             },
 
             /**

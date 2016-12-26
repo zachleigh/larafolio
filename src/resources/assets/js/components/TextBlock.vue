@@ -4,7 +4,7 @@
             <div>
                 <label v-bind:for="elementId('name')">Name: </label>
                 <input
-                    class="text-block__control-input"
+                    class="form__name-input"
                     type="text"
                     v-bind:name="elementId('name')"
                     autocomplete="off"
@@ -37,15 +37,19 @@
                 ></span>
             </div>
         </div>
-        <textarea
-            class="form__input form__textarea"
-            v-bind:name="elementId('text')"
-            autocomplete="off"
-            v-model="text"
-            v-on:input="update()"
-            placeholder="Text"
-            v-bind:class="{ form__errored: errored() }"
-        ></textarea>
+        <div class="text-block__fields">
+            <label class="form__label" :for="elementId('text')">Text</label>
+            <textarea
+                :id="elementId('text')"
+                class="form__input form__textarea"
+                v-bind:name="elementId('text')"
+                autocomplete="off"
+                v-model="text"
+                v-on:input="update()"
+                placeholder="Text"
+                v-bind:class="{ form__errored: errored() }"
+            ></textarea>
+        </div>
     </div>
 </template>
 

@@ -1,7 +1,7 @@
 @extends('larafolio::master')
 
 @section('title')
-
+    {{ $project->name() }} - Larafolio
 @stop
 
 @section('content')

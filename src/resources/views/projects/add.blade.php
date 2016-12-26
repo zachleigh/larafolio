@@ -1,7 +1,7 @@
 @extends('larafolio::master')
 
 @section('title')
-create a project
+    Add Project - Larafolio
 @stop
 
 @section('content')

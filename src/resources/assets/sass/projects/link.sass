@@ -1,8 +1,16 @@
 .link
+    border-bottom: $border
+    padding-bottom: 15px
+
+    &:last-child
+        border-bottom: 0
 
     +ele(display-text)
         min-height: 30px
         margin-bottom: 5px
+
+    +ele(fields)
+        margin-left: 15px
     
     +ele(text)
         margin-bottom: 5px

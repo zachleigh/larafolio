@@ -4,7 +4,7 @@
             <div>
                 <label v-bind:for="elementId('linkName')">Name: </label>
                 <input
-                    class="text-block__control-input"
+                    class="form__name-input"
                     type="text"
                     autocomplete="off"
                     :name="elementId('linkName')"
@@ -38,7 +38,9 @@
             </div>
         </div>
         <div class="link__fields">
+            <label class="form__label" :for="elementId('linkText')">Text</label>
             <input
+                :id="elementId('linkText')"
                 class="form__input link__text"
                 type="text"
                 :name="elementId('linkText')"
@@ -47,6 +49,7 @@
                 v-on:input="update()"
                 placeholder="Text"
             >
+            <label class="form__label" :for="elementId('url')">Url</label>
             <input
                 class="form__input link__url"
                 type="text"

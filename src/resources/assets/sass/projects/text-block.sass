@@ -1,4 +1,6 @@
 .text-block
+    border-bottom: $border
+    padding-bottom: 15px
 
     +ele(control)
         display: flex
@@ -11,20 +13,6 @@
         justify-content: flex-end
         align-items: center
         align-content: center
-
-    +ele(control-input)
-        flex: 1 0
-        border: none
-        border-bottom: 1px solid transparent
-        color: $black
-        font-weight: bold
-        background-color: $offWhite
-        padding: 2px
-
-        &:focus
-            outline: none
-            border-bottom: 1px solid $blue
-            box-shadow: none
 
     +ele(icon)
         display: flex
@@ -41,4 +29,7 @@
 
         & svg g
             fill: $black
+
+    +ele(fields)
+        margin-left: 15px
         
