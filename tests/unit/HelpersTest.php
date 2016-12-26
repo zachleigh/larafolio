@@ -22,7 +22,7 @@ class HelpersTest extends TestCase
         );
 
         $this->assertEquals(
-            'vendor/larafolio/css/larafolio-final-fe2dbb5504.css',
+            '/vendor/larafolio/css/larafolio-final-fe2dbb5504.css',
             $filename
         );
     }
@@ -43,7 +43,7 @@ class HelpersTest extends TestCase
         );
 
         $this->assertEquals(
-            'vendor/larafolio/js/larafolio-d54b988e06.js',
+            '/vendor/larafolio/js/larafolio-d54b988e06.js',
             $filename
         );
     }

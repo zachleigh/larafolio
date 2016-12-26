@@ -33,7 +33,9 @@ if (!function_exists('manager_cache_bust')) {
      */
     function manager_cache_bust($path,  $jsonData = null, $root = 'vendor/larafolio/')
     {
-        $path = str_replace($root, '', $path);
+        $path = trim($path, '/');
+
+        $file = str_replace($root, '', $path);
 
         if (!$jsonData && file_exists(public_path($root.'rev-manifest.json'))) {
             $jsonData = file_get_contents(public_path($root.'rev-manifest.json'));
@@ -42,8 +44,8 @@ if (!function_exists('manager_cache_bust')) {
         if ($jsonData) {
             $data = json_decode($jsonData, true);
 
-            if (array_key_exists($path, $data)) {
-                return $root.$data[$path];
+            if (array_key_exists($file, $data)) {
+                return '/'.$root.$data[$file];
             }
 
             return elixir($path);
