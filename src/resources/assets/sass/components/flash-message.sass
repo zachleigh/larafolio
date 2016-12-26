@@ -1,4 +1,5 @@
 $leftMargin: 15px
+$leftMarginMobile: 0
 
 .flash-message
     position: fixed
@@ -43,4 +44,28 @@ $leftMargin: 15px
         display: flex
         align-items: center
         margin: 10px 0 10px $leftMargin
+
+    +small()
+        height: 50px
+        min-width: 200px
+        width: auto
+        padding: 5px 10px
+        bottom: 15px
+        right: 15px
+
+        +ele(bottom)
+            margin-left: $leftMarginMobile
+
+        +ele(lines)
+            & .lines svg
+                height: 12px
+
+        +ele(message)
+            font-size: .9em
+
+        +ele(title)
+            font-size: 1.2em
+
+        +ele(top)
+            margin: 5px 0 5px $leftMarginMobile
 

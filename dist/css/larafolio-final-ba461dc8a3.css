@@ -813,9 +813,10 @@ a {
 
 .lines {
   display: inline-block;
-  fill: #5a5a5a; }
+  fill: #5a5a5a;
+  margin-top: 2px; }
   .lines svg {
-    height: 24px;
+    height: 22px;
     width: auto; }
 
 .modal__mask {
@@ -957,6 +958,24 @@ a {
     -webkit-box-align: center;
     align-items: center;
     margin: 10px 0 10px 15px; }
+  @media only screen and (max-width: 1000px) {
+    .flash-message {
+      height: 50px;
+      min-width: 200px;
+      width: auto;
+      padding: 5px 10px;
+      bottom: 15px;
+      right: 15px; }
+      .flash-message__bottom {
+        margin-left: 0; }
+      .flash-message__lines .lines svg {
+        height: 12px; }
+      .flash-message__message {
+        font-size: .9em; }
+      .flash-message__title {
+        font-size: 1.2em; }
+      .flash-message__top {
+        margin: 5px 0 5px 0; } }
 
 .project__display-header {
   margin: 0;
