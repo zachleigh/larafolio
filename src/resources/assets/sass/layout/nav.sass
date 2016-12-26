@@ -1,9 +1,13 @@
+$mobileNavWidth: 150px
+$mobileNavLeft: $mobileNavWidth + 10px
+
 .nav
     display: flex
     align-items: center
     justify-content: space-between
     padding: 0 6em
-    background-color: $primaryColor
+    background-color: $white
+    border-bottom: 1px solid $primaryColor
 
     +ele(dropdown)
         position: relative
@@ -13,7 +17,7 @@
             display: block
 
         &:hover .nav__item
-            color: $primaryColorDark
+            color: $primaryColor
 
     +ele(dropdown-content)
         display: none
@@ -48,20 +52,23 @@
 
         & g
             transition: $hoverTransition
-            fill: $primaryColorDark
+            fill: $primaryColor
 
     +ele(item)
         display: flex
         align-items: center 
-        color: $white
+        color: $primaryColor
         padding: 0 1em
         height: 50px
         cursor: pointer
         transition: $hoverTransition
 
         &:hover
-            color: $primaryColorDark
             text-decoration: none
+            color: $primaryColorDark
+
+            & svg, svg g
+                fill: $primaryColorDark
 
     +ele(link)
         &:hover
@@ -70,4 +77,59 @@
     +ele(section)
         display: flex
 
-        
+    +ele(toggle)
+        display: none
+
+    +small()
+        position: absolute
+        top: 0
+        flex-direction: column
+        justify-content: flex-start
+        align-items: flex-end
+        width: $mobileNavWidth
+        height: 100%
+        z-index: 10
+        border-bottom: 0
+        padding: 50px 0 0
+        +card(1)
+        overflow: hidden
+
+        +ele(left)
+            flex-direction: column
+            align-self: flex-start
+
+        +ele(right)
+            flex-direction: column
+            align-self: flex-start
+
+        +ele(toggle)
+            display: block
+            position: absolute
+            top: 0
+            left: 0
+            cursor: pointer
+
+            & svg, svg g
+                fill: $black
+                width: 25px
+                height: 25px            
+
+.slide-enter-active
+    animation: slide-in .3s
+
+.slide-leave-active
+    animation: slide-out .3s
+
+@keyframes slide-in
+    0%
+        transform: translateX(- $mobileNavLeft)
+
+    100% 
+        transform: translateX(0)
+
+@keyframes slide-out
+    0%
+        transform: translateX(0)
+
+    100%
+        transform: translateX(- $mobileNavLeft)

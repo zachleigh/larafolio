@@ -15,5 +15,27 @@ const bus = new Vue();
 Vue.prototype.$bus = bus;
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data: {
+        showMenu: false
+    },
+
+    computed: {
+        menuVisible () {
+            var mq = window.matchMedia( "(max-width: 1000px)" );
+
+            if (mq.matches) {
+                return this.showMenu;
+            }
+
+            return true;
+        }
+    },
+
+    methods: {
+        toggleMenu () {
+            this.showMenu = !this.showMenu;
+        }
+    }
 });
