@@ -14,7 +14,7 @@
             ]); ?>
         </script>
         
-        <link rel="stylesheet" href="{{ elixir('vendor/larafolio/css/larafolio-final.css') }}">
+        <link rel="stylesheet" href="{{ manager_cache_bust('vendor/larafolio/css/larafolio-final.css') }}">
     </head>
     <body>
         <div id="app">
@@ -25,6 +25,6 @@
                 @include('larafolio::layout.footer')
             </div>
         </div>
-        <script async src="{{ elixir('vendor/larafolio/js/larafolio.js') }}" type="text/javascript"></script>
+        <script async src="{{ manager_cache_bust('vendor/larafolio/js/larafolio.js') }}" type="text/javascript"></script>
     </body>
 </html>
