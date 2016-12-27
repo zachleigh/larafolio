@@ -4,6 +4,7 @@ namespace Larafolio;
 
 use View;
 use Larafolio\Commands\PublishSeeds;
+use Intervention\Image\ImageServiceProvider;
 use Illuminate\Support\ServiceProvider as BaseProvider;
 
 class LarafolioServiceProvider extends BaseProvider
@@ -50,5 +51,7 @@ class LarafolioServiceProvider extends BaseProvider
                 PublishSeeds::class,
             ]);
         }
+
+        $this->app->register(ImageServiceProvider::class);
     }
 }
