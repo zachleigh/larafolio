@@ -124,11 +124,7 @@ class TextBlocksCest
         $I->fillForm($I, $data);
         $I->click('#up2');
         $I->click('#up1');
-        $I->removeBlock($I, '#delete2');
-        $I->removeBlock($I, '#delete1');
-        $I->see('block2');
-        $I->dontSee('block0');
-        $I->dontSee('block1');
+        $I->seeinFormFields('.form', ['text0' => 'block2']);
     }
 
     public function user_can_move_text_block_down(AcceptanceTester $I)
@@ -147,11 +143,7 @@ class TextBlocksCest
         $I->fillForm($I, $data);
         $I->click('#down0');
         $I->click('#down1');
-        $I->removeBlock($I, '#delete1');
-        $I->removeBlock($I, '#delete0');
-        $I->see('block0');
-        $I->dontSee('block1');
-        $I->dontSee('block2');
+        $I->seeinFormFields('.form', ['text2' => 'block0']);;
     }
 
     public function user_can_add_and_delete_blocks_when_editing(AcceptanceTester $I)
