@@ -513,7 +513,9 @@ html, body {
   @media only screen and (max-width: 1200px) {
     .top {
       margin: auto;
-      width: 80%; } }
+      width: 80%;
+      -webkit-box-align: start;
+      align-items: flex-start; } }
   @media only screen and (max-width: 1000px) {
     .top {
       width: 90%;
@@ -524,6 +526,9 @@ html, body {
         width: 90%; }
       .top__title-block {
         width: 90%; } }
+  @media only screen and (max-width: 800px) {
+    .top {
+      width: 100%; } }
 
 .placeholder, ::-webkit-input-placeholder {
   font-style: italic;
@@ -1035,6 +1040,8 @@ a {
   .project__half {
     width: auto;
     min-width: 500px; }
+    .project__half:first-child {
+      padding-right: 0; }
   .project__main {
     min-width: 850px; } }
 
@@ -1055,6 +1062,10 @@ a {
     min-width: initial; }
   .project__main {
     width: 90%; } }
+
+@media only screen and (max-width: 800px) {
+  .project__main {
+    width: 100%; } }
 
 .project-form__display-area {
   position: absolute;
