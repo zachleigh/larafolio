@@ -45,14 +45,40 @@
         display: flex
         min-width: 1150px
 
-    +medium()
+    +wide()
+
+        +ele(half)
+            width: auto
+            min-width: 500px
 
         +ele(main)
-            min-width: $widthMedium
+            min-width: 850px
+
+    +medium()
+
+        +ele(display-section)
+            
+            & .button:first-child
+                margin-right: $buttonSpace
+
+        +ele(half)
+
+            &:first-child
+                border-right: 0
+
+            &:last-child
+                display: none
+
+        +ele(main)
             width: $widthMedium
-            margin: auto
+            min-width: initial
+            margin: 25px auto 0
+
 
     +small()
+
+        +ele(half)
+            min-width: initial
 
         +ele(main)
             width: $widthSmall
@@ -60,4 +86,4 @@
     +tiny()
 
         +ele(main)
-            width: 100%
+            

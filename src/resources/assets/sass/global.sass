@@ -48,7 +48,13 @@ html, body
 
     +small()
         width: $widthSmall
+        flex-direction: column
 
+        +ele(section)
+            width: $widthSmall
+
+        +ele(title-block)
+            width: $widthSmall
 
 .placeholder, ::-webkit-input-placeholder
     font-style: italic

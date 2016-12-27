@@ -69,6 +69,16 @@ $arrowWidth: 25px
             flex-direction: column
             width: calc(100% - #{$arrowWidth})
 
+        +ele(wrapper)
+            min-width: $widthMedium
+            width: $widthMedium
+            margin: auto
+
+    +small()
+
+        +ele(wrapper)
+            width: $widthSmall
+
     +tiny()
 
         +ele(flex-tiny)
@@ -84,3 +94,6 @@ $arrowWidth: 25px
 
             & img
                 max-width: 100%
+
+        +ele(wrapper)
+            width: 100%

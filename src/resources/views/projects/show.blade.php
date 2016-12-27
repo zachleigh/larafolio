@@ -74,6 +74,13 @@
                     >
                         Edit Project
                     </a>
+                    <a
+                        class="button button--secondary"
+                        href="{{ route('show-images', ['project' => $project]) }}"
+                        v-show="medium"
+                    >
+                        Manage Images
+                    </a>
                 </section>
             </div>
             <div class="project__right project__half">

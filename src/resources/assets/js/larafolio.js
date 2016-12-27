@@ -14,8 +14,12 @@ const bus = new Vue();
 
 Vue.prototype.$bus = bus;
 
+import MediaQueries from './mixins/MediaQueries.js';
+
 const app = new Vue({
     el: '#app',
+
+    mixins: [ MediaQueries ],
 
     data: {
         showMenu: false
@@ -23,9 +27,7 @@ const app = new Vue({
 
     computed: {
         menuVisible () {
-            var mq = window.matchMedia( "(max-width: 1000px)" );
-
-            if (mq.matches) {
+            if (this.small) {
                 return this.showMenu;
             }
 

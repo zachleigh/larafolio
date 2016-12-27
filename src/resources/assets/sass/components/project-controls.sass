@@ -1,13 +1,16 @@
+$groupPadding: 10px
+
 .project-controls
     display: flex
 
     +ele(group)
-        padding: 0 10px
+        padding-right: $groupPadding
         border-right: $border
 
         &:last-child
             border-right: 0
             padding-right: 0
+            padding-left: $groupPadding
 
     +ele(icon)
         display: flex
@@ -37,3 +40,6 @@
 
             &:hover
                 fill: $darkGreen
+
+    +small()
+        margin-top: 10px

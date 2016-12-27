@@ -25,8 +25,11 @@ class ProjectImageController extends Controller
             return response()->json($images);
         }
 
+        $images = $project->imagesWithProps();
+
         return view('larafolio::images.manage', [
             'project' => $project,
+            'images'  => $images
         ]);
     }
 
