@@ -25,13 +25,13 @@ if (!function_exists('manager_cache_bust')) {
     /**
      * Return the versioned asset file for given file.
      *
-     * @param  string $path     Unversioned file path.
-     * @param  string $jsonData Json object.
-     * @param  string $root     Location of files in /public.
+     * @param string $path     Unversioned file path.
+     * @param string $jsonData Json object.
+     * @param string $root     Location of files in /public.
      *
      * @return string
      */
-    function manager_cache_bust($path,  $jsonData = null, $root = 'vendor/larafolio/')
+    function manager_cache_bust($path, $jsonData = null, $root = 'vendor/larafolio/')
     {
         $path = trim($path, '/');
 
