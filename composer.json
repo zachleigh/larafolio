@@ -49,9 +49,6 @@
     },
 
     "scripts": {
-        "post-package-update": [
-            "php artisan vendor:publish --provider='Larafolio\\LarafolioServiceProvider' --tag=public --force"
-        ],
         "test": [
             "phpunit",
             "codecept run acceptance"
