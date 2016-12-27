@@ -56,10 +56,10 @@ class TextBlocksCest
         $I->amOnAddPage($I);
         $I->click('#addBlock');
         $I->fillForm($I, $data);
-        $I->see('Project description');
-        $I->see('Project info');
+        $I->seeElement('#text0');
+        $I->seeElement('#text1');
         $I->removeBlock($I, '#delete1');
-        $I->dontSee('Project info');
+        $I->dontSeeElement('#text1');
     }
 
     public function user_can_add_and_remove_blocks_like_crazy(AcceptanceTester $I)
@@ -69,43 +69,43 @@ class TextBlocksCest
         $I->amOnAddPage($I);
         // fill 0
         $I->fillField(['name' => 'text0'], 'block0');
-        $I->see('block0');
+        $I->seeInFormFields('.form', ['text0' => 'block0']);
         // add and fill 1
         $I->click('#addBlock');
         $I->fillField(['name' => 'text1'], 'block1');
-        $I->see('block1');
+        $I->seeInFormFields('.form', ['text1' => 'block1']);
         // add and fill 2
         $I->click('#addBlock');
         $I->fillField(['name' => 'text2'], 'block2');
-        $I->see('block2');
+        $I->seeInFormFields('.form', ['text2' => 'block2']);
         // delete 1
         $I->removeBlock($I, '#delete1');
-        $I->dontSee('block1');
+        $I->seeInFormFields('.form', ['text1' => 'block2']);
         // add and fill 3
         $I->click('#addBlock');
         $I->fillField(['name' => 'text2'], 'block3');
-        $I->see('block3');
+        $I->seeInFormFields('.form', ['text2' => 'block3']);
         // delete 0
         $I->removeBlock($I, '#delete0');
-        $I->dontSee('block0');
+        $I->seeInFormFields('.form', ['text0' => 'block2']);
         // add and fill 4
         $I->click('#addBlock');
         $I->fillField(['name' => 'text2'], 'block4');
-        $I->see('block4');
+        $I->seeInFormFields('.form', ['text2' => 'block4']);
         // add and fill 5
         $I->click('#addBlock');
         $I->fillField(['name' => 'text3'], 'block5');
-        $I->see('block5');
+        $I->seeInFormFields('.form', ['text3' => 'block5']);
         // delete 5
         $I->removeBlock($I, '#delete3');
-        $I->dontSee('block5');
+        $I->dontSeeElement('#text3');
         // add and fill 6
         $I->click('#addBlock');
         $I->fillField(['name' => 'text3'], 'block6');
-        $I->see('block6');
-        $I->see('block2');
-        $I->see('block3');
-        $I->see('block4');
+        $I->seeInFormFields('.form', ['text3' => 'block6']);
+        $I->seeInFormFields('.form', ['text0' => 'block2']);
+        $I->seeInFormFields('.form', ['text1' => 'block3']);
+        $I->seeInFormFields('.form', ['text2' => 'block4']);
     }
 
     public function user_can_move_text_block_up(AcceptanceTester $I)
