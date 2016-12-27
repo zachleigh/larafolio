@@ -29,7 +29,7 @@ class ProjectImageController extends Controller
 
         return view('larafolio::images.manage', [
             'project' => $project,
-            'images'  => $images
+            'images'  => $images,
         ]);
     }
 
