@@ -1305,6 +1305,20 @@ a {
     justify-content: space-between;
     margin-left: 15px;
     width: 100%; }
+  @media only screen and (max-width: 800px) {
+    .image-tile__body {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      flex-direction: column;
+      height: auto; }
+    .image-tile__container {
+      -webkit-box-pack: center;
+      justify-content: center; }
+    .image-tile__form-section {
+      margin-top: 10px; }
+    .image-tile__right {
+      width: auto;
+      margin-left: 0; } }
 
 .black-icon {
   cursor: pointer; }

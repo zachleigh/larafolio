@@ -12,7 +12,7 @@
                 <h1 class="top__title">Manage Images</h1>
             </div>
         </div>
-        <div class="project__main">
+        <div class="project__main image-tile__container">
             @if ($project->images->isEmpty())
                 <h3>No Current Images</h3>
             @endif

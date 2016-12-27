@@ -42,3 +42,19 @@
         justify-content: space-between
         margin-left: 15px
         width: 100%
+
+    +tiny()
+
+        +ele(body)
+            flex-direction: column
+            height: auto
+
+        +ele(container)
+            justify-content: center
+
+        +ele(form-section)
+            margin-top: 10px
+
+        +ele(right)
+            width: auto
+            margin-left: 0
