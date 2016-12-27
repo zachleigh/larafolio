@@ -72,9 +72,14 @@ class Acceptance extends \Codeception\Module
      *
      * @param \AcceptanceTester $I
      */
-    public function login(\AcceptanceTester $I)
+    public function login(\AcceptanceTester $I, $size = 'max')
     {
-        $I->maximizeWindow();
+        if ($size === 'max') {
+            $I->maximizeWindow();
+        } elseif ($size === 'mobile') {
+            $I->resizeWindow(400,700);
+        }
+        
         $I->amOnPage('/login');
     }
 

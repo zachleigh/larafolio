@@ -20,9 +20,7 @@ class ImagesCest
     public function user_can_update_image_name_caption_and_alt(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
-
         $image = $I->getImageFromProjectArray($project);
-
         $id = $image->id();
 
         $data = [
@@ -49,9 +47,7 @@ class ImagesCest
     public function user_can_remove_an_image(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
-
         $image = $I->getImageFromProjectArray($project);
-
         $id = $image->id();
 
         $I->wantTo('Remove an image from a project.');

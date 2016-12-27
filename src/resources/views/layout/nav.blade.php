@@ -1,9 +1,9 @@
-<div class="nav__toggle" @click.prevent="toggleMenu">
+<div id="openMenu" class="nav__toggle" @click.prevent="toggleMenu">
     {!! file_get_contents(public_path('vendor/larafolio/zondicons/menu.svg')) !!}
 </div>
 <transition name="slide" v-cloak>
     <nav class="nav" v-show="menuVisible">
-        <div class="nav__toggle" @click.prevent="toggleMenu">
+        <div id="closeMenu" class="nav__toggle" @click.prevent="toggleMenu">
             {!! file_get_contents(public_path('vendor/larafolio/zondicons/menu.svg')) !!}
         </div>
         <div class="nav__section nav__left">

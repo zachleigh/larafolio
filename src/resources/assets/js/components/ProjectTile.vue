@@ -55,6 +55,7 @@
                     </div>
                     <div>
                         <a
+                            :id="elementId('manage')"
                             class="button button--primary"
                             v-bind:href="link"
                         >
