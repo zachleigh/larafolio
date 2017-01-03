@@ -460,7 +460,7 @@
 
                     this.heights[id] = section.offsetTop;
 
-                    this.setMarginBottom(section, display);
+                    this.setPaddingBottom(section, display);
                 }
             },
 
@@ -478,21 +478,21 @@
             },
 
             /**
-             * Set the bottom margin on a form element if the corresponding
+             * Set the bottom padding on a form element if the corresponding
              * display element is longer.
              *
              * @param {Element} section Form section element.
              * @param {Element} display Display element.
              */
-            setMarginBottom (section, display) {
+            setPaddingBottom (section, display) {
                 let sectionHeight = section.offsetHeight;
 
                 let displayHeight = display.offsetHeight;
 
-                let difference = displayHeight - sectionHeight - 15;
+                let difference = displayHeight - sectionHeight + 30;
 
                 if (displayHeight > sectionHeight && difference > 15) {
-                    section.style.marginBottom = difference + 'px';
+                    section.style.paddingBottom = difference + 'px';
                 }
             },
 

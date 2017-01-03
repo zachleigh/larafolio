@@ -773,6 +773,7 @@ a:hover {
 
 .nav__center svg, .nav__center svg g {
   height: 30px;
+  width: 30px;
 }
 
 .nav__dropdown {
