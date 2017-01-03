@@ -302,6 +302,15 @@ a:hover {
   border-bottom: 1px solid #4390ad;
 }
 
+.nav__center {
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.nav__center svg, .nav__center svg g {
+  height: 30px;
+}
+
 .nav__dropdown {
   position: relative;
   display: inline-block;
@@ -387,9 +396,16 @@ a:hover {
   text-decoration: none;
 }
 
+.nav__right {
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+}
+
 .nav__section {
   display: -webkit-box;
   display: flex;
+  -webkit-box-flex: 1;
+  flex: 1 0;
 }
 
 .nav__toggle {
@@ -414,6 +430,10 @@ a:hover {
     padding: 50px 0 0;
     box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   }
+  .nav__center {
+    -webkit-box-ordinal-group: 1;
+    order: 0;
+  }
   .nav__dropdown-content {
     top: 0;
     left: 120px;
@@ -424,12 +444,20 @@ a:hover {
     -webkit-box-direction: normal;
     flex-direction: column;
     align-self: flex-start;
+    -webkit-box-ordinal-group: 2;
+    order: 1;
   }
   .nav__right {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
     align-self: flex-start;
+    -webkit-box-ordinal-group: 3;
+    order: 2;
+  }
+  .nav__section {
+    -webkit-box-flex: 0;
+    flex: 0 1 auto;
   }
   .nav__toggle {
     display: block;

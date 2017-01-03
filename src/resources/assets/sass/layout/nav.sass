@@ -9,6 +9,13 @@ $mobileNavLeft: $mobileNavWidth + 10px
     background-color: $white
     border-bottom: 1px solid $primaryColor
 
+    +ele(center)
+        justify-content: center
+
+        & svg, svg g
+            height: 30px
+            width: 30px
+
     +ele(dropdown)
         position: relative
         display: inline-block
@@ -74,8 +81,12 @@ $mobileNavLeft: $mobileNavWidth + 10px
         &:hover
             text-decoration: none
 
+    +ele(right)
+        justify-content: flex-end
+
     +ele(section)
         display: flex
+        flex: 1 0
 
     +ele(toggle)
         display: none
@@ -93,6 +104,9 @@ $mobileNavLeft: $mobileNavWidth + 10px
         padding: 50px 0 0
         +card(1)
 
+        +ele(center)
+            order: 0
+
         +ele(dropdown-content)
             top: 0
             left: 120px
@@ -101,10 +115,15 @@ $mobileNavLeft: $mobileNavWidth + 10px
         +ele(left)
             flex-direction: column
             align-self: flex-start
+            order: 1
 
         +ele(right)
             flex-direction: column
             align-self: flex-start
+            order: 2
+
+        +ele(section)
+            flex: 0 1 auto
 
         +ele(toggle)
             display: block

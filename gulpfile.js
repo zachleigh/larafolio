@@ -16,6 +16,7 @@ elixir((mix) => {
         ], './dist/')
         .browserSync({open: false, proxy: 'http://localhost:8000/', notify: false})
         .copy('./dist/css', 'vendor/laravel/laravel/public/vendor/larafolio/css')
+        .copy('./dist/images', 'vendor/laravel/laravel/public/vendor/larafolio/images')
         .copy('./dist/js', 'vendor/laravel/laravel/public/vendor/larafolio/js')
         .copy('./dist/rev-manifest.json', 'vendor/laravel/laravel/public/vendor/larafolio/rev-manifest.json');
 });

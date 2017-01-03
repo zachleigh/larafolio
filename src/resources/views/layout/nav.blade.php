@@ -52,6 +52,9 @@
                 @endif
             @endif
         </div>
+        <div class="nav__section nav__center">
+            {!! file_get_contents(public_path('vendor/larafolio/images/logo.svg')) !!}
+        </div>
         <div class="nav__section nav__right">
             @if (Auth::check())
                 <a href="/logout" class="nav__item">
