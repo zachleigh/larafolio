@@ -126,4 +126,24 @@ class ImagesCest
         $I->amOnPage('/manager');
         $I->seeElement('//img[@src="'.$image->small().'"]');
     }
+
+    public function message_displayed_when_project_has_no_images(AcceptanceTester $I)
+    {
+        $I->wantTo('Verify that a message is displayed when no project has no images.');
+        $I->login($I);
+        $project = $I->addProject($I);
+        $I->amOnProjectPage($I, $project);
+        $I->see('This project has no images');
+    }
+
+    public function no_images_message_is_hidden_when_image_added(AcceptanceTester $I)
+    {
+        $I->wantTo('Verify that the no images message is hidden when a image is added.');
+        $I->login($I);
+        $project = $I->addProject($I);
+        $I->amOnProjectPage($I, $project);
+        $I->see('This project has no images');
+        $I->addImage($I, $project);
+        $I->dontSee('This project has no images');
+    }
 }

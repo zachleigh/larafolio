@@ -42,7 +42,7 @@ class Acceptance extends \Codeception\Module
     ) {
         $order = $order === null ? rand(1, 10) : $order;
 
-        $id = $I->haveRecord('projects', [
+        $project = Project::create([
             'name'        => $name,
             'description' => $description,
             'info'        => $info,

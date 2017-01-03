@@ -1562,6 +1562,11 @@ a:hover {
   border: 1px solid #c8c8c8;
 }
 
+.image-manager__message {
+  text-align: center;
+  margin-top: 40px;
+}
+
 .image-tile {
   position: relative;
   display: -webkit-box;

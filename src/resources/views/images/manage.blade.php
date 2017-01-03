@@ -13,9 +13,6 @@
             </div>
         </div>
         <div class="project__main image-tile__container">
-            @if ($project->images->isEmpty())
-                <h3>No Current Images</h3>
-            @endif
             <image-manager
                 action="{{ route('store-image', ['project' => $project]) }}"
                 fetch-action="{{ route('show-images', ['project' => $project]) }}"

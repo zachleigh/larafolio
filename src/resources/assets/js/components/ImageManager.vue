@@ -40,6 +40,12 @@
         >
             <input type="hidden" name="_token" v-bind:value="token">
         </form>
+        <h3 
+            class="image-manager__message"
+            v-show="!hasImages"
+        >
+            This project has no images
+        </h3>
         <div class="image-manager__images">
             <image-tile
                 v-for="image in passedImages"
@@ -135,6 +141,15 @@
                 if (this.currentImage) {
                     return this.currentImage.thumbnail;
                 }
+            },
+
+            /**
+             * Return true if project hass images.
+             *
+             * @return {Boolean}
+             */
+            hasImages () {
+                return this.passedImages.length > 0;
             }
         },
 
