@@ -873,7 +873,7 @@ a:hover {
     align-items: flex-end;
     width: 150px;
     height: 100%;
-    z-index: 10;
+    z-index: 100;
     border-bottom: 0;
     padding: 50px 0 0;
     box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
