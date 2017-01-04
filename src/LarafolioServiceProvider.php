@@ -16,7 +16,12 @@ class LarafolioServiceProvider extends BaseProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'Larafolio\Http\HttpValidator\HttpValidator',
+            'Larafolio\Http\HttpValidator\CurlValidator'
+        );
+
+        $this->app->register(ImageServiceProvider::class);
     }
 
     /**
@@ -51,7 +56,5 @@ class LarafolioServiceProvider extends BaseProvider
                 PublishSeeds::class,
             ]);
         }
-
-        $this->app->register(ImageServiceProvider::class);
     }
 }

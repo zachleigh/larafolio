@@ -4,6 +4,7 @@ namespace Larafolio\Http\Controllers;
 
 use Larafolio\Models\Link;
 use Illuminate\Http\Request;
+use Larafolio\Http\HttpValidator\HttpValidator;
 
 class LinkController extends Controller
 {
@@ -22,31 +23,18 @@ class LinkController extends Controller
     }
 
     /**
-     * Check the status of a url and return json http code.
+     * Check the status of a link and return json http code.
      *
-     * @param Request $request Http request with 'url'.
+     * @param Request       $request       Http request with 'url'.
+     * @param HttpValidator $httpValidator Instance of http validator class.
      *
      * @return \Illuminate\Http\Response
      */
-    public function check(Request $request)
+    public function check(Request $request, HttpValidator $httpValidator)
     {
         $url = $request->input('url');
 
-        $handle = curl_init($url);
-
-        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($handle, CURLOPT_NOBODY, true);
-
-        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-
-        curl_setopt($handle, CURLOPT_TIMEOUT, 10);
-
-        $response = curl_exec($handle);
-
-        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
-        curl_close($handle);
+        $httpCode = $httpValidator->validate($url);
 
         return response()->json(['httpCode' => $httpCode]);
     }
