@@ -924,7 +924,7 @@ a:hover {
 
 .text-block {
   border-bottom: 1px solid #c8c8c8;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 
 .text-block__control {
@@ -970,6 +970,12 @@ a:hover {
 
 .text-block__fields {
   margin-left: 15px;
+}
+
+.text-block__md-message {
+  font-size: .7em;
+  text-align: right;
+  margin-top: 2px;
 }
 
 .link {

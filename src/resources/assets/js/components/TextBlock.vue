@@ -49,6 +49,14 @@
                 placeholder="Text"
                 v-bind:class="{ form__errored: errored() }"
             ></textarea>
+            <div class="text-block__md-message">
+                <a
+                    href="https://jonschlinkert.github.io/remarkable/demo/"
+                    target="_blank"
+                >
+                    Markdown Supported
+                </a>
+            </div>
         </div>
     </div>
 </template>
