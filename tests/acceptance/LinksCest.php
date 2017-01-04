@@ -286,4 +286,31 @@ class LinksCest
         $I->dontSee($data['url0']);
         $I->dontSee($data['url1']);
     }
+
+    public function link_validation_works(AcceptanceTester $I)
+    {
+        $data = [
+            'name'      => 'Project Name',
+            'url0'      => 'http://httpstat.us/200',
+            'url1'      => 'http://httpstat.us/302',
+            'url2'      => 'http://httpstat.us/404',
+            'url3'      => 'http://httpstat.us/500',
+            'text0'     => 'Project description'
+        ];
+
+        $I->wantTo('Save a link when a new project is added.');
+        $I->login($I);
+        $I->amOnAddPage($I);
+        $I->click('#addLink');
+        $I->click('#addLink');
+        $I->click('#addLink');
+        $I->fillForm($I, $data);
+        $I->click('Add Project');
+        $I->wait(1);
+        $I->seeCurrentUrlEquals('/manager/project_name');
+        $I->waitForElement('.redDot');
+        $I->seeElement('.greenDot');
+        $I->seeElement('.limeDot');
+        $I->seeElement('.redDot');        
+    }
 }
