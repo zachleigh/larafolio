@@ -298,7 +298,7 @@ class LinksCest
             'text0'     => 'Project description'
         ];
 
-        $I->wantTo('Save a link when a new project is added.');
+        $I->wantTo('Validate a links status.');
         $I->login($I);
         $I->amOnAddPage($I);
         $I->click('#addLink');

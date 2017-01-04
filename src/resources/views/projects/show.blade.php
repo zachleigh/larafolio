@@ -53,6 +53,7 @@
                             </div>
                             <link-status
                                 url="{{ $link->url() }}"
+                                :check="{{ json_encode(config('larafolio.url_validation')) }}"
                             >
                             </link-status>
                         </div>

@@ -48,6 +48,10 @@ class LarafolioServiceProvider extends BaseProvider
         ], 'public');
 
         $this->publishes([
+            __DIR__.'/config/larafolio.php' => config_path('larafolio.php'),
+        ]);
+
+        $this->publishes([
             __DIR__.'/config/imagecache.php' => config_path('imagecache.php'),
         ]);
 

@@ -41,8 +41,8 @@ class CurlValidator implements HttpValidator
 
         curl_setopt($handle, CURLOPT_NOBODY, true);
 
-        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 3);
 
-        curl_setopt($handle, CURLOPT_TIMEOUT, 10);
+        curl_setopt($handle, CURLOPT_TIMEOUT, 5);
     }
 }

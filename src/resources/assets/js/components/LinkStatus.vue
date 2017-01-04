@@ -17,19 +17,53 @@
 
         data () {
             return {
+                /**
+                 * The link status.
+                 */
                 status: null,
 
-                statusFirst: 0
+                /**
+                 * The first number of the http status code.
+                 */
+                statusFirst: 0,
+
+                exceptions: [
+                    'http://httpstat.us/200',
+                    'http://httpstat.us/302',
+                    'http://httpstat.us/404',
+                    'http://httpstat.us/500',
+                ]
             }
         },
 
         props: {
+            /**
+             * The url to validate.
+             */
             url: {
                 type: String
+            },
+
+            /**
+             * If true, check the validity of the url.
+             */
+            check: {
+                type: Boolean,
+                default: false
             }
         },
 
         computed: {
+            shouldCheck () {
+                let isException = this.exceptions.indexOf(this.url);
+
+                if (isException !== -1 || this.check) {
+                    return true;
+                }
+
+                return false;
+            },
+
             colorClass () {
                 if (this.status === null) {
                     return 'greyDot';
@@ -44,10 +78,15 @@
         },
 
         created () {
-            this.checkStatus();
+            if (this.shouldCheck) {
+                this.checkStatus();
+            }
         },
 
         methods: {
+            /**
+             * Fire ajax request to server to check url status.
+             */
             checkStatus () {
                 this.ajax.post('/manager/links/check', {
                     url: this.url
