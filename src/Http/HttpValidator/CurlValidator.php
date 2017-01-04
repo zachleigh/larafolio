@@ -37,7 +37,7 @@ class CurlValidator implements HttpValidator
      */
     protected function setCurlOptions($handle)
     {
-        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($handle, CURLOPT_NOBODY, true);
 
