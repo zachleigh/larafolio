@@ -554,10 +554,11 @@ a:hover {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   flex-direction: column;
-  background-color: #5a5a5a;
+  background-color: white;
   height: 210px;
   margin-top: auto;
-  color: white;
+  color: #5a5a5a;
+  border-top: 1px solid #c8c8c8;
 }
 
 .footer__bottom {
@@ -569,7 +570,7 @@ a:hover {
   align-items: center;
   margin-top: auto;
   height: 30px;
-  background-color: #4390ad;
+  background-color: #5a5a5a;
 }
 
 .footer__bottom-link {
@@ -595,7 +596,7 @@ a:hover {
 }
 
 .footer__link {
-  color: white;
+  color: #4390ad;
 }
 
 .footer__links {
