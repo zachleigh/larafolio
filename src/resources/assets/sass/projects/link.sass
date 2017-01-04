@@ -1,3 +1,5 @@
+$statusSize: 12px
+
 .link
     border-bottom: $border
     padding-bottom: 15px
@@ -11,6 +13,17 @@
 
     +ele(fields)
         margin-left: 15px
+
+    +ele(status)
+        display: inline-block
+        width: $statusSize
+        height: $statusSize
+        border-radius: 100px
+        margin: 0 5px
+
+    +ele(status-wrapper)
+        display: flex
+        align-items: center
     
     +ele(text)
         margin-bottom: 5px

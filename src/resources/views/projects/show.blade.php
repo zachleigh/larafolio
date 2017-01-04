@@ -51,6 +51,10 @@
                                     {{ $link->url() }}
                                 </a>
                             </div>
+                            <link-status
+                                url="{{ $link->url() }}"
+                            >
+                            </link-status>
                         </div>
                     @endforeach
                 </section>
