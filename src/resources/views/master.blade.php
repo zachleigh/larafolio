@@ -13,6 +13,8 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
+
+        <link href="https://fonts.googleapis.com/css?family=Nova+Script" rel="stylesheet"> 
         
         <link rel="stylesheet" href="{{ manager_cache_bust('vendor/larafolio/css/larafolio-final.css') }}">
     </head>

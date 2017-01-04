@@ -310,6 +310,7 @@ a:hover {
 .nav__center svg, .nav__center svg g {
   height: 30px;
   width: 30px;
+  fill: #4390ad;
 }
 
 .nav__dropdown {
@@ -529,9 +530,66 @@ a:hover {
 }
 
 .footer {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
   background-color: #5a5a5a;
-  height: 100px;
+  height: 210px;
   margin-top: auto;
+  color: white;
+}
+
+.footer__bottom {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: auto;
+  height: 30px;
+  background-color: #4390ad;
+}
+
+.footer__bottom-link {
+  color: white;
+}
+
+.footer__brand {
+  font-size: 1.7em;
+  font-family: 'Nova Script', cursive;
+}
+
+.footer__larafolio {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.footer__link {
+  color: white;
+}
+
+.footer__links {
+  display: -webkit-box;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.footer__logo svg, .footer__logo svg g {
+  height: 50px;
+  width: 50px;
+  fill: #4390ad;
 }
 
 .lines {

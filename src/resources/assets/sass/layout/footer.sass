@@ -1,4 +1,50 @@
 .footer
+    display: flex
+    flex-direction: column
     background-color: $black
-    height: 100px
+    height: 210px
     margin-top: auto
+    color: $white
+
+    +ele(bottom)
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-top: auto
+        height: 30px
+        background-color: $primaryColor
+
+    +ele(bottom-link)
+        color: $white
+
+    +ele(brand)
+        font-size: 1.7em
+        font-family: 'Nova Script', cursive
+
+    +ele(larafolio)
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-top: 30px
+
+    +ele(link)
+        color: $white
+
+    +ele(links)
+        display: flex
+        justify-content: space-around
+        margin-top: 15px
+
+    +ele(logo)
+
+        & svg, svg g
+            height: 50px
+            width: 50px
+            fill: $primaryColor
+
+            // & rect:nth-child(3), rect:nth-child(7)
+            //     fill: $white
+
+            // & rect:nth-child(2), rect:nth-child(4), rect:nth-child(6), rect:nth-child(8),
+            //     fill: lighten($primaryColor, 20)
