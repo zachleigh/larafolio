@@ -9,7 +9,7 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::patch('/manager', 'Larafolio\Http\Controllers\PortfolioController@update')->name('update-portfolio');
 
-    Route::get('/manager/{project}/edit', 'Larafolio\Http\Controllers\ProjectController@edit')->name('edit-project');
+    Route::get('/manager/{slug}/edit', 'Larafolio\Http\Controllers\ProjectController@edit')->name('edit-project');
 
     Route::patch('/manager/{project}/update', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');
 
@@ -19,7 +19,7 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::post('/manager/{project}/images', 'Larafolio\Http\Controllers\ProjectImageController@store')->name('store-image');
 
-    Route::get('/manager/{project}', 'Larafolio\Http\Controllers\ProjectController@show')->name('show-project');
+    Route::get('/manager/{slug}', 'Larafolio\Http\Controllers\ProjectController@show')->name('show-project');
 
     Route::delete('/manager/blocks/{block}', 'Larafolio\Http\Controllers\TextBlockController@destroy')->name('remove-block');
 
