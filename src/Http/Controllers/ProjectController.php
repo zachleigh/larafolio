@@ -41,7 +41,11 @@ class ProjectController extends Controller
      */
     public function show($slug)
     {
-        $project = Project::withBlocks($slug);
+        $project = Project::withBlocks($slug)->first();
+
+        if (!$project) {
+            abort(404, "No project with slug {$slug} found.");
+        }
 
         $images = $project->imagesWithProps();
 
@@ -88,7 +92,7 @@ class ProjectController extends Controller
      */
     public function edit($slug)
     {
-        $project = Project::full($slug);
+        $project = Project::full($slug)->first();
 
         $nextBlock = $project->blocks->pluck('order')->max() + 1;
 

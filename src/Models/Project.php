@@ -518,8 +518,7 @@ class Project extends Model
     public function scopeWithBlocks($query, $slug)
     {
         return $query->orderRelationship('blocks')
-            ->where('slug', $slug)
-            ->first();
+            ->where('slug', $slug);
     }
 
     /**
@@ -534,8 +533,7 @@ class Project extends Model
     {
         return $query->orderRelationship('blocks')
             ->orderRelationship('links')
-            ->where('slug', $slug)
-            ->first();
+            ->where('slug', $slug);
     }
 
     /**
