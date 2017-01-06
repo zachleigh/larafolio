@@ -1,6 +1,7 @@
 var Remarkable = require('remarkable');
 var md = new Remarkable({
-    linkify: true
+    linkify: true,
+    html: true
 });
 
 export default {
