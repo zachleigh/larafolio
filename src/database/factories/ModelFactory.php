@@ -13,7 +13,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Larafolio\Models\Project::class, function (Faker\Generator $faker) {
-    $name = $faker->unique()->string;
+    $name = str_random(30);
 
     $types = ['web', 'github', 'volunteer'];
 
