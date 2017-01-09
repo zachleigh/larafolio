@@ -1,34 +1,6 @@
 <template>
     <div class="project-form content">
         <modal
-            :show="showRemoveBlockModal"
-            :icons="icons"
-            @close="showRemoveBlockModal = false"
-        >
-            <h3 slot="header">
-                Sanity Check
-            </h3>
-                <p slot="body">
-                    Remove this text block and loose all changes?
-                </p>
-                <div slot="footer">
-                    <div class="modal__buttons">
-                        <button
-                            class="button button--secondary"
-                            @click.prevent="showRemoveBlockModal = false"
-                        >
-                            Don't Remove
-                        </button>
-                        <button
-                            class="button button--primary"
-                            @click.prevent="removeBlock"
-                        >
-                            Remove Block
-                        </button>
-                    </div>
-                </div>
-        </modal>
-        <modal
             :show="showRemoveLinkModal"
             :icons="icons"
             @close="showRemoveLinkModal = false"
@@ -120,18 +92,12 @@
                         >+</button>
                     </div>
                     <h3 class="project-form__section-header">Text Blocks</h3>
-                    <text-block
-                        v-for="(block, index) in blocks"
-                        :key="block.id"
-                        :index="index"
-                        :block="block"
-                        :errors="errors"
+                    <blocks
+                        :passedBlocks="blocks"
+                        :nextBlockOrder="nextBlockOrder"
                         :icons="icons"
-                        @up="moveBlockUp"
-                        @down="moveBlockDown"
-                        @remove="toggleRemoveBlockModal"
-                        @blockInput="updateBlocks"
-                    ></text-block>
+                        @change="updateBlocks"
+                    ></blocks>
                     <div class="form__button-row">
                         <div v-show="type === 'add'">
                             <button
@@ -156,13 +122,6 @@
                             >
                                 Finished
                             </a>
-                        </div>
-                        <div class="project-form__section-controls">
-                            <button
-                                id="addBlock"
-                                class="button button--secondary button--icon"
-                                @click.prevent="addBlock"
-                            >+</button>
                         </div>
                     </div>
                     <div class="form__errors" v-for="formField in errors">
@@ -218,15 +177,15 @@
 
 <script>
     import Ajax from './../mixins/Ajax.js';
+    import Blocks from './Blocks.vue';
     import Flash from './../mixins/Flash.js';
     import FormErrors from './../mixins/FormErrors.js';
     import Helpers from './../mixins/Helpers.js';
     import Modal from './Modal.vue';
     import ProjectLink from './ProjectLink.vue';
-    import TextBlock from './TextBlock.vue';
 
     export default {
-        components: { Modal, ProjectLink, TextBlock },
+        components: { Blocks, Modal, ProjectLink },
 
         mixins: [ Ajax, Flash, FormErrors, Helpers ],
 
@@ -268,13 +227,6 @@
                 componentChanged: false,
 
                 /**
-                 * Next block order value.
-                 *
-                 * @type {Number}
-                 */
-                nextBlock: 0,
-
-                /**
                  * Next link id.
                  *
                  * @type {Number}
@@ -289,25 +241,11 @@
                 heights: {},
 
                 /**
-                 * The currently selected block, if any.
-                 *
-                 * @type {String}
-                 */
-                currentBlock: '',
-
-                /**
                  * The currently selected link, if any.
                  *
                  * @type {String}
                  */
                 currentLink: '',
-
-                /**
-                 * If true, show the remove block modal.
-                 *
-                 * @type {Boolean}
-                 */
-                showRemoveBlockModal: false,
 
                 /**
                  * If true, show the remove link modal.
@@ -408,15 +346,9 @@
         },
 
         created () {
-            if (typeof this.nextBlockOrder !== 'undefined') {
-                this.nextBlock = this.nextBlockOrder;
-            }
-
             if (typeof this.nextLinkOrder !== 'undefined') {
                 this.nextLink = this.nextLinkOrder;
             }
-   
-            this.addBlock();
 
             this.addLink();
 
@@ -485,14 +417,16 @@
              * @param {Element} display Display element.
              */
             setPaddingBottom (section, display) {
-                let sectionHeight = section.offsetHeight;
+                if (section && display) {
+                    let sectionHeight = section.offsetHeight;
 
-                let displayHeight = display.offsetHeight;
+                    let displayHeight = display.offsetHeight;
 
-                let difference = displayHeight - sectionHeight + 30;
+                    let difference = displayHeight - sectionHeight + 30;
 
-                if (displayHeight > sectionHeight && difference > 15) {
-                    section.style.paddingBottom = difference + 'px';
+                    if (displayHeight > sectionHeight && difference > 15) {
+                        section.style.paddingBottom = difference + 'px';
+                    }
                 }
             },
 
@@ -567,95 +501,14 @@
             },
 
             /**
-             * Add a new text block to the project.
-             */
-            addBlock () {
-                this.blocks.push({
-                    order: this.nextBlock,
-                    id: this.nextBlock++
-                });
-            },
-
-            /**
              * Update currentBlock in the blocks array.
              *
              * @param  {Object} currentBlock The block that was updated.
              */
-            updateBlocks (currentBlock) {
-                let index = currentBlock.index;
-
-                this.blocks.splice(index, 1, currentBlock);
+            updateBlocks (blocks) {
+                this.blocks = blocks;
 
                 this.componentChanged = true;
-            },
-
-            /**
-             * Move current block up one position in list.
-             *
-             * @param  {Number} index Index of block object to move.
-             */
-            moveBlockUp (index) {
-                this.componentChanged = true;
-
-                if (index > 0) {
-                    let block = this.blocks.splice(index, 1);
-
-                    this.blocks.splice(index - 1, 0, block[0]); 
-                }
-            },
-
-            /**
-             * Move current block down one position in list.
-             *
-             * @param  {Number} index Index of block object to move.
-             */
-            moveBlockDown (index) {
-                this.componentChanged = true;
-
-                let block = this.blocks.splice(index, 1);
-
-                this.blocks.splice(index + 1, 0, block[0]);
-            },
-
-            /**
-             * Set currentBlock and show remove block confirmation modal.
-             *
-             * @param  {Object} currentBlock Block object received through event.
-             */
-            toggleRemoveBlockModal (currentBlock) {
-                this.currentBlock = currentBlock;
-
-                this.showRemoveBlockModal = !this.showRemoveBlockModal;
-            },
-
-            /**
-             * Remove a block from the blocks list.
-             */
-            removeBlock () {
-                if (typeof this.currentBlock.project_id !== 'undefined') {
-                    this.destroyBlock(this.currentBlock.id);
-                }
-
-                this.showRemoveBlockModal = false;
-                
-                let index = this.currentBlock.index;
-
-                this.blocks.splice(index, 1);
-            },
-
-            /**
-             * Make ajax call to server to remove block.
-             *
-             * @param  {Number} id Id of text block to remove.
-             */
-            destroyBlock (id) {
-                this.ajax.delete('/manager/blocks/'+id)
-                .then(function (response) {
-                    // console.log(response.data);
-                })
-                .catch(function (error) {
-                    this.errors = error.data;
-                });
             },
 
             /**

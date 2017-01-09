@@ -1,5 +1,6 @@
 require('./bootstrap');
 
+Vue.component('blocks', require('./components/Blocks.vue'));
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('flash-message', require('./components/FlashMessage.vue'));
 Vue.component('image-manager', require('./components/ImageManager.vue'));
