@@ -54,6 +54,9 @@
         </div>
         <div class="nav__section nav__center">
             {!! file_get_contents(public_path('vendor/larafolio/images/logo.svg')) !!}
+            <div class="nav__brand">
+                Larafoilo
+            </div>
         </div>
         <div class="nav__section nav__right">
             @if (Auth::check())
