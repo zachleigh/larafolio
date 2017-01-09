@@ -829,7 +829,8 @@ a:hover {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  height: 40px;
+  min-height: 30px;
+  padding: 5px 0;
   color: #4390ad;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
