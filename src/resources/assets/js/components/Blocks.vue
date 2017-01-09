@@ -1,5 +1,5 @@
 <template>
-    <div class="project-form content">
+    <div>
         <modal
             :show="showRemoveBlockModal"
             :icons="icons"
@@ -53,16 +53,13 @@
 
 <script>
     import Ajax from './../mixins/Ajax.js';
-    import Flash from './../mixins/Flash.js';
-    import FormErrors from './../mixins/FormErrors.js';
-    import Helpers from './../mixins/Helpers.js';
     import Modal from './Modal.vue';
     import TextBlock from './TextBlock.vue';
 
     export default {
         components: { Modal, TextBlock },
 
-        mixins: [ Ajax, Flash, FormErrors, Helpers ],
+        mixins: [ Ajax ],
 
         data: function () {
             return {
@@ -231,7 +228,7 @@
                     // console.log(response.data);
                 })
                 .catch(function (error) {
-                    this.errors = error.data;
+                    // this.errors = error.data;
                 });
             },
         }
