@@ -94,41 +94,32 @@
                 <div class="project-form__preview placeholder">
                     Live Preview
                 </div>
-                <h2
-                    id="displayName"
-                    class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('name', 4) }"
-                >
-                    {{ name }}
-                </h2>
-                <div
-                    id="displayProjectType"
-                    class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('projectType', 6) }"
-                >
-                    {{ projectType }}
-                </div>
-                <div
+                <name-preview
+                    :name="name"
+                    :height="getHeight('name')"
+                ></name-preview>
+                <type-preview
+                    :type="projectType"
+                    :height="getHeight('projectType')"
+                ></type-preview>
+                <link-preview
                     v-for="(link, index) in links"
                     :key="link.id"
                     :id="'displayLink' + index"
-                    class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('link' + index, 4) }"
+                    :link="link"
+                    :height="getHeight('link' + index)"
                 >
-                    <div class="link__display-text" v-html="link.text"></div>
-                    <a v-bind:href="link.url">
-                        {{ link.url }}
-                    </a>
-                </div>
-                <div
+                    {{ }}
+                </link-preview>
+                <block-preview
                     v-for="(block, index) in blocks"
                     :key="block.id"
-                    v-bind:id="'displayBlock' + index"
-                    class="project-form__display-area"
-                    v-bind:style="{ top: getHeight('block' + index, 4) }"
-                    v-html="block.formatted_text"
+                    :id="'displayBlock' + index"
+                    :block="block"
+                    :height="getHeight('block' + index)"
                 >
-                </div>
+                    {{ }}
+                </block-preview>
             </div>
         </div>
     </div>
@@ -136,16 +127,13 @@
 
 <script>
     import Ajax from './../mixins/Ajax.js';
-    import Blocks from './Blocks.vue';
     import Flash from './../mixins/Flash.js';
     import FormErrors from './../mixins/FormErrors.js';
+    import FormPreview from './../mixins/FormPreview.js';
     import Helpers from './../mixins/Helpers.js';
-    import Links from './Links.vue';
 
     export default {
-        components: { Blocks, Links },
-
-        mixins: [ Ajax, Flash, FormErrors, Helpers ],
+        mixins: [ Ajax, Flash, FormErrors, FormPreview, Helpers ],
 
         data: function () {
             return {
@@ -183,13 +171,6 @@
                  * @type {Boolean}
                  */
                 componentChanged: false,
-
-                /**
-                 * Heights of form fields, keyed by id.
-                 *
-                 * @type {Object}
-                 */
-                heights: {},
             }
         },
 
@@ -315,79 +296,6 @@
             },
 
             /**
-             * Set heights for form and display elements.
-             */
-            setHeights () {
-                let sections = document.querySelectorAll('.form__section');
-
-                for (var i = 0; i < sections.length; i++) {
-                    let section = sections[i];
-
-                    var id = section.id;
-
-                    let display = this.getDisplayById(id);
-
-                    this.heights[id] = section.offsetTop;
-
-                    this.setPaddingBottom(section, display);
-                }
-            },
-
-            /**
-             * Get a display element from the form section id.
-             *
-             * @param  {String} id Form section ID.
-             *
-             * @return {Element}
-             */
-            getDisplayById (id) {
-                let displayId = 'display'+this.capitalizeFirstLetter(id);
-
-                return document.getElementById(displayId);
-            },
-
-            /**
-             * Set the bottom padding on a form element if the corresponding
-             * display element is longer.
-             *
-             * @param {Element} section Form section element.
-             * @param {Element} display Display element.
-             */
-            setPaddingBottom (section, display) {
-                if (section && display) {
-                    let sectionHeight = section.offsetHeight;
-
-                    let displayHeight = display.offsetHeight;
-
-                    let difference = displayHeight - sectionHeight + 30;
-
-                    if (displayHeight > sectionHeight && difference > 15) {
-                        section.style.paddingBottom = difference + 'px';
-                    }
-                }
-            },
-
-            /**
-             * Get form element registered from heights object.
-             *
-             * @param  {String}  id       ID of form element.
-             * @param  {Number}  padding  Additional padding if necessary.
-             *
-             * @return {String}    Height in px.
-             */
-            getHeight (id, padding) {
-                this.setHeights();
-
-                padding = typeof padding === 'undefined' ? 0 : padding;
-
-                if (id === 'name' || id === 'projectType') {
-                    return (this.heights[id] + 24 + padding) + 'px';
-                }
-
-                return (this.heights[id] + 46 + padding) + 'px';
-            },
-
-            /**
              * Submit ajax request to add a project.
              */
             addProject () {
@@ -438,7 +346,7 @@
             },
 
             /**
-             * Update currentBlock in the blocks array.
+             * Update blocks array.
              *
              * @param  {Array} blocks Array of updated blocks.
              */
@@ -449,7 +357,7 @@
             },
 
             /**
-             * Update currentLink in the links array.
+             * Update links array.
              *
              * @param  {Array} links Array of updated links.
              */

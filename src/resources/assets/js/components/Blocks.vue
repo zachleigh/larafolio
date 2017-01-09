@@ -28,7 +28,6 @@
                     </div>
                 </div>
         </modal>
-        <h3 class="project-form__section-header">Text Blocks</h3>
         <text-block
             v-for="(block, index) in blocks"
             :key="block.id"

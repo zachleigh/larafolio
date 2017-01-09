@@ -93,7 +93,6 @@
         },
 
         props: {
-
             /**
              * Icons object.
              */
