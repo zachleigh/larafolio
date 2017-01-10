@@ -364,8 +364,6 @@
             updateLinks (links) {
                 this.links = links;
 
-this.resetHeights();
-
                 this.componentChanged = true;
             }
         }

@@ -75,14 +75,6 @@ export default {
             }
         },
 
-        resetHeights () {
-            for (var id in this.heights) {
-                let section = document.querySelector('#'+id);
-
-                this.setSectionHeight(section);
-            }
-        },
-
         /**
          * Get form element registered from heights object.
          *
