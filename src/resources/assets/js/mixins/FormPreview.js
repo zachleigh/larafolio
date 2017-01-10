@@ -18,7 +18,7 @@ export default {
             let sections = document.querySelectorAll('.form__section');
 
             for (var i = 0; i < sections.length; i++) {
-                this.setSingleHeight(sections[i]);
+                this.setSectionHeight(sections[i]);
             }
         },
 
@@ -27,7 +27,7 @@ export default {
          *
          * @param {Element} section Form element to set.
          */
-        setSingleHeight (section) {
+        setSectionHeight (section) {
             var id = section.id;
 
             let display = this.getDisplayById(id);
@@ -72,6 +72,14 @@ export default {
                 if (displayHeight > sectionHeight && difference > 15) {
                     section.style.paddingBottom = difference + 'px';
                 }
+            }
+        },
+
+        resetHeights () {
+            for (var id in this.heights) {
+                let section = document.querySelector('#'+id);
+
+                this.setSectionHeight(section);
             }
         },
 

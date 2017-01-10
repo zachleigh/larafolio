@@ -131,6 +131,8 @@
             if (this.keyExists('text')) {
                 this.text = this.passedBlock.text;
             }
+
+            this.update();
         },
 
         mounted () {

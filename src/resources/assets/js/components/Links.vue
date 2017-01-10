@@ -139,10 +139,12 @@
              * Add a new link to the project.
              */
             addLink () {
-                this.links.push({
+                let link = {
                     order: this.nextLink,
-                    id: this.nextLink++
-                });
+                    id: this.nextLink++,
+                }
+
+                this.links.push(link);
 
                 this.$emit('change', this.links);
             },

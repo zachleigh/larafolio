@@ -120,6 +120,10 @@
             }
         },
 
+        created () {
+            this.update();
+        },
+
         methods: {
             /**
              * Emit event to update the link.
