@@ -4,7 +4,7 @@
         class="project-form__display-area"
         v-bind:style="{ top: top }"
     >
-        {{ name }}
+        <slot></slot>
     </h2>
 </template>
 
@@ -21,8 +21,8 @@
         },
 
         props: {
-            name: {
-                type: String
+            height: {
+                type: Number
             }
         }
     };

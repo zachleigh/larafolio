@@ -95,31 +95,33 @@
                     Live Preview
                 </div>
                 <name-preview
-                    :name="name"
                     :height="getHeight('name')"
-                ></name-preview>
+                >
+                    {{ name }}
+                </name-preview>
                 <type-preview
-                    :type="projectType"
                     :height="getHeight('projectType')"
-                ></type-preview>
+                >
+                    {{ projectType }}
+                </type-preview>
                 <link-preview
                     v-for="(link, index) in links"
                     :key="link.id"
                     :id="'displayLink' + index"
-                    :link="link"
                     :height="getHeight('link' + index)"
                 >
-                    {{ }}
+                    <span slot="text">{{ link.text }}</span>
+                    <a slot="url" v-bind:href="link.url">
+                        {{ link.url }}
+                    </a>
                 </link-preview>
                 <block-preview
                     v-for="(block, index) in blocks"
                     :key="block.id"
                     :id="'displayBlock' + index"
-                    :block="block"
                     :height="getHeight('block' + index)"
-                >
-                    {{ }}
-                </block-preview>
+                    v-html="block.formatted_text"
+                ></block-preview>
             </div>
         </div>
     </div>

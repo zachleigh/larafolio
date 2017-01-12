@@ -3,10 +3,10 @@
         class="project-form__display-area"
         v-bind:style="{ top: top }"
     >
-        <div class="link__display-text" v-html="link.text"></div>
-        <a v-bind:href="link.url">
-            {{ link.url }}
-        </a>
+        <div class="link__display-text">
+            <slot name="text"></slot>
+        </div>
+        <slot name="url"></slot>
     </div>
 </template>
 
@@ -23,10 +23,6 @@
         },
 
         props: {
-            link: {
-                type: Object
-            },
-
             height: {
                 type: Number
             }

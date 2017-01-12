@@ -2,8 +2,8 @@
     <div
         class="project-form__display-area"
         v-bind:style="{ top: top }"
-        v-html="block.formatted_text"
     >
+        <slot></slot>
     </div>
 </template>
 
