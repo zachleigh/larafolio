@@ -441,11 +441,9 @@ class Project extends Model
     /**
      * Get url of small image with project name or first image in collection.
      *
-     * @param string $size The size of the image, name of image cache filter.
-     *
      * @return string
      */
-    public function getProjectImage($size = 'small')
+    public function getProjectImage()
     {
         $projectImage = $this->image($this->name());
 

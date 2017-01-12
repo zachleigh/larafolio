@@ -41,6 +41,10 @@
 
 ###### blockText($name, $formatted = true)
 
+###### getProjectBlock()
+
+###### getProjectBlockText($formatted = true)
+
 ###### hasImages()
 
 ###### image($name)
@@ -48,6 +52,10 @@
 ###### imageUrl($name, $size = 'medium')
 
 ###### imageCaption($name)
+
+###### getProjectImage()
+
+###### getProjectImageUrl($size = 'small')
 
 ###### hasLinks()
 
