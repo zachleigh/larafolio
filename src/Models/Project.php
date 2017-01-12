@@ -336,13 +336,35 @@ class Project extends Model
      */
     public function getProjectBlock()
     {
-        $description = $this->block('description');
+        $block = $this->block($this->name());
 
-        if ($description) {
-            return $description->formattedText();
+        if ($block) {
+            return $block;
         } elseif ($this->hasBlocks()) {
-            return $this->blocks()->first()->formattedText();
+            return $this->blocks()->first();
         }
+
+        return null;
+    }
+
+    /**
+     * Get formatted text of block named description or first block.
+     *
+     * @param bool $formatted If true, return formatted text.
+     *
+     * @return string
+     */
+    public function getProjectBlockText($formatted = true)
+    {
+        $project = $this->getProjectBlock();
+
+        if ($project && $formatted) {
+            return $project->formattedText();
+        } elseif ($project) {
+            return $project->text();
+        }
+
+        return $project;
     }
 
     /**
@@ -428,10 +450,30 @@ class Project extends Model
         $projectImage = $this->image($this->name());
 
         if ($projectImage) {
-            return $projectImage->{$size}();
+            return $projectImage;
         } elseif ($this->hasImages()) {
-            return $this->images()->first()->{$size}();
+            return $this->images()->first();
         }
+
+        return null;
+    }
+
+    /**
+     * Get url of small image with project name or first image in collection.
+     *
+     * @param string $size The size of the image, name of image cache filter.
+     *
+     * @return string
+     */
+    public function getProjectImageUrl($size = 'small')
+    {
+        $projectImage = $this->getProjectImage();
+
+        if ($projectImage) {
+            return $projectImage->{$size}();
+        }
+
+        return $projectImage;
     }
 
     /**

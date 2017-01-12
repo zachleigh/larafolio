@@ -2,6 +2,7 @@
 
 namespace Larafolio\tests\unit;
 
+use Larafolio\Models\Image;
 use Larafolio\Models\Project;
 use Larafolio\tests\TestCase;
 use Illuminate\Support\Collection;
@@ -427,6 +428,190 @@ class ProjectTest extends TestCase
 
             $this->assertOrder($links->pluck('order'));
         }
+    }
+
+    /**
+     * @test
+     */
+    public function get_project_block_returns_block_named_after_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->blocks()->create([
+            'name'           => 'name1',
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $project->blocks()->create([
+            'name'           => $project->name(),
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $project->blocks()->create([
+            'name'           => 'name2',
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $projectBlock = $project->getProjectBlock();
+
+        $this->assertEquals($project->name(), $projectBlock->name());
+    }
+
+    /**
+     * @test
+     */
+    public function get_project_block_returns_first_block_if_no_block_named_after_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->blocks()->create([
+            'name'           => 'name1',
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $project->blocks()->create([
+            'name'           => 'name2',
+            'text'           => 'text',
+            'formatted_text' => 'formatted',
+            'order' => 5
+        ]);
+
+        $projectBlock = $project->getProjectBlock();
+
+        $this->assertEquals('name1', $projectBlock->name());
+    }
+
+    /**
+     * @test
+     */
+    public function get_project_block_returns_null_if_no_blocks()
+    {
+        $project = factory(Project::class)->create();
+
+        $projectBlock = $project->getProjectBlock();
+
+        $this->assertEquals(null, $projectBlock);
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_project_block_formatted_text()
+    {
+        $project = $this->createProjectWithBlock();
+
+        $formatted = $project->getProjectBlockText();
+
+        $this->assertEquals('formatted', $formatted);
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_project_block_unformatted_text()
+    {
+        $project = $this->createProjectWithBlock();
+
+        $formatted = $project->getProjectBlockText(false);
+
+        $this->assertEquals('text', $formatted);
+    }
+
+    /**
+     * @test
+     */
+    public function get_project_image_returns_image_named_after_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->images()->save(factory(Image::class)->make([
+            'name' => 'name1',
+        ]));
+
+        $project->images()->save(factory(Image::class)->make([
+            'name' => $project->name(),
+        ]));
+
+        $project->images()->save(factory(Image::class)->make([
+            'name' => 'name2',
+        ]));
+
+        $projectImage = $project->getProjectImage();
+
+        $this->assertEquals($project->name(), $projectImage->name());
+    }
+
+    /**
+     * @test
+     */
+    public function get_project_image_returns_first_image_if_no_image_named_after_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->images()->save(factory(Image::class)->make([
+            'name' => 'name1',
+        ]));
+
+        $project->images()->save(factory(Image::class)->make([
+            'name' => 'name2',
+        ]));
+
+        $projectImage = $project->getProjectImage();
+
+        $this->assertEquals('name1', $projectImage->name());
+    }
+
+
+    /**
+     * @test
+     */
+    public function get_project_image_returns_null_if_no_images()
+    {
+        $project = factory(Project::class)->create();
+
+        $projectImage = $project->getProjectImage();
+
+        $this->assertEquals(null, $projectImage);
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_project_image_url()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->images()->save(factory(Image::class)->make([
+            'path' => 'url',
+        ]));
+
+        $url = $project->getProjectImageUrl();
+
+        $this->assertEquals('/manager/images/small/url', $url);
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_project_image_url_by_size()
+    {
+        $project = factory(Project::class)->create();
+
+        $project->images()->save(factory(Image::class)->make([
+            'path' => 'url',
+        ]));
+
+        $url = $project->getProjectImageUrl('medium');
+
+        $this->assertEquals('/manager/images/medium/url', $url);
     }
 
     /**
