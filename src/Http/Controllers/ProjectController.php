@@ -18,11 +18,11 @@ class ProjectController extends Controller
         $projects = Project::all()->sortBy('order')->values();
 
         $images = $projects->mapWithKeys(function ($project) {
-            return [$project->name() => $project->getProjectImage()];
+            return [$project->name() => $project->getProjectImageUrl()];
         });
 
         $blocks = $projects->mapWithKeys(function ($project) {
-            return [$project->name() => $project->getProjectBlock()];
+            return [$project->name() => $project->getProjectBlockText()];
         });
 
         return view('larafolio::projects.index', [

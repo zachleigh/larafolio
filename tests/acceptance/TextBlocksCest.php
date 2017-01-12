@@ -301,7 +301,7 @@ class TextBlocksCest
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
     }
     
-    public function block_with_name_description_is_shown_on_dashboard(AcceptanceTester $I)
+    public function block_with_name_as_project_name_is_shown_on_dashboard(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -316,7 +316,7 @@ class TextBlocksCest
 
         $block = TextBlock::find($block->id());
 
-        $I->fillField(['name' => 'name'.$block->order()], 'description');
+        $I->fillField(['name' => 'name'.$block->order()], $project->name());
         $I->click('Update Project');
         $I->wait(1);
         $I->amOnPage('/manager');
