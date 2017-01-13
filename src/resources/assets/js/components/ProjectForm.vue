@@ -26,6 +26,7 @@
                             autocomplete="off"
                             v-model="name"
                             v-bind:class="{ form__errored: hasError('name') }"
+                            v-on:input="projectChanged()"
                         >
                     </div>
                     <div id="projectType" class="form__section">
@@ -41,6 +42,7 @@
                             autocomplete="off"
                             v-model="projectType"
                             v-bind:class="{ form__errored: hasError('projectType') }"
+                            v-on:input="projectChanged()"
                         >
                     </div>
                     <h3 class="project-form__section-header">Links</h3>
@@ -173,6 +175,13 @@
                  * @type {Boolean}
                  */
                 componentChanged: false,
+
+                /**
+                 * If true, project is being saved.
+                 *
+                 * @type {Boolean}
+                 */
+                saving: false
             }
         },
 
@@ -240,18 +249,18 @@
              *
              * @return {Boolean}
              */
-            changed () {
-                if (this.project) {
-                    return this.project.name !== this.name ||
-                        this.project.type !== this.projectType ||
-                        this.componentChanged;
-                }
+            // changed () {
+            //     if (this.project) {
+            //         return this.project.name !== this.name ||
+            //             this.project.type !== this.projectType ||
+            //             this.componentChanged;
+            //     }
 
-                return this.name !== '' ||
-                    this.projectType !== '' ||
-                    this.componentChanged;
+            //     return this.name !== '' ||
+            //         this.projectType !== '' ||
+            //         this.componentChanged;
 
-            },
+            // },
 
             /**
              * Update/Add button state. If form has changed, remove disabled.
@@ -259,7 +268,7 @@
              * @return {String}
              */
             buttonState () {
-                if (!this.changed) {
+                if (!this.componentChanged) {
                     return 'disabled';
                 }
             }
@@ -276,7 +285,7 @@
 
             this.updateBlocks(this.blocks);
 
-            this.componentChanged = false;
+            this.projectUpToDate();
 
             this.setHeights();
         },
@@ -301,6 +310,8 @@
              * Submit ajax request to add a project.
              */
             addProject () {
+                this.saving = true;
+
                 this.ajax.post(this.action, {
                     name: this.name,
                     type: this.projectType,
@@ -325,6 +336,8 @@
              * Update a project.
              */
             updateProject () {
+                this.saving = true;
+
                 this.ajax.patch(this.action, {
                     name: this.name,
                     type: this.projectType,
@@ -334,7 +347,7 @@
                 .then(function (response) {
                     let slug = response.data.project.slug;
 
-                    this.componentChanged = false;
+                    this.projectUpToDate();
 
                     this.postFlash({
                         title: 'Updated',
@@ -352,21 +365,55 @@
              *
              * @param  {Array} blocks Array of updated blocks.
              */
-            updateBlocks (blocks) {
+            updateBlocks (blocks, changed) {
                 this.blocks = blocks;
 
-                this.componentChanged = true;
+                if (changed) {
+                    this.projectChanged();
+                }
             },
 
             /**
              * Update links array.
              *
-             * @param  {Array} links Array of updated links.
+             * @param  {Array} links   Array of updated links.
+             * @param  {Bool}  changed True if change requires project save.
              */
-            updateLinks (links) {
+            updateLinks (links, changed) {
                 this.links = links;
 
-                this.componentChanged = true;
+                if (changed) {
+                    this.projectChanged();
+                }
+            },
+
+            /**
+             * Add onbeforeunload event and change componentChanged state.
+             */
+            projectChanged () {
+                if (!this.componentChanged) {
+                    window.onbeforeunload = function() {
+                        if (!this.saving) {
+                            return 'Form contains unsaved content. '+
+                                'Are you sure you want to leave?';
+                        }
+                    }.bind(this);
+
+                    this.componentChanged = true;
+                }
+            },
+
+            /**
+             * Remove onbeforeunload event and change componentChanged state.
+             */
+            projectUpToDate () {
+                this.componentChanged = false;
+
+                window.onbeforeunload = function () {
+                    //
+                }
+
+                this.saving = false;
             }
         }
     };

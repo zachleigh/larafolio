@@ -144,7 +144,7 @@
                     id: this.nextBlock++
                 });
 
-                this.$emit('change', this.blocks);
+                this.$emit('change', this.blocks, true);
             },
 
             /**
@@ -157,7 +157,7 @@
 
                 this.blocks.splice(index, 1, currentBlock);
 
-                this.$emit('change', this.blocks);
+                this.$emit('change', this.blocks, true);
             },
 
             /**
@@ -172,7 +172,7 @@
                     this.blocks.splice(index - 1, 0, block[0]); 
                 }
 
-                this.$emit('change', this.blocks);
+                this.$emit('change', this.blocks, true);
             },
 
             /**
@@ -185,7 +185,7 @@
 
                 this.blocks.splice(index + 1, 0, block[0]);
 
-                this.$emit('change', this.blocks);
+                this.$emit('change', this.blocks, true);
             },
 
             /**
@@ -213,7 +213,7 @@
 
                 this.blocks.splice(index, 1);
 
-                this.$emit('change', this.blocks);
+                this.$emit('change', this.blocks, false);
             },
 
             /**

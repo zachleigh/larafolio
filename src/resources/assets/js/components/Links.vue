@@ -144,7 +144,7 @@
                     id: this.nextLink++,
                 });
 
-                this.$emit('change', this.links);
+                this.$emit('change', this.links, true);
             },
 
             /**
@@ -157,7 +157,7 @@
 
                 this.links.splice(index, 1, currentLink);
 
-                this.$emit('change', this.links);
+                this.$emit('change', this.links, true);
             },
 
             /**
@@ -185,7 +185,7 @@
 
                 this.links.splice(index, 1);
 
-                this.$emit('change', this.links);
+                this.$emit('change', this.links, false);
             },
 
             /**
@@ -215,7 +215,7 @@
                     this.links.splice(index - 1, 0, link[0]); 
                 }
 
-                this.$emit('change', this.links);
+                this.$emit('change', this.links, true);
             },
 
             /**
@@ -228,7 +228,7 @@
 
                 this.links.splice(index + 1, 0, link[0]);
 
-                this.$emit('change', this.links);
+                this.$emit('change', this.links, true);
             },
         }
     };

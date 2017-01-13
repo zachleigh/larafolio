@@ -304,6 +304,7 @@ class MobileCest
         $I->seeElement('#text1');
         $I->removeBlock($I, '#delete1');
         $I->dontSeeElement('#text1');
+        $I->click('Add Project');
     }
 
     // **LINKS** //
@@ -359,5 +360,6 @@ class MobileCest
         $I->seeElement('#linkText1');
         $I->removeLink($I, '#deleteLink1');
         $I->dontSeeElement('#linkText1');
+        $I->click('Add Project');
     }
 }

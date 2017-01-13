@@ -74,6 +74,7 @@ class LinksCest
         $I->see('Link url 1');
         $I->removeLink($I, '#deleteLink1');
         $I->dontSee('Link url 1');
+        $I->click('Add Project');
     }
 
     public function user_can_add_and_remove_links_like_crazy(AcceptanceTester $I)
@@ -120,6 +121,7 @@ class LinksCest
         $I->see('url2');
         $I->see('url3');
         $I->see('url4');
+        $I->click('Add Project');
     }
 
     public function user_can_move_link_up(AcceptanceTester $I)
@@ -143,6 +145,7 @@ class LinksCest
         $I->see('link2');
         $I->dontSee('link0');
         $I->dontSee('link1');
+        $I->click('Add Project');
     }
 
     public function user_can_move_text_block_down(AcceptanceTester $I)
@@ -166,6 +169,7 @@ class LinksCest
         $I->see('link0');
         $I->dontSee('link1');
         $I->dontSee('link2');
+        $I->click('Add Project');
     }
 
     public function user_can_add_and_delete_links_when_editing(AcceptanceTester $I)

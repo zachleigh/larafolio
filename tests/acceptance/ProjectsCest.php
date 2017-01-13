@@ -144,6 +144,7 @@ class ProjectsCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'name'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->click('Update Project');
     }
 
     public function update_button_disabled_until_type_changed(AcceptanceTester $I)
@@ -156,6 +157,7 @@ class ProjectsCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'projectType'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->click('Update Project');
     }
 
     public function update_button_disabled_until_link_changed(AcceptanceTester $I)
@@ -168,5 +170,29 @@ class ProjectsCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'url0'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->click('Update Project');
+    }
+
+    public function leaving_edit_page_when_unsaved_causes_popup(AcceptanceTester $I)
+    {
+        $data = ['text0' => 'Project description'];
+
+        $I->wantTo('Verify that popup blocks page leave if form is unsaved.');
+        $I->login($I);
+        $I->amOnAddPage($I);
+        $I->fillForm($I, $data);
+        $I->amOnPage('/manager');
+        $I->seeInPopup('Form contains unsaved content. Are you sure you want to leave?');
+        $I->acceptPopup();
+        $I->seeCurrentUrlEquals('/manager');
+    }
+
+    public function leaving_edit_page_when_unedited_does_not_cause_popup(AcceptanceTester $I)
+    {
+        $I->wantTo('Verify that popup does not occur if form is saved.');
+        $I->login($I);
+        $I->amOnAddPage($I);
+        $I->amOnPage('/manager');
+        $I->seeCurrentUrlEquals('/manager');
     }
 }

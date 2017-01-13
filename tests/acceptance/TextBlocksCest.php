@@ -60,6 +60,7 @@ class TextBlocksCest
         $I->seeElement('#text1');
         $I->removeBlock($I, '#delete1');
         $I->dontSeeElement('#text1');
+        $I->click('Add Project');
     }
 
     public function user_can_add_and_remove_blocks_like_crazy(AcceptanceTester $I)
@@ -106,6 +107,7 @@ class TextBlocksCest
         $I->seeInFormFields('.form', ['text0' => 'block2']);
         $I->seeInFormFields('.form', ['text1' => 'block3']);
         $I->seeInFormFields('.form', ['text2' => 'block4']);
+        $I->click('Add Project');
     }
 
     public function user_can_move_text_block_up(AcceptanceTester $I)
@@ -125,6 +127,7 @@ class TextBlocksCest
         $I->click('#up2');
         $I->click('#up1');
         $I->seeinFormFields('.form', ['text0' => 'block2']);
+        $I->click('Add Project');
     }
 
     public function user_can_move_text_block_down(AcceptanceTester $I)
@@ -143,7 +146,8 @@ class TextBlocksCest
         $I->fillForm($I, $data);
         $I->click('#down0');
         $I->click('#down1');
-        $I->seeinFormFields('.form', ['text2' => 'block0']);;
+        $I->seeinFormFields('.form', ['text2' => 'block0']);
+        $I->click('Add Project');
     }
 
     public function user_can_add_and_delete_blocks_when_editing(AcceptanceTester $I)
@@ -275,6 +279,7 @@ class TextBlocksCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'text0'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->click('Update Project');
     }
 
     public function update_button_disabled_until_block_moved_up(AcceptanceTester $I)
@@ -287,6 +292,7 @@ class TextBlocksCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->click('#up2');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->click('Update Project');
     }
 
     public function update_button_disabled_until_block_moved_down(AcceptanceTester $I)
@@ -299,6 +305,7 @@ class TextBlocksCest
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->click('#down1');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
+        $I->click('Update Project');
     }
     
     public function block_with_name_as_project_name_is_shown_on_dashboard(AcceptanceTester $I)
