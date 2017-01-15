@@ -20,12 +20,6 @@
                     </span>
                     <span class="">Dashboard</span>
                 </a>
-                <a href="{{ route('add-project') }}" class="nav__item">
-                    <span class="nav__icon">
-                        {!! file_get_contents(public_path('vendor/larafolio/zondicons/compose.svg')) !!}
-                    </span>
-                    <span class="">Add</span>
-                </a>
                 @if (!$navProjects->isEmpty())
                     <div class="nav__dropdown">
                         <span class="nav__item">
@@ -35,6 +29,13 @@
                             Projects
                         </span>
                         <div class="nav__dropdown-content">
+                            <a href="{{ route('add-project') }}" class="nav__link">
+                                <div class="nav__dropdown-item">
+                                    <span class="nav__dropdown-item-text">
+                                        Add
+                                    </span>
+                                </div>
+                            </a>
                             @foreach($navProjects as $project)
                                 <a class="nav__link" href="{{ route(
                                     'show-project',
