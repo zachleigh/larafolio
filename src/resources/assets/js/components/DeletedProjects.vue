@@ -169,6 +169,8 @@
 
                 this.ajax.patch('/manager/'+project.slug+'/update')
                 .then(function (response) {
+                    this.$bus.$emit('refreshNavProjects');
+
                     this.flash({
                         title: 'Restored',
                         message: 'Project un-deleted',

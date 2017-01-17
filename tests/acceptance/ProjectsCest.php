@@ -239,4 +239,24 @@ class ProjectsCest
             'deleted_at' => null,
         ]);
     }
+
+    public function restored_project_causes_nav_dropdown_refresh(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->click('#removeProject');
+        $I->click('Remove Project');
+        $I->wait(1);
+        $I->amOnPage('/manager/settings/projects');
+        $I->dontSeeInPageSource('<span class="nav__dropdown-item-text">
+                '.$project->name().'
+            </span>');
+        $I->click('#restore'.$project->id());
+        $I->wait(1);
+        $I->seeInPageSource('<span class="nav__dropdown-item-text">
+                '.$project->name().'
+            </span>');
+    }
 }

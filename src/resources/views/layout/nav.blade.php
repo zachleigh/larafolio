@@ -35,18 +35,10 @@
                                 </span>
                             </div>
                         </a>
-                        @foreach($navProjects as $project)
-                            <a class="nav__link" href="{{ route(
-                                'show-project',
-                                ['project' => $project]
-                            )}}">
-                                <div class="nav__dropdown-item">
-                                    <span class="nav__dropdown-item-text">
-                                        {{ $project->name() }}
-                                    </span>
-                                </div>
-                            </a>
-                        @endforeach
+                        <nav-projects
+                            :passed-projects="{{ $navProjects }}"
+                        >
+                        </nav-projects>
                     </div>
                 </div>
                 <div class="nav__dropdown">

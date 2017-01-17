@@ -9,27 +9,13 @@ use Larafolio\Http\Requests\AddProjectRequest;
 class ProjectController extends Controller
 {
     /**
-     * Show the manager dashboard.
+     * Return all projects.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $projects = Project::all()->sortBy('order')->values();
-
-        $images = $projects->mapWithKeys(function ($project) {
-            return [$project->name() => $project->getProjectImageUrl()];
-        });
-
-        $blocks = $projects->mapWithKeys(function ($project) {
-            return [$project->name() => $project->getProjectBlockText()];
-        });
-
-        return view('larafolio::projects.index', [
-            'projects' => $projects,
-            'images' => $images,
-            'blocks' => $blocks,
-        ]);
+        return response()->json(Project::all());
     }
 
     /**
