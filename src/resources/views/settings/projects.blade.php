@@ -10,9 +10,6 @@
 
 @section('body')
     <div class="page__half">
-
-    </div>
-    <div class="page__half">
         <section class="section">
             <h3 class="section__header">Deleted Projects</h3>
             <deleted-projects
@@ -22,5 +19,8 @@
                 ]) }}"
             ></deleted-projects>
         </section>
+    </div>
+    <div class="page__half">
+
     </div>
 @stop

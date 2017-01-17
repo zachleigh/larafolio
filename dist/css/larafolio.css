@@ -686,6 +686,10 @@ a:hover {
   border-bottom: 1px solid #c8c8c8;
 }
 
+.section__item:last-child {
+  border-bottom: 0;
+}
+
 .modal__mask {
   position: fixed;
   z-index: 9998;
