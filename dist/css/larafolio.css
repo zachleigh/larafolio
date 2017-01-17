@@ -285,10 +285,6 @@ a:hover {
   box-shadow: none;
 }
 
-.form__section {
-  margin-bottom: 15px;
-}
-
 .form__text {
   min-height: 20px;
 }
@@ -664,6 +660,10 @@ a:hover {
   padding-left: 20px;
 }
 
+.section {
+  margin-bottom: 20px;
+}
+
 .section__divided {
   display: -webkit-box;
   display: flex;
@@ -688,6 +688,12 @@ a:hover {
 
 .section__item:last-child {
   border-bottom: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  .section .button:first-child {
+    margin-right: 10px;
+  }
 }
 
 .modal__mask {
@@ -914,33 +920,6 @@ a:hover {
   }
 }
 
-.project__display-header {
-  margin: 0;
-  color: #4390ad;
-}
-
-.project__display-item {
-  margin-left: 15px;
-  padding-top: 5px;
-}
-
-.project__display-section {
-  margin-bottom: 20px;
-}
-
-.project__display-section:last-child {
-  margin-bottom: 0;
-}
-
-.project__display-subsection {
-  border-bottom: 1px solid #c8c8c8;
-  padding: 10px 0;
-}
-
-.project__display-subsection:last-child {
-  border-bottom: 0;
-}
-
 .project__error {
   text-align: center;
 }
@@ -987,9 +966,6 @@ a:hover {
 }
 
 @media only screen and (max-width: 1200px) {
-  .project__display-section .button:first-child {
-    margin-right: 10px;
-  }
   .project__half:first-child {
     border-right: 0;
   }
@@ -1113,10 +1089,6 @@ a:hover {
   fill: #5a5a5a;
 }
 
-.text-block__fields {
-  margin-left: 15px;
-}
-
 .text-block__md-message {
   font-size: .7em;
   text-align: right;
@@ -1135,10 +1107,6 @@ a:hover {
 .link__display-text {
   min-height: 30px;
   margin-bottom: 5px;
-}
-
-.link__fields {
-  margin-left: 15px;
 }
 
 .link__status {

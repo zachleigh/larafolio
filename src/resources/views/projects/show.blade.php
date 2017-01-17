@@ -29,23 +29,23 @@
                 <h2 class="project__half-header">
                     Content
                 </h2>
-                <section class="project__display-section">
-                    <h3 class="project__display-header">Project Type</h3>
-                    <div class="project__display-item">
+                <section class="section">
+                    <h3 class="section__header">Project Type</h3>
+                    <div class="section__indented">
                         <b>{{ $project->type() }}</b>
                     </div>
                 </section>
-                <section class="project__display-section">
-                    <h3 class="project__display-header">Project Links</h3>
+                <section class="section">
+                    <h3 class="section__header">Project Links</h3>
                     @foreach ($project->links as $link)
-                        <div class="project__display-subsection">
+                        <div class="section__item">
                             <div class="">
                                 Name: <b>{{ $link->name() }}</b>
                             </div>
-                            <div class="project__display-item">
+                            <div class="section__indented">
                                 Text: {{ $link->text() }}
                             </div>
-                            <div class="project__display-item">
+                            <div class="section__indented">
                                 URL: 
                                 <a href="{{ $link->url() }}">
                                     {{ $link->url() }}
@@ -59,20 +59,20 @@
                         </div>
                     @endforeach
                 </section>
-                <section class="project__display-section">
-                    <h3 class="project__display-header">Project Blocks</h3>
+                <section class="section">
+                    <h3 class="section__header">Project Blocks</h3>
                     @foreach ($project->blocks as $block)
-                        <div class="project__display-subsection">
+                        <div class="section__item">
                             <div class="">
                                 Name: <b>{{ $block->name() }}</b>
                             </div>
-                            <div class="project__display-item">
+                            <div class="section__indented">
                                 {!! $block->formattedText() !!}
                             </div>
                         </div>
                     @endforeach
                 </section>
-                <section class="project__display-section">
+                <section class="section">
                     <a
                         class="button button--primary"
                         href="{{ route('edit-project', ['project' => $project]) }}"

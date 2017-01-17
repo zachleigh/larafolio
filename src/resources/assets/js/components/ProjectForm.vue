@@ -13,7 +13,7 @@
                     method="POST"
                     action=""
                 >
-                    <div id="name" class="form__section">
+                    <div id="name" class="section">
                         <h3 class="project-form__section-header">
                             <label for="name">
                                 Project Name
@@ -29,7 +29,7 @@
                             v-on:input="projectChanged()"
                         >
                     </div>
-                    <div id="projectType" class="form__section">
+                    <div id="projectType" class="section">
                         <h3 class="project-form__section-header">
                             <label for="name">
                                 Project Type

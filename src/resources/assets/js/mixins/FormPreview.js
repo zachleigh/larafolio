@@ -15,7 +15,7 @@ export default {
          * Set heights for form and display elements.
          */
         setHeights () {
-            let sections = document.querySelectorAll('.form__section');
+            let sections = document.querySelectorAll('.section');
 
             for (var i = 0; i < sections.length; i++) {
                 this.setSectionHeight(sections[i]);

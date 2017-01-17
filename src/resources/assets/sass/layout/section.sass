@@ -1,4 +1,5 @@
 .section
+    margin-bottom: 20px
 
     +ele(divided)
         display: flex
@@ -13,8 +14,13 @@
         padding-top: 5px
 
     +ele(item)
-        padding: 10px 0
+        padding: $buttonSpace 0
         border-bottom: $border
 
         &:last-child
             border-bottom: 0
+
+    +medium()
+
+        & .button:first-child
+            margin-right: $buttonSpace

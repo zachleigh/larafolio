@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:id="elementId('block')" class="text-block form__section">
+    <div v-bind:id="elementId('block')" class="text-block section">
         <div class="text-block__control">
             <div>
                 <label v-bind:for="elementId('name')">Name: </label>
@@ -37,7 +37,7 @@
                 ></span>
             </div>
         </div>
-        <div class="text-block__fields">
+        <div class="section__indented">
             <label class="form__label" :for="elementId('text')">Text</label>
             <textarea
                 :id="elementId('text')"

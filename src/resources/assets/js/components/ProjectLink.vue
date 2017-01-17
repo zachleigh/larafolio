@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:id="elementId('link')" class="link form__section">
+    <div v-bind:id="elementId('link')" class="link section">
         <div class="link__control text-block__control">
             <div>
                 <label v-bind:for="elementId('linkName')">Name: </label>
@@ -37,7 +37,7 @@
                 ></span>
             </div>
         </div>
-        <div class="link__fields">
+        <div class="section__indented">
             <label class="form__label" :for="elementId('linkText')">Text</label>
             <input
                 :id="elementId('linkText')"
