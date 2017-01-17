@@ -195,4 +195,48 @@ class ProjectsCest
         $I->amOnPage('/manager');
         $I->seeCurrentUrlEquals('/manager');
     }
+
+    public function user_can_force_delete_projects(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->click('#removeProject');
+        $I->click('Remove Project');
+        $I->wait(1);
+        $I->seeInDatabase('projects', [
+            'id' => $project->id()
+        ]);
+        $I->amOnPage('/manager/settings/projects');
+        $I->click('#delete'.$project->id());
+        $I->wait(1);
+        $I->click('#confirmDelete');
+        $I->wait(1);
+        $I->dontseeInDatabase('projects', [
+            'id' => $project->id()
+        ]);
+    }
+
+    public function user_can_restore_deleted_projects(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+
+        $I->login($I);
+        $I->amOnPage("/manager/{$project->slug()}");
+        $I->click('#removeProject');
+        $I->click('Remove Project');
+        $I->wait(1);
+        $I->dontSeeInDatabase('projects', [
+            'id'         => $project->id(),
+            'deleted_at' => null,
+        ]);
+        $I->amOnPage('/manager/settings/projects');
+        $I->click('#restore'.$project->id());
+        $I->wait(1);
+        $I->seeInDatabase('projects', [
+            'id' => $project->id(),
+            'deleted_at' => null,
+        ]);
+    }
 }

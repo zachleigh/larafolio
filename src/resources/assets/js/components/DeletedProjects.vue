@@ -14,12 +14,14 @@
                 <div slot="footer">
                     <div class="modal__buttons">
                         <button
+                            id="dontDelete"
                             class="button button--secondary"
                             @click.prevent="hideDeleteModal"
                         >
                             Don't Delete
                         </button>
                         <button
+                            id="confirmDelete"
                             class="button button--primary"
                             @click.prevent="purge"
                         >
@@ -48,12 +50,14 @@
             </div>
             <div class="settings__button-row">
                 <button
+                    :id="'restore' + project.id"
                     class="button button--primary button--small"
                     @click.prevent="restore(project, index)"
                 >
                     Restore
                 </button>
                 <button
+                    :id="'delete' + project.id"
                     class="button button--secondary button--small"
                     @click.prevent="confirmDelete(project, index)"
                 >
