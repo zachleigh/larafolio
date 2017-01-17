@@ -245,24 +245,6 @@
 
         computed: {
             /**
-             * Return true if project form has changed.
-             *
-             * @return {Boolean}
-             */
-            // changed () {
-            //     if (this.project) {
-            //         return this.project.name !== this.name ||
-            //             this.project.type !== this.projectType ||
-            //             this.componentChanged;
-            //     }
-
-            //     return this.name !== '' ||
-            //         this.projectType !== '' ||
-            //         this.componentChanged;
-
-            // },
-
-            /**
              * Update/Add button state. If form has changed, remove disabled.
              *
              * @return {String}

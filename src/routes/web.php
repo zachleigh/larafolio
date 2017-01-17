@@ -32,4 +32,6 @@ Route::group(['middleware' => ['web', 'admin']], function () {
     Route::delete('/manager/images/{image}', 'Larafolio\Http\Controllers\ImageController@destroy')->name('remove-image');
 
     Route::post('/manager/session', 'Larafolio\Http\Controllers\SessionController@store')->name('store-session');
+
+    Route::get('/manager/settings/{page}', 'Larafolio\Http\Controllers\SettingsController@show')->name('show-settings');
 });

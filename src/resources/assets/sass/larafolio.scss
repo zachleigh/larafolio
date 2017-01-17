@@ -10,6 +10,8 @@
 @import "layout/nav";
 @import "layout/footer";
 @import "layout/lines";
+@import "layout/page";
+@import "layout/section";
 @import "components/modal";
 @import "components/project-controls";
 @import "components/flash-message";
@@ -21,4 +23,5 @@
 @import "projects/dashboard";
 @import "images/image-manager";
 @import "images/image-tile";
+@import "settings/settings";
 @import "style";

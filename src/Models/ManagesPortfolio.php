@@ -58,11 +58,39 @@ trait ManagesPortfolio
      */
     public function removeProject(Project $project)
     {
+        return $project->delete();
+    }
+
+    /**
+     * Restore a soft deleted project.
+     *
+     * @param  Larafolio\Models\Project $project Project to restore.
+     *
+     * @return bool
+     */
+    public function restoreProject(Project $project)
+    {
+        $this->updateProject($project, ['visible' => false]);
+
+        return $project->restore();
+    }
+
+    /**
+     * Hard delete a project from the portfolio.
+     *
+     * @param  Larafolio\Models\Project $project Project to purge.
+     *
+     * @return bool
+     */
+    public function purgeProject(Project $project)
+    {
         foreach ($project->images as $image) {
             $this->removeImage($image);
         }
 
-        return $project->delete();
+        $project->restore();
+
+        return $project->forceDelete();
     }
 
     /**

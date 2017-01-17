@@ -13,44 +13,59 @@
                 </span>
                 <span class="">Home</span>
             </a>
-            @if (Auth::check())
-                <a href="{{ route('dashboard') }}" class="nav__item">
-                    <span class="nav__icon">
-                        {!! file_get_contents(public_path('vendor/larafolio/zondicons/dashboard.svg')) !!}
-                    </span>
-                    <span class="">Dashboard</span>
-                </a>
-                @if (!$navProjects->isEmpty())
-                    <div class="nav__dropdown">
-                        <span class="nav__item">
-                            <span class="nav__icon">
-                                {!! file_get_contents(public_path('vendor/larafolio/zondicons/portfolio.svg')) !!}
-                            </span>
-                            Projects
+            <a href="{{ route('dashboard') }}" class="nav__item">
+                <span class="nav__icon">
+                    {!! file_get_contents(public_path('vendor/larafolio/zondicons/dashboard.svg')) !!}
+                </span>
+                <span class="">Dashboard</span>
+            </a>
+            @if (!$navProjects->isEmpty())
+                <div class="nav__dropdown">
+                    <span class="nav__item">
+                        <span class="nav__icon">
+                            {!! file_get_contents(public_path('vendor/larafolio/zondicons/portfolio.svg')) !!}
                         </span>
-                        <div class="nav__dropdown-content">
-                            <a href="{{ route('add-project') }}" class="nav__link">
+                        Projects
+                    </span>
+                    <div class="nav__dropdown-content">
+                        <a href="{{ route('add-project') }}" class="nav__link">
+                            <div class="nav__dropdown-item">
+                                <span class="nav__dropdown-item-text">
+                                    Add
+                                </span>
+                            </div>
+                        </a>
+                        @foreach($navProjects as $project)
+                            <a class="nav__link" href="{{ route(
+                                'show-project',
+                                ['project' => $project]
+                            )}}">
                                 <div class="nav__dropdown-item">
                                     <span class="nav__dropdown-item-text">
-                                        Add
+                                        {{ $project->name() }}
                                     </span>
                                 </div>
                             </a>
-                            @foreach($navProjects as $project)
-                                <a class="nav__link" href="{{ route(
-                                    'show-project',
-                                    ['project' => $project]
-                                )}}">
-                                    <div class="nav__dropdown-item">
-                                        <span class="nav__dropdown-item-text">
-                                            {{ $project->name() }}
-                                        </span>
-                                    </div>
-                                </a>
-                            @endforeach
-                        </div>
+                        @endforeach
                     </div>
-                @endif
+                </div>
+                <div class="nav__dropdown">
+                    <span class="nav__item">
+                        <span class="nav__icon">
+                            {!! file_get_contents(public_path('vendor/larafolio/zondicons/cog.svg')) !!}
+                        </span>
+                        Settings
+                    </span>
+                    <div class="nav__dropdown-content">
+                        <a href="{{ route('show-settings', ['page' => 'projects']) }}" class="nav__link">
+                            <div class="nav__dropdown-item">
+                                <span class="nav__dropdown-item-text">
+                                    Project Settings
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             @endif
         </div>
         <div class="nav__section nav__center">

@@ -1,0 +1,15 @@
+.page
+    
+    +ele(content)
+        display: flex
+
+    +ele(half)
+        flex: 1 0
+        width: 700px
+
+        &:first-child
+            padding-right: 20px
+            border-right: $border
+
+        &:last-child
+            padding-left: 20px

@@ -27,8 +27,8 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.index', [
             'projects' => $projects,
-            'images'   => $images,
-            'blocks'   => $blocks,
+            'images' => $images,
+            'blocks' => $blocks,
         ]);
     }
 
@@ -51,7 +51,7 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.show', [
             'project' => $project,
-            'images'  => $images,
+            'images' => $images,
         ]);
     }
 
@@ -99,9 +99,9 @@ class ProjectController extends Controller
         $nextLink = $project->links->pluck('order')->max() + 1;
 
         return view('larafolio::projects.edit', [
-            'project'     => $project,
-            'nextBlock'   => $nextBlock,
-            'nextLink'    => $nextLink,
+            'project' => $project,
+            'nextBlock' => $nextBlock,
+            'nextLink' => $nextLink,
         ]);
     }
 
@@ -109,13 +109,19 @@ class ProjectController extends Controller
      * Update a project.
      *
      * @param \Illuminate\Http\Request $request Request data.
-     * @param Larafolio\Models\Project $project Project to update.
+     * @param string                   $slug    Slug of project to update.
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $slug)
     {
-        $this->user->updateProject($project, $request->all());
+        $project = Project::withTrashed()->where('slug', $slug)->first();
+
+        if ($project->trashed()) {
+            $this->user->restoreProject($project);
+        } else {
+            $this->user->updateProject($project, $request->all());
+        }
 
         if ($request->ajax()) {
             return response()->json(['project' => $project]);
@@ -128,13 +134,19 @@ class ProjectController extends Controller
      * Remove a project from the portfolio.
      *
      * @param \Illuminate\Http\Request $request Request data.
-     * @param Larafolio\Models\Project $project Project to remove.
+     * @param string                   $slug    Slug of project to remove.
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Project $project)
+    public function destroy(Request $request, $slug)
     {
-        $this->user->removeProject($project);
+        $project = Project::withTrashed()->where('slug', $slug)->first();
+
+        if ($project->trashed()) {
+            $this->user->purgeProject($project);
+        } else {
+            $this->user->removeProject($project);
+        }
 
         if ($request->ajax()) {
             return response()->json(true);

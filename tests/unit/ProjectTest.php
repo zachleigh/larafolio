@@ -163,6 +163,58 @@ class ProjectTest extends TestCase
     /**
      * @test
      */
+    public function user_can_hard_delete_a_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $this->seeInDatabase('projects', [
+            'id'         => $project->id(),
+            'deleted_at' => null,
+        ]);
+        
+        $this->user->removeProject($project);
+
+        $deleted = $this->user->purgeProject($project);
+
+        $this->assertTrue($deleted);
+
+        $this->dontSeeInDatabase('projects', [
+            'id'         => $project->id()
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_restore_a_soft_deleted_project()
+    {
+        $project = factory(Project::class)->create();
+
+        $this->seeInDatabase('projects', [
+            'id'         => $project->id(),
+            'deleted_at' => null,
+        ]);
+
+        $deleted = $this->user->removeProject($project);
+
+        $this->assertTrue($deleted);
+
+        $this->dontSeeInDatabase('projects', [
+            'id'         => $project->id(),
+            'deleted_at' => null,
+        ]);
+
+        $this->user->restoreProject($project);
+
+        $this->seeInDatabase('projects', [
+            'id'         => $project->id(),
+            'deleted_at' => null,
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function all_visible_static_returns_all_visible_projects()
     {
         $project1 = factory(Project::class)->create();

@@ -14,17 +14,17 @@ class MobileCest
     {
         $I->wantTo('Access the menu on mobile.');
         $I->login($I, 'mobile');
-        $I->dontSee('Add');
+        $I->dontSee('Settings');
         $I->click('#openMenu');
         $I->wait(1);
-        $I->see('Add');
+        $I->see('Settings');
         $I->click('#closeMenu');
         $I->wait(1);
-        $I->dontSee('Add');
+        $I->dontSee('Settings');
         $I->click('#openMenu');
         $I->wait(1);
-        $I->click('Add');
-        $I->seeCurrentUrlEquals('/manager/add');
+        $I->click('Dashboard');
+        $I->seeCurrentUrlEquals('/manager');
     }
 
     // **DASHBOARD** //

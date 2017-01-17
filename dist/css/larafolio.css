@@ -221,6 +221,10 @@ a:hover {
   padding: 1px 3px;
 }
 
+.button--small {
+  padding: 5px 8px;
+}
+
 .form {
   color: #5a5a5a;
 }
@@ -638,6 +642,48 @@ a:hover {
 .lines svg {
   height: 22px;
   width: auto;
+}
+
+.page__content {
+  display: -webkit-box;
+  display: flex;
+}
+
+.page__half {
+  -webkit-box-flex: 1;
+  flex: 1 0;
+  width: 700px;
+}
+
+.page__half:first-child {
+  padding-right: 20px;
+  border-right: 1px solid #c8c8c8;
+}
+
+.page__half:last-child {
+  padding-left: 20px;
+}
+
+.section__divided {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.section__header {
+  margin: 0;
+  color: #4390ad;
+}
+
+.section__indented {
+  margin-left: 15px;
+  padding-top: 5px;
+}
+
+.section__item {
+  padding: 10px 0;
+  border-bottom: 1px solid #c8c8c8;
 }
 
 .modal__mask {
@@ -1335,6 +1381,21 @@ a:hover {
     width: auto;
     margin-left: 0;
   }
+}
+
+.settings {
+  width: 1200px;
+}
+
+.settings__button-row {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.settings__button-row .button {
+  margin-left: 10px;
 }
 
 .black-icon {

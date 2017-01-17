@@ -43,6 +43,13 @@ class Project extends Model
     ];
 
     /**
+     * Fields that are dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    /**
      * Get the route key for the model.
      *
      * @return string
@@ -602,5 +609,20 @@ class Project extends Model
         return $query->with([$relationship => function ($query) {
             $query->orderBy('order');
         }]);
+    }
+
+    /**
+     * Return project properties to be passed to js.
+     *
+     * @return array
+     */
+    public function generateProps()
+    {
+        return [
+            'deletedAt' => $this->deleted_at->diffForHumans(),
+            'id'        => $this->id(),
+            'name'      => $this->name(),
+            'slug'      => $this->slug(),
+        ];
     }
 }
