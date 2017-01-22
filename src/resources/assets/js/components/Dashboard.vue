@@ -1,5 +1,5 @@
 <template>
-    <div class="project__main dashboard__wrapper">
+    <div class="page__content dashboard__wrapper">
         <project-tile
             v-for="(project, index) in passedProjects"
             :key="project.id"

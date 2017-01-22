@@ -5,11 +5,13 @@
 @stop
 
 @section('content')
-    <div class="project-manager content">
-        <div class="top">
-            <div class="top__title-block top__section">
+    <div class="page">
+        <div class="page__top">
+            <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="top__title">Manage Images</h1>
+                <h1 class="page__top-title">
+                    Manage Images
+                </h1>
             </div>
         </div>
         <div class="project__main image-tile__container">

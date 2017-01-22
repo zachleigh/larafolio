@@ -5,13 +5,13 @@
 @stop
 
 @section('content')
-    <div class="project-manager content">
-        <div class="top">
-            <div class="top__title-block top__section">
+    <div class="page">
+        <div class="page__top">
+            <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="top__title">{{ $project->name() }}</h1>
+                <h1 class="page__top-title">{{ $project->name() }}</h1>
             </div>
-            <div class="top__section">
+            <div>
                 <project-controls
                     remove-action="{{ route('remove-project', ['project' => $project]) }}"
                     update-action="{{ route('update-project', ['project' => $project]) }}"
@@ -24,9 +24,9 @@
                 ></project-controls>
             </div>
         </div>
-        <div class="project__main">
-            <div class="project__left project__half">
-                <h2 class="project__half-header">
+        <div class="page__content">
+            <div class="page__half">
+                <h2 class="page__half-header">
                     Content
                 </h2>
                 <section class="section">
@@ -88,8 +88,8 @@
                     </a>
                 </section>
             </div>
-            <div class="project__right project__half">
-                <h2 class="project__half-header">
+            <div class="page__half">
+                <h2 class="page__half-header">
                     Images
                 </h2>
                 <image-manager

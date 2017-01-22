@@ -14,49 +14,6 @@ html, body
     margin: auto
     background-color: $offWhite
 
-.content
-    margin: 20px 40px 50px
-    max-width: 1200px
-    align-self: center
-
-    +medium()
-        margin: 20px auto 50px
-        width: 95%
-
-    +small()
-        margin: 70px auto 50px
-
-.top
-    display: flex
-    align-items: center
-    justify-content: space-between
-    margin: 40px 0
-
-    +ele(title-block)
-        display: flex
-        align-items: center
-
-    +ele(title)
-        margin: 0 0 0 10px
-
-    +medium()
-        margin: auto
-        width: $widthMedium
-        align-items: flex-start
-
-    +small()
-        width: $widthSmall
-        flex-direction: column
-
-        +ele(section)
-            width: $widthSmall
-
-        +ele(title-block)
-            width: $widthSmall
-
-    +tiny()
-        width: $widthTiny
-
 .placeholder, ::-webkit-input-placeholder
     font-style: italic
     color: $darkGrey

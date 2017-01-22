@@ -5,11 +5,11 @@
 @stop
 
 @section('content')
-    <div class="project-manager content dashboard">
-        <div class="top">
-            <div class="top__title-block top__section">
+    <div class="page dashboard">
+        <div class="page__top">
+            <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="top__title">Dashboard</h1>
+                <h1 class="page__top-title">Dashboard</h1>
             </div>
         </div>
         @if ($projects->isEmpty())

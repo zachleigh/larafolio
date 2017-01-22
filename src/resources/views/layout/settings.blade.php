@@ -5,11 +5,11 @@
 @stop
 
 @section('content')
-    <div class="project-manager content settings">
-        <div class="top">
-            <div class="top__title-block top__section">
+    <div class="page settings">
+        <div class="page__top">
+            <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="top__title">
+                <h1 class="page__top-title">
                     @yield('page_header')
                 </h1>
             </div>

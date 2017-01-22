@@ -1,7 +1,13 @@
 .page
+    margin: 20px 40px 50px
+    max-width: 1200px
+    align-self: center
     
     +ele(content)
         display: flex
+        position: relative
+        display: flex
+        min-width: 1150px
 
     +ele(half)
         flex: 1 0
@@ -13,3 +19,82 @@
 
         &:last-child
             padding-left: 20px
+
+    +ele(half-header)
+        text-align: center
+        font-style: italic
+        margin: 0 0 20px
+
+    +ele(top)     
+        display: flex
+        align-items: center
+        justify-content: space-between
+        margin: 40px 0
+
+    +ele(top-block)
+        display: flex
+        align-items: center
+
+    +ele(top-title)
+        margin: 0 0 0 10px
+
+    +wide()
+
+        +ele(content)
+            min-width: 850px
+
+        +ele(half)
+            width: auto
+            min-width: 500px
+
+            &:first-child
+                padding-right: 10px
+
+    +medium()
+        margin: 20px auto 50px
+        width: 95%
+
+        +ele(content)
+            width: $widthMedium
+            min-width: initial
+            margin: 25px auto 0
+
+        +ele(half)
+
+            &:first-child
+                border-right: 0
+
+            &:last-child
+                display: none
+
+        +ele(top)
+            margin: auto
+            width: $widthMedium
+            align-items: flex-start
+
+    +small()
+        margin: 70px auto 50px
+
+        +ele(content)
+            width: $widthSmall
+
+        +ele(half)
+            min-width: initial
+
+        +ele(top)
+            width: $widthSmall
+            flex-direction: column
+
+        +ele(top-section)
+            width: $widthSmall
+
+        +ele(top-title-block)
+            width: $widthSmall
+
+    +tiny()
+
+        +ele(content)
+            width: $widthTiny
+
+        +ele(top) 
+            width: $widthTiny

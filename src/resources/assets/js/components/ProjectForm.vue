@@ -1,13 +1,13 @@
 <template>
-    <div class="project-form content">
-        <div class="top">
-            <div class="top__title-block">
+    <div class="page">
+        <div class="page__top">
+            <div class="page__top-block">
                 <lines></lines>
-                <h1 class="top__title">{{ title }}</h1>
+                <h1 class="page__top-title">{{ title }}</h1>
             </div>
         </div>
-        <div class="project__main">
-            <div class="project__left project__half">
+        <div class="page__content">
+            <div class="page__half">
                 <form
                     class="project-form__form form"
                     method="POST"
@@ -92,7 +92,7 @@
                     </div>
                 </form>
             </div>
-            <div class="project__right project__half">
+            <div class="page__half">
                 <div class="project-form__preview placeholder">
                     Live Preview
                 </div>
