@@ -350,8 +350,6 @@ class Project extends Model
         } elseif ($this->hasBlocks()) {
             return $this->blocks()->first();
         }
-
-        return null;
     }
 
     /**
@@ -459,8 +457,6 @@ class Project extends Model
         } elseif ($this->hasImages()) {
             return $this->images()->first();
         }
-
-        return null;
     }
 
     /**
