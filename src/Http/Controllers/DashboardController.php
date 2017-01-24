@@ -2,7 +2,6 @@
 
 namespace Larafolio\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Larafolio\Models\Project;
 
 class DashboardController extends Controller
@@ -26,8 +25,8 @@ class DashboardController extends Controller
 
         return view('larafolio::projects.index', [
             'projects' => $projects,
-            'images' => $images,
-            'blocks' => $blocks,
+            'images'   => $images,
+            'blocks'   => $blocks,
         ]);
     }
 }

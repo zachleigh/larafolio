@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.show', [
             'project' => $project,
-            'images' => $images,
+            'images'  => $images,
         ]);
     }
 
@@ -85,9 +85,9 @@ class ProjectController extends Controller
         $nextLink = $project->links->pluck('order')->max() + 1;
 
         return view('larafolio::projects.edit', [
-            'project' => $project,
+            'project'   => $project,
             'nextBlock' => $nextBlock,
-            'nextLink' => $nextLink,
+            'nextLink'  => $nextLink,
         ]);
     }
 
