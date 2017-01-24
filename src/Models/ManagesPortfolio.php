@@ -64,7 +64,7 @@ trait ManagesPortfolio
     /**
      * Restore a soft deleted project.
      *
-     * @param  Larafolio\Models\Project $project Project to restore.
+     * @param Larafolio\Models\Project $project Project to restore.
      *
      * @return bool
      */
@@ -78,7 +78,7 @@ trait ManagesPortfolio
     /**
      * Hard delete a project from the portfolio.
      *
-     * @param  Larafolio\Models\Project $project Project to purge.
+     * @param Larafolio\Models\Project $project Project to purge.
      *
      * @return bool
      */
