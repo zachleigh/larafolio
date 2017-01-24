@@ -62,6 +62,7 @@ class ProjectsCest
             'id'      => $project->id(),
             'visible' => true,
         ]);
+        $I->amOnPage("/manager/{$project->slug()}");
         $I->click('#makeHidden');
         $I->see('Hidden');
         $I->see($project->name().' is not publicly viewable');

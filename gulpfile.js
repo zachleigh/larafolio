@@ -2,8 +2,6 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
-elixir.config.registerWatcher('default', 'src/resources/assets/**', null);
-
 elixir((mix) => {
     mix.sass('./src/resources/assets/sass/larafolio.scss', './dist/css/')
         .styles([

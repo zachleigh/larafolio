@@ -1,8 +1,8 @@
 <template>
     <transition name="fade">
         <div
-            v-show="showFlash"
             class="flash-message"
+            v-show="showFlash"
             v-bind:class="[typeClass]"
         >
             <div class="flash-message__top">
@@ -13,12 +13,12 @@
                     ✕
                 </div>
                 <div class="flash-message__title">
-                    {{ passedTitle }}
+                    {{ message.title }}
                 </div>
             </div>
             <div class="flash-message__bottom">
                 <div class="flash-message__message">
-                    {{ passedMessage }}
+                    {{ message.message }}
                 </div>
             </div>
         </div>
@@ -26,11 +26,7 @@
 </template>
 
 <script>
-    import Lines from './Lines.vue';
-
     export default {
-        components: { Lines },
-
         data () {
             return {
                 /**
@@ -38,51 +34,17 @@
                  *
                  * @type {Boolean}
                  */
-                showFlash: false,
-
-                /**
-                 * Flash title.
-                 *
-                 * @type {String}
-                 */
-                passedTitle: this.title,
-
-                /**
-                 * Flash message.
-                 *
-                 * @type {String}
-                 */
-                passedMessage: this.message,
-
-                /**
-                 * Flash type.
-                 *
-                 * @type {String}
-                 */
-                passedType: this.type
+                showFlash: true,
             };
         },
 
         props: {
             /**
-             * Flash message title.
-             */
-            title: {
-                type: String
-            },
-
-            /**
-             * Body of flash message.
+             * The message to flash.
              */
             message: {
-                type: String
-            },
-
-            /**
-             * Flash message type: success.
-             */
-            type: {
-                type: String
+                type: Object,
+                default: null
             }
         },
 
@@ -93,20 +55,16 @@
              * @return {String}
              */
             typeClass () {
-                return 'flash-message--'+this.passedType;
+                if (this.message) {
+                    return 'flash-message--'+this.message.type;
+                }
             }
         },
 
         created () {
-            this.$bus.$on('flash', this.flash);
-
-            if (typeof this.message !== 'undefined') {
-                 this.show();
-            }
-        },
-
-        beforeDestroy () {
-            this.$bus.$off('flash', this.flash);
+            setTimeout(function () {
+                this.showFlash = false;
+            }.bind(this), 3500);
         },
 
         methods: {
@@ -116,32 +74,6 @@
             close () {
                 this.showFlash = false;
             },
-
-            /**
-             * Flash a message.
-             * 
-             * @param {Object} data Flash message data.
-             */
-            flash (data) {
-                this.passedTitle = data.title;
-
-                this.passedMessage = data.message;
-
-                this.passedType = data.type;
-                
-                this.show();
-            },
-
-            /**
-             * Show flash message for 3.5 sec.
-             */
-            show () {
-                this.showFlash = true;
-
-                setTimeout(function () {
-                    this.showFlash = false;
-                }.bind(this), 3500);
-            }
         }
     };
 </script>

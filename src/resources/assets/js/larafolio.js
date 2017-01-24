@@ -4,6 +4,7 @@ Vue.component('blocks', require('./components/Blocks.vue'));
 Vue.component('block-preview', require('./components/Previews/BlockPreview.vue'));
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('deleted-projects', require('./components/DeletedProjects.vue'));
+Vue.component('flash-manager', require('./components/FlashManager.vue'));
 Vue.component('flash-message', require('./components/FlashMessage.vue'));
 Vue.component('image-manager', require('./components/ImageManager.vue'));
 Vue.component('image-tile', require('./components/ImageTile.vue'));
