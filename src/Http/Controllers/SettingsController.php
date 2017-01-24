@@ -3,7 +3,6 @@
 namespace Larafolio\Http\Controllers;
 
 use View;
-use Illuminate\Http\Request;
 use Larafolio\Models\Project;
 
 class SettingsController extends Controller
@@ -11,14 +10,14 @@ class SettingsController extends Controller
     /**
      * Show the requested settings page if it exists.
      *
-     * @param  string $page Settings page name.
+     * @param string $page Settings page name.
      *
      * @return \Illuminate\Http\Response
      */
     public function show($page)
     {
         if (!View::exists("larafolio::settings.{$page}")) {
-            abort(404); 
+            abort(404);
         }
 
         if (method_exists($this, $method = 'show'.ucfirst($page))) {
@@ -43,7 +42,7 @@ class SettingsController extends Controller
             });
 
         return view('larafolio::settings.projects', [
-            'deletedProjects' => $deletedProjects
+            'deletedProjects' => $deletedProjects,
         ]);
     }
 }
