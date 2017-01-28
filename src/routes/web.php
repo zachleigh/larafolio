@@ -13,9 +13,9 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::get('/manager/projects', 'Larafolio\Http\Controllers\ProjectController@index')->name('all-projects');
 
-    Route::patch('/manager/{project}/update', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');
+    Route::patch('/manager/{slug}/update', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');
 
-    Route::delete('/manager/{project}', 'Larafolio\Http\Controllers\ProjectController@destroy')->name('remove-project');
+    Route::delete('/manager/{slug}', 'Larafolio\Http\Controllers\ProjectController@destroy')->name('remove-project');
 
     Route::get('/manager/{project}/images', 'Larafolio\Http\Controllers\ProjectImageController@index')->name('show-images');
 
