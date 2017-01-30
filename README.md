@@ -1,22 +1,27 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/zachleigh/larafolio/dev/dist/images/brand.png"/>
-    <br><br>
+    <br>
     <h4>Turn a Laravel app into a portfolio site in minutes</h4>
-    <br><br>
+    <br>
     <a href="packagist.org/packages/zachleigh/larafolio">
         <img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/zachleigh/larafolio.svg">
     </a>
+    <a href="packagist.org/packages/zachleigh/larafolio">
+        <img alt="Licence" src="https://img.shields.io/badge/license-MIT-brightgreen.svg">
+    </a>
+    <a href="https://travis-ci.org/zachleigh/larafolio">
+        <img alt="Build Status" src="https://img.shields.io/travis/zachleigh/larafolio/master.svg">
+    </a>
+    <a href="https://insight.sensiolabs.com/projects/7ea2ca53-06d1-4175-b777-f81899cff706">
+        <img alt="SensioLabsInsight" src="https://img.shields.io/sensiolabs/i/7ea2ca53-06d1-4175-b777-f81899cff706.svg">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/zachleigh/larafolio/">
+        <img alt="Quality Score" src="https://img.shields.io/scrutinizer/g/zachleigh/larafolio.svg">
+    </a>
+    <a href="https://styleci.io/repos/74421920">
+        <img alt="StyleCI" src="https://styleci.io/repos/74421920/shield?style=flat">
+    </a>
 </div>
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/zachleigh/larafolio.svg)](//packagist.org/packages/zachleigh/larafolio)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](//packagist.org/packages/zachleigh/larafolio) 
-[![Build Status](https://img.shields.io/travis/zachleigh/larafolio/master.svg)](https://travis-ci.org/zachleigh/larafolio)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/7ea2ca53-06d1-4175-b777-f81899cff706.svg)](https://insight.sensiolabs.com/projects/7ea2ca53-06d1-4175-b777-f81899cff706)
-[![Quality Score](https://img.shields.io/scrutinizer/g/zachleigh/larafolio.svg)](https://scrutinizer-ci.com/g/zachleigh/larafolio/)
-[![StyleCI](https://styleci.io/repos/74421920/shield?style=flat)](https://styleci.io/repos/74421920)      
-
-##### Turn a Laravel app into a portfolio site in minutes.
-
 
 ## This project is still under construction. Come back soon!
 
