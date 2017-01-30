@@ -2,8 +2,20 @@
 
 namespace Larafolio\Models\Traits;
 
+use Larafolio\Models\Image;
+
 trait HasImages
 {
+    /**
+     * Get a model from a relationship by model name.
+     *
+     * @param string $relationship Name of relationship.
+     * @param string $name         Name of model to get.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    abstract protected function getFromRelationshipByName($relationship, $name);
+    
     /**
      * A project has many images.
      *
@@ -83,5 +95,18 @@ trait HasImages
         }
 
         return $image->alt();
+    }
+    
+    /**
+     * Return images with all props needed for javascript.
+     *
+     * @return Collection
+     */
+    public function imagesWithProps()
+    {
+        return $this->images
+            ->map(function (Image $image) {
+                return $image->generateProps();
+            })->reverse()->values();
     }
 }

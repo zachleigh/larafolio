@@ -2,10 +2,7 @@
 
 namespace Larafolio\Models;
 
-use Larafolio\Models\Image;
-use Larafolio\Models\Project;
 use Larafolio\Helpers\Sluggable;
-use Larafolio\Models\HasContent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends HasContent
@@ -68,11 +65,11 @@ class Project extends HasContent
     {
         parent::boot();
 
-        static::creating(function (Project $project) {
+        static::creating(function (Larafolio\Models\Project $project) {
             $project->setSlug('name');
         });
 
-        static::updating(function (Project $project) {
+        static::updating(function (Larafolio\Models\Project $project) {
             $project->setSlug('name');
         });
     }
@@ -304,7 +301,7 @@ class Project extends HasContent
     /**
      * Get url of small image with project name or first image in collection.
      *
-     * @return string
+     * @return Larafolio\Models\Image
      */
     public function getProjectImage()
     {
@@ -365,19 +362,6 @@ class Project extends HasContent
     }
 
     /**
-     * Return images with all props needed for javascript.
-     *
-     * @return Collection
-     */
-    public function imagesWithProps()
-    {
-        return $this->images
-            ->map(function (Image $image) {
-                return $image->generateProps();
-            })->reverse()->values();
-    }
-
-    /**
      * Order given relationship by order value.
      *
      * @param \Builder $query        Query builder.
@@ -401,9 +385,9 @@ class Project extends HasContent
     {
         return [
             'deletedAt' => $this->deleted_at->diffForHumans(),
-            'id'        => $this->id(),
-            'name'      => $this->name(),
-            'slug'      => $this->slug(),
+            'id' => $this->id(),
+            'name' => $this->name(),
+            'slug' => $this->slug(),
         ];
     }
 }
