@@ -11,7 +11,7 @@ class ProjectController extends Controller
     /**
      * Return all projects.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -54,7 +54,7 @@ class ProjectController extends Controller
     /**
      * Add a new project to the portfolio.
      *
-     * @param Larafolio\Http\Requests\AddProjectRequest $request Form request.
+     * @param AddProjectRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */
