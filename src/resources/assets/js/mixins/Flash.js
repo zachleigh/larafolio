@@ -25,7 +25,7 @@ export default {
                 key: 'flash_message',
                 value: data
             })
-            .then(function (response) {
+            .then(function () {
                 window.location = route;
             });
         }

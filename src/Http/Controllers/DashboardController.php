@@ -15,11 +15,11 @@ class DashboardController extends Controller
     {
         $projects = Project::all()->sortBy('order')->values();
 
-        $images = $projects->mapWithKeys(function ($project) {
+        $images = $projects->mapWithKeys(function (Project $project) {
             return [$project->name() => $project->getProjectImageUrl()];
         });
 
-        $blocks = $projects->mapWithKeys(function ($project) {
+        $blocks = $projects->mapWithKeys(function (Project $project) {
             return [$project->name() => $project->getProjectBlockText()];
         });
 

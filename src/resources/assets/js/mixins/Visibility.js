@@ -31,7 +31,7 @@ export default {
             this.ajax.patch(updateAction, {
                 visible: this.visible,
             })
-            .then(function (response) {
+            .then(function () {
                 let title = 'Project Hidden';
                 let message = this.project.name + ' is not publicly viewable';
 
@@ -46,7 +46,7 @@ export default {
                     type: 'success'
                 });
             })
-            .catch(function (error) {
+            .catch(function () {
                 this.flash({
                     title: 'Error',
                     message: 'Could not change project visibility',

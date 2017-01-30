@@ -3,5 +3,4 @@
 /storage/*.key
 /vendor
 .env
-
 tests/_output/*

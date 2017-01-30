@@ -3,6 +3,7 @@
 namespace Larafolio\Http\ImageFilters;
 
 use Intervention\Image\Image;
+use Intervention\Image\Constraint;
 use Intervention\Image\Filters\FilterInterface;
 
 class Small implements FilterInterface
@@ -16,7 +17,7 @@ class Small implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        return $image->resize(null, 150, function ($constraint) {
+        return $image->resize(null, 150, function (Constraint $constraint) {
             $constraint->aspectRatio();
         });
     }

@@ -117,7 +117,7 @@ class PublishSeeds extends Command
      */
     protected function seedPath($fileName = null)
     {
-        if (!$fileName) {
+        if ($fileName === null) {
             return database_path('seeds');
         }
 

@@ -22,6 +22,8 @@ export default {
             if (field in this.errors && !this[field]) {
                 return true;
             }
+
+            return false;
         },
 
         /**

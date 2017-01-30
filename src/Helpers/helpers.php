@@ -37,11 +37,11 @@ if (!function_exists('manager_cache_bust')) {
 
         $file = str_replace($root, '', $path);
 
-        if (!$jsonData && file_exists(public_path($root.'rev-manifest.json'))) {
+        if ($jsonData === null && file_exists(public_path($root.'rev-manifest.json'))) {
             $jsonData = file_get_contents(public_path($root.'rev-manifest.json'));
         }
 
-        if ($jsonData) {
+        if ($jsonData !== null) {
             $data = json_decode($jsonData, true);
 
             if (array_key_exists($file, $data)) {

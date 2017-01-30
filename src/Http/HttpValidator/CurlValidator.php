@@ -18,7 +18,7 @@ class CurlValidator implements HttpValidator
         if ($handle) {
             $this->setCurlOptions($handle);
 
-            $response = curl_exec($handle);
+            curl_exec($handle);
 
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
 

@@ -26,7 +26,7 @@ Vue.prototype.$bus = bus;
 
 import MediaQueries from './mixins/MediaQueries.js';
 
-const app = new Vue({
+new Vue({
     el: '#app',
 
     mixins: [ MediaQueries ],

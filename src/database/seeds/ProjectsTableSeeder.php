@@ -21,7 +21,7 @@ class ProjectsTableSeeder extends Seeder
 
             factory(Project::class)
                 ->create(['name' => $name])
-                ->each(function ($project) {
+                ->each(function (Project $project) {
                     $project->blocks()->save(factory(TextBlock::class)->make());
 
                     $project->links()->save(factory(Link::class)->make());

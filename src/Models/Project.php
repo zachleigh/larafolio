@@ -2,6 +2,8 @@
 
 namespace Larafolio\Models;
 
+use Larafolio\Models\Image;
+use Larafolio\Models\Project;
 use Larafolio\Helpers\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -66,11 +68,11 @@ class Project extends Model
     {
         parent::boot();
 
-        static::creating(function ($project) {
+        static::creating(function (Project $project) {
             $project->setSlug('name');
         });
 
-        static::updating(function ($project) {
+        static::updating(function (Project $project) {
             $project->setSlug('name');
         });
     }
@@ -587,7 +589,7 @@ class Project extends Model
     public function imagesWithProps()
     {
         return $this->images
-            ->map(function ($image) {
+            ->map(function (Image $image) {
                 return $image->generateProps();
             })->reverse()->values();
     }

@@ -37,7 +37,7 @@ class SettingsController extends Controller
         $deletedProjects = Project::onlyTrashed()
             ->orderBy('deleted_at', 'DESC')
             ->get()
-            ->map(function ($project) {
+            ->map(function (Project $project) {
                 return $project->generateProps();
             });
 

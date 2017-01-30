@@ -55,7 +55,7 @@ class ImagesTableSeeder extends Seeder
      *
      * @param \Symfony\Component\Finder\SplFileInfo $image      File info.
      * @param string                                $path       Path to move to.
-     * @param /Illuminate\Filesystem\Filesystem     $filesystem
+     * @param \Illuminate\Filesystem\Filesystem     $filesystem
      */
     protected function moveImage($image, $path, $filesystem)
     {
@@ -63,7 +63,7 @@ class ImagesTableSeeder extends Seeder
 
         \Storage::put($path, $imageFile);
 
-        $fullPath = storage_path('app/'.$path);
+        storage_path('app/'.$path);
     }
 
     /**

@@ -78,8 +78,7 @@ export default {
         /**
          * Get form element registered from heights object.
          *
-         * @param  {String}  id       ID of form element.
-         * @param  {Number}  padding  Additional padding if necessary.
+         * @param  {String} key Key for heights array.
          *
          * @return {String}    Height in px.
          */
