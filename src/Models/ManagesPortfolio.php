@@ -34,7 +34,7 @@ trait ManagesPortfolio
      * Update a project in the portfolio.
      *
      * @param Project $project Project to update.
-     * @param array                    $data    Array of data to save.
+     * @param array   $data    Array of data to save.
      *
      * @return Project
      */
@@ -54,7 +54,7 @@ trait ManagesPortfolio
      *
      * @param Project $project Project to remove.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function removeProject(Project $project)
     {
@@ -66,7 +66,7 @@ trait ManagesPortfolio
      *
      * @param Project $project Project to restore.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function restoreProject(Project $project)
     {
@@ -80,7 +80,7 @@ trait ManagesPortfolio
      *
      * @param Project $project Project to purge.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function purgeProject(Project $project)
     {
@@ -130,7 +130,7 @@ trait ManagesPortfolio
      * Add a text block to a project.
      *
      * @param Project $project   Project to add text block to.
-     * @param array                    $blockData Array of text block data.
+     * @param array   $blockData Array of text block data.
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -143,7 +143,7 @@ trait ManagesPortfolio
      * Update a text block.
      *
      * @param TextBlock $textBlock Text block to update.
-     * @param array                      $blockData Array of text block data.
+     * @param array     $blockData Array of text block data.
      *
      * @return TextBlock
      */
@@ -158,7 +158,7 @@ trait ManagesPortfolio
      * Update project text blocks by adding new ones and updating existing ones.
      *
      * @param Project $project Project that blocks belong to.
-     * @param array                    $data    Array of project information.
+     * @param array   $data    Array of project information.
      */
     public function updateProjectTextBlocks(Project $project, array $data)
     {
@@ -182,7 +182,7 @@ trait ManagesPortfolio
      *
      * @param TextBlock $textBlock The text block to delete.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function removeTextBlock(TextBlock $textBlock)
     {
@@ -193,7 +193,7 @@ trait ManagesPortfolio
      * Add image to a project.
      *
      * @param Project $project   Project to add image to.
-     * @param array                    $imageData Array of image infomation.
+     * @param array   $imageData Array of image infomation.
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -206,7 +206,7 @@ trait ManagesPortfolio
      * Update image name and caption.
      *
      * @param Image $image     Image to update.
-     * @param array                  $imageData Array of inmage information.
+     * @param array $imageData Array of inmage information.
      *
      * @return Image
      */
@@ -222,7 +222,7 @@ trait ManagesPortfolio
      *
      * @param Image $image Image to remove.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function removeImage(Image $image)
     {
@@ -235,7 +235,7 @@ trait ManagesPortfolio
      * Add a link to a project.
      *
      * @param Project $project  Project to add link to.
-     * @param array                    $linkData Array of link info.
+     * @param array   $linkData Array of link info.
      */
     public function addLinkToProject(Project $project, array $linkData)
     {
@@ -245,8 +245,8 @@ trait ManagesPortfolio
     /**
      * Update a link.
      *
-     * @param Link $link     Link to update.
-     * @param array                 $linkData Array of link data.
+     * @param Link  $link     Link to update.
+     * @param array $linkData Array of link data.
      *
      * @return Link
      */
@@ -261,7 +261,7 @@ trait ManagesPortfolio
      * Update project links by adding new ones and updating existing ones.
      *
      * @param Project $project Project that links belong to.
-     * @param array                    $data    Array of project information.
+     * @param array   $data    Array of project information.
      */
     public function updateProjectLinks(Project $project, array $data)
     {
@@ -285,7 +285,7 @@ trait ManagesPortfolio
      *
      * @param Link $link Link to remove.
      *
-     * @return boolean|null
+     * @return bool|null
      */
     public function removeLink(Link $link)
     {

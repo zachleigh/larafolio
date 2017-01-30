@@ -11,7 +11,7 @@ class ImageController extends Controller
      * Update image name and caption.
      *
      * @param \Illuminate\Http\Request $request Request object.
-     * @param Image   $image   Image to be updated.
+     * @param Image                    $image   Image to be updated.
      *
      * @return \Illuminate\Http\Response
      */
