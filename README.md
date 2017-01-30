@@ -1,6 +1,7 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/zachleigh/larafolio/dev/dist/images/brand.png"/>
-
+</div>
+<div align="center">
 [![Latest Stable Version](https://img.shields.io/packagist/v/zachleigh/larafolio.svg)](//packagist.org/packages/zachleigh/larafolio)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](//packagist.org/packages/zachleigh/larafolio) 
 [![Build Status](https://img.shields.io/travis/zachleigh/larafolio/master.svg)](https://travis-ci.org/zachleigh/larafolio)
