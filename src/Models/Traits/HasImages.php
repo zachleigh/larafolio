@@ -15,7 +15,7 @@ trait HasImages
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     abstract protected function getFromRelationshipByName($relationship, $name);
-    
+
     /**
      * A project has many images.
      *
@@ -96,7 +96,7 @@ trait HasImages
 
         return $image->alt();
     }
-    
+
     /**
      * Return images with all props needed for javascript.
      *
