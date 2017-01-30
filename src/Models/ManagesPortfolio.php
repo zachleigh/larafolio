@@ -11,7 +11,7 @@ trait ManagesPortfolio
      *
      * @param array $data Array of data to save.
      *
-     * @return Larafolio\Models\Project
+     * @return Project
      */
     public function addProject(array $data)
     {
@@ -33,10 +33,10 @@ trait ManagesPortfolio
     /**
      * Update a project in the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project to update.
+     * @param Project $project Project to update.
      * @param array                    $data    Array of data to save.
      *
-     * @return bool
+     * @return Project
      */
     public function updateProject(Project $project, array $data)
     {
@@ -52,9 +52,9 @@ trait ManagesPortfolio
     /**
      * Remove a project from the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project to remove.
+     * @param Project $project Project to remove.
      *
-     * @return bool
+     * @return boolean|null
      */
     public function removeProject(Project $project)
     {
@@ -64,9 +64,9 @@ trait ManagesPortfolio
     /**
      * Restore a soft deleted project.
      *
-     * @param Larafolio\Models\Project $project Project to restore.
+     * @param Project $project Project to restore.
      *
-     * @return bool
+     * @return boolean|null
      */
     public function restoreProject(Project $project)
     {
@@ -78,9 +78,9 @@ trait ManagesPortfolio
     /**
      * Hard delete a project from the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project to purge.
+     * @param Project $project Project to purge.
      *
-     * @return bool
+     * @return boolean|null
      */
     public function purgeProject(Project $project)
     {
@@ -114,7 +114,7 @@ trait ManagesPortfolio
      *
      * @param array $data Data array containing 'order' index.
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     protected function setOrder(array $data)
     {
@@ -129,10 +129,10 @@ trait ManagesPortfolio
     /**
      * Add a text block to a project.
      *
-     * @param Larafolio\Models\Project $project   Project to add text block to.
+     * @param Project $project   Project to add text block to.
      * @param array                    $blockData Array of text block data.
      *
-     * @return Larafolio\Models\TextBlock
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function addBlockToProject(Project $project, array $blockData)
     {
@@ -142,10 +142,10 @@ trait ManagesPortfolio
     /**
      * Update a text block.
      *
-     * @param Larafolio\Models\TextBlock $textBlock Text block to update.
+     * @param TextBlock $textBlock Text block to update.
      * @param array                      $blockData Array of text block data.
      *
-     * @return Larafolio\Models\TextBlock
+     * @return TextBlock
      */
     public function updateTextBlock(TextBlock $textBlock, array $blockData)
     {
@@ -157,7 +157,7 @@ trait ManagesPortfolio
     /**
      * Update project text blocks by adding new ones and updating existing ones.
      *
-     * @param Larafolio\Models\Project $project Project that blocks belong to.
+     * @param Project $project Project that blocks belong to.
      * @param array                    $data    Array of project information.
      */
     public function updateProjectTextBlocks(Project $project, array $data)
@@ -180,9 +180,9 @@ trait ManagesPortfolio
     /**
      * Remove a text block from a project.
      *
-     * @param Larafolio\Models\TextBlock $textBlock The text block to delete.
+     * @param TextBlock $textBlock The text block to delete.
      *
-     * @return bool
+     * @return boolean|null
      */
     public function removeTextBlock(TextBlock $textBlock)
     {
@@ -192,10 +192,10 @@ trait ManagesPortfolio
     /**
      * Add image to a project.
      *
-     * @param Larafolio\Models\Project $project   Project to add image to.
+     * @param Project $project   Project to add image to.
      * @param array                    $imageData Array of image infomation.
      *
-     * @return Larafolio\Models\Image
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function addImageToProject(Project $project, array $imageData)
     {
@@ -205,10 +205,10 @@ trait ManagesPortfolio
     /**
      * Update image name and caption.
      *
-     * @param Larafolio\Models\Image $image     Image to update.
+     * @param Image $image     Image to update.
      * @param array                  $imageData Array of inmage information.
      *
-     * @return Larafolio\Models\Image
+     * @return Image
      */
     public function updateImageInfo(Image $image, array $imageData)
     {
@@ -220,9 +220,9 @@ trait ManagesPortfolio
     /**
      * Remove image from storage and delete database info.
      *
-     * @param Larafolio\Models\Image $image Image to remove.
+     * @param Image $image Image to remove.
      *
-     * @return bool
+     * @return boolean|null
      */
     public function removeImage(Image $image)
     {
@@ -234,7 +234,7 @@ trait ManagesPortfolio
     /**
      * Add a link to a project.
      *
-     * @param Larafolio\Models\Project $project  Project to add link to.
+     * @param Project $project  Project to add link to.
      * @param array                    $linkData Array of link info.
      */
     public function addLinkToProject(Project $project, array $linkData)
@@ -245,10 +245,10 @@ trait ManagesPortfolio
     /**
      * Update a link.
      *
-     * @param Larafolio\Models\Link $link     Link to update.
+     * @param Link $link     Link to update.
      * @param array                 $linkData Array of link data.
      *
-     * @return Larafolio\Models\Link
+     * @return Link
      */
     public function updateLink(Link $link, array $linkData)
     {
@@ -260,7 +260,7 @@ trait ManagesPortfolio
     /**
      * Update project links by adding new ones and updating existing ones.
      *
-     * @param Larafolio\Models\Project $project Project that links belong to.
+     * @param Project $project Project that links belong to.
      * @param array                    $data    Array of project information.
      */
     public function updateProjectLinks(Project $project, array $data)
@@ -283,9 +283,9 @@ trait ManagesPortfolio
     /**
      * Remove link from a project.
      *
-     * @param Larafolio\Models\Link $link Link to remove.
+     * @param Link $link Link to remove.
      *
-     * @return bool
+     * @return boolean|null
      */
     public function removeLink(Link $link)
     {
