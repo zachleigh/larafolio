@@ -5,10 +5,10 @@ namespace Larafolio\Models;
 use Larafolio\Models\Image;
 use Larafolio\Models\Project;
 use Larafolio\Helpers\Sluggable;
-use Illuminate\Database\Eloquent\Model;
+use Larafolio\Models\HasContent;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class Project extends HasContent
 {
     use Sluggable, SoftDeletes;
 
@@ -216,36 +216,6 @@ class Project extends Model
     }
 
     /**
-     * A project has many text blocks.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function blocks()
-    {
-        return $this->hasMany(TextBlock::class);
-    }
-
-    /**
-     * A project has many images.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function images()
-    {
-        return $this->hasMany(Image::class);
-    }
-
-    /**
-     * A project has many links.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function links()
-    {
-        return $this->hasMany(Link::class);
-    }
-
-    /**
      * Return the project id.
      *
      * @return int
@@ -296,49 +266,6 @@ class Project extends Model
     }
 
     /**
-     * Return true if project has blocks.
-     *
-     * @return bool
-     */
-    public function hasBlocks()
-    {
-        return !$this->blocks->isEmpty();
-    }
-
-    /**
-     * Get a text block by name, if exists.
-     *
-     * @param string $name Name of text block to get.
-     *
-     * @return Larafolio\Models\TextBlock
-     */
-    public function block($name)
-    {
-        return $this->getFromRelationshipByName('blocks', $name);
-    }
-
-    /**
-     * Get block text by block name, if block exists.
-     *
-     * @param string $name      Name of text block to get.
-     * @param bool   $formatted If true, return formmated text.
-     *
-     * @return string|null
-     */
-    public function blockText($name, $formatted = true)
-    {
-        if (!$block = $this->block($name)) {
-            return;
-        }
-
-        if ($formatted) {
-            return $block->formattedText();
-        }
-
-        return $block->text();
-    }
-
-    /**
      * Get formatted text of block named description or first block.
      *
      * @return Larafolio\Models\TextBlock
@@ -375,77 +302,6 @@ class Project extends Model
     }
 
     /**
-     * Return true if project has images.
-     *
-     * @return bool
-     */
-    public function hasImages()
-    {
-        return !$this->images->isEmpty();
-    }
-
-    /**
-     * Get image by name, if exists.
-     *
-     * @param string $name Name of image to get.
-     *
-     * @return Larafolio\Models\Image|null
-     */
-    public function image($name)
-    {
-        return $this->getFromRelationshipByName('images', $name);
-    }
-
-    /**
-     * Get image url for given size.
-     *
-     * @param string $name Name of image to get url for.
-     * @param string $size Size of image.
-     *
-     * @return string|null
-     */
-    public function imageUrl($name, $size = 'medium')
-    {
-        if (!$image = $this->image($name)) {
-            return;
-        }
-
-        return $image->{$size}();
-    }
-
-    /**
-     * Get caption for image.
-     *
-     * @param string $name Name of image to get caption for.
-     *
-     * @return string|null
-     */
-    public function imageCaption($name)
-    {
-        if (!$image = $this->image($name)) {
-            return;
-        }
-
-        return $image->caption();
-    }
-
-    /**
-     * Get alt for image.
-     *
-     * @param string $name Name of image to get caption for.
-     *
-     * @return string|null
-     */
-    public function imageAlt($name)
-    {
-        if (!$image = $this->image($name)) {
-            return;
-        }
-
-        return $image->alt();
-    }
-
-    /**
      * Get url of small image with project name or first image in collection.
      *
      * @return string
@@ -477,79 +333,6 @@ class Project extends Model
         }
 
         return $projectImage;
-    }
-
-    /**
-     * Return true if project has links.
-     *
-     * @return bool
-     */
-    public function hasLinks()
-    {
-        return !$this->links->isEmpty();
-    }
-
-    /**
-     * Get link by name, if exists.
-     *
-     * @param string $name Name of link to get.
-     *
-     * @return Larafolio\Models\Link|null
-     */
-    public function link($name)
-    {
-        return $this->getFromRelationshipByName('links', $name);
-    }
-
-    /**
-     * Get link url.
-     *
-     * @param string $name Name of link.
-     *
-     * @return string|null
-     */
-    public function linkUrl($name)
-    {
-        if (!$link = $this->link($name)) {
-            return;
-        }
-
-        return $link->url();
-    }
-
-    /**
-     * Get link text.
-     *
-     * @param string $name Name of link.
-     *
-     * @return string|null
-     */
-    public function linkText($name)
-    {
-        if (!$link = $this->link($name)) {
-            return;
-        }
-
-        return $link->text();
-    }
-
-    /**
-     * Get a model from a relationship by model name.
-     *
-     * @param string $relationship Name of relationship.
-     * @param string $name         Name of model to get.
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    protected function getFromRelationshipByName($relationship, $name)
-    {
-        $items = $this->{$relationship}->where('name', $name);
-
-        if ($items->isEmpty()) {
-            return;
-        }
-
-        return $items->first();
     }
 
     /**
