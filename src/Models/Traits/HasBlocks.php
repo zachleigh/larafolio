@@ -41,7 +41,7 @@ trait HasBlocks
      *
      * @param string $name Name of text block to get.
      *
-     * @return Larafolio\Models\TextBlock
+     * @return Larafolio\Models\TextBlock|null
      */
     public function block($name)
     {
