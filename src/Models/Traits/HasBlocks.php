@@ -35,7 +35,7 @@ trait HasBlocks
     {
         return !$this->blocks->isEmpty();
     }
-    
+
     /**
      * Get a text block by name, if exists.
      *

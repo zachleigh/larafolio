@@ -15,7 +15,7 @@ trait HasLinks
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     abstract protected function getFromRelationshipByName($relationship, $name);
-    
+
     /**
      * A project has many links.
      *
@@ -25,7 +25,7 @@ trait HasLinks
     {
         return $this->hasMany(Link::class);
     }
-    
+
     /**
      * Return true if project has links.
      *
