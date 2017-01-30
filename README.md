@@ -1,8 +1,11 @@
 # Larafolio
-[![Build Status](https://travis-ci.org/zachleigh/larafolio.svg?branch=master)](https://travis-ci.org/zachleigh/larafolio)
-[![Latest Stable Version](https://poser.pugx.org/zachleigh/larafolio/version.svg)](//packagist.org/packages/zachleigh/larafolio)
+[![Latest Stable Version](https://img.shields.io/packagist/v/zachleigh/larafolio.svg)](//packagist.org/packages/zachleigh/larafolio)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](//packagist.org/packages/zachleigh/larafolio) 
+[![Build Status](https://img.shields.io/travis/zachleigh/larafolio/master.svg)](https://travis-ci.org/zachleigh/larafolio)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/7ea2ca53-06d1-4175-b777-f81899cff706.svg)](https://insight.sensiolabs.com/projects/7ea2ca53-06d1-4175-b777-f81899cff706)
+[![Quality Score](https://img.shields.io/scrutinizer/g/zachleigh/larafolio.svg)](https://scrutinizer-ci.com/g/zachleigh/larafolio/)
 [![StyleCI](https://styleci.io/repos/74421920/shield?style=flat)](https://styleci.io/repos/74421920)
-[![License](https://poser.pugx.org/zachleigh/larafolio/license.svg)](//packagist.org/packages/zachleigh/larafolio)  
+ 
 ##### Turn a Laravel app into a portfolio site in minutes. 
 
 ## This project is still under construction. Come back soon!
