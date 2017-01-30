@@ -1,5 +1,11 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/zachleigh/larafolio/dev/dist/images/brand.png"/>
+    <br><br>
+    <h4>Turn a Laravel app into a portfolio site in minutes</h4>
+    <br><br>
+    <a href="packagist.org/packages/zachleigh/larafolio">
+        <img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/zachleigh/larafolio.svg">
+    </a>
 </div>
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/zachleigh/larafolio.svg)](//packagist.org/packages/zachleigh/larafolio)
