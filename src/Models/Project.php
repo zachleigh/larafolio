@@ -65,11 +65,11 @@ class Project extends HasContent
     {
         parent::boot();
 
-        static::creating(function (Larafolio\Models\Project $project) {
+        static::creating(function (Project $project) {
             $project->setSlug('name');
         });
 
-        static::updating(function (Larafolio\Models\Project $project) {
+        static::updating(function (Project $project) {
             $project->setSlug('name');
         });
     }
