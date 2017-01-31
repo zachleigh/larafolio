@@ -30,17 +30,6 @@ class AddResourceColumnsToImagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('images', function (Blueprint $table) {
-            $table->renameColumn('resource_id', 'project_id');
-            $table->dropIndex('images_resource_id_index');
-            $table->dropIndex('images_resource_type_index');
-            $table->dropColumn('resource_type');
-            $table->index('project_id');
-
-            $table->foreign('project_id')
-              ->references('id')
-              ->on('projects')
-              ->onDelete('cascade');
-        });
+        //
     }
 }

@@ -30,17 +30,6 @@ class AddResourceColumnsToTextBlocksTable extends Migration
      */
     public function down()
     {
-        Schema::table('text_blocks', function (Blueprint $table) {
-            $table->renameColumn('resource_id', 'project_id');
-            $table->dropIndex('text_blocks_resource_id_index');
-            $table->dropIndex('text_blocks_resource_type_index');
-            $table->dropColumn('resource_type');
-            $table->index('project_id');
-
-            $table->foreign('project_id')
-              ->references('id')
-              ->on('projects')
-              ->onDelete('cascade');
-        });
+        //
     }
 }
