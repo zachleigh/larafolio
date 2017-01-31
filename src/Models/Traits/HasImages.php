@@ -17,13 +17,13 @@ trait HasImages
     abstract protected function getFromRelationshipByName($relationship, $name);
 
     /**
-     * A project has many images.
+     * A resource has many images.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return MorphMany
      */
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->morphMany(Image::class, 'resource');
     }
 
     /**

@@ -185,7 +185,12 @@ class Project extends HasContent
      */
     public static function hasImageNamed($imageName)
     {
-        return static::hasRelationshipNamed('images', $imageName);
+        // return static::hasRelationshipNamed('images', $imageName);
+        return static::join('images', 'projects.id', '=', 'images.resource_id')
+            ->where('images.name', '=', $imageName)
+            ->where('images.resource_type', '=', Project::class)
+            ->select('projects.*')
+            ->get();
     }
 
     /**

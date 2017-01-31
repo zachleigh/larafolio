@@ -29,7 +29,7 @@ class ImageTest extends TestCase
 
         $this->assertInstanceOf(Image::class, $image);
 
-        $imageData['project_id'] = $project->id();
+        $imageData['resource_id'] = $project->id();
 
         $this->seeInDatabase('images', $imageData);
     }
