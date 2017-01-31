@@ -167,7 +167,7 @@ trait ManagesPortfolio
         $blockData = $this->setOrder($blockData);
 
         foreach ($blockData as $singleBlockData) {
-            if (isset($singleBlockData['project_id'])) {
+            if (isset($singleBlockData['resource_id'])) {
                 $block = TextBlock::find($singleBlockData['id']);
 
                 $this->updateTextBlock($block, $singleBlockData);

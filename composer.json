@@ -21,7 +21,8 @@
 
     "require": {
         "intervention/imagecache": "^2.3",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "doctrine/dbal": "^2.5"
     },
 
     "require-dev": {

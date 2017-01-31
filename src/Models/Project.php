@@ -169,7 +169,11 @@ class Project extends HasContent
      */
     public static function hasBlockNamed($blockName)
     {
-        return static::hasRelationshipNamed('text_blocks', $blockName);
+        return static::join('text_blocks', 'projects.id', '=', 'text_blocks.resource_id')
+            ->where('text_blocks.name', '=', $blockName)
+            ->where('text_blocks.resource_type', '=', Project::class)
+            ->select('projects.*')
+            ->get();
     }
 
     /**

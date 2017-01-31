@@ -16,14 +16,15 @@ trait HasBlocks
      */
     abstract protected function getFromRelationshipByName($relationship, $name);
 
+
     /**
-     * A project has many text blocks.
+     * A resource has many text blocks.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return MorphMany
      */
     public function blocks()
     {
-        return $this->hasMany(TextBlock::class);
+        return $this->morphMany(TextBlock::class, 'resource');
     }
 
     /**

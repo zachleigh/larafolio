@@ -28,7 +28,7 @@ class TextBlockTest extends TestCase
 
         $this->user->addBlockToProject($project, $data);
 
-        $data['project_id'] = $project->id();
+        $data['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $data);
     }
@@ -60,8 +60,8 @@ class TextBlockTest extends TestCase
 
         $project = $this->user->addProject($data);
 
-        $firstBlock['project_id'] = $project->id();
-        $secondBlock['project_id'] = $project->id();
+        $firstBlock['resource_id'] = $project->id();
+        $secondBlock['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $firstBlock);
         $this->seeInDatabase('text_blocks', $secondBlock);
@@ -123,11 +123,11 @@ class TextBlockTest extends TestCase
 
         $this->user->updateProject($project, $data);
 
-        $firstBlock['project_id'] = $project->id();
+        $firstBlock['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $firstBlock);
 
-        $secondBlock['project_id'] = $project->id();
+        $secondBlock['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $secondBlock);
     }
@@ -160,12 +160,12 @@ class TextBlockTest extends TestCase
         $project = $this->user->updateProject($project, $data);
 
         $firstBlock['order'] = 0;
-        $firstBlock['project_id'] = $project->id();
+        $firstBlock['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $firstBlock);
 
         $secondBlock['order'] = 1;
-        $secondBlock['project_id'] = $project->id();
+        $secondBlock['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $secondBlock);
     }

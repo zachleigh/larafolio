@@ -203,7 +203,7 @@
              * Remove a block from the blocks list.
              */
             removeBlock () {
-                if (typeof this.currentBlock.project_id !== 'undefined') {
+                if (typeof this.currentBlock.resource_id !== 'undefined') {
                     this.destroyBlock(this.currentBlock.id);
                 }
 
