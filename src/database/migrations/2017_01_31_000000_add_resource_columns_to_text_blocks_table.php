@@ -14,11 +14,13 @@ class AddResourceColumnsToTextBlocksTable extends Migration
     public function up()
     {
         Schema::table('text_blocks', function (Blueprint $table) {
-            $table->integer('resource_id')->nullable()->unsigned()->index();
-            $table->string('resource_type')->index()->default('Larafolio\\Models\\Project');
+            $table->renameColumn('project_id', 'resource_id');
+            $table->string('resource_type')->default('Larafolio\\Models\\Project')->index();
 
-            // $table->dropForeign('text_blocks_project_id_foreign');
-            // $table->dropIndex('text_blocks_project_id_index');
+            $table->index('resource_id');
+
+            $table->dropForeign('text_blocks_project_id_foreign');
+            $table->dropIndex('text_blocks_project_id_index');
         });
     }
 
@@ -35,10 +37,12 @@ class AddResourceColumnsToTextBlocksTable extends Migration
             $table->dropColumn('resource_id');
             $table->dropColumn('resource_type');
 
-            // $table->foreign('project_id')
-            //   ->references('id')
-            //   ->on('projects')
-            //   ->onDelete('cascade');
+            $table->integer('project_id')->nullable()->unsigned()->index();
+
+            $table->foreign('project_id')
+              ->references('id')
+              ->on('projects')
+              ->onDelete('cascade');
         });
     }
 }
