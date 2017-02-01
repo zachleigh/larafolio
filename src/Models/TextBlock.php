@@ -31,16 +31,6 @@ class TextBlock extends Model
     protected $fillable = ['name', 'text', 'formatted_text', 'order'];
 
     /**
-     * A text block belongs to a single project.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    /**
      * Return the text block id.
      *
      * @return int

@@ -31,16 +31,6 @@ class Link extends Model
     protected $fillable = ['name', 'text', 'url', 'order'];
 
     /**
-     * A link belongs to a single project.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    /**
      * Return the link id.
      *
      * @return int
