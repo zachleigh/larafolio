@@ -169,11 +169,7 @@ class Project extends HasContent
      */
     public static function hasBlockNamed($blockName)
     {
-        return static::join('text_blocks', 'projects.id', '=', 'text_blocks.resource_id')
-            ->where('text_blocks.name', '=', $blockName)
-            ->where('text_blocks.resource_type', '=', Project::class)
-            ->select('projects.*')
-            ->get();
+        return static::hasRelationshipNamed('text_blocks', $blockName);
     }
 
     /**
@@ -185,11 +181,7 @@ class Project extends HasContent
      */
     public static function hasImageNamed($imageName)
     {
-        return static::join('images', 'projects.id', '=', 'images.resource_id')
-            ->where('images.name', '=', $imageName)
-            ->where('images.resource_type', '=', Project::class)
-            ->select('projects.*')
-            ->get();
+        return static::hasRelationshipNamed('images', $imageName);
     }
 
     /**
@@ -214,8 +206,9 @@ class Project extends HasContent
      */
     protected static function hasRelationshipNamed($table, $name)
     {
-        return static::join($table, 'projects.id', '=', "{$table}.project_id")
+        return static::join($table, 'projects.id', '=', "{$table}.resource_id")
             ->where("{$table}.name", '=', $name)
+            ->where("{$table}.resource_type", '=', Project::class)
             ->select('projects.*')
             ->get();
     }

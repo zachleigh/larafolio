@@ -27,7 +27,7 @@ class LinkTest extends TestCase
 
         $this->user->addLinkToProject($project, $data);
 
-        $data['project_id'] = $project->id();
+        $data['resource_id'] = $project->id();
 
         $this->seeInDatabase('links', $data);
     }
@@ -58,8 +58,8 @@ class LinkTest extends TestCase
 
         $project = $this->user->addProject($data);
 
-        $firstLink['project_id'] = $project->id();
-        $secondLink['project_id'] = $project->id();
+        $firstLink['resource_id'] = $project->id();
+        $secondLink['resource_id'] = $project->id();
 
         $this->seeInDatabase('links', $firstLink);
         $this->seeInDatabase('links', $secondLink);
@@ -118,11 +118,11 @@ class LinkTest extends TestCase
 
         $this->user->updateProject($project, $data);
 
-        $firstLink['project_id'] = $project->id();
+        $firstLink['resource_id'] = $project->id();
 
         $this->seeInDatabase('links', $firstLink);
 
-        $secondLink['project_id'] = $project->id();
+        $secondLink['resource_id'] = $project->id();
 
         $this->seeInDatabase('links', $secondLink);
     }

@@ -270,7 +270,7 @@ trait ManagesPortfolio
         $linkData = $this->setOrder($linkData);
 
         foreach ($linkData as $singleLinkData) {
-            if (isset($singleLinkData['project_id'])) {
+            if (isset($singleLinkData['resource_id'])) {
                 $link = Link::find($singleLinkData['id']);
 
                 $this->updateLink($link, $singleLinkData);

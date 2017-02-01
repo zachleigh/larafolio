@@ -175,7 +175,7 @@
              * Remove a link from the project.
              */
             removeLink () {
-                if (typeof this.currentLink.project_id !== 'undefined') {
+                if (typeof this.currentLink.resource_id !== 'undefined') {
                     this.destroyLink(this.currentLink.id);
                 }
 

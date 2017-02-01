@@ -201,6 +201,7 @@ class ProjectsCest
     {
         $project = $I->getProject($I);
 
+        $I->wantTo('Force delete a project.');
         $I->login($I);
         $I->amOnPage("/manager/{$project->slug()}");
         $I->click('#removeProject');
@@ -223,6 +224,7 @@ class ProjectsCest
     {
         $project = $I->getProject($I);
 
+        $I->wantTo('Restore a deleted project.');
         $I->login($I);
         $I->amOnPage("/manager/{$project->slug()}");
         $I->click('#removeProject');
@@ -245,6 +247,7 @@ class ProjectsCest
     {
         $project = $I->getProject($I);
 
+        $I->wantTo('Verify that when a project is restored, the nav menu refreshes.');
         $I->login($I);
         $I->amOnPage("/manager/{$project->slug()}");
         $I->click('#removeProject');

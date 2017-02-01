@@ -17,13 +17,13 @@ trait HasLinks
     abstract protected function getFromRelationshipByName($relationship, $name);
 
     /**
-     * A project has many links.
+     * A resource has many text blocks.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return MorphMany
      */
     public function links()
     {
-        return $this->hasMany(Link::class);
+        return $this->morphMany(Link::class, 'resource');
     }
 
     /**

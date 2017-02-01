@@ -16,7 +16,6 @@ trait HasBlocks
      */
     abstract protected function getFromRelationshipByName($relationship, $name);
 
-
     /**
      * A resource has many text blocks.
      *

@@ -48,7 +48,7 @@ class LinksCest
         $I->click('Update Project');
         $I->wait(1);
         $I->seeInDatabase('links', [
-            'project_id' => $project['id'],
+            'resource_id' => $project['id'],
             'name'       => $data['linkName0'],
             'text'       => $data['linkText0'],
             'url'        => $data['url0'],
