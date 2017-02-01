@@ -1,5 +1,5 @@
 <template>
-    <div class="project__display-item link__status-wrapper">
+    <div class="section__indented project__display-item link__status-wrapper">
         Status: 
         <div
             class="link__status"
