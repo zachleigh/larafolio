@@ -32,7 +32,7 @@ class ProjectTest extends TestCase
     /**
      * @test
      */
-    public function order_value_is_set_to_next_avilable_value()
+    public function project_order_value_is_set_to_next_available_value()
     {
         $max = Project::all()->pluck('order')->max() + 1;
 
@@ -99,7 +99,7 @@ class ProjectTest extends TestCase
     /**
      * @test
      */
-    public function user_can_update_visibility()
+    public function user_can_update_project_visibility()
     {
         $project = factory(Project::class)->create();
 
@@ -123,7 +123,7 @@ class ProjectTest extends TestCase
     /**
      * @test
      */
-    public function slug_is_updated_when_name_is_updated()
+    public function project_slug_is_updated_when_name_is_updated()
     {
         $project = factory(Project::class)->create(['name' => 'first name']);
 
@@ -664,24 +664,6 @@ class ProjectTest extends TestCase
         $url = $project->getProjectImageUrl('medium');
 
         $this->assertEquals('/manager/images/medium/url', $url);
-    }
-
-    /**
-     * Assert a collection is ordered.
-     *
-     * @param  \Illuminate\Support\Collection $ordered Collection of numbers.
-     */
-    protected function assertOrder(Collection $ordered)
-    {
-        $current = 0;
-
-        $ordered->each(function ($order) use (&$current) {
-            $this->assertTrue($order >= $current);
-
-            if ($order != $current) {
-                $current = $order;
-            }
-        });
     }
 
     /**

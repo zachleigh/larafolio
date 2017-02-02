@@ -25,7 +25,7 @@ class ImageTest extends TestCase
             'alt'     => 'alt',
         ];
 
-        $image = $this->user->addImageToProject($project, $imageData);
+        $image = $this->user->addImageToModel($project, $imageData);
 
         $this->assertInstanceOf(Image::class, $image);
 

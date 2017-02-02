@@ -56,3 +56,13 @@ $factory->define(Larafolio\Models\Link::class, function (Faker\Generator $faker)
         'order' => rand(0, 10),
     ];
 });
+
+$factory->define(Larafolio\Models\Page::class, function () {
+    $name = str_random(30);
+
+    return [
+        'name'  => $name,
+        'slug'  => strtolower(snake_case($name)),
+        'order' => rand(0, 10),
+    ];
+});

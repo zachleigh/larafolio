@@ -2,112 +2,15 @@
 
 namespace Larafolio\Models;
 
+use Larafolio\Models\HasContent;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Larafolio\Models\UserTraits\ManagesPages;
+use Larafolio\Models\UserTraits\ManagesProjects;
 
 trait ManagesPortfolio
 {
-    /**
-     * Add a project to the portfolio.
-     *
-     * @param array $data Array of data to save.
-     *
-     * @return Project
-     */
-    public function addProject(array $data)
-    {
-        $data['order'] = Project::all()->pluck('order')->max() + 1;
-
-        $project = Project::create($data);
-
-        foreach (collect($data)->get('blocks', []) as $block) {
-            $this->addBlockToProject($project, $block);
-        }
-
-        foreach (collect($data)->get('links', []) as $link) {
-            $this->addLinkToProject($project, $link);
-        }
-
-        return $project;
-    }
-
-    /**
-     * Update a project in the portfolio.
-     *
-     * @param Project $project Project to update.
-     * @param array   $data    Array of data to save.
-     *
-     * @return Project
-     */
-    public function updateProject(Project $project, array $data)
-    {
-        $project->update($data);
-
-        $this->updateProjectTextBlocks($project, $data);
-
-        $this->updateProjectLinks($project, $data);
-
-        return $project;
-    }
-
-    /**
-     * Remove a project from the portfolio.
-     *
-     * @param Project $project Project to remove.
-     *
-     * @return bool|null
-     */
-    public function removeProject(Project $project)
-    {
-        return $project->delete();
-    }
-
-    /**
-     * Restore a soft deleted project.
-     *
-     * @param Project $project Project to restore.
-     *
-     * @return bool|null
-     */
-    public function restoreProject(Project $project)
-    {
-        $this->updateProject($project, ['visible' => false]);
-
-        return $project->restore();
-    }
-
-    /**
-     * Hard delete a project from the portfolio.
-     *
-     * @param Project $project Project to purge.
-     *
-     * @return bool|null
-     */
-    public function purgeProject(Project $project)
-    {
-        foreach ($project->images as $image) {
-            $this->removeImage($image);
-        }
-
-        $project->restore();
-
-        return $project->forceDelete();
-    }
-
-    /**
-     * Update the order of projects in the portfolio.
-     *
-     * @param array $data Array of data for projects.
-     */
-    public function updateProjectOrder(array $data)
-    {
-        $projectData = $this->setOrder($data);
-
-        foreach ($projectData as $singleProjectData) {
-            $project = Project::find($singleProjectData['id']);
-
-            $project->update($singleProjectData);
-        }
-    }
+    use ManagesPages, ManagesProjects;
 
     /**
      * Set order of data based on order value.
@@ -127,16 +30,16 @@ trait ManagesPortfolio
     }
 
     /**
-     * Add a text block to a project.
+     * Add a text block to a model.
      *
-     * @param Project $project   Project to add text block to.
+     * @param HasContent $model   Model to add text block to.
      * @param array   $blockData Array of text block data.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return HasContent
      */
-    public function addBlockToProject(Project $project, array $blockData)
+    public function addBlockToModel(HasContent $model, array $blockData)
     {
-        return $project->blocks()->create($blockData);
+        return $model->blocks()->create($blockData);
     }
 
     /**
@@ -155,12 +58,12 @@ trait ManagesPortfolio
     }
 
     /**
-     * Update project text blocks by adding new ones and updating existing ones.
+     * Update model text blocks by adding new ones and updating existing ones.
      *
-     * @param Project $project Project that blocks belong to.
-     * @param array   $data    Array of project information.
+     * @param Model $model Model that blocks belong to.
+     * @param array $data  Array of model information.
      */
-    public function updateProjectTextBlocks(Project $project, array $data)
+    public function updateAllTextBlocks(Model $model, array $data)
     {
         $blockData = collect($data)->get('blocks', []);
 
@@ -172,7 +75,7 @@ trait ManagesPortfolio
 
                 $this->updateTextBlock($block, $singleBlockData);
             } else {
-                $this->addBlockToProject($project, $singleBlockData);
+                $this->addBlockToModel($model, $singleBlockData);
             }
         }
     }
@@ -190,16 +93,16 @@ trait ManagesPortfolio
     }
 
     /**
-     * Add image to a project.
+     * Add image to a model.
      *
-     * @param Project $project   Project to add image to.
-     * @param array   $imageData Array of image infomation.
+     * @param HasContent $model     Model to add image to.
+     * @param array      $imageData Array of image infomation.
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return HasContent
      */
-    public function addImageToProject(Project $project, array $imageData)
+    public function addImageToModel(HasContent $model, array $imageData)
     {
-        return $project->images()->create($imageData);
+        return $model->images()->create($imageData);
     }
 
     /**
@@ -232,14 +135,14 @@ trait ManagesPortfolio
     }
 
     /**
-     * Add a link to a project.
+     * Add a link to a model.
      *
-     * @param Project $project  Project to add link to.
+     * @param HasContent $model  Model to add link to.
      * @param array   $linkData Array of link info.
      */
-    public function addLinkToProject(Project $project, array $linkData)
+    public function addLinkToModel(HasContent $model, array $linkData)
     {
-        return $project->links()->create($linkData);
+        return $model->links()->create($linkData);
     }
 
     /**
@@ -258,12 +161,12 @@ trait ManagesPortfolio
     }
 
     /**
-     * Update project links by adding new ones and updating existing ones.
+     * Update model links by adding new ones and updating existing ones.
      *
-     * @param Project $project Project that links belong to.
-     * @param array   $data    Array of project information.
+     * @param Model $model Model that links belong to.
+     * @param array $data  Array of model information.
      */
-    public function updateProjectLinks(Project $project, array $data)
+    public function updateAllLinks(Model $model, array $data)
     {
         $linkData = collect($data)->get('links', []);
 
@@ -275,7 +178,7 @@ trait ManagesPortfolio
 
                 $this->updateLink($link, $singleLinkData);
             } else {
-                $this->addLinkToProject($project, $singleLinkData);
+                $this->addLinkToModel($model, $singleLinkData);
             }
         }
     }

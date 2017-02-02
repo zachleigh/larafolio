@@ -25,7 +25,7 @@ class LinkTest extends TestCase
             'order' => 0,
         ];
 
-        $this->user->addLinkToProject($project, $data);
+        $this->user->addLinkToModel($project, $data);
 
         $data['resource_id'] = $project->id();
 

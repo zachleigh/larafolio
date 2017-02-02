@@ -264,7 +264,7 @@ class Project extends HasContent
     }
 
     /**
-     * Get formatted text of block named description or first block.
+     * Get formatted text of block with project name or first block.
      *
      * @return Larafolio\Models\TextBlock
      */
@@ -280,7 +280,7 @@ class Project extends HasContent
     }
 
     /**
-     * Get formatted text of block named description or first block.
+     * Get formatted text of block with project name or first block.
      *
      * @param bool $formatted If true, return formatted text.
      *
@@ -288,15 +288,15 @@ class Project extends HasContent
      */
     public function getProjectBlockText($formatted = true)
     {
-        $project = $this->getProjectBlock();
+        $block = $this->getProjectBlock();
 
-        if ($project && $formatted) {
-            return $project->formattedText();
-        } elseif ($project) {
-            return $project->text();
+        if ($block && $formatted) {
+            return $block->formattedText();
+        } elseif ($block) {
+            return $block->text();
         }
 
-        return $project;
+        return $block;
     }
 
     /**

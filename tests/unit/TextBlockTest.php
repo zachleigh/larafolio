@@ -26,7 +26,7 @@ class TextBlockTest extends TestCase
             'order'          => 0,
         ];
 
-        $this->user->addBlockToProject($project, $data);
+        $this->user->addBlockToModel($project, $data);
 
         $data['resource_id'] = $project->id();
 

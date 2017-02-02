@@ -1,6 +1,6 @@
 <?php
 
-namespace Larafolio\Models\Traits;
+namespace Larafolio\Models\ContentTraits;
 
 use Larafolio\Models\Link;
 

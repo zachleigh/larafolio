@@ -3,8 +3,12 @@
 namespace Larafolio\tests;
 
 use App\User;
+use Larafolio\Models\Link;
+use Larafolio\Models\Page;
 use Larafolio\Models\Image;
 use Larafolio\Models\Project;
+use Larafolio\Models\HasContent;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
@@ -67,18 +71,45 @@ abstract class TestCase extends IlluminateTestCase
      *
      * @return Larafolio\Models\Project
      */
-    public function createProjectWithBlock($name = 'name')
+    protected function createProjectWithBlock($name = 'name')
     {
         $project = factory(Project::class)->create();
 
-        $project->blocks()->create([
+        return $this->addBlockToModel($project, $name);
+    }
+
+    /**
+     * Create a page with a single block.
+     *
+     * @param string $name Name of block.
+     *
+     * @return Larafolio\Models\Page
+     */
+    protected function createPageWithBlock($name = 'name')
+    {
+        $page = factory(Page::class)->create();
+
+        return $this->addBlockToModel($page, $name);
+    }
+
+    /**
+     * Add a block to a HasContent model.
+     *
+     * @param Larafolio\Models\HasContent $model Model to add block to.
+     * @param string                      $name  Name of block.
+     *
+     * @return Larafolio\Models\HasContent
+     */
+    private function addBlockToModel(HasContent $model, $name)
+    {
+        $model->blocks()->create([
             'name'           => $name,
             'text'           => 'text',
             'formatted_text' => 'formatted',
-            'order' => 5
+            'order'          => 5,
         ]);
 
-        return $project;
+        return $model;
     }
 
     /**
@@ -92,17 +123,44 @@ abstract class TestCase extends IlluminateTestCase
     {
         $project = factory(Project::class)->create();
 
+        return $this->addImagesToModel($project, $imageCount);
+    }
+
+    /**
+     * Make a new page with the given number of images.
+     *
+     * @param int $imageCount The number of images to attach to page.
+     *
+     * @return Larafolio\Models\Page
+     */
+    protected function makePageWithImages($imageCount = 3)
+    {
+        $page = factory(Page::class)->create();
+
+        return $this->addImagesToModel($page, $imageCount);
+    }
+
+    /**
+     * Add images to a HasContent model.
+     *
+     * @param Larafolio\Models\HasContent $model      Model to add images to.
+     * @param int                         $imageCount Number of images to add.
+     *
+     * @return Larafolio\Models\HasContent 
+     */
+    private function addImagesToModel(HasContent $model, $imageCount)
+    {
         foreach (range(1, $imageCount) as $i) {
-            $project->images()->save(factory(Image::class)->make());
+            $model->images()->save(factory(Image::class)->make());
         }
 
-        return $project;
+        return $model;
     }
 
     /**
      * Make a single project with an image.
      *
-     * @param  string $name Image name.
+     * @param string $name Image name.
      *
      * @return Larafolio\Models\Project
      */
@@ -110,37 +168,105 @@ abstract class TestCase extends IlluminateTestCase
     {
         $project = factory(Project::class)->create();
 
-        $project->images()->save(factory(Image::class)->make([
+        return $this->addSingleImageToModel($project, $name, $alt);
+    }
+
+    /**
+     * Make a single page with an image.
+     *
+     * @param string $name Image name.
+     *
+     * @return Larafolio\Models\Page
+     */
+    protected function makePageWithImage($name = 'name', $alt = 'alt')
+    {
+        $page = factory(Page::class)->create();
+
+        return $this->addSingleImageToModel($page, $name, $alt);
+    }
+
+    /**
+     * Add a single image to a HasContent model.
+     *
+     * @param Larafolio\Models\HasContent $model Model to add image to.
+     * @param string                      $name  Name of image.
+     * @param string                      $alt   Alt text for image.
+     *
+     * @return Larafolio\Models\HasContent
+     */
+    private function addSingleImageToModel(HasContent $model, $name, $alt)
+    {
+        $model->images()->save(factory(Image::class)->make([
             'name' => $name,
             'alt'  => $alt,
         ]));
 
-        return $project;
+        return $model;
     }
 
     /**
      * Make a project with a link.
      *
-     * @param  string $name Name of link.
+     * @param string $name Name of link.
      *
      * @return Larafolio\Models\Project
      */
     protected function makeProjectWithLink($name = 'name', $url = 'url', $text = 'text')
     {
         $project = factory(Project::class)->create();
+        
+        return $this->addLinkToModel($project, $name, $url, $text);
+    }
 
-        $link = [
+    /**
+     * Make a page with a link.
+     *
+     * @param string $name Name of link.
+     *
+     * @return Larafolio\Models\Page
+     */
+    protected function makePageWithLink($name = 'name', $url = 'url', $text = 'text')
+    {
+        $page = factory(Page::class)->create();
+
+        return $this->addLinkToModel($page, $name, $url, $text);
+    }
+    /**
+     * Add a link to a model.
+     *
+     * @param HasContent $model Model to add link to.
+     * @param string     $name  Name to assign to link.
+     * @param string     $url   Link url.
+     * @param string     $text  Link text.
+     *
+     * @return HasContent
+     */
+    private function addLinkToModel(HasContent $model, $name, $url, $text)
+    {
+        $model->links()->save(factory(Link::class)->make([
             'name' => $name,
             'url'  => $url,
             'text' => $text,
-        ];
+        ]));
 
-        $data = [
-            'links' => [$link],
-        ];
+        return $model;
+    }
 
-        $this->user->updateProject($project, $data);
+    /**
+     * Assert a collection is ordered.
+     *
+     * @param \Illuminate\Support\Collection $ordered Collection of numbers.
+     */
+    protected function assertOrder(Collection $ordered)
+    {
+        $current = 0;
 
-        return $project;
+        $ordered->each(function ($order) use (&$current) {
+            $this->assertTrue($order >= $current);
+
+            if ($order != $current) {
+                $current = $order;
+            }
+        });
     }
 }
