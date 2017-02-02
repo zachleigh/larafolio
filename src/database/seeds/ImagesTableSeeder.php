@@ -80,6 +80,6 @@ class ImagesTableSeeder extends Seeder
 
         $user = User::find(1);
 
-        $user->addImageToProject($project, ['path' => $path]);
+        $user->addImageToModel($project, ['path' => $path]);
     }
 }

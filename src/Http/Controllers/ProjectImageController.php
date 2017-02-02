@@ -47,6 +47,6 @@ class ProjectImageController extends Controller
 
         Storage::put($imagePath, $image);
 
-        $this->user->addImageToProject($project, ['path' => $imagePath]);
+        $this->user->addImageToModel($project, ['path' => $imagePath]);
     }
 }
