@@ -66,8 +66,8 @@ class HasContent extends Model
      * Order and group query, return results.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query Query to be ordered.
-     * @param bool    $group If true, group projects by 'type'.
-     * @param bool    $order If true, order projects by 'order'.
+     * @param bool                                  $group If true, group projects by 'type'.
+     * @param bool                                  $order If true, order projects by 'order'.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -134,7 +134,7 @@ class HasContent extends Model
      * Get blocks sorted by order.
      *
      * @param Illuminate\Database\Eloquent\Builder $query Query builder.
-     * @param string   $slug  Project slug.
+     * @param string                               $slug  Project slug.
      *
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -148,7 +148,7 @@ class HasContent extends Model
      * Get full model info (blocks and links sorted by order).
      *
      * @param Illuminate\Database\Eloquent\Builder $query Query builder.
-     * @param string   $slug  Project slug.
+     * @param string                               $slug  Project slug.
      *
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -163,7 +163,7 @@ class HasContent extends Model
      * Order given relationship by order value.
      *
      * @param Illuminate\Database\Eloquent\Builder $query        Query builder.
-     * @param string   $relationship Name of relationship to order.
+     * @param string                               $relationship Name of relationship to order.
      *
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -173,7 +173,7 @@ class HasContent extends Model
             $query->orderBy('order');
         }]);
     }
-    
+
     /**
      * Return page properties to be passed to js.
      *
