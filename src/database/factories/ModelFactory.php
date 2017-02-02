@@ -31,8 +31,8 @@ $factory->define(Larafolio\Models\Image::class, function (Faker\Generator $faker
     $project = factory(Larafolio\Models\Project::class)->create();
 
     return [
-        'path'       => str_random(20).'.jpg',
-        'name'       => $faker->word,
+        'path'        => str_random(20).'.jpg',
+        'name'        => $faker->word,
         'resource_id' => $project->id(),
     ];
 });

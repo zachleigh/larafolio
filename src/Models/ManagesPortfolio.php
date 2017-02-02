@@ -251,7 +251,7 @@ trait ManagesPortfolio
     /**
      * Update content associated with model.
      *
-     * @param Larafolio\Models\HasContent $model          Model associated with content.   
+     * @param Larafolio\Models\HasContent $model          Model associated with content.
      * @param string                      $type           Type of model.
      * @param array                       $data           user posted data.
      * @param callable                    $updateCallback Callback to update the content.

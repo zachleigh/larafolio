@@ -178,7 +178,7 @@ class Project extends HasContent
     {
         return static::join($table, 'projects.id', '=', "{$table}.resource_id")
             ->where("{$table}.name", '=', $name)
-            ->where("{$table}.resource_type", '=', Project::class)
+            ->where("{$table}.resource_type", '=', self::class)
             ->select('projects.*')
             ->get();
     }
