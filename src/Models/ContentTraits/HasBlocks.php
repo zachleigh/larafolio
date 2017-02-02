@@ -31,7 +31,7 @@ trait HasBlocks
     /**
      * A resource has many text blocks.
      *
-     * @return MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function blocks()
     {

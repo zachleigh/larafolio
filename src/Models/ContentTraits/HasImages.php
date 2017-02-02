@@ -31,7 +31,7 @@ trait HasImages
     /**
      * A resource has many images.
      *
-     * @return MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function images()
     {
@@ -112,7 +112,7 @@ trait HasImages
     /**
      * Return images with all props needed for javascript.
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function imagesWithProps()
     {

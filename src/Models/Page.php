@@ -190,19 +190,4 @@ class Page extends HasContent
     {
         return $this->order;
     }
-
-    /**
-     * Return page properties to be passed to js.
-     *
-     * @return array
-     */
-    public function generateProps()
-    {
-        return [
-            'deletedAt' => $this->deleted_at->diffForHumans(),
-            'id'        => $this->id(),
-            'name'      => $this->name(),
-            'slug'      => $this->slug(),
-        ];
-    }
 }

@@ -2,7 +2,6 @@
 
 namespace Larafolio\Models;
 
-use Larafolio\Models\HasContent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Larafolio\Models\UserTraits\ManagesPages;
@@ -15,10 +14,10 @@ trait ManagesPortfolio
     /**
      * Add a blocks and links to model.
      *
-     * @param HasContent $model Model to add extras to.
-     * @param array      $data  Array of posted user data.
+     * @param Larafolio\Models\HasContent $model Model to add extras to.
+     * @param array                       $data  Array of posted user data.
      *
-     * @return HasContent
+     * @return Larafolio\Models\HasContent
      */
     protected function addModelExtras(HasContent $model, array $data)
     {
@@ -36,10 +35,10 @@ trait ManagesPortfolio
     /**
      * Update a HasContent model and its children.
      *
-     * @param  HasContent $model Model to update.
-     * @param  array      $data  Array of posted user data.
+     * @param Larafolio\Models\HasContent $model Model to update.
+     * @param array                       $data  Array of posted user data.
      *
-     * @return HasContent
+     * @return Larafolio\Models\HasContent
      */
     protected function updateModel(HasContent $model, array $data)
     {
@@ -55,9 +54,9 @@ trait ManagesPortfolio
     /**
      * Permanently delete a model.
      *
-     * @param  HasContent $model Model to delete.
+     * @param Larafolio\Models\HasContent $model Model to delete.
      *
-     * @return boolean
+     * @return bool
      */
     protected function purgeModel(HasContent $model)
     {
@@ -90,10 +89,10 @@ trait ManagesPortfolio
     /**
      * Add a text block to a model.
      *
-     * @param HasContent $model   Model to add text block to.
-     * @param array   $blockData Array of text block data.
+     * @param Larafolio\Models\HasContent $model     Model to add text block to.
+     * @param array                       $blockData Array of text block data.
      *
-     * @return HasContent
+     * @return Larafolio\Models\HasContent
      */
     public function addBlockToModel(HasContent $model, array $blockData)
     {
@@ -103,10 +102,10 @@ trait ManagesPortfolio
     /**
      * Update a text block.
      *
-     * @param TextBlock $textBlock Text block to update.
-     * @param array     $blockData Array of text block data.
+     * @param Larafolio\Models\TextBlock $textBlock Text block to update.
+     * @param array                      $blockData Array of text block data.
      *
-     * @return TextBlock
+     * @return Larafolio\Models\TextBlock
      */
     public function updateTextBlock(TextBlock $textBlock, array $blockData)
     {
@@ -118,10 +117,10 @@ trait ManagesPortfolio
     /**
      * Update model text blocks by adding new ones and updating existing ones.
      *
-     * @param Model $model Model that blocks belong to.
-     * @param array $data  Array of model information.
+     * @param Larafolio\Models\HasContent $model Model that blocks belong to.
+     * @param array                       $data  Array of model information.
      */
-    public function updateAllTextBlocks(Model $model, array $data)
+    public function updateAllTextBlocks(HasContent $model, array $data)
     {
         $blockData = collect($data)->get('blocks', []);
 
@@ -139,7 +138,7 @@ trait ManagesPortfolio
     /**
      * Remove a text block from a model.
      *
-     * @param TextBlock $textBlock The text block to delete.
+     * @param Larafolio\Models\TextBlock $textBlock The text block to delete.
      *
      * @return bool|null
      */
@@ -151,10 +150,10 @@ trait ManagesPortfolio
     /**
      * Add image to a model.
      *
-     * @param HasContent $model     Model to add image to.
-     * @param array      $imageData Array of image infomation.
+     * @param Larafolio\Models\HasContent $model     Model to add image to.
+     * @param array                       $imageData Array of image infomation.
      *
-     * @return HasContent
+     * @return Larafolio\Models\HasContent
      */
     public function addImageToModel(HasContent $model, array $imageData)
     {
@@ -164,10 +163,10 @@ trait ManagesPortfolio
     /**
      * Update image name and caption.
      *
-     * @param Image $image     Image to update.
-     * @param array $imageData Array of inmage information.
+     * @param Larafolio\Models\Image $image     Image to update.
+     * @param array                  $imageData Array of inmage information.
      *
-     * @return Image
+     * @return Larafolio\Models\Image
      */
     public function updateImageInfo(Image $image, array $imageData)
     {
@@ -179,7 +178,7 @@ trait ManagesPortfolio
     /**
      * Remove image from storage and delete database info.
      *
-     * @param Image $image Image to remove.
+     * @param Larafolio\Models\Image $image Image to remove.
      *
      * @return bool|null
      */
@@ -193,8 +192,8 @@ trait ManagesPortfolio
     /**
      * Add a link to a model.
      *
-     * @param HasContent $model  Model to add link to.
-     * @param array   $linkData Array of link info.
+     * @param Larafolio\Models\HasContent $model    Model to add link to.
+     * @param array                       $linkData Array of link info.
      */
     public function addLinkToModel(HasContent $model, array $linkData)
     {
@@ -204,10 +203,10 @@ trait ManagesPortfolio
     /**
      * Update a link.
      *
-     * @param Link  $link     Link to update.
-     * @param array $linkData Array of link data.
+     * @param Larafolio\Models\Link $link     Link to update.
+     * @param array                 $linkData Array of link data.
      *
-     * @return Link
+     * @return Larafolio\Models\Link
      */
     public function updateLink(Link $link, array $linkData)
     {
@@ -219,10 +218,10 @@ trait ManagesPortfolio
     /**
      * Update model links by adding new ones and updating existing ones.
      *
-     * @param Model $model Model that links belong to.
-     * @param array $data  Array of model information.
+     * @param Larafolio\Models\HasContent $model Model that links belong to.
+     * @param array                       $data  Array of model information.
      */
-    public function updateAllLinks(Model $model, array $data)
+    public function updateAllLinks(HasContent $model, array $data)
     {
         $linkData = collect($data)->get('links', []);
 
@@ -240,7 +239,7 @@ trait ManagesPortfolio
     /**
      * Remove link from a model.
      *
-     * @param Link $link Link to remove.
+     * @param Larafolio\Models\Link $link Link to remove.
      *
      * @return bool|null
      */
@@ -248,15 +247,15 @@ trait ManagesPortfolio
     {
         return $link->delete();
     }
-    
+
     /**
      * Update content associated with model.
      *
-     * @param  HasContent $model          Model associated with content.   
-     * @param  string     $type           Type of model.
-     * @param  array      $data           user posted data.
-     * @param  callable   $updateCallback Callback to update the content.
-     * @param  callable   $addCallback    Callback to add new content.
+     * @param Larafolio\Models\HasContent $model          Model associated with content.   
+     * @param string                      $type           Type of model.
+     * @param array                       $data           user posted data.
+     * @param callable                    $updateCallback Callback to update the content.
+     * @param callable                    $addCallback    Callback to add new content.
      */
     protected function updateContent(
         HasContent $model,

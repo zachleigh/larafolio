@@ -9,38 +9,38 @@ trait ManagesPages
     /**
      * Add a blocks and links to model.
      *
-     * @param HasContent $model Model to add extras to.
-     * @param array      $data  Array of posted user data.
+     * @param Larafolio\Models\HasContent $model Model to add extras to.
+     * @param array                       $data  Array of posted user data.
      *
-     * @return HasContent
+     * @return Larafolio\Models\HasContent
      */
-    protected abstract function addModelExtras(HasContent $model, array $data);
+    abstract protected function addModelExtras(HasContent $model, array $data);
 
     /**
      * Update a HasContent model and its children.
      *
-     * @param  HasContent $model Model to update.
-     * @param  array      $data  Array of posted user data.
+     * @param Larafolio\Models\HasContent $model Model to update.
+     * @param array                       $data  Array of posted user data.
      *
-     * @return HasContent
+     * @return Larafolio\Models\HasContent
      */
-    protected abstract function updateModel(HasContent $model, array $data);
+    abstract protected function updateModel(HasContent $model, array $data);
 
     /**
      * Permanently delete a model.
      *
-     * @param  HasContent $model Model to delete.
+     * @param Larafolio\Models\HasContent $model Model to delete.
      *
-     * @return boolean
+     * @return bool
      */
-    protected abstract function purgeModel(HasContent $model);
+    abstract protected function purgeModel(HasContent $model);
 
     /**
      * Add a page to the portfolio.
      *
      * @param array $data Array of data to save.
      *
-     * @return Project
+     * @return Larafolio\Models\Page
      */
     public function addPage(array $data)
     {
@@ -54,10 +54,10 @@ trait ManagesPages
     /**
      * Update a page.
      *
-     * @param Page  $page Page to update.
-     * @param array $data Array of data to save.
+     * @param Larafolio\Models\Page $page Page to update.
+     * @param array                 $data Array of data to save.
      *
-     * @return Page
+     * @return Larafolio\Models\Page
      */
     public function updatePage(Page $page, array $data)
     {
@@ -67,7 +67,7 @@ trait ManagesPages
     /**
      * Remove a page.
      *
-     * @param Page $page Page to remove.
+     * @param Larafolio\Models\Page $page Page to remove.
      *
      * @return bool|null
      */
@@ -79,7 +79,7 @@ trait ManagesPages
     /**
      * Restore a soft deleted page.
      *
-     * @param Page $page Page to restore.
+     * @param Larafolio\Models\Page $page Page to restore.
      *
      * @return bool|null
      */
@@ -93,7 +93,7 @@ trait ManagesPages
     /**
      * Hard delete a page from the portfolio.
      *
-     * @param Page $page Page to purge.
+     * @param Larafolio\Models\Page $page Page to purge.
      *
      * @return bool|null
      */
@@ -101,7 +101,7 @@ trait ManagesPages
     {
         return $this->purgeModel($page);
     }
-    
+
     /**
      * Update the order of pages in the portfolio.
      *

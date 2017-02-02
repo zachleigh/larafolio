@@ -65,7 +65,7 @@ class HasContent extends Model
     /**
      * Order and group query, return results.
      *
-     * @param Builder $query Query to be ordered.
+     * @param \Illuminate\Database\Eloquent\Builder $query Query to be ordered.
      * @param bool    $group If true, group projects by 'type'.
      * @param bool    $order If true, order projects by 'order'.
      *
@@ -114,10 +114,10 @@ class HasContent extends Model
     /**
      * Get blocks sorted by order.
      *
-     * @param \Builder $query Query builder.
+     * @param Illuminate\Database\Eloquent\Builder $query Query builder.
      * @param string   $slug  Project slug.
      *
-     * @return \Builder
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function scopeWithBlocks($query, $slug)
     {
@@ -128,10 +128,10 @@ class HasContent extends Model
     /**
      * Get full model info (blocks and links sorted by order).
      *
-     * @param \Builder $query Query builder.
+     * @param Illuminate\Database\Eloquent\Builder $query Query builder.
      * @param string   $slug  Project slug.
      *
-     * @return \Builder
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function scopeFull($query, $slug)
     {
@@ -143,15 +143,30 @@ class HasContent extends Model
     /**
      * Order given relationship by order value.
      *
-     * @param \Builder $query        Query builder.
+     * @param Illuminate\Database\Eloquent\Builder $query        Query builder.
      * @param string   $relationship Name of relationship to order.
      *
-     * @return \Builder
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public function scopeOrderRelationship($query, $relationship)
     {
         return $query->with([$relationship => function ($query) {
             $query->orderBy('order');
         }]);
+    }
+    
+    /**
+     * Return page properties to be passed to js.
+     *
+     * @return array
+     */
+    public function generateProps()
+    {
+        return [
+            'deletedAt' => $this->deleted_at->diffForHumans(),
+            'id'        => $this->id(),
+            'name'      => $this->name(),
+            'slug'      => $this->slug(),
+        ];
     }
 }
