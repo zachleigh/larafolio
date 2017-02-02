@@ -131,36 +131,6 @@ class Project extends HasContent
     }
 
     /**
-     * Order and group query, return results.
-     *
-     * @param Builder $query Query to be ordered.
-     * @param bool    $group If true, group projects by 'type'.
-     * @param bool    $order If true, order projects by 'order'.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected static function orderAndGroupQuery($query, $group, $order)
-    {
-        if ($order) {
-            $query->orderBy('order');
-        }
-
-        $query->orderRelationship('links');
-
-        $query->orderRelationship('blocks');
-
-        if ($group) {
-            return $query->get()
-                ->each(function ($project, $key) {
-                    $project->index = $key;
-                })
-                ->groupBy('type');
-        }
-
-        return $query->get();
-    }
-
-    /**
      * Get all projects with given block name.
      *
      * @param string $blockName Name of block.

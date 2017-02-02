@@ -130,6 +130,26 @@ class TextBlockTest extends TestCase
         $secondBlock['resource_id'] = $project->id();
 
         $this->seeInDatabase('text_blocks', $secondBlock);
+
+        $firstBlockModel = TextBlock::where($firstBlock)->first();
+
+        $firstBlockUpdated = [
+            'name'           => 'first text block name updated',
+            'text'           => 'first text block text updated',
+            'formatted_text' => '<p>first text block text udpated</p>',
+            'resource_id'    => $project->id(),
+            'id'             => $firstBlockModel->id()
+        ];
+
+        $newData = [
+            'name'   => 'new updated name',
+            'link'   => 'new updated link',
+            'blocks' => [$firstBlockUpdated],
+        ];
+
+        $this->user->updateProject($project, $newData);
+
+        $this->seeInDatabase('text_blocks', $firstBlockUpdated);
     }
 
     /**

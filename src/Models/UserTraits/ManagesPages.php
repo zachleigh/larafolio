@@ -7,6 +7,35 @@ use Larafolio\Models\Page;
 trait ManagesPages
 {
     /**
+     * Add a blocks and links to model.
+     *
+     * @param HasContent $model Model to add extras to.
+     * @param array      $data  Array of posted user data.
+     *
+     * @return HasContent
+     */
+    protected abstract function addModelExtras(HasContent $model, array $data);
+
+    /**
+     * Update a HasContent model and its children.
+     *
+     * @param  HasContent $model Model to update.
+     * @param  array      $data  Array of posted user data.
+     *
+     * @return HasContent
+     */
+    protected abstract function updateModel(HasContent $model, array $data);
+
+    /**
+     * Permanently delete a model.
+     *
+     * @param  HasContent $model Model to delete.
+     *
+     * @return boolean
+     */
+    protected abstract function purgeModel(HasContent $model);
+
+    /**
      * Add a page to the portfolio.
      *
      * @param array $data Array of data to save.
@@ -19,15 +48,7 @@ trait ManagesPages
 
         $page = Page::create($data);
 
-        foreach (collect($data)->get('blocks', []) as $block) {
-            $this->addBlockToModel($page, $block);
-        }
-
-        foreach (collect($data)->get('links', []) as $link) {
-            $this->addLinkToModel($page, $link);
-        }
-
-        return $page;
+        return $this->addModelExtras($page, $data);
     }
 
     /**
@@ -40,13 +61,7 @@ trait ManagesPages
      */
     public function updatePage(Page $page, array $data)
     {
-        $page->update($data);
-
-        $this->updateAllTextBlocks($page, $data);
-
-        $this->updateAllLinks($page, $data);
-
-        return $page;
+        return $this->updateModel($page, $data);
     }
 
     /**
@@ -84,12 +99,22 @@ trait ManagesPages
      */
     public function purgePage(Page $page)
     {
-        foreach ($page->images as $image) {
-            $this->removeImage($image);
+        return $this->purgeModel($page);
+    }
+    
+    /**
+     * Update the order of pages in the portfolio.
+     *
+     * @param array $data Array of data for pages.
+     */
+    public function updatePageOrder(array $data)
+    {
+        $pageData = $this->setOrder($data);
+
+        foreach ($pageData as $singlePageData) {
+            $page = Page::find($singlePageData['id']);
+
+            $page->update($singlePageData);
         }
-
-        $page->restore();
-
-        return $page->forceDelete();
     }
 }

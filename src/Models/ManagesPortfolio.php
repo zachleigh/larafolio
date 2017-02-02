@@ -13,6 +13,64 @@ trait ManagesPortfolio
     use ManagesPages, ManagesProjects;
 
     /**
+     * Add a blocks and links to model.
+     *
+     * @param HasContent $model Model to add extras to.
+     * @param array      $data  Array of posted user data.
+     *
+     * @return HasContent
+     */
+    protected function addModelExtras(HasContent $model, array $data)
+    {
+        foreach (collect($data)->get('blocks', []) as $block) {
+            $this->addBlockToModel($model, $block);
+        }
+
+        foreach (collect($data)->get('links', []) as $link) {
+            $this->addLinkToModel($model, $link);
+        }
+
+        return $model;
+    }
+
+    /**
+     * Update a HasContent model and its children.
+     *
+     * @param  HasContent $model Model to update.
+     * @param  array      $data  Array of posted user data.
+     *
+     * @return HasContent
+     */
+    protected function updateModel(HasContent $model, array $data)
+    {
+        $model->update($data);
+
+        $this->updateAllTextBlocks($model, $data);
+
+        $this->updateAllLinks($model, $data);
+
+        return $model;
+    }
+
+    /**
+     * Permanently delete a model.
+     *
+     * @param  HasContent $model Model to delete.
+     *
+     * @return boolean
+     */
+    protected function purgeModel(HasContent $model)
+    {
+        foreach ($model->images as $image) {
+            $this->removeImage($image);
+        }
+
+        $model->restore();
+
+        return $model->forceDelete();
+    }
+
+    /**
      * Set order of data based on order value.
      *
      * @param array $data Data array containing 'order' index.
@@ -67,21 +125,19 @@ trait ManagesPortfolio
     {
         $blockData = collect($data)->get('blocks', []);
 
-        $blockData = $this->setOrder($blockData);
+        $type = TextBlock::class;
 
-        foreach ($blockData as $singleBlockData) {
-            if (isset($singleBlockData['resource_id'])) {
-                $block = TextBlock::find($singleBlockData['id']);
-
-                $this->updateTextBlock($block, $singleBlockData);
-            } else {
-                $this->addBlockToModel($model, $singleBlockData);
-            }
-        }
+        $this->updateContent(
+            $model,
+            $type,
+            $blockData,
+            [$this, 'updateTextBlock'],
+            [$this, 'addBlockToModel']
+        );
     }
 
     /**
-     * Remove a text block from a project.
+     * Remove a text block from a model.
      *
      * @param TextBlock $textBlock The text block to delete.
      *
@@ -170,21 +226,19 @@ trait ManagesPortfolio
     {
         $linkData = collect($data)->get('links', []);
 
-        $linkData = $this->setOrder($linkData);
+        $type = Link::class;
 
-        foreach ($linkData as $singleLinkData) {
-            if (isset($singleLinkData['resource_id'])) {
-                $link = Link::find($singleLinkData['id']);
-
-                $this->updateLink($link, $singleLinkData);
-            } else {
-                $this->addLinkToModel($model, $singleLinkData);
-            }
-        }
+        $this->updateContent(
+            $model,
+            $type,
+            $linkData,
+            [$this, 'updateLink'],
+            [$this, 'addLinkToModel']
+        );
     }
 
     /**
-     * Remove link from a project.
+     * Remove link from a model.
      *
      * @param Link $link Link to remove.
      *
@@ -193,5 +247,34 @@ trait ManagesPortfolio
     public function removeLink(Link $link)
     {
         return $link->delete();
+    }
+    
+    /**
+     * Update content associated with model.
+     *
+     * @param  HasContent $model          Model associated with content.   
+     * @param  string     $type           Type of model.
+     * @param  array      $data           user posted data.
+     * @param  callable   $updateCallback Callback to update the content.
+     * @param  callable   $addCallback    Callback to add new content.
+     */
+    protected function updateContent(
+        HasContent $model,
+        $type,
+        array $data,
+        callable $updateCallback,
+        callable $addCallback
+    ) {
+        $data = $this->setOrder($data);
+
+        foreach ($data as $singleItemData) {
+            if (isset($singleItemData['resource_id'])) {
+                $block = $type::find($singleItemData['id']);
+
+                $updateCallback($block, $singleItemData);
+            } else {
+                $addCallback($model, $singleItemData);
+            }
+        }
     }
 }

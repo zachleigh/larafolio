@@ -125,6 +125,26 @@ class LinkTest extends TestCase
         $secondLink['resource_id'] = $project->id();
 
         $this->seeInDatabase('links', $secondLink);
+
+        $firstLinkModel = Link::where($firstLink)->first();
+
+        $firstLinkUpdated = [
+            'name'        => 'first link name updated',
+            'text'        => 'first link text updated',
+            'url'         => 'first link url updated',
+            'resource_id' => $project->id(),
+            'id'          => $firstLinkModel->id()
+        ];
+
+        $newData = [
+            'name'   => 'new updated name',
+            'link'   => 'new updated link',
+            'links' => [$firstLinkUpdated],
+        ];
+
+        $this->user->updateProject($project, $newData);
+
+        $this->seeInDatabase('links', $firstLinkUpdated);
     }
 
     /**

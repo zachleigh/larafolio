@@ -7,6 +7,35 @@ use Larafolio\Models\Project;
 trait ManagesProjects
 {
     /**
+     * Add a blocks and links to model.
+     *
+     * @param HasContent $model Model to add extras to.
+     * @param array      $data  Array of posted user data.
+     *
+     * @return HasContent
+     */
+    protected abstract function addModelExtras(HasContent $model, array $data);
+
+    /**
+     * Update a HasContent model and its children.
+     *
+     * @param  HasContent $model Model to update.
+     * @param  array      $data  Array of posted user data.
+     *
+     * @return HasContent
+     */
+    protected abstract function updateModel(HasContent $model, array $data);
+
+    /**
+     * Permanently delete a model.
+     *
+     * @param  HasContent $model Model to delete.
+     *
+     * @return boolean
+     */
+    protected abstract function purgeModel(HasContent $model);
+
+    /**
      * Add a project to the portfolio.
      *
      * @param array $data Array of data to save.
@@ -19,15 +48,7 @@ trait ManagesProjects
 
         $project = Project::create($data);
 
-        foreach (collect($data)->get('blocks', []) as $block) {
-            $this->addBlockToModel($project, $block);
-        }
-
-        foreach (collect($data)->get('links', []) as $link) {
-            $this->addLinkToModel($project, $link);
-        }
-
-        return $project;
+        return $this->addModelExtras($project, $data);
     }
 
     /**
@@ -40,13 +61,7 @@ trait ManagesProjects
      */
     public function updateProject(Project $project, array $data)
     {
-        $project->update($data);
-
-        $this->updateAllTextBlocks($project, $data);
-
-        $this->updateAllLinks($project, $data);
-
-        return $project;
+        return $this->updateModel($project, $data);
     }
 
     /**
@@ -84,13 +99,7 @@ trait ManagesProjects
      */
     public function purgeProject(Project $project)
     {
-        foreach ($project->images as $image) {
-            $this->removeImage($image);
-        }
-
-        $project->restore();
-
-        return $project->forceDelete();
+        return $this->purgeModel($project);
     }
     
     /**
