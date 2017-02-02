@@ -59,22 +59,6 @@ class Project extends HasContent
     }
 
     /**
-     * Bootstrap model.
-     */
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (Project $project) {
-            $project->setSlug('name');
-        });
-
-        static::updating(function (Project $project) {
-            $project->setSlug('name');
-        });
-    }
-
-    /**
      * Return all visible projects.
      *
      * @param bool $group If true, group projects by 'type'.
@@ -139,7 +123,7 @@ class Project extends HasContent
      */
     public static function hasBlockNamed($blockName)
     {
-        return static::hasRelationshipNamed('text_blocks', $blockName);
+        return static::hasRelationshipNamed(Project::class, 'projects', 'text_blocks', $blockName);
     }
 
     /**
@@ -151,7 +135,7 @@ class Project extends HasContent
      */
     public static function hasImageNamed($imageName)
     {
-        return static::hasRelationshipNamed('images', $imageName);
+        return static::hasRelationshipNamed(Project::class, 'projects', 'images', $imageName);
     }
 
     /**
@@ -163,24 +147,7 @@ class Project extends HasContent
      */
     public static function hasLinkNamed($linkName)
     {
-        return static::hasRelationshipNamed('links', $linkName);
-    }
-
-    /**
-     * Get all projects with relationship on table that has given name.
-     *
-     * @param string $table Name of table relationship is on.
-     * @param string $name  Relationship name.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected static function hasRelationshipNamed($table, $name)
-    {
-        return static::join($table, 'projects.id', '=', "{$table}.resource_id")
-            ->where("{$table}.name", '=', $name)
-            ->where("{$table}.resource_type", '=', Project::class)
-            ->select('projects.*')
-            ->get();
+        return static::hasRelationshipNamed(Project::class, 'projects', 'links', $linkName);
     }
 
     /**

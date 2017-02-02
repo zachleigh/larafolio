@@ -107,7 +107,7 @@ class Page extends HasContent
      */
     public static function hasBlockNamed($blockName)
     {
-        return static::hasRelationshipNamed('text_blocks', $blockName);
+        return static::hasRelationshipNamed(Page::class, 'pages', 'text_blocks', $blockName);
     }
 
     /**
@@ -119,7 +119,7 @@ class Page extends HasContent
      */
     public static function hasImageNamed($imageName)
     {
-        return static::hasRelationshipNamed('images', $imageName);
+        return static::hasRelationshipNamed(Page::class, 'pages', 'images', $imageName);
     }
 
     /**
@@ -131,24 +131,7 @@ class Page extends HasContent
      */
     public static function hasLinkNamed($linkName)
     {
-        return static::hasRelationshipNamed('links', $linkName);
-    }
-
-    /**
-     * Get all pages with relationship on table that has given name.
-     *
-     * @param string $table Name of table relationship is on.
-     * @param string $name  Relationship name.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected static function hasRelationshipNamed($table, $name)
-    {
-        return static::join($table, 'pages.id', '=', "{$table}.resource_id")
-            ->where("{$table}.name", '=', $name)
-            ->where("{$table}.resource_type", '=', Page::class)
-            ->select('pages.*')
-            ->get();
+        return static::hasRelationshipNamed(Page::class, 'pages', 'links', $linkName);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Larafolio\Models\UserTraits;
 
 use Larafolio\Models\Project;
+use Larafolio\Models\HasContent;
 
 trait ManagesProjects
 {

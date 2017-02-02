@@ -3,6 +3,7 @@
 namespace Larafolio\Models\UserTraits;
 
 use Larafolio\Models\Page;
+use Larafolio\Models\HasContent;
 
 trait ManagesPages
 {
