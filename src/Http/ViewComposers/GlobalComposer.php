@@ -4,6 +4,7 @@ namespace Larafolio\Http\ViewComposers;
 
 use Auth;
 use Illuminate\View\View;
+use Larafolio\Models\Page;
 use Larafolio\Models\Project;
 
 class GlobalComposer
@@ -19,6 +20,9 @@ class GlobalComposer
 
         $projects = $user ? Project::all() : collect([]);
 
-        $view->with('navProjects', $projects);
+        $pages = $user ? Page::all() : collect([]);
+
+        $view->with('navProjects', $projects)
+             ->with('navPages', $pages);
     }
 }

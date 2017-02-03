@@ -13,6 +13,7 @@ Vue.component('links', require('./components/Links.vue'));
 Vue.component('link-preview', require('./components/Previews/LinkPreview.vue'));
 Vue.component('link-status', require('./components/LinkStatus.vue'));
 Vue.component('name-preview', require('./components/Previews/NamePreview.vue'));
+Vue.component('nav-pages', require('./components/NavPages.vue'));
 Vue.component('nav-projects', require('./components/NavProjects.vue'));
 Vue.component('project-link', require('./components/ProjectLink.vue'));
 Vue.component('project-controls', require('./components/ProjectControls.vue'));
