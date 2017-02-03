@@ -146,7 +146,7 @@ class Page extends HasContent
     {
         return static::join($table, 'pages.id', '=', "{$table}.resource_id")
             ->where("{$table}.name", '=', $name)
-            ->where("{$table}.resource_type", '=', Page::class)
+            ->where("{$table}.resource_type", '=', self::class)
             ->select('pages.*')
             ->get();
     }
