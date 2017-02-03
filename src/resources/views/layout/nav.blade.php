@@ -41,24 +41,47 @@
                         </nav-projects>
                     </div>
                 </div>
+            @endif
+            @if (!$navProjects->isEmpty())
                 <div class="nav__dropdown">
                     <span class="nav__item">
                         <span class="nav__icon">
-                            {!! file_get_contents(public_path('vendor/larafolio/zondicons/cog.svg')) !!}
+                            {!! file_get_contents(public_path('vendor/larafolio/zondicons/view-carousel.svg')) !!}
                         </span>
-                        Settings
+                        Pages
                     </span>
                     <div class="nav__dropdown-content">
-                        <a href="{{ route('show-settings', ['page' => 'projects']) }}" class="nav__link">
+                        <a href="{{ route('add-page') }}" class="nav__link">
                             <div class="nav__dropdown-item">
                                 <span class="nav__dropdown-item-text">
-                                    Project Settings
+                                    Add
                                 </span>
                             </div>
                         </a>
+                        <nav-pages
+                            :passed-pages="{{ $navPages }}"
+                        >
+                        </nav-pages>
                     </div>
                 </div>
             @endif
+            <div class="nav__dropdown">
+                <span class="nav__item">
+                    <span class="nav__icon">
+                        {!! file_get_contents(public_path('vendor/larafolio/zondicons/cog.svg')) !!}
+                    </span>
+                    Settings
+                </span>
+                <div class="nav__dropdown-content">
+                    <a href="{{ route('show-settings', ['page' => 'projects']) }}" class="nav__link">
+                        <div class="nav__dropdown-item">
+                            <span class="nav__dropdown-item-text">
+                                Project Settings
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="nav__section nav__center">
             {!! file_get_contents(public_path('vendor/larafolio/images/logo.svg')) !!}

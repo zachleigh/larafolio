@@ -47,7 +47,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('larafolio::projects.add');
+        // return view('larafolio::projects.add');
     }
 
     /**
@@ -59,13 +59,13 @@ class PageController extends Controller
      */
     public function store(AddProjectRequest $request)
     {
-        $project = $this->user->addProject($request->all());
+        // $project = $this->user->addProject($request->all());
 
-        if ($request->ajax()) {
-            return response()->json(['project' => $project]);
-        }
+        // if ($request->ajax()) {
+        //     return response()->json(['project' => $project]);
+        // }
 
-        return redirect(route('show-project', ['project' => $project]));
+        // return redirect(route('show-project', ['project' => $project]));
     }
 
     /**
@@ -77,17 +77,17 @@ class PageController extends Controller
      */
     public function edit($slug)
     {
-        $project = Project::full($slug)->first();
+        // $project = Project::full($slug)->first();
 
-        $nextBlock = $project->blocks->pluck('order')->max() + 1;
+        // $nextBlock = $project->blocks->pluck('order')->max() + 1;
 
-        $nextLink = $project->links->pluck('order')->max() + 1;
+        // $nextLink = $project->links->pluck('order')->max() + 1;
 
-        return view('larafolio::projects.edit', [
-            'project'   => $project,
-            'nextBlock' => $nextBlock,
-            'nextLink'  => $nextLink,
-        ]);
+        // return view('larafolio::projects.edit', [
+        //     'project'   => $project,
+        //     'nextBlock' => $nextBlock,
+        //     'nextLink'  => $nextLink,
+        // ]);
     }
 
     /**
@@ -100,19 +100,19 @@ class PageController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $project = Project::withTrashed()->where('slug', $slug)->first();
+        // $project = Project::withTrashed()->where('slug', $slug)->first();
 
-        if ($project->trashed()) {
-            $this->user->restoreProject($project);
-        } else {
-            $this->user->updateProject($project, $request->all());
-        }
+        // if ($project->trashed()) {
+        //     $this->user->restoreProject($project);
+        // } else {
+        //     $this->user->updateProject($project, $request->all());
+        // }
 
-        if ($request->ajax()) {
-            return response()->json(['project' => $project]);
-        }
+        // if ($request->ajax()) {
+        //     return response()->json(['project' => $project]);
+        // }
 
-        return redirect(route('show-project', ['project' => $project]));
+        // return redirect(route('show-project', ['project' => $project]));
     }
 
     /**
@@ -125,18 +125,18 @@ class PageController extends Controller
      */
     public function destroy(Request $request, $slug)
     {
-        $project = Project::withTrashed()->where('slug', $slug)->first();
+        // $project = Project::withTrashed()->where('slug', $slug)->first();
 
-        if ($project->trashed()) {
-            $this->user->purgeProject($project);
-        } else {
-            $this->user->removeProject($project);
-        }
+        // if ($project->trashed()) {
+        //     $this->user->purgeProject($project);
+        // } else {
+        //     $this->user->removeProject($project);
+        // }
 
-        if ($request->ajax()) {
-            return response()->json(true);
-        }
+        // if ($request->ajax()) {
+        //     return response()->json(true);
+        // }
 
-        return redirect(route('dashboard'));
+        // return redirect(route('dashboard'));
     }
 }
