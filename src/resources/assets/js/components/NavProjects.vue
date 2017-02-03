@@ -3,7 +3,7 @@
         <a
             v-for="project in projects"
             class="nav__link" 
-            v-bind:href="'/manager/' + project.slug">
+            v-bind:href="'/manager/projects/' + project.slug">
             <div class="nav__dropdown-item">
                 <span class="nav__dropdown-item-text">
                     {{ project.name }}

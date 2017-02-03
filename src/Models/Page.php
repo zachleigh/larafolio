@@ -107,7 +107,7 @@ class Page extends HasContent
      */
     public static function hasBlockNamed($blockName)
     {
-        return static::hasRelationshipNamed(Page::class, 'pages', 'text_blocks', $blockName);
+        return static::hasRelationshipNamed('pages', 'text_blocks', $blockName);
     }
 
     /**
@@ -119,7 +119,7 @@ class Page extends HasContent
      */
     public static function hasImageNamed($imageName)
     {
-        return static::hasRelationshipNamed(Page::class, 'pages', 'images', $imageName);
+        return static::hasRelationshipNamed('pages', 'images', $imageName);
     }
 
     /**
@@ -131,7 +131,7 @@ class Page extends HasContent
      */
     public static function hasLinkNamed($linkName)
     {
-        return static::hasRelationshipNamed(Page::class, 'pages', 'links', $linkName);
+        return static::hasRelationshipNamed('pages', 'links', $linkName);
     }
 
     /**

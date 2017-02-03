@@ -114,18 +114,17 @@ class HasContent extends Model
     /**
      * Get all models with relationship on table that have given name.
      *
-     * @param string $class      Model class name.
      * @param string $modelTable Model table name.
      * @param string $table      Name of table relationship is on.
      * @param string $name       Relationship name.
      *
      * @return \Illuminate\Support\Collection
      */
-    protected static function hasRelationshipNamed($class, $modelTable, $table, $name)
+    protected static function hasRelationshipNamed($modelTable, $table, $name)
     {
         return static::join($table, "{$modelTable}.id", '=', "{$table}.resource_id")
             ->where("{$table}.name", '=', $name)
-            ->where("{$table}.resource_type", '=', $class)
+            ->where("{$table}.resource_type", '=', static::class)
             ->select("{$modelTable}.*")
             ->get();
     }

@@ -35,7 +35,7 @@ class MobileCest
         $I->wantTo('Access the project manager page on mobile.');
         $I->login($I, 'mobile');
         $I->click('#manage'.$project->id());
-        $I->seeCurrentUrlEquals('/manager/'.$project->slug());
+        $I->seeCurrentUrlEquals('/manager/projects/'.$project->slug());
     }
 
     public function project_order_can_be_changed(AcceptanceTester $I)
@@ -99,7 +99,7 @@ class MobileCest
         $I->fillForm($I, $data);
         $I->click('Add Project');
         $I->wait(1);
-        $I->seeCurrentUrlEquals('/manager/project_name');
+        $I->seeCurrentUrlEquals('/manager/projects/project_name');
         $I->see('Project successfully added');
         $I->seeInDatabase('projects', ['name' => $data['name']]);
         $I->seeInDatabase('text_blocks', ['text' => $data['text0']]);
@@ -121,7 +121,7 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Update a project in the portfolio on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Project');
         $I->wait(1);
@@ -142,7 +142,7 @@ class MobileCest
             'name' => $data['name2'],
             'text' => $data['text2'],
         ]);
-        $I->seeCurrentUrlEquals('/manager/updated_name/edit');
+        $I->seeCurrentUrlEquals('/manager/projects/updated_name/edit');
         $I->see('Project successfully updated');
     }
 
@@ -151,7 +151,7 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Toggle the visibility of a project from the project screen on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see('Hidden');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
@@ -165,7 +165,7 @@ class MobileCest
             'id'      => $project->id(),
             'visible' => true,
         ]);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('#makeHidden');
         $I->see('Hidden');
         $I->see($project->name().' is not publicly viewable');
@@ -181,7 +181,7 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Remove a project from the portfolio on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->seeInDatabase('projects', [
             'id'         => $project->id(),
             'deleted_at' => null,
@@ -203,7 +203,7 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Add an image to a project on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}/images");
+        $I->amOnPage("/manager/projects/{$project->slug()}/images");
         $I->waitForElement('.dz-hidden-input');
         $I->attachFile('.dz-hidden-input', 'new.jpg');
         $I->wait(1);
@@ -225,7 +225,7 @@ class MobileCest
 
         $I->wantTo('Update image information on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}/images");
+        $I->amOnPage("/manager/projects/{$project->slug()}/images");
         $I->fillForm($I, $data);
         $I->click('#button'.$id);
         $I->wait(1);
@@ -247,7 +247,7 @@ class MobileCest
         $I->wantTo('Remove an image from a project on mobile.');
         $I->login($I, 'mobile');
         $I->seeInDatabase('images', ['path' => $image->path()]);
-        $I->amOnPage("/manager/{$project->slug()}/images");
+        $I->amOnPage("/manager/projects/{$project->slug()}/images");
         $I->click('#remove'.$id);
         $I->click('Remove Image');
         $I->wait(1);
@@ -267,7 +267,7 @@ class MobileCest
 
         $I->wantTo('Change textblock order on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -278,12 +278,12 @@ class MobileCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('Edit Project');
         $I->removeBlock($I, '#delete2');
         $I->removeBlock($I, '#delete0');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see($data['name2']);
         $I->dontSee($data['name0']);
         $I->dontSee($data['name1']);
@@ -320,7 +320,7 @@ class MobileCest
 
         $I->wantTo('Change the order of links on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -331,12 +331,12 @@ class MobileCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('Edit Project');
         $I->removeLink($I, '#deleteLink2');
         $I->removeLink($I, '#deleteLink0');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see($data['url2']);
         $I->dontSee($data['url0']);
         $I->dontSee($data['url1']);

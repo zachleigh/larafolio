@@ -20,7 +20,7 @@ class ImageTest extends TestCase
 
         $project = factory(Project::class)->create();
 
-        $this->json('POST', "manager/{$project->slug()}/images",
+        $this->json('POST', "manager/projects/{$project->slug()}/images",
             ['path' => 'path']
         )
              ->seeStatusCode(302)
@@ -34,7 +34,7 @@ class ImageTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $this->visit('manager/'.$project->slug().'/images')
+        $this->visit('manager/projects/'.$project->slug().'/images')
              ->seeStatusCode(200)
              ->seePageIs('/');
     }

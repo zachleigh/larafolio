@@ -23,7 +23,7 @@ class ProjectsCest
         $I->fillForm($I, $data);
         $I->click('Add Project');
         $I->wait(1);
-        $I->seeCurrentUrlEquals('/manager/project_name');
+        $I->seeCurrentUrlEquals('/manager/projects/project_name');
         $I->see('Project successfully added');
         $I->seeInDatabase('projects', ['name' => $data['name']]);
         $I->seeInDatabase('text_blocks', ['text' => $data['text0']]);
@@ -48,7 +48,7 @@ class ProjectsCest
         $project = $I->getProject($I);
         $I->wantTo('Toggle the visibility of a project.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see('Hidden');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
@@ -62,7 +62,7 @@ class ProjectsCest
             'id'      => $project->id(),
             'visible' => true,
         ]);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('#makeHidden');
         $I->see('Hidden');
         $I->see($project->name().' is not publicly viewable');
@@ -78,7 +78,7 @@ class ProjectsCest
         $project = $I->getProject($I);
         $I->wantTo('Remove a project from the portfolio.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->seeInDatabase('projects', [
             'id'         => $project->id(),
             'deleted_at' => null,
@@ -110,7 +110,7 @@ class ProjectsCest
         $project = $I->getProject($I);
         $I->wantTo('Update a project in the portfolio.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Project');
         $I->wait(1);
@@ -131,7 +131,7 @@ class ProjectsCest
             'name' => $data['name2'],
             'text' => $data['text2'],
         ]);
-        $I->seeCurrentUrlEquals('/manager/updated_name/edit');
+        $I->seeCurrentUrlEquals('/manager/projects/updated_name/edit');
         $I->see('Project successfully updated');
     }
 
@@ -141,7 +141,7 @@ class ProjectsCest
 
         $I->wantTo('Be able to update a project if the name was changed.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'name'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -154,7 +154,7 @@ class ProjectsCest
 
         $I->wantTo('Be able to update a project if the type was changed.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'projectType'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -167,7 +167,7 @@ class ProjectsCest
 
         $I->wantTo('Be able to update a project if a link was changed.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'url0'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -203,7 +203,7 @@ class ProjectsCest
 
         $I->wantTo('Force delete a project.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('#removeProject');
         $I->click('Remove Project');
         $I->wait(1);
@@ -226,7 +226,7 @@ class ProjectsCest
 
         $I->wantTo('Restore a deleted project.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('#removeProject');
         $I->click('Remove Project');
         $I->wait(1);
@@ -249,7 +249,7 @@ class ProjectsCest
 
         $I->wantTo('Verify that when a project is restored, the nav menu refreshes.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('#removeProject');
         $I->click('Remove Project');
         $I->wait(1);

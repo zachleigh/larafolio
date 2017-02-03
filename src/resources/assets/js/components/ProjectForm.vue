@@ -307,7 +307,7 @@
                         title: 'Added',
                         message: 'Project successfully added',
                         type: 'success'
-                    }, '/manager/'+slug);
+                    }, '/manager/projects/'+slug);
                 })
                 .catch(function (error) {
                     this.errors = error.data;
@@ -335,7 +335,7 @@
                         title: 'Updated',
                         message: 'Project successfully updated',
                         type: 'success'
-                    }, '/manager/'+slug+'/edit');
+                    }, '/manager/projects/'+slug+'/edit');
                 })
                 .catch(function (error) {
                     this.errors = error.data;

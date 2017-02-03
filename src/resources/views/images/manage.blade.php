@@ -16,8 +16,8 @@
         </div>
         <div class="project__main image-tile__container">
             <image-manager
-                action="{{ route('store-image', ['project' => $project]) }}"
-                fetch-action="{{ route('show-images', ['project' => $project]) }}"
+                action="{{ route('store-project-image', ['project' => $project]) }}"
+                fetch-action="{{ route('show-project-images', ['project' => $project]) }}"
                 :icons="{{ json_encode([
                     'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
                     'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),

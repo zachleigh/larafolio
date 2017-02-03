@@ -38,7 +38,7 @@ class TextBlocksCest
         $I->fillForm($I, $data);
         $I->click('Add Project');
         $I->wait(1);
-        $I->seeCurrentUrlEquals('/manager/project_name');
+        $I->seeCurrentUrlEquals('/manager/projects/project_name');
         $I->seeInDatabase('projects', ['name' => $data['name']]);
         $I->seeInDatabase('text_blocks', ['text' => $data['text0']]);
         $I->seeInDatabase('text_blocks', ['text' => $data['text1']]);
@@ -157,7 +157,7 @@ class TextBlocksCest
 
         $I->wantTo('Add and delete text blocks from a project when editing.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->click('#addBlock');
         $I->fillField('text3', 'block4');
         $I->removeBlock($I, '#delete2');
@@ -168,7 +168,7 @@ class TextBlocksCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see('block4');
         $I->see('block5');
         $I->dontSee($blocks[0]->text());
@@ -187,7 +187,7 @@ class TextBlocksCest
 
         $I->wantTo('Move a block up while editing a project.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -200,7 +200,7 @@ class TextBlocksCest
         $I->removeBlock($I, '#delete1');
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see($data['name2']);
         $I->dontSee($data['name0']);
         $I->dontSee($data['name1']);
@@ -217,7 +217,7 @@ class TextBlocksCest
 
         $I->wantTo('Move a block down while editing a project.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -230,7 +230,7 @@ class TextBlocksCest
         $I->removeBlock($I, '#delete0');
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see($data['name0']);
         $I->dontSee($data['name2']);
         $I->dontSee($data['name1']);
@@ -247,7 +247,7 @@ class TextBlocksCest
 
         $I->wantTo('Change the order of blocks and have that order remembered.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -258,12 +258,12 @@ class TextBlocksCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->click('Edit Project');
         $I->removeBlock($I, '#delete2');
         $I->removeBlock($I, '#delete0');
         $I->wait(1);
-        $I->amOnPage("/manager/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug()}");
         $I->see($data['name2']);
         $I->dontSee($data['name0']);
         $I->dontSee($data['name1']);
@@ -275,7 +275,7 @@ class TextBlocksCest
 
         $I->wantTo('Be able to update a project if a block was changed.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'text0'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -288,7 +288,7 @@ class TextBlocksCest
 
         $I->wantTo('Be able to update a project if a block was moved up.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->click('#up2');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -301,7 +301,7 @@ class TextBlocksCest
 
         $I->wantTo('Be able to update a project if a block was moved down.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->click('#down1');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -316,7 +316,7 @@ class TextBlocksCest
 
         $I->wantTo('Set a block as the description and see it on the dashboard.');
         $I->login($I);
-        $I->amOnPage("/manager/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->fillField(['name' => 'name0'], 'dfsd');
         $I->click('Update Project');
         $I->wait(1);

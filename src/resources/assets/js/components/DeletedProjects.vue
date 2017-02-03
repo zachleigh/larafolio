@@ -128,7 +128,7 @@
              * Purge the project from the database.
              */
             purge () {
-                this.ajax.delete('/manager/'+this.activeData.project.slug)
+                this.ajax.delete('/manager/projects/'+this.activeData.project.slug)
                 .then(function (response) {
                     this.removeFromProjects(this.activeData.index);
 
@@ -167,7 +167,7 @@
             restore (project, index) {
                 this.removeFromProjects(index);
 
-                this.ajax.patch('/manager/'+project.slug+'/update')
+                this.ajax.patch('/manager/projects/'+project.slug+'/update')
                 .then(function (response) {
                     this.$bus.$emit('refreshNavProjects');
 
