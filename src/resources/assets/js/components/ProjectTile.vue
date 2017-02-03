@@ -126,7 +126,7 @@
 
         computed: {
             link () {
-                return '/manager/'+this.project.slug;
+                return '/manager/projects/'+this.project.slug;
             }
         },
 

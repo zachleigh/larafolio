@@ -15,7 +15,7 @@ class ProjectTest extends TestCase
      */
     public function only_admin_user_can_access_create_project_page()
     {
-        $this->visit('/manager/add')
+        $this->visit('/manager/projects/add')
              ->seeStatusCode(200)
              ->seePageIs('/');
     }
@@ -27,7 +27,7 @@ class ProjectTest extends TestCase
     {
         $this->dontSeeInDatabase('projects', ['name' => 'name']);
 
-        $this->json('POST', '/manager',
+        $this->json('POST', '/manager/projects',
             ['name' => 'name'],
             ['link' => 'https://www.google.com']
         )
@@ -42,7 +42,7 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $this->visit('/manager/'.$project->slug().'/edit')
+        $this->visit('/manager/projects/'.$project->slug().'/edit')
              ->seeStatusCode(200)
              ->seePageIs('/');
     }
@@ -55,7 +55,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', ['id' => $project->id()])
-             ->json('PATCH', 'manager/'.$project->slug().'/update', ['name' => 'new'])
+             ->json('PATCH', 'manager/projects/'.$project->slug().'/update', ['name' => 'new'])
              ->seeStatusCode(302)
              ->dontSeeInDatabase('projects', ['name' => 'new']);
     }
@@ -68,7 +68,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', ['id' => $project->id()])
-             ->json('DELETE', "/manager/{$project->slug()}")
+             ->json('DELETE', "/manager/projects/{$project->slug()}")
              ->seeStatusCode(302)
              ->seeInDatabase('projects', ['id' => $project->id()]);
     }

@@ -81,7 +81,7 @@
                     </a>
                     <a
                         class="button button--secondary"
-                        href="{{ route('show-project-images', ['project' => $project]) }}"
+                        href="{{ route('show-page-images', ['project' => $project]) }}"
                         v-show="medium"
                     >
                         Manage Images
@@ -93,8 +93,8 @@
                     Images
                 </h2>
                 <image-manager
-                    action="{{ route('store-project-image', ['project' => $project]) }}"
-                    fetch-action="{{ route('show-project-images', ['project' => $project]) }}"
+                    action="{{ route('store-page-image', ['project' => $project]) }}"
+                    fetch-action="{{ route('show-page-images', ['project' => $project]) }}"
                     :icons="{{ json_encode([
                         'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
                         'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),

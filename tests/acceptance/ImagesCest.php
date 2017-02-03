@@ -55,6 +55,7 @@ class ImagesCest
         $I->seeInDatabase('images', ['path' => $image->path()]);
         $I->amOnProjectPage($I, $project);
         $I->click('#remove'.$id);
+        $I->wait(1);
         $I->click('Remove Image');
         $I->wait(1);
         $I->dontSeeInDatabase('images', ['path' => $image->path()]);
