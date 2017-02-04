@@ -83,15 +83,15 @@ class ProjectsCest
             'id'         => $project->id(),
             'deleted_at' => null,
         ]);
-        $I->click('#removeProject');
-        $I->click('Remove Project');
+        $I->click('#removeResource');
+        $I->click('Remove');
         $I->wait(1);
         $I->seeInDatabase('projects', ['id' => $project->id()]);
         $I->dontseeInDatabase('projects', [
             'id'         => $project['id'],
             'deleted_at' => null,
         ]);
-        $I->see('Project removed from portfolio');
+        $I->see("{$project->name()} removed from portfolio");
     }
 
     public function user_can_update_a_project(AcceptanceTester $I)
@@ -204,8 +204,8 @@ class ProjectsCest
         $I->wantTo('Force delete a project.');
         $I->login($I);
         $I->amOnPage("/manager/projects/{$project->slug()}");
-        $I->click('#removeProject');
-        $I->click('Remove Project');
+        $I->click('#removeResource');
+        $I->click('Remove');
         $I->wait(1);
         $I->seeInDatabase('projects', [
             'id' => $project->id()
@@ -227,8 +227,8 @@ class ProjectsCest
         $I->wantTo('Restore a deleted project.');
         $I->login($I);
         $I->amOnPage("/manager/projects/{$project->slug()}");
-        $I->click('#removeProject');
-        $I->click('Remove Project');
+        $I->click('#removeResource');
+        $I->click('Remove');
         $I->wait(1);
         $I->dontSeeInDatabase('projects', [
             'id'         => $project->id(),
@@ -250,8 +250,8 @@ class ProjectsCest
         $I->wantTo('Verify that when a project is restored, the nav menu refreshes.');
         $I->login($I);
         $I->amOnPage("/manager/projects/{$project->slug()}");
-        $I->click('#removeProject');
-        $I->click('Remove Project');
+        $I->click('#removeResource');
+        $I->click('Remove');
         $I->wait(1);
         $I->amOnPage('/manager/settings/projects');
         $I->dontSeeInPageSource('<span class="nav__dropdown-item-text">

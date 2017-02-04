@@ -12,7 +12,7 @@
                 <h1 class="page__top-title">{{ $project->name() }}</h1>
             </div>
             <div>
-                <project-controls
+                <resource-controls
                     remove-action="{{ route('remove-project', ['project' => $project]) }}"
                     update-action="{{ route('update-project', ['project' => $project]) }}"
                     :icons="{{ json_encode([
@@ -20,8 +20,8 @@
                         'visible' => file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')),
                         'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),
                     ]) }}"
-                    :project="{{ json_encode($project) }}"
-                ></project-controls>
+                    :resource="{{ json_encode($project) }}"
+                ></resource-controls>
             </div>
         </div>
         <div class="page__content">
@@ -38,38 +38,13 @@
                 <section class="section">
                     <h3 class="section__header">Project Links</h3>
                     @foreach ($project->links as $link)
-                        <div class="section__item">
-                            <div class="">
-                                Name: <b>{{ $link->name() }}</b>
-                            </div>
-                            <div class="section__indented">
-                                Text: {{ $link->text() }}
-                            </div>
-                            <div class="section__indented">
-                                URL: 
-                                <a href="{{ $link->url() }}">
-                                    {{ $link->url() }}
-                                </a>
-                            </div>
-                            <link-status
-                                url="{{ $link->url() }}"
-                                :check="{{ json_encode(config('larafolio.url_validation')) }}"
-                            >
-                            </link-status>
-                        </div>
+                        @include('larafolio::components.show-link')
                     @endforeach
                 </section>
                 <section class="section">
                     <h3 class="section__header">Project Blocks</h3>
                     @foreach ($project->blocks as $block)
-                        <div class="section__item">
-                            <div class="">
-                                Name: <b>{{ $block->name() }}</b>
-                            </div>
-                            <div class="section__indented">
-                                {!! $block->formattedText() !!}
-                            </div>
-                        </div>
+                        @include('larafolio::components.show-block')
                     @endforeach
                 </section>
                 <section class="section">

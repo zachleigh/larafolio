@@ -1,7 +1,7 @@
 @extends('larafolio::master')
 
 @section('title')
-    {{ $project->name() }} - Larafolio
+    {{ $page->name() }} - Larafolio
 @stop
 
 @section('content')
@@ -9,19 +9,19 @@
         <div class="page__top">
             <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="page__top-title">{{ $project->name() }}</h1>
+                <h1 class="page__top-title">{{ $page->name() }}</h1>
             </div>
             <div>
-                <project-controls
-                    remove-action="{{ route('remove-project', ['project' => $project]) }}"
-                    update-action="{{ route('update-project', ['project' => $project]) }}"
+                <resource-controls
+                    remove-action="{{ route('remove-page', ['page' => $page]) }}"
+                    update-action="{{ route('update-page', ['page' => $page]) }}"
                     :icons="{{ json_encode([
                         'hidden' => file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')),
                         'visible' => file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')),
                         'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),
                     ]) }}"
-                    :project="{{ json_encode($project) }}"
-                ></project-controls>
+                    :resource="{{ json_encode($page) }}"
+                ></resource-controls>
             </div>
         </div>
         <div class="page__content">
@@ -30,58 +30,29 @@
                     Content
                 </h2>
                 <section class="section">
-                    <h3 class="section__header">Project Type</h3>
-                    <div class="section__indented">
-                        <b>{{ $project->type() }}</b>
-                    </div>
-                </section>
-                <section class="section">
-                    <h3 class="section__header">Project Links</h3>
-                    @foreach ($project->links as $link)
+                    <h3 class="section__header">Page Links</h3>
+                    @foreach ($page->links as $link)
                         <div class="section__item">
-                            <div class="">
-                                Name: <b>{{ $link->name() }}</b>
-                            </div>
-                            <div class="section__indented">
-                                Text: {{ $link->text() }}
-                            </div>
-                            <div class="section__indented">
-                                URL: 
-                                <a href="{{ $link->url() }}">
-                                    {{ $link->url() }}
-                                </a>
-                            </div>
-                            <link-status
-                                url="{{ $link->url() }}"
-                                :check="{{ json_encode(config('larafolio.url_validation')) }}"
-                            >
-                            </link-status>
+                            @include('larafolio::components.show-link')
                         </div>
                     @endforeach
                 </section>
                 <section class="section">
-                    <h3 class="section__header">Project Blocks</h3>
-                    @foreach ($project->blocks as $block)
-                        <div class="section__item">
-                            <div class="">
-                                Name: <b>{{ $block->name() }}</b>
-                            </div>
-                            <div class="section__indented">
-                                {!! $block->formattedText() !!}
-                            </div>
-                        </div>
+                    <h3 class="section__header">Page Blocks</h3>
+                    @foreach ($page->blocks as $block)
+                        @include('larafolio::components.show-block')
                     @endforeach
                 </section>
                 <section class="section">
                     <a
                         class="button button--primary"
-                        href="{{ route('edit-project', ['project' => $project]) }}"
+                        href="{{ route('edit-page', ['page' => $page]) }}"
                     >
-                        Edit Project
+                        Edit Page
                     </a>
                     <a
                         class="button button--secondary"
-                        href="{{ route('show-page-images', ['project' => $project]) }}"
+                        href="{{ route('show-page-images', ['page' => $page]) }}"
                         v-show="medium"
                     >
                         Manage Images
@@ -93,8 +64,8 @@
                     Images
                 </h2>
                 <image-manager
-                    action="{{ route('store-page-image', ['project' => $project]) }}"
-                    fetch-action="{{ route('show-page-images', ['project' => $project]) }}"
+                    action="{{ route('store-page-image', ['page' => $page]) }}"
+                    fetch-action="{{ route('show-page-images', ['page' => $page]) }}"
                     :icons="{{ json_encode([
                         'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
                         'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),

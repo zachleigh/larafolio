@@ -47,14 +47,14 @@ class DashboardCest
         $I->login($I);
         $I->click('#makeVisible'.$project->id());
         $I->wait(1);
-        $I->see('Project Visible');
+        $I->see('Resource Visible');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
             'visible' => true,
         ]);
         $I->click('#makeHidden'.$project->id());
         $I->wait(1);
-        $I->see('Project Hidden');
+        $I->see('Resource Hidden');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
             'visible' => false,

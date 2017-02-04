@@ -44,7 +44,7 @@
             class="image-manager__message"
             v-show="!hasImages"
         >
-            This project has no images
+            This resource has no images
         </h3>
         <div class="image-manager__images">
             <image-tile
@@ -159,7 +159,7 @@
             let instance = this;
 
             Dropzone.options.myAwesomeDropzone = {
-                dictDefaultMessage: 'Drop images here to add to project',
+                dictDefaultMessage: 'Drop images here to add',
                 init: function() {
                     this.on('success', function (file) {
                         instance.uploaded();
@@ -177,7 +177,7 @@
             uploaded () {
                 this.flash({
                     title: 'Added',
-                    message: 'Image added to project',
+                    message: 'Image added to portfolio',
                     type: 'success'
                 });
 
@@ -235,7 +235,7 @@
                 .then(function (response) {
                     this.flash({
                         title: 'Removed',
-                        message: 'Image removed from project',
+                        message: 'Image removed from portfolio',
                         type: 'success'
                     });
 

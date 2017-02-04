@@ -2,7 +2,9 @@
 
 namespace Helper;
 
+use Larafolio\Models\Page;
 use Larafolio\Models\Project;
+use Larafolio\Models\HasContent;
 use Illuminate\Support\Facades\Artisan;
 
 class Acceptance extends \Codeception\Module
@@ -60,11 +62,24 @@ class Acceptance extends \Codeception\Module
      * @param \AcceptanceTester $I
      * @param int               $id
      *
-     * @return App\Project
+     * @return Larafolio\Models\Project
      */
     public function getProject(\AcceptanceTester $I, $id = 1)
     {
         return Project::find($id);
+    }
+
+    /**
+     * Get a page from the database.
+     *
+     * @param \AcceptanceTester $I
+     * @param int               $id
+     *
+     * @return Larafolio\Models\Page
+     */
+    public function getPage(\AcceptanceTester $I, $id = 1)
+    {
+        return Page::find($id);
     }
 
     /**
@@ -99,6 +114,21 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Add an image to the database.
+     *
+     * @param \AcceptanceTester $I
+     * @param array             $project Project info array.
+     */
+    public function addImageToPage(\AcceptanceTester $I, Page $page, $file = 'new.jpg')
+    {
+        $I->amOnPagePage($I, $page);
+        $I->seeCurrentUrlEquals("/manager/pages/{$page->slug()}");
+        $I->waitForElement('.dz-hidden-input');
+        $I->attachFile('.dz-hidden-input', $file);
+        $I->wait(1);
+    }
+
+    /**
      * Go to project page.
      *
      * @param \AcceptanceTester $I
@@ -107,6 +137,17 @@ class Acceptance extends \Codeception\Module
     public function amOnProjectPage(\AcceptanceTester $I, Project $project)
     {
         $I->amOnPage("/manager/projects/{$project->slug()}");
+    }
+
+    /**
+     * Go to page page.
+     *
+     * @param \AcceptanceTester $I
+     * @param array             $page Page info array.
+     */
+    public function amOnPagePage(\AcceptanceTester $I, Page $page)
+    {
+        $I->amOnPage("/manager/pages/{$page->slug()}");
     }
 
     /**
@@ -150,6 +191,18 @@ class Acceptance extends \Codeception\Module
     public function getImageFromProjectArray(Project $project)
     {
         return $project->images[0];
+    }
+
+    /**
+     * Get first image for resource.
+     *
+     * @param array $resource HasContent info array.
+     *
+     * @return App\Image
+     */
+    public function getImageFromResourceArray(HasContent $resource)
+    {
+        return $resource->images[0];
     }
 
     /**

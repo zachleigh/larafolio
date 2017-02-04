@@ -176,7 +176,7 @@ trait ManagesPortfolio
     }
 
     /**
-     * Remove image from storage and delete database info.
+     * Remove image from storage and delete database info if path is unique.
      *
      * @param Larafolio\Models\Image $image Image to remove.
      *
@@ -184,8 +184,12 @@ trait ManagesPortfolio
      */
     public function removeImage(Image $image)
     {
-        Storage::delete($image->path());
+        $count = Image::where('path', $image->path)->count();
 
+        if ($count <= 1) {
+            Storage::delete($image->path());
+        }
+        
         return $image->delete();
     }
 

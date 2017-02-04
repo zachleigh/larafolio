@@ -21,6 +21,7 @@ class AddResourceColumnsToImagesTable extends Migration
 
             $table->dropForeign('images_project_id_foreign');
             $table->dropIndex('images_project_id_index');
+            $table->dropIndex('images_path_unique');
         });
     }
 

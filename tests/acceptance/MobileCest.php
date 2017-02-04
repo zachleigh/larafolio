@@ -70,14 +70,14 @@ class MobileCest
         $I->login($I, 'mobile');
         $I->click('#makeVisible'.$project->id());
         $I->wait(1);
-        $I->see('Project Visible');
+        $I->see('Resource Visible');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
             'visible' => true,
         ]);
         $I->click('#makeHidden'.$project->id());
         $I->wait(1);
-        $I->see('Project Hidden');
+        $I->see('Resource Hidden');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
             'visible' => false,
@@ -186,19 +186,19 @@ class MobileCest
             'id'         => $project->id(),
             'deleted_at' => null,
         ]);
-        $I->click('#removeProject');
-        $I->click('Remove Project');
+        $I->click('#removeResource');
+        $I->click('Remove');
         $I->wait(1);
         $I->seeInDatabase('projects', ['id' => $project->id()]);
         $I->dontseeInDatabase('projects', [
             'id'         => $project['id'],
             'deleted_at' => null,
         ]);
-        $I->see('Project removed from portfolio');
+        $I->see("{$project->name()} removed from portfolio");
     }
 
-    // **IMAGES** //
-    public function user_can_add_images_on_mobile(AcceptanceTester $I)
+    // **PROJECT IMAGES** //
+    public function user_can_add_project_images_on_mobile(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
         $I->wantTo('Add an image to a project on mobile.');
@@ -208,13 +208,13 @@ class MobileCest
         $I->attachFile('.dz-hidden-input', 'new.jpg');
         $I->wait(1);
         $I->seeInDatabase('images', ['path' => 'public/images/b9dc5a3f4e80d23072fdd43fd23ea635.jpeg']);
-        $I->see('Image added to project');
+        $I->see('Image added to portfolio');
     }
 
-    public function user_can_update_image_info_on_mobile(AcceptanceTester $I)
+    public function user_can_update_project_image_info_on_mobile(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
-        $image = $I->getImageFromProjectArray($project);
+        $image = $I->getImageFromResourceArray($project);
         $id = $image->id();
 
         $data = [
@@ -223,7 +223,7 @@ class MobileCest
             'alt'.$id     => 'image alt',
         ];
 
-        $I->wantTo('Update image information on mobile.');
+        $I->wantTo('Update project image information on mobile.');
         $I->login($I, 'mobile');
         $I->amOnPage("/manager/projects/{$project->slug()}/images");
         $I->fillForm($I, $data);
@@ -238,10 +238,10 @@ class MobileCest
         $I->see('Image information updated');
     }
 
-    public function user_can_remove_image_from_mobile(AcceptanceTester $I)
+    public function user_can_remove_project_image_from_mobile(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
-        $image = $I->getImageFromProjectArray($project);
+        $image = $I->getImageFromResourceArray($project);
         $id = $image->id();
 
         $I->wantTo('Remove an image from a project on mobile.');
@@ -249,10 +249,70 @@ class MobileCest
         $I->seeInDatabase('images', ['path' => $image->path()]);
         $I->amOnPage("/manager/projects/{$project->slug()}/images");
         $I->click('#remove'.$id);
+        $I->wait(1);
         $I->click('Remove Image');
         $I->wait(1);
         $I->dontSeeInDatabase('images', ['path' => $image->path()]);
-        $I->see('Image removed from project');
+        $I->see('Image removed from portfolio');
+    }
+
+    // **PAGE IMAGES** //
+    public function user_can_add_page_images_on_mobile(AcceptanceTester $I)
+    {
+        $page = $I->getPage($I);
+        $I->wantTo('Add an image to a page on mobile.');
+        $I->login($I, 'mobile');
+        $I->amOnPage("/manager/pages/{$page->slug()}/images");
+        $I->waitForElement('.dz-hidden-input');
+        $I->attachFile('.dz-hidden-input', 'new.jpg');
+        $I->wait(1);
+        $I->seeInDatabase('images', ['path' => 'public/images/b9dc5a3f4e80d23072fdd43fd23ea635.jpeg']);
+        $I->see('Image added to portfolio');
+    }
+
+    public function user_can_update_page_image_info_on_mobile(AcceptanceTester $I)
+    {
+        $page = $I->getPage($I);
+        $image = $I->getImageFromResourceArray($page);
+        $id = $image->id();
+
+        $data = [
+            'name'.$id    => 'image name',
+            'caption'.$id => 'image caption',
+            'alt'.$id     => 'image alt',
+        ];
+
+        $I->wantTo('Update page image information on mobile.');
+        $I->login($I, 'mobile');
+        $I->amOnPage("/manager/pages/{$page->slug()}/images");
+        $I->fillForm($I, $data);
+        $I->click('#button'.$id);
+        $I->wait(1);
+        $I->seeInDatabase('images', [
+            'path'    => $image->path(),
+            'name'    => 'image name',
+            'caption' => 'image caption',
+            'alt'     => 'image alt',
+        ]);
+        $I->see('Image information updated');
+    }
+
+    public function user_can_remove_page_image_from_mobile(AcceptanceTester $I)
+    {
+        $page = $I->getPage($I);
+        $image = $I->getImageFromResourceArray($page);
+        $id = $image->id();
+
+        $I->wantTo('Remove an image from a page on mobile.');
+        $I->login($I, 'mobile');
+        $I->seeInDatabase('images', ['path' => $image->path()]);
+        $I->amOnPage("/manager/pages/{$page->slug()}/images");
+        $I->click('#remove'.$id);
+        $I->wait(1);
+        $I->click('Remove Image');
+        $I->wait(1);
+        $I->dontSeeInDatabase('images', ['path' => $image->path()]);
+        $I->see('Image removed from portfolio');
     }
 
     // **TEXT BLOCKS** //
