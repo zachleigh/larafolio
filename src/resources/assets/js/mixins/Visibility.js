@@ -2,11 +2,11 @@ export default {
     data: function () {
         return {
             /**
-             * When true, project is visible.
+             * When true, resource is visible.
              *
              * @type {Boolean}
              */
-            visible: this.project.visible
+            visible: this.resource.visible
         }
     },
 
@@ -21,7 +21,7 @@ export default {
         /**
          * Send ajax request to server to change visibility.
          *
-         * @param  {Boolean} visible Desired project visibility.
+         * @param  {Boolean} visible Desired resource visibility.
          */
         changeVisibility (visible) {
             this.toggleVisiblity();
@@ -32,12 +32,12 @@ export default {
                 visible: this.visible,
             })
             .then(function () {
-                let title = 'Project Hidden';
-                let message = this.project.name + ' is not publicly viewable';
+                let title = 'Resource Hidden';
+                let message = this.resource.name + ' is not publicly viewable';
 
                 if (this.visible) {
-                    title = 'Project Visible';
-                    message = this.project.name + ' is now publicly viewable';
+                    title = 'Resource Visible';
+                    message = this.resource.name + ' is now publicly viewable';
                 }
 
                 this.flash({
@@ -49,7 +49,7 @@ export default {
             .catch(function () {
                 this.flash({
                     title: 'Error',
-                    message: 'Could not change project visibility',
+                    message: 'Could not change visibility',
                     type: 'error'
                 });
             });
@@ -62,7 +62,7 @@ export default {
          */
         getAction () {
             if (typeof this.updateAction === 'undefined') {
-                return '/manager/projects/'+this.project.slug+'/update'
+                return '/manager/projects/'+this.resource.slug+'/update'
             }
 
             return this.updateAction;

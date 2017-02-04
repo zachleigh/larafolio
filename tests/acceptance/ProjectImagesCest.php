@@ -1,23 +1,23 @@
 <?php
 
-class ImagesCest
+class ProjectImagesCest
 {
     public function _before(\AcceptanceTester $I)
     {
         $I->migrate();
     }
 
-    public function user_can_add_image(AcceptanceTester $I)
+    public function user_can_add_image_to_project(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
         $I->wantTo('Add an image to a project.');
         $I->login($I);
         $I->addImage($I, $project);
         $I->seeInDatabase('images', ['path' => 'public/images/b9dc5a3f4e80d23072fdd43fd23ea635.jpeg']);
-        $I->see('Image added to project');
+        $I->see('Image added to portfolio');
     }
 
-    public function user_can_update_image_name_caption_and_alt(AcceptanceTester $I)
+    public function user_can_update_project_image_name_caption_and_alt(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
         $image = $I->getImageFromProjectArray($project);
@@ -29,7 +29,7 @@ class ImagesCest
             'alt'.$id     => 'image alt',
         ];
 
-        $I->wantTo('Add a name, caption and alt for an image.');
+        $I->wantTo('Add a name, caption and alt for a project image.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
         $I->fillForm($I, $data);
@@ -44,7 +44,7 @@ class ImagesCest
         $I->see('Image information updated');
     }
 
-    public function user_can_remove_an_image(AcceptanceTester $I)
+    public function user_can_remove_an_image_from_project(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
         $image = $I->getImageFromProjectArray($project);
@@ -59,10 +59,10 @@ class ImagesCest
         $I->click('Remove Image');
         $I->wait(1);
         $I->dontSeeInDatabase('images', ['path' => $image->path()]);
-        $I->see('Image removed from project');
+        $I->see('Image removed from portfolio');
     }
 
-    public function update_button_disabled_until_name_changed(AcceptanceTester $I)
+    public function project_image_update_button_disabled_until_name_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -70,7 +70,7 @@ class ImagesCest
 
         $id = $image->id();
 
-        $I->wantTo('Be able to update an image if the name has changed.');
+        $I->wantTo('Be able to update a project image if the name has changed.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
         $I->seeElement('#button'.$id, ['disabled' => 'true']);
@@ -78,7 +78,7 @@ class ImagesCest
         $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
     }
 
-    public function update_button_disabled_until_alt_changed(AcceptanceTester $I)
+    public function project_image_update_button_disabled_until_alt_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -86,7 +86,7 @@ class ImagesCest
 
         $id = $image->id();
 
-        $I->wantTo('Be able to update an image if the alt text has changed.');
+        $I->wantTo('Be able to update a project image if the alt text has changed.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
         $I->seeElement('#button'.$id, ['disabled' => 'true']);
@@ -94,7 +94,7 @@ class ImagesCest
         $I->dontSeeElement('#button'.$id, ['disabled' => 'true']);
     }
 
-    public function update_button_disabled_until_caption_changed(AcceptanceTester $I)
+    public function project_image_update_button_disabled_until_caption_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -102,7 +102,7 @@ class ImagesCest
 
         $id = $image->id();
 
-        $I->wantTo('Be able to update an image if the caption has changed.');
+        $I->wantTo('Be able to update a project image if the caption has changed.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
         $I->seeElement('#button'.$id, ['disabled' => 'true']);
@@ -134,17 +134,17 @@ class ImagesCest
         $I->login($I);
         $project = $I->addProject($I);
         $I->amOnProjectPage($I, $project);
-        $I->see('This project has no images');
+        $I->see('This resource has no images');
     }
 
-    public function no_images_message_is_hidden_when_image_added(AcceptanceTester $I)
+    public function no_images_message_is_hidden_when_project_image_added(AcceptanceTester $I)
     {
-        $I->wantTo('Verify that the no images message is hidden when a image is added.');
+        $I->wantTo('Verify that the no images message is hidden when a project image is added.');
         $I->login($I);
         $project = $I->addProject($I);
         $I->amOnProjectPage($I, $project);
-        $I->see('This project has no images');
+        $I->see('This resource has no images');
         $I->addImage($I, $project);
-        $I->dontSee('This project has no images');
+        $I->dontSee('This resource has no images');
     }
 }

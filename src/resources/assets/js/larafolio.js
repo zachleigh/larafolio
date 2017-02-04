@@ -16,9 +16,9 @@ Vue.component('name-preview', require('./components/Previews/NamePreview.vue'));
 Vue.component('nav-pages', require('./components/NavPages.vue'));
 Vue.component('nav-projects', require('./components/NavProjects.vue'));
 Vue.component('project-link', require('./components/ProjectLink.vue'));
-Vue.component('project-controls', require('./components/ProjectControls.vue'));
 Vue.component('project-form', require('./components/ProjectForm.vue'));
 Vue.component('project-tile', require('./components/ProjectTile.vue'));
+Vue.component('resource-controls', require('./components/ResourceControls.vue'));
 Vue.component('type-preview', require('./components/Previews/TypePreview.vue'));
 
 const bus = new Vue();

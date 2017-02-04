@@ -1,5 +1,5 @@
 <template>
-    <div class="project-controls">
+    <div class="resource-controls">
         <modal
             :show="showRemoveModal"
             :icons="icons"
@@ -9,7 +9,7 @@
                 Sanity Check
             </h3>
                 <p slot="body">
-                    Remove this project from the portfolio?
+                    Remove {{ resource.name }} from the portfolio?
                 </p>
                 <div slot="footer">
                     <div class="modal__buttons">
@@ -21,40 +21,40 @@
                         </button>
                         <button
                             class="button button--primary"
-                            @click.prevent="removeProject"
+                            @click.prevent="removeResource"
                         >
-                            Remove Project
+                            Remove
                         </button>
                     </div>
                 </div>
 
         </modal>
-        <div class="project-controls__group">
-            <div class="project-controls__section" v-show="visible">
+        <div class="resource-controls__group">
+            <div class="resource-controls__section" v-show="visible">
                 Visible
                 <span
                     id="makeHidden"
-                    class="project-controls__icon green-icon"
+                    class="resource-controls__icon green-icon"
                     v-html="icons.visible"
                     @click.prevent="changeVisibility(false)"
                 ></span>
             </div>
-            <div class="project-controls__section" v-show="!visible">
+            <div class="resource-controls__section" v-show="!visible">
                 Hidden
                 <span
                     id="makeVisible"
-                    class="project-controls__icon red-icon"
+                    class="resource-controls__icon red-icon"
                     v-html="icons.hidden"
                     @click.prevent="changeVisibility(true)"
                 ></span>
             </div>
         </div>
-        <div class="project-controls__group">
-            <div class="project-controls__section">
+        <div class="resource-controls__group">
+            <div class="resource-controls__section">
                 Remove
                 <span
-                    id="removeProject"
-                    class="project-controls__icon red-icon"
+                    id="removeResource"
+                    class="resource-controls__icon red-icon"
                     v-html="icons.remove"
                     @click.prevent="showRemoveModal = true"
                 ></span>
@@ -78,7 +78,7 @@
         data: function () {
             return {
                 /**
-                 * When true, show the remove project modal.
+                 * When true, show the remove resource modal.
                  *
                  * @type {Boolean}
                  */
@@ -88,7 +88,7 @@
 
         props: {
             /**
-             * Action for updating project.
+             * Action for updating resource.
              */
             updateAction: {
                 type: String
@@ -102,30 +102,32 @@
             },
 
             /**
-             * Project object.
+             * Resource object.
              */
-            project: {
+            resource: {
                 type: Object
             }
         },
 
         methods: {
             /**
-             * Remove the project from the portfolio.
+             * Remove the resource from the portfolio.
              */
-            removeProject () {
+            removeResource () {
+                let name = this.resource.name;
+
                 this.ajax.delete(this.removeAction)
                 .then(function (response) {
                     this.postFlash({
                         title: 'Removed',
-                        message: 'Project removed from portfolio',
+                        message: name + ' removed from portfolio',
                         type: 'success'
                     }, '/manager');
                 })
                 .catch(function (error) {
                     this.flash({
                         title: 'Error',
-                        message: 'Could not remove project',
+                        message: 'Could not remove ' + name,
                         type: 'error'
                     });
                 });

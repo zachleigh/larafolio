@@ -7,7 +7,7 @@
             :block="projectBlock(project)"
             :icons="icons"
             :image="projectImage(project)"
-            :project="project"
+            :resource="project"
             @down="moveProjectDown"
             @up="moveProjectUp"
         ></project-tile>

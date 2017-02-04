@@ -21,10 +21,10 @@
                 <div class="dashboard__info">
                     <div>
                         <h2 class="dashboard__name">
-                            {{ project.name }}
+                            {{ resource.name }}
                         </h2>
                         <div
-                            class="project-controls__section dashboard__visibility"
+                            class="resource-controls__section dashboard__visibility"
                             v-show="visible"
                         >
                             <span
@@ -37,7 +37,7 @@
                             Visible
                         </div>
                         <div
-                            class="project-controls__section dashboard__visibility"
+                            class="resource-controls__section dashboard__visibility"
                             v-show="!visible"
                         >
                             <span
@@ -49,8 +49,8 @@
                             </span>
                             Hidden
                         </div>
-                        <div class="dashboard__type" v-show="project.type">
-                            Type: {{ project.type }}
+                        <div class="dashboard__type" v-show="resource.type">
+                            Type: {{ resource.type }}
                         </div>
                     </div>
                     <div>
@@ -119,14 +119,14 @@
             /**
              * This project.
              */
-            project: {
+            resource: {
                 type: Object
             }
         },
 
         computed: {
             link () {
-                return '/manager/projects/'+this.project.slug;
+                return '/manager/projects/'+this.resource.slug;
             }
         },
 
@@ -138,7 +138,7 @@
              * @return {[type]}         [description]
              */
             elementId (element) {
-                return element + this.project.id;
+                return element + this.resource.id;
             },
         }
     };

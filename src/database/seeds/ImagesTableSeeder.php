@@ -3,6 +3,7 @@
 namespace Larafolio\database\seeds;
 
 use App\User;
+use Larafolio\Models\Page;
 use Larafolio\Models\Project;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -23,25 +24,24 @@ class ImagesTableSeeder extends Seeder
     ];
 
     /**
+     * User instance.
+     *
+     * @var User
+     */
+    protected $user;
+
+    /**
      * Run the database seeds.
      */
     public function run()
     {
         $filesystem = new Filesystem();
 
-        $from = __DIR__.'/../../../tests/_data/images';
+        $this->user = $user = User::find(1);
 
-        $images = $filesystem->allFiles($from);
+        $this->makeProjectImages($filesystem);
 
-        foreach ($images as $key => $image) {
-            $name = $image->getFilename();
-
-            $path = 'public/images/'.$name;
-
-            $this->moveImage($image, $path, $filesystem);
-
-            $this->addToProject($name, $path);
-        }
+        $this->makePageImages($filesystem);
 
         $old = umask(0);
 
@@ -51,19 +51,55 @@ class ImagesTableSeeder extends Seeder
     }
 
     /**
+     * Make images for project.
+     *
+     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     */
+    protected function makeProjectImages(Filesystem $filesystem)
+    {
+        $images = $filesystem->allFiles(__DIR__.'/../../../tests/_data/images');
+
+        foreach ($images as $image) {
+            $name = $image->getFilename();
+
+            $path = 'public/images/'.$name;
+
+            $this->moveImage($image, $path, $filesystem);
+
+            $this->addToProject($name, $path);
+        }
+    }
+
+    /**
+     * Make images for project.
+     *
+     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     */
+    protected function makePageImages(Filesystem $filesystem)
+    {
+        $image = $filesystem->get(__DIR__.'/../../../tests/_data/new.jpg');
+
+        $path = 'public/images/pageImage.jpg';
+
+        \Storage::put($path, $image);
+
+        $page = Page::first();
+
+        $this->user->addImageToModel($page, ['path' => $path]);
+    }
+
+    /**
      * Move image file to storage.
      *
      * @param \Symfony\Component\Finder\SplFileInfo $image      File info.
      * @param string                                $path       Path to move to.
      * @param \Illuminate\Filesystem\Filesystem     $filesystem
      */
-    protected function moveImage($image, $path, $filesystem)
+    protected function moveImage($image, $path, Filesystem $filesystem)
     {
         $imageFile = $filesystem->get($image->getPathname());
 
         \Storage::put($path, $imageFile);
-
-        storage_path('app/'.$path);
     }
 
     /**
@@ -78,8 +114,6 @@ class ImagesTableSeeder extends Seeder
 
         $project = Project::find($key);
 
-        $user = User::find(1);
-
-        $user->addImageToModel($project, ['path' => $path]);
+        $this->user->addImageToModel($project, ['path' => $path]);
     }
 }
