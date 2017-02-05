@@ -90,7 +90,7 @@ class Acceptance extends \Codeception\Module
     public function login(\AcceptanceTester $I, $size = 'max')
     {
         if ($size === 'max') {
-            $I->maximizeWindow();
+            $I->resizeWindow(1300,800);;
         } elseif ($size === 'mobile') {
             $I->resizeWindow(400,700);
         }

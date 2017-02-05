@@ -7,7 +7,7 @@ class PageImagesCest
         $I->migrate();
     }
 
-    public function user_can_add_image(AcceptanceTester $I)
+    public function user_can_add_image_to_page(AcceptanceTester $I)
     {
         $page = $I->getPage($I);
         $I->wantTo('Add an image to a page.');
