@@ -7,7 +7,7 @@ class PageImagesCest
         $I->migrate();
     }
 
-    public function user_can_add_image(AcceptanceTester $I)
+    public function user_can_add_image_to_page(AcceptanceTester $I)
     {
         $page = $I->getPage($I);
         $I->wantTo('Add an image to a page.');
@@ -32,6 +32,7 @@ class PageImagesCest
         $I->wantTo('Add a name, caption and alt for a page image.');
         $I->login($I);
         $I->amOnPagePage($I, $page);
+$I->wait(5);
         $I->fillForm($I, $data);
         $I->click('#button'.$id);
         $I->wait(1);
@@ -54,6 +55,7 @@ class PageImagesCest
         $I->login($I);
         $I->seeInDatabase('images', ['path' => $image->path()]);
         $I->amOnPagePage($I, $page);
+$I->wait(5);
         $I->click('#remove'.$id);
         $I->wait(1);
         $I->click('Remove Image');

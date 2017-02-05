@@ -19,31 +19,8 @@ class ProjectImagesCest
 
     public function user_can_update_project_image_name_caption_and_alt(AcceptanceTester $I)
     {
-        // $project = $I->getProject($I);
-        // $image = $I->getImageFromProjectArray($project);
-        // $id = $image->id();
-
-        // $data = [
-        //     'name'.$id    => 'image name',
-        //     'caption'.$id => 'image caption',
-        //     'alt'.$id     => 'image alt',
-        // ];
-
-        // $I->wantTo('Add a name, caption and alt for a project image.');
-        // $I->login($I);
-        // $I->amOnProjectPage($I, $project);
-        // $I->fillForm($I, $data);
-        // $I->click('#button'.$id);
-        // $I->wait(1);
-        // $I->seeInDatabase('images', [
-        //     'path'    => $image->path(),
-        //     'name'    => 'image name',
-        //     'caption' => 'image caption',
-        //     'alt'     => 'image alt',
-        // ]);
-        // $I->see('Image information updated');
         $project = $I->getProject($I);
-        $image = $I->getImageFromResourceArray($project);
+        $image = $I->getImageFromProjectArray($project);
         $id = $image->id();
 
         $data = [
@@ -55,7 +32,6 @@ class ProjectImagesCest
         $I->wantTo('Add a name, caption and alt for a project image.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
-        $I->waitForElement('.image-manager', 5);
         $I->fillForm($I, $data);
         $I->click('#button'.$id);
         $I->wait(1);
