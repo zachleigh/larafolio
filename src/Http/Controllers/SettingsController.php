@@ -3,6 +3,7 @@
 namespace Larafolio\Http\Controllers;
 
 use View;
+use Larafolio\Models\Page;
 use Larafolio\Models\Project;
 
 class SettingsController extends Controller
@@ -43,6 +44,25 @@ class SettingsController extends Controller
 
         return view('larafolio::settings.projects', [
             'deletedProjects' => $deletedProjects,
+        ]);
+    }
+
+    /**
+     * Show the pages settings page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    private function showPages()
+    {
+        $deletedPages = Page::onlyTrashed()
+            ->orderBy('deleted_at', 'DESC')
+            ->get()
+            ->map(function (Page $page) {
+                return $page->generateProps();
+            });
+
+        return view('larafolio::settings.pages', [
+            'deletedPages' => $deletedPages,
         ]);
     }
 }

@@ -80,6 +80,13 @@
                             </span>
                         </div>
                     </a>
+                    <a href="{{ route('show-settings', ['page' => 'pages']) }}" class="nav__link">
+                        <div class="nav__dropdown-item">
+                            <span class="nav__dropdown-item-text">
+                                Page Settings
+                            </span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

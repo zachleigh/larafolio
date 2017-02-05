@@ -4,6 +4,7 @@ namespace Larafolio\Http\Controllers;
 
 use Larafolio\Models\Page;
 use Illuminate\Http\Request;
+use Larafolio\Http\Requests\AddResourceRequest;
 
 class PageController extends Controller
 {
@@ -41,57 +42,57 @@ class PageController extends Controller
     }
 
     /**
-     * Return the project create page.
+     * Return the page create page.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        // return view('larafolio::projects.add');
+        return view('larafolio::pages.add');
     }
 
     /**
-     * Add a new project to the portfolio.
+     * Add a new page to the portfolio.
      *
-     * @param AddProjectRequest $request Form request.
+     * @param Larafolio\Http\Requests\AddResourceRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AddProjectRequest $request)
+    public function store(AddResourceRequest $request)
     {
-        // $project = $this->user->addProject($request->all());
+        $page = $this->user->addPage($request->all());
 
-        // if ($request->ajax()) {
-        //     return response()->json(['project' => $project]);
-        // }
+        if ($request->ajax()) {
+            return response()->json(['page' => $page]);
+        }
 
-        // return redirect(route('show-project', ['project' => $project]));
+        return redirect(route('show-page', ['page' => $page]));
     }
 
     /**
-     * Return the project edit form view.
+     * Return the page edit form view.
      *
-     * @param string $slug Slug for the project to edit.
+     * @param string $slug Slug for the page to edit.
      *
      * @return \Illuminate\Http\Response
      */
     public function edit($slug)
     {
-        // $project = Project::full($slug)->first();
+        $page = Page::full($slug)->first();
 
-        // $nextBlock = $project->blocks->pluck('order')->max() + 1;
+        $nextBlock = $page->blocks->pluck('order')->max() + 1;
 
-        // $nextLink = $project->links->pluck('order')->max() + 1;
+        $nextLink = $page->links->pluck('order')->max() + 1;
 
-        // return view('larafolio::projects.edit', [
-        //     'project'   => $project,
-        //     'nextBlock' => $nextBlock,
-        //     'nextLink'  => $nextLink,
-        // ]);
+        return view('larafolio::pages.edit', [
+            'page'   => $page,
+            'nextBlock' => $nextBlock,
+            'nextLink'  => $nextLink,
+        ]);
     }
 
     /**
-     * Update a project.
+     * Update a page.
      *
      * @param \Illuminate\Http\Request $request Request data.
      * @param string                   $slug    Slug of page to update.
@@ -116,27 +117,27 @@ class PageController extends Controller
     }
 
     /**
-     * Remove a project from the portfolio.
+     * Remove a page from the portfolio.
      *
      * @param \Illuminate\Http\Request $request Request data.
-     * @param string                   $slug    Slug of project to remove.
+     * @param string                   $slug    Slug of page to remove.
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $slug)
     {
-        // $project = Project::withTrashed()->where('slug', $slug)->first();
+        $page = Page::withTrashed()->where('slug', $slug)->first();
 
-        // if ($project->trashed()) {
-        //     $this->user->purgeProject($project);
-        // } else {
-        //     $this->user->removeProject($project);
-        // }
+        if ($page->trashed()) {
+            $this->user->purgePage($page);
+        } else {
+            $this->user->removePage($page);
+        }
 
-        // if ($request->ajax()) {
-        //     return response()->json(true);
-        // }
+        if ($request->ajax()) {
+            return response()->json(true);
+        }
 
-        // return redirect(route('dashboard'));
+        return redirect(route('dashboard'));
     }
 }

@@ -172,6 +172,16 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Go to add page page.
+     *
+     * @param \AcceptanceTester $I
+     */
+    public function amOnAddPagePage(\AcceptanceTester $I)
+    {
+        $I->amOnPage('/manager/pages/add');
+    }
+
+    /**
      * Confirm that the current page is the add page.
      *
      * @param \AcceptanceTester $I

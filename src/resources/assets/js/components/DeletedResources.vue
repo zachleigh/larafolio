@@ -9,7 +9,7 @@
                 Sanity Check
             </h3>
                 <p slot="body">
-                    Delete this project from the database?
+                    Delete this {{ resourceType }} from the database?
                 </p>
                 <div slot="footer">
                     <div class="modal__buttons">
@@ -25,7 +25,7 @@
                             class="button button--primary"
                             @click.prevent="purge"
                         >
-                            Delete Project
+                            Delete
                         </button>
                     </div>
                 </div>
@@ -33,33 +33,33 @@
         </modal>
         <div
             class="section__item"
-            v-if="projectsEmpty"
+            v-if="resourcesEmpty"
         >
-            No deleted projects
+            No deleted {{ resourceTypePlural }}
         </div>
         <div
             class="section__item section__divided"
-            v-for="(project, index) in projects"
-            key="project.id"
+            v-for="(resource, index) in resources"
+            key="resource.id"
         >
             <div class="">
-                <div><b>{{ project.name }}</b></div>
+                <div><b>{{ resource.name }}</b></div>
                 <div class="section__indented">
-                    Deleted {{ project.deletedAt }}
+                    Deleted {{ resource.deletedAt }}
                 </div>
             </div>
             <div class="settings__button-row">
                 <button
-                    :id="'restore' + project.id"
+                    :id="'restore' + resource.id"
                     class="button button--primary button--small"
-                    @click.prevent="restore(project, index)"
+                    @click.prevent="restore(resource, index)"
                 >
                     Restore
                 </button>
                 <button
-                    :id="'delete' + project.id"
+                    :id="'delete' + resource.id"
                     class="button button--secondary button--small"
-                    @click.prevent="confirmDelete(project, index)"
+                    @click.prevent="confirmDelete(resource, index)"
                 >
                     Delete
                 </button>
@@ -71,26 +71,24 @@
 <script>
     import Ajax from './../mixins/Ajax.js';
     import Flash from './../mixins/Flash.js';
-    import Modal from './Modal.vue';
+    import Helpers from './../mixins/Helpers.js';
 
     export default {
-        components: { Modal },
-
-        mixins: [ Ajax, Flash ],
+        mixins: [ Ajax, Flash, Helpers ],
 
         data () {
             return {
                 activeData: {},
-                projects: this.passedProjects,
+                resources: this.passedResources,
                 showDeleteModal: false
             }
         },
 
         props: {
             /**
-             * Array of deleted projects.
+             * Array of deleted resources.
              */
-            passedProjects: {
+            passedResources: {
                 type: Array
             },
 
@@ -99,25 +97,48 @@
              */
             icons: {
                 type: Object
+            },
+
+            /**
+             * Type of resource.
+             */
+            resourceType: {
+                type: String
             }
         },
 
         computed: {
-            projectsEmpty () {
-                return this.projects.length === 0;
+            resourcesEmpty () {
+                return this.resources.length === 0;
+            },
+
+            resourceTypePlural () {
+                return this.resourceType+'s';
+            },
+
+            resourceTypeCapitalized() {
+                return this.capitalizeFirstLetter(this.resourceType);
+            },
+
+            deleteRoute () {
+                return '/manager/'+this.resourceTypePlural+'/'+this.activeData.resource.slug;
+            },
+
+            refreshNavEvent () {
+                return 'refreshNav'+this.capitalizeFirstLetter(this.resourceTypePlural);
             }
         },
 
         methods: {
             /**
-             * Show modal to confirm project deletion.
+             * Show modal to confirm resource deletion.
              *
-             * @param  {Object} project Project to delete.
-             * @param  {Number} index   Index of project in projects array.
+             * @param  {Object} resource resource to delete.
+             * @param  {Number} index   Index of resource in resources array.
              */
-            confirmDelete (project, index) {
+            confirmDelete (resource, index) {
                 this.activeData = {
-                    project: project,
+                    resource: resource,
                     index: index
                 };
 
@@ -125,25 +146,25 @@
             },
 
             /**
-             * Purge the project from the database.
+             * Purge the resource from the database.
              */
             purge () {
-                this.ajax.delete('/manager/projects/'+this.activeData.project.slug)
+                this.ajax.delete(this.deleteRoute)
                 .then(function (response) {
-                    this.removeFromProjects(this.activeData.index);
+                    this.removeFromResources(this.activeData.index);
 
                     this.hideDeleteModal();
 
                     this.flash({
                         title: 'Deleted',
-                        message: 'Project removed from database',
+                        message: this.resourceTypeCapitalized+' removed from database',
                         type: 'success'
                     });
                 })
                 .catch(function (error) {
                     this.flash({
                         title: 'Error',
-                        message: 'Could not remove project',
+                        message: 'Could not remove '+this.resourceType,
                         type: 'error'
                     });
                 });
@@ -159,39 +180,42 @@
             },
 
             /**
-             * Restore the project.
+             * Restore the resource.
              *
-             * @param  {Object} project Project to restore.
-             * @param  {Number} index   Index of project in projects array.
+             * @param  {Object} resource resource to restore.
+             * @param  {Number} index   Index of resource in resources array.
              */
-            restore (project, index) {
-                this.removeFromProjects(index);
+            restore (resource, index) {
+                this.removeFromResources(index);
 
-                this.ajax.patch('/manager/projects/'+project.slug+'/update')
+                this.ajax.patch(
+                    '/manager/'+this.resourceTypePlural+'/'+resource.slug+'/update'
+                )
                 .then(function (response) {
-                    this.$bus.$emit('refreshNavProjects');
+                    this.$bus.$emit(this.refreshNavEvent);
 
                     this.flash({
                         title: 'Restored',
-                        message: 'Project un-deleted',
+                        message: this.resourceTypeCapitalized+' restored',
                         type: 'success'
                     });
                 })
                 .catch(function (error) {
                     this.flash({
                         title: 'Error',
-                        message: 'Could not restore project',
+                        message: 'Could not restore '+this.resourceType,
                         type: 'error'
                     });
                 });
             },
 
             /**
-             * Remove the project from the projects array.
-             * @param  {Numer} index Index of project in projects array.
+             * Remove the resource from the resources array.
+             *
+             * @param  {Numer} index Index of resource in resources array.
              */
-            removeFromProjects (index) {
-                this.projects.splice(index, 1);
+            removeFromResources (index) {
+                this.resources.splice(index, 1);
             }
         }
     };

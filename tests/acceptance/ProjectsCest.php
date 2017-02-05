@@ -33,7 +33,7 @@ class ProjectsCest
     {
         $data = ['text0' => 'Project description'];
 
-        $I->wantTo('Verify that name required error appears.');
+        $I->wantTo('Verify that name required error appears on add project page.');
         $I->login($I);
         $I->amOnAddPage($I);
         $I->fillForm($I, $data);
@@ -43,7 +43,7 @@ class ProjectsCest
         $I->see('The name field is required.');
     }
 
-    public function user_can_toggle_visibility(AcceptanceTester $I)
+    public function user_can_toggle_project_visibility(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
         $I->wantTo('Toggle the visibility of a project.');
@@ -135,7 +135,7 @@ class ProjectsCest
         $I->see('Project successfully updated');
     }
 
-    public function update_button_disabled_until_name_changed(AcceptanceTester $I)
+    public function update_project_button_disabled_until_name_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -148,7 +148,7 @@ class ProjectsCest
         $I->click('Update Project');
     }
 
-    public function update_button_disabled_until_type_changed(AcceptanceTester $I)
+    public function update_project_button_disabled_until_type_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -161,7 +161,7 @@ class ProjectsCest
         $I->click('Update Project');
     }
 
-    public function update_button_disabled_until_link_changed(AcceptanceTester $I)
+    public function update_project_button_disabled_until_link_changed(AcceptanceTester $I)
     {
         $project = $I->getProject($I);
 
@@ -174,11 +174,11 @@ class ProjectsCest
         $I->click('Update Project');
     }
 
-    public function leaving_edit_page_when_unsaved_causes_popup(AcceptanceTester $I)
+    public function leaving_project_edit_page_when_unsaved_causes_popup(AcceptanceTester $I)
     {
         $data = ['text0' => 'Project description'];
 
-        $I->wantTo('Verify that popup blocks page leave if form is unsaved.');
+        $I->wantTo('Verify that popup blocks page leave if project form is unsaved.');
         $I->login($I);
         $I->amOnAddPage($I);
         $I->fillForm($I, $data);
@@ -188,9 +188,9 @@ class ProjectsCest
         $I->seeCurrentUrlEquals('/manager');
     }
 
-    public function leaving_edit_page_when_unedited_does_not_cause_popup(AcceptanceTester $I)
+    public function leaving_project_edit_page_when_unedited_does_not_cause_popup(AcceptanceTester $I)
     {
-        $I->wantTo('Verify that popup does not occur if form is saved.');
+        $I->wantTo('Verify that popup does not occur if project form is saved.');
         $I->login($I);
         $I->amOnAddPage($I);
         $I->amOnPage('/manager');

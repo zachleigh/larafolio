@@ -4,7 +4,7 @@ namespace Larafolio\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Larafolio\Models\Project;
-use Larafolio\Http\Requests\AddProjectRequest;
+use Larafolio\Http\Requests\AddResourceRequest;
 
 class ProjectController extends Controller
 {
@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         return view('larafolio::projects.show', [
             'project' => $project,
-            'images'  => $images,
+            'images' => $images,
         ]);
     }
 
@@ -54,11 +54,11 @@ class ProjectController extends Controller
     /**
      * Add a new project to the portfolio.
      *
-     * @param AddProjectRequest $request Form request.
+     * @param Larafolio\Http\Requests\AddResourceRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AddProjectRequest $request)
+    public function store(AddResourceRequest $request)
     {
         $project = $this->user->addProject($request->all());
 
@@ -85,9 +85,9 @@ class ProjectController extends Controller
         $nextLink = $project->links->pluck('order')->max() + 1;
 
         return view('larafolio::projects.edit', [
-            'project'   => $project,
+            'project' => $project,
             'nextBlock' => $nextBlock,
-            'nextLink'  => $nextLink,
+            'nextLink' => $nextLink,
         ]);
     }
 
