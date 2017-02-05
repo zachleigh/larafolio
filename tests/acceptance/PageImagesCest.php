@@ -32,7 +32,6 @@ class PageImagesCest
         $I->wantTo('Add a name, caption and alt for a page image.');
         $I->login($I);
         $I->amOnPagePage($I, $page);
-$I->wait(5);
         $I->fillForm($I, $data);
         $I->click('#button'.$id);
         $I->wait(1);
@@ -55,7 +54,6 @@ $I->wait(5);
         $I->login($I);
         $I->seeInDatabase('images', ['path' => $image->path()]);
         $I->amOnPagePage($I, $page);
-$I->wait(5);
         $I->click('#remove'.$id);
         $I->wait(1);
         $I->click('Remove Image');
