@@ -56,14 +56,17 @@
                     <div>
                         <a
                             :id="elementId('manage')"
-                            class="button button--primary"
+                            class="button button--primary button--small"
                             v-bind:href="link"
                         >
                             Manage
                         </a>
                     </div>
                 </div>
-                <div class="dashboard__photo">
+                <div
+                    class="dashboard__photo"
+                    v-show="image"
+                >
                     <img v-bind:src="image">
                 </div>
             </div>
@@ -99,14 +102,16 @@
              * Icons object.
              */
             icons: {
-                type: Object
+                type: Object,
+                default: null
             },
 
             /**
              * This projects main image small url.
              */
             image: {
-                type: String
+                type: String,
+                default: null
             },
 
             /**

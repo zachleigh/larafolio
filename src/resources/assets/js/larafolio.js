@@ -2,7 +2,8 @@ require('./bootstrap');
 
 Vue.component('blocks', require('./components/Blocks.vue'));
 Vue.component('block-preview', require('./components/Previews/BlockPreview.vue'));
-Vue.component('dashboard', require('./components/Dashboard.vue'));
+Vue.component('dashboard-pages', require('./components/DashboardPages.vue'));
+Vue.component('dashboard-projects', require('./components/DashboardProjects.vue'));
 Vue.component('deleted-projects', require('./components/DeletedProjects.vue'));
 Vue.component('flash-manager', require('./components/FlashManager.vue'));
 Vue.component('flash-message', require('./components/FlashMessage.vue'));
@@ -17,7 +18,7 @@ Vue.component('nav-pages', require('./components/NavPages.vue'));
 Vue.component('nav-projects', require('./components/NavProjects.vue'));
 Vue.component('project-link', require('./components/ProjectLink.vue'));
 Vue.component('project-form', require('./components/ProjectForm.vue'));
-Vue.component('project-tile', require('./components/ProjectTile.vue'));
+Vue.component('dashboard-tile', require('./components/DashboardTile.vue'));
 Vue.component('resource-controls', require('./components/ResourceControls.vue'));
 Vue.component('type-preview', require('./components/Previews/TypePreview.vue'));
 

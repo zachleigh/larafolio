@@ -11,7 +11,7 @@ class ProjectImageController extends Controller
     /**
      * Service class for content images.
      *
-     * @var Larafolio\Http\Content\ContentImages
+     * @var \Larafolio\Http\Content\ContentImages
      */
     protected $contentImages;
 

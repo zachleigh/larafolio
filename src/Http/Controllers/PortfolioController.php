@@ -2,10 +2,41 @@
 
 namespace Larafolio\Http\Controllers;
 
+use Larafolio\Models\Page;
 use Illuminate\Http\Request;
+use Larafolio\Models\Project;
+use Larafolio\Models\UserTraits\updatePageOrder;
 
 class PortfolioController extends Controller
 {
+    /**
+     * Show the manager dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $projects = Project::all()->sortBy('order')->values();
+
+        $projectImages = $projects->mapWithKeys(function (Project $project) {
+            return [$project->name() => $project->getProjectImageUrl()];
+        })->objectIfEmpty();
+
+        $projectBlocks = $projects->mapWithKeys(function (Project $project) {
+            return [$project->name() => $project->getProjectBlockText()];
+        })->objectIfEmpty();
+
+        $pages = Page::all()->sortBy('order')->values();
+
+        return view('larafolio::projects.index', [
+            'projects' => $projects,
+            'projectImages'   => $projectImages,
+            'projectBlocks'   => $projectBlocks,
+            'pages' => $pages,
+            'icons' => $this->dashboardIcons(),
+        ]);
+    }
+
     /**
      * Update project order in portfolio.
      *
@@ -15,8 +46,27 @@ class PortfolioController extends Controller
      */
     public function update(Request $request)
     {
-        $updated = $this->user->updateProjectOrder($request->get('projects'));
-
+        if ($request->has('projects')) {
+            $updated = $this->user->updateProjectOrder($request->get('projects'));
+        } else if ($request->has('pages')) {
+            $updated = $this->user->updatePageOrder($request->get('pages'));
+        }
+        
         return response()->json($updated);
+    }
+
+    /**
+     * Icons needed for dashboard.
+     *
+     * @return array
+     */
+    protected function dashboardIcons()
+    {
+        return [
+            'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
+            'up' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-up.svg')),
+            'hidden' => file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')),
+            'visible' => file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg'))
+        ];
     }
 }

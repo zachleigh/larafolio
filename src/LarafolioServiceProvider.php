@@ -22,6 +22,8 @@ class LarafolioServiceProvider extends BaseProvider
         );
 
         $this->app->register(ImageServiceProvider::class);
+
+        require_once __DIR__.'/Helpers/macros.php';
     }
 
     /**
