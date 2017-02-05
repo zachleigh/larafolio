@@ -9,7 +9,7 @@ interface HttpValidator
      *
      * @param string $url The url to validate.
      *
-     * @return int http code
+     * @return int|bool http code
      */
     public function validate($url);
 }

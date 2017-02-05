@@ -1,6 +1,21 @@
 <template>
     <div class="page__content dashboard__wrapper">
-        <project-tile
+        <div class="page__top">
+            <div class="page__top-block">
+                <lines></lines>
+                <h1 class="page__top-title">Projects</h1>
+            </div>
+        </div>
+        <div v-show="count == 0">
+            <h2>You have not added any projects yet.</h2>
+            <a
+                class="button button--primary"
+                href="/manager/projects/add"
+            >
+                Add a Project
+            </a>
+        </div>
+        <dashboard-tile
             v-for="(project, index) in passedProjects"
             :key="project.id"
             v-bind:index="index"
@@ -10,18 +25,15 @@
             :resource="project"
             @down="moveProjectDown"
             @up="moveProjectUp"
-        ></project-tile>
+        ></dashboard-tile>
     </div>
 </template>
 
 <script>
     import Ajax from './../mixins/Ajax.js';
     import Flash from './../mixins/Flash.js';
-    import ProjectTile from './ProjectTile.vue';
 
     export default {
-        components: { ProjectTile },
-
         mixins: [ Ajax, Flash ],
 
         data: function () {
@@ -72,6 +84,12 @@
             }
         },
 
+        computed : {
+            count () {
+                return this.passedProjects.length;
+            }
+        },
+
         methods: {
             /**
              * Move a project down.
@@ -81,7 +99,7 @@
             moveProjectDown (index) {
                 let project = this.passedProjects.splice(index, 1);
 
-                this.projects.splice(index + 1, 0, project[0]);
+                this.passedProjects.splice(index + 1, 0, project[0]);
 
                 this.updateProjectOrder();
             },

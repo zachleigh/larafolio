@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['middleware' => ['web', 'admin']], function () {
-    Route::get('/manager', 'Larafolio\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::get('/manager', 'Larafolio\Http\Controllers\PortfolioController@index')->name('dashboard');
 
     Route::patch('/manager', 'Larafolio\Http\Controllers\PortfolioController@update')->name('update-portfolio');
 

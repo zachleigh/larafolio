@@ -37,7 +37,7 @@ class ImagesTableSeeder extends Seeder
     {
         $filesystem = new Filesystem();
 
-        $this->user = $user = User::find(1);
+        $this->user = User::find(1);
 
         $this->makeProjectImages($filesystem);
 

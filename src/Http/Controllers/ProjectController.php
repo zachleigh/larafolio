@@ -122,7 +122,7 @@ class ProjectController extends Controller
      * @param \Illuminate\Http\Request $request Request data.
      * @param string                   $slug    Slug of project to remove.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|bool
      */
     public function destroy(Request $request, $slug)
     {

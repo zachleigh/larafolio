@@ -13,7 +13,7 @@ class ImageController extends Controller
      * @param \Illuminate\Http\Request $request Request object.
      * @param Image                    $image   Image to be updated.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|bool
      */
     public function update(Request $request, Image $image)
     {
@@ -33,7 +33,7 @@ class ImageController extends Controller
      *
      * @param Image $image Image to be removed.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|bool
      */
     public function destroy(Request $request, Image $image)
     {
