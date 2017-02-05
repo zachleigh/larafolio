@@ -22,6 +22,7 @@
             :icons="icons"
             :resource="page"
             :block="firstBlock(page)"
+            resource-type="page"
             @down="movePageDown"
             @up="movePageUp"
         ></dashboard-tile>

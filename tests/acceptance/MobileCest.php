@@ -1,5 +1,6 @@
 <?php
 
+use Larafolio\Models\Page;
 use Larafolio\Models\Project;
 
 class MobileCest
@@ -34,7 +35,7 @@ class MobileCest
 
         $I->wantTo('Access the project manager page on mobile.');
         $I->login($I, 'mobile');
-        $I->click('#manage'.$project->id());
+        $I->click('#projectManage'.$project->id());
         $I->seeCurrentUrlEquals('/manager/projects/'.$project->slug());
     }
 
@@ -44,7 +45,7 @@ class MobileCest
         $I->login($I, 'mobile');
         $project = Project::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
-            $I->click('#up'.$project->id());
+            $I->click('#projectUp'.$project->id());
         }
         $I->amOnPage('/manager');
         $I->seeInDatabase('projects', [
@@ -53,7 +54,7 @@ class MobileCest
         ]);
         $project = Project::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
-            $I->click('#down'.$project->id());
+            $I->click('#projectDown'.$project->id());
             $I->wait(1);
         }
         $I->seeInDatabase('projects', [
@@ -68,18 +69,74 @@ class MobileCest
 
         $I->wantTo('Toggle project visibility from the dashboard.');
         $I->login($I, 'mobile');
-        $I->click('#makeVisible'.$project->id());
+        $I->click('#projectMakeVisible'.$project->id());
         $I->wait(1);
         $I->see('Resource Visible');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
             'visible' => true,
         ]);
-        $I->click('#makeHidden'.$project->id());
+        $I->click('#projectMakeHidden'.$project->id());
         $I->wait(1);
         $I->see('Resource Hidden');
         $I->seeInDatabase('projects', [
             'id'      => $project->id(),
+            'visible' => false,
+        ]);
+    }
+
+    public function page_manager_screen_can_be_accessed_from_dashboard(AcceptanceTester $I)
+    {
+        $page = $I->getPage($I);
+
+        $I->wantTo('Access the page manager page on mobile.');
+        $I->login($I, 'mobile');
+        $I->click('#pageManage'.$page->id());
+        $I->seeCurrentUrlEquals('/manager/pages/'.$page->slug());
+    }
+
+    public function page_order_can_be_changed(AcceptanceTester $I)
+    {
+        $I->wantTo('Change the page order on mobile.');
+        $I->login($I, 'mobile');
+        $page = Page::all()->sortBy('order')->last();
+        foreach (range(0, 4) as $time) {
+            $I->click('#pageUp'.$page->id());
+        }
+        $I->amOnPage('/manager');
+        $I->seeInDatabase('pages', [
+            'id'    => $page->id(),
+            'order' => 0,
+        ]);
+        $page = Page::all()->sortBy('order')->first();
+        foreach (range(0, 4) as $time) {
+            $I->click('#pageDown'.$page->id());
+            $I->wait(1);
+        }
+        $I->seeInDatabase('pages', [
+            'id'    => $page->id(),
+            'order' => 4,
+        ]);
+    }
+
+    public function page_visibility_can_be_toggled_from_dashboard_on_mobile(AcceptanceTester $I)
+    {
+        $page = $I->getPage($I);
+
+        $I->wantTo('Toggle page visibility from the dashboard.');
+        $I->login($I, 'mobile');
+        $I->click('#pageMakeVisible'.$page->id());
+        $I->wait(1);
+        $I->see('Resource Visible');
+        $I->seeInDatabase('pages', [
+            'id'      => $page->id(),
+            'visible' => true,
+        ]);
+        $I->click('#pageMakeHidden'.$page->id());
+        $I->wait(1);
+        $I->see('Resource Hidden');
+        $I->seeInDatabase('pages', [
+            'id'      => $page->id(),
             'visible' => false,
         ]);
     }

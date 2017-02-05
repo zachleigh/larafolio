@@ -94,25 +94,25 @@ class PageController extends Controller
      * Update a project.
      *
      * @param \Illuminate\Http\Request $request Request data.
-     * @param string                   $slug    Slug of project to update.
+     * @param string                   $slug    Slug of page to update.
      *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
     {
-        // $project = Project::withTrashed()->where('slug', $slug)->first();
+        $page = Page::withTrashed()->where('slug', $slug)->first();
 
-        // if ($project->trashed()) {
-        //     $this->user->restoreProject($project);
-        // } else {
-        //     $this->user->updateProject($project, $request->all());
-        // }
+        if ($page->trashed()) {
+            $this->user->restorePage($page);
+        } else {
+            $this->user->updatePage($page, $request->all());
+        }
 
-        // if ($request->ajax()) {
-        //     return response()->json(['project' => $project]);
-        // }
+        if ($request->ajax()) {
+            return response()->json(['page' => $page]);
+        }
 
-        // return redirect(route('show-project', ['project' => $project]));
+        return redirect(route('show-page', ['page' => $page]));
     }
 
     /**

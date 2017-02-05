@@ -23,6 +23,7 @@
             :icons="icons"
             :image="projectImage(project)"
             :resource="project"
+            resource-type="project"
             @down="moveProjectDown"
             @up="moveProjectUp"
         ></dashboard-tile>

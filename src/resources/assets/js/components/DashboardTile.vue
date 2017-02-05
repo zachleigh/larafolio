@@ -2,14 +2,14 @@
     <section class="dashboard__item">
         <div class="dashboard__arrows">
             <span
-                v-bind:id="elementId('up')"
+                v-bind:id="elementId('Up')"
                 class="nav__icon black-icon"
                 v-html="icons.up"
                 @click="$emit('up', index)"
             >                 
             </span>
             <span
-                v-bind:id="elementId('down')"
+                v-bind:id="elementId('Down')"
                 class="nav__icon black-icon"
                 v-html="icons.down"
                 @click="$emit('down', index)"
@@ -28,7 +28,7 @@
                             v-show="visible"
                         >
                             <span
-                                :id="elementId('makeHidden')"
+                                :id="elementId('MakeHidden')"
                                 class="nav__icon green-icon"
                                 v-html="icons.visible"
                                 @click.prevent="changeVisibility(false)"
@@ -41,7 +41,7 @@
                             v-show="!visible"
                         >
                             <span
-                                :id="elementId('makeVisible')"
+                                :id="elementId('MakeVisible')"
                                 class="nav__icon red-icon"
                                 v-html="icons.hidden"
                                 @click.prevent="changeVisibility(true)"
@@ -55,7 +55,7 @@
                     </div>
                     <div>
                         <a
-                            :id="elementId('manage')"
+                            :id="elementId('Manage')"
                             class="button button--primary button--small"
                             v-bind:href="link"
                         >
@@ -126,12 +126,23 @@
              */
             resource: {
                 type: Object
-            }
+            },
+
+            /**
+             * Type of resource.
+             */
+            resourceType: {
+                type: String
+            },
         },
 
         computed: {
             link () {
-                return '/manager/projects/'+this.resource.slug;
+                return '/manager/'+this.resourceType+'s/'+this.resource.slug;
+            },
+
+            updateAction () {
+                return '/manager/'+this.resourceType+'s/'+this.resource.slug+'/update';
             }
         },
 
@@ -139,11 +150,10 @@
             /**
              * Make unique id for given element.
              *
-             * @param  {[type]} element [description]
-             * @return {[type]}         [description]
+             * @param  {String} element Element name.
              */
             elementId (element) {
-                return element + this.resource.id;
+                return this.resourceType + element + this.resource.id;
             },
         }
     };
