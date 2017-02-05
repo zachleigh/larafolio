@@ -47,12 +47,10 @@ class PortfolioController extends Controller
     public function update(Request $request)
     {
         if ($request->has('projects')) {
-            $updated = $this->user->updateProjectOrder($request->get('projects'));
+            $this->user->updateProjectOrder($request->get('projects'));
         } else if ($request->has('pages')) {
-            $updated = $this->user->updatePageOrder($request->get('pages'));
+            $this->user->updatePageOrder($request->get('pages'));
         }
-        
-        return response()->json($updated);
     }
 
     /**
