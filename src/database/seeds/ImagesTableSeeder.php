@@ -62,7 +62,7 @@ class ImagesTableSeeder extends Seeder
         foreach ($images as $image) {
             $name = $image->getFilename();
 
-            $path = 'public/images/'.$name;
+            $path = storage_path('app/images/'.$name);
 
             $this->moveImage($image, $path, $filesystem);
 
@@ -79,7 +79,7 @@ class ImagesTableSeeder extends Seeder
     {
         $image = $filesystem->get(__DIR__.'/../../../tests/_data/new.jpg');
 
-        $path = 'public/images/pageImage.jpg';
+        $path = storage_path('app/images/pageImage.jpg');
 
         \Storage::put($path, $image);
 
