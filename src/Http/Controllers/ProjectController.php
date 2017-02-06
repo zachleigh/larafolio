@@ -4,10 +4,30 @@ namespace Larafolio\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Larafolio\Models\Project;
+use Larafolio\Http\Content\ContentCrud;
 use Larafolio\Http\Requests\AddResourceRequest;
 
 class ProjectController extends Controller
 {
+    /**
+     * Service class for content crud.
+     *
+     * @var Larafolio\Http\Content\ContentCrud
+     */
+    protected $contentCrud;
+
+    /**
+     * Construct.
+     *
+     * @param Larafolio\Http\Content\ContentCrud $contentCrud Service class for crud.
+     */
+    public function __construct(ContentCrud $contentCrud)
+    {
+        parent::__construct();
+
+        $this->contentCrud = $contentCrud;
+    }
+
     /**
      * Return all projects.
      *
@@ -15,7 +35,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return response()->json(Project::all());
+        return $this->contentCrud->index(Project::all());
     }
 
     /**
@@ -27,18 +47,9 @@ class ProjectController extends Controller
      */
     public function show($slug)
     {
-        $project = Project::withBlocks($slug)->first();
+        $project = Project::withBlocks($slug)->firstOrFail();
 
-        if (!$project) {
-            abort(404, "No project with slug {$slug} found.");
-        }
-
-        $images = $project->imagesWithProps();
-
-        return view('larafolio::projects.show', [
-            'project' => $project,
-            'images' => $images,
-        ]);
+        return $this->contentCrud->show($project, 'project');
     }
 
     /**
@@ -48,7 +59,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('larafolio::projects.add');
+        return $this->contentCrud->create('project');
     }
 
     /**
@@ -60,13 +71,7 @@ class ProjectController extends Controller
      */
     public function store(AddResourceRequest $request)
     {
-        $project = $this->user->addProject($request->all());
-
-        if ($request->ajax()) {
-            return response()->json(['project' => $project]);
-        }
-
-        return redirect(route('show-project', ['project' => $project]));
+        return $this->contentCrud->store($request, $this->user, 'project');
     }
 
     /**
@@ -78,17 +83,9 @@ class ProjectController extends Controller
      */
     public function edit($slug)
     {
-        $project = Project::full($slug)->first();
+        $project = Project::full($slug)->firstOrFail();
 
-        $nextBlock = $project->blocks->pluck('order')->max() + 1;
-
-        $nextLink = $project->links->pluck('order')->max() + 1;
-
-        return view('larafolio::projects.edit', [
-            'project' => $project,
-            'nextBlock' => $nextBlock,
-            'nextLink' => $nextLink,
-        ]);
+        return $this->contentCrud->edit($project);
     }
 
     /**
@@ -101,19 +98,9 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $project = Project::withTrashed()->where('slug', $slug)->first();
+        $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
 
-        if ($project->trashed()) {
-            $this->user->restoreProject($project);
-        } else {
-            $this->user->updateProject($project, $request->all());
-        }
-
-        if ($request->ajax()) {
-            return response()->json(['project' => $project]);
-        }
-
-        return redirect(route('show-project', ['project' => $project]));
+        return $this->contentCrud->update($request, $project, $this->user);
     }
 
     /**
@@ -126,18 +113,8 @@ class ProjectController extends Controller
      */
     public function destroy(Request $request, $slug)
     {
-        $project = Project::withTrashed()->where('slug', $slug)->first();
+        $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
 
-        if ($project->trashed()) {
-            $this->user->purgeProject($project);
-        } else {
-            $this->user->removeProject($project);
-        }
-
-        if ($request->ajax()) {
-            return response()->json(true);
-        }
-
-        return redirect(route('dashboard'));
+        return $this->contentCrud->destroy($request, $project, $this->user);
     }
 }

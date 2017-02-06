@@ -4,10 +4,30 @@ namespace Larafolio\Http\Controllers;
 
 use Larafolio\Models\Page;
 use Illuminate\Http\Request;
+use Larafolio\Http\Content\ContentCrud;
 use Larafolio\Http\Requests\AddResourceRequest;
 
 class PageController extends Controller
 {
+    /**
+     * Service class for content crud.
+     *
+     * @var Larafolio\Http\Content\ContentCrud
+     */
+    protected $contentCrud;
+
+    /**
+     * Construct.
+     *
+     * @param Larafolio\Http\Content\ContentCrud $contentCrud Service class for crud.
+     */
+    public function __construct(ContentCrud $contentCrud)
+    {
+        parent::__construct();
+
+        $this->contentCrud = $contentCrud;
+    }
+
     /**
      * Return all projects.
      *
@@ -15,7 +35,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return response()->json(Page::all());
+        return $this->contentCrud->index(Page::all());
     }
 
     /**
@@ -27,18 +47,9 @@ class PageController extends Controller
      */
     public function show($slug)
     {
-        $page = Page::withBlocks($slug)->first();
+        $page = Page::withBlocks($slug)->firstOrFail();
 
-        if (!$page) {
-            abort(404, "No page with slug {$slug} found.");
-        }
-
-        $images = $page->imagesWithProps();
-
-        return view('larafolio::pages.show', [
-            'page' => $page,
-            'images'  => $images,
-        ]);
+        return $this->contentCrud->show($page, 'page');
     }
 
     /**
@@ -48,7 +59,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('larafolio::pages.add');
+        return $this->contentCrud->create('page');
     }
 
     /**
@@ -60,13 +71,7 @@ class PageController extends Controller
      */
     public function store(AddResourceRequest $request)
     {
-        $page = $this->user->addPage($request->all());
-
-        if ($request->ajax()) {
-            return response()->json(['page' => $page]);
-        }
-
-        return redirect(route('show-page', ['page' => $page]));
+        return $this->contentCrud->store($request, $this->user, 'page');
     }
 
     /**
@@ -78,17 +83,9 @@ class PageController extends Controller
      */
     public function edit($slug)
     {
-        $page = Page::full($slug)->first();
+        $page = Page::full($slug)->firstOrFail();
 
-        $nextBlock = $page->blocks->pluck('order')->max() + 1;
-
-        $nextLink = $page->links->pluck('order')->max() + 1;
-
-        return view('larafolio::pages.edit', [
-            'page'   => $page,
-            'nextBlock' => $nextBlock,
-            'nextLink'  => $nextLink,
-        ]);
+        return $this->contentCrud->edit($page);
     }
 
     /**
@@ -101,19 +98,9 @@ class PageController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $page = Page::withTrashed()->where('slug', $slug)->first();
+        $page = Page::withTrashed()->where('slug', $slug)->firstOrFail();
 
-        if ($page->trashed()) {
-            $this->user->restorePage($page);
-        } else {
-            $this->user->updatePage($page, $request->all());
-        }
-
-        if ($request->ajax()) {
-            return response()->json(['page' => $page]);
-        }
-
-        return redirect(route('show-page', ['page' => $page]));
+        return $this->contentCrud->update($request, $page, $this->user);
     }
 
     /**
@@ -126,18 +113,8 @@ class PageController extends Controller
      */
     public function destroy(Request $request, $slug)
     {
-        $page = Page::withTrashed()->where('slug', $slug)->first();
+        $page = Page::withTrashed()->where('slug', $slug)->firstOrFail();
 
-        if ($page->trashed()) {
-            $this->user->purgePage($page);
-        } else {
-            $this->user->removePage($page);
-        }
-
-        if ($request->ajax()) {
-            return response()->json(true);
-        }
-
-        return redirect(route('dashboard'));
+        return $this->contentCrud->destroy($request, $page, $this->user);
     }
 }

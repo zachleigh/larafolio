@@ -5,7 +5,6 @@ namespace Larafolio\Http\Controllers;
 use Larafolio\Models\Page;
 use Illuminate\Http\Request;
 use Larafolio\Models\Project;
-use Larafolio\Models\UserTraits\updatePageOrder;
 
 class PortfolioController extends Controller
 {
