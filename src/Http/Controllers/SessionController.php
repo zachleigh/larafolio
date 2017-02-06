@@ -9,7 +9,7 @@ class SessionController extends Controller
     /**
      * Store data in the session.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return mixed
      */

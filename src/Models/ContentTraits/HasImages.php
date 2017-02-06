@@ -54,7 +54,7 @@ trait HasImages
      *
      * @param string $name Name of image to get.
      *
-     * @return Larafolio\Models\Image|null
+     * @return \Larafolio\Models\Image|null
      */
     public function image($name)
     {

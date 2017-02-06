@@ -12,7 +12,7 @@ class ContentCrud
     /**
      * Return all.
      *
-     * @param Collection $collection Colelction of all resources.
+     * @param \Illuminate\Support\Collection $collection Colelction of all resources.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -24,8 +24,8 @@ class ContentCrud
     /**
      * Show an individual resource in the manager.
      *
-     * @param Larafolio\Models\HasContent $model Resource to show.
-     * @param string                      $type  Type of resource (page, project etc.).
+     * @param \Larafolio\Models\HasContent $model Resource to show.
+     * @param string                       $type  Type of resource (page, project etc.).
      *
      * @return \Illuminate\Http\Response
      */
@@ -54,9 +54,9 @@ class ContentCrud
     /**
      * Add a new resource to the portfolio.
      *
-     * @param Larafolio\Http\Requests\AddResourceRequest $request Form request.
-     * @param User                                       $user    User object.
-     * @param string                                     $type    Type of resource (page, project etc.).
+     * @param \Larafolio\Http\Requests\AddResourceRequest $request Form request.
+     * @param User                                        $user    User object.
+     * @param string                                      $type    Type of resource (page, project etc.).
      *
      * @return \Illuminate\Http\Response
      */
@@ -76,7 +76,7 @@ class ContentCrud
     /**
      * Return the resource edit form view.
      *
-     * @param Larafolio\Models\HasContent $model Resource to show edit form for.
+     * @param \Larafolio\Models\HasContent $model Resource to show edit form for.
      *
      * @return \Illuminate\Http\Response
      */
@@ -98,9 +98,9 @@ class ContentCrud
     /**
      * Update a resource.
      *
-     * @param \Illuminate\Http\Request    $request Request data.
-     * @param Larafolio\Models\HasContent $model   Resource to update.
-     * @param User                        $user    User object.
+     * @param \Illuminate\Http\Request     $request Request data.
+     * @param \Larafolio\Models\HasContent $model   Resource to update.
+     * @param User                         $user    User object.
      *
      * @return \Illuminate\Http\Response
      */
@@ -128,11 +128,11 @@ class ContentCrud
     /**
      * Remove a resource from the portfolio.
      *
-     * @param \Illuminate\Http\Request    $request Request data.
-     * @param Larafolio\Models\HasContent $model   Resource to update.
-     * @param User                        $user    User object.
+     * @param \Illuminate\Http\Request     $request Request data.
+     * @param \Larafolio\Models\HasContent $model   Resource to update.
+     * @param User                         $user    User object.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|bool
      */
     public function destroy(Request $request, HasContent $model, $user)
     {
@@ -158,8 +158,8 @@ class ContentCrud
     /**
      * Make HasContent method.
      *
-     * @param  string $verb Action to perform.
-     * @param  string $type Name of resource.
+     * @param string $verb Action to perform.
+     * @param string $type Name of resource.
      *
      * @return string
      */
@@ -171,8 +171,8 @@ class ContentCrud
     /**
      * Make route name.
      *
-     * @param  string $verb Route action to perform.
-     * @param  string $type Name of resource.
+     * @param string $verb Route action to perform.
+     * @param string $type Name of resource.
      *
      * @return string
      */
@@ -184,7 +184,7 @@ class ContentCrud
     /**
      * Get the model type (short class name) from the model.
      *
-     * @param  HasContent $model Model to get name of.
+     * @param \Larafolio\Models\HasContent $model Model to get name of.
      *
      * @return string
      */

@@ -132,10 +132,10 @@ class HasContent extends Model
     /**
      * Get blocks sorted by order.
      *
-     * @param Illuminate\Database\Eloquent\Builder $query Query builder.
-     * @param string                               $slug  Project slug.
+     * @param \Illuminate\Database\Eloquent\Builder $query Query builder.
+     * @param string                                $slug  Project slug.
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeWithBlocks($query, $slug)
     {
@@ -146,10 +146,10 @@ class HasContent extends Model
     /**
      * Get full model info (blocks and links sorted by order).
      *
-     * @param Illuminate\Database\Eloquent\Builder $query Query builder.
-     * @param string                               $slug  Project slug.
+     * @param \Illuminate\Database\Eloquent\Builder $query Query builder.
+     * @param string                                $slug  Project slug.
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFull($query, $slug)
     {
@@ -161,10 +161,10 @@ class HasContent extends Model
     /**
      * Order given relationship by order value.
      *
-     * @param Illuminate\Database\Eloquent\Builder $query        Query builder.
-     * @param string                               $relationship Name of relationship to order.
+     * @param \Illuminate\Database\Eloquent\Builder $query        Query builder.
+     * @param string                                $relationship Name of relationship to order.
      *
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOrderRelationship($query, $relationship)
     {
@@ -182,9 +182,9 @@ class HasContent extends Model
     {
         return [
             'deletedAt' => $this->deleted_at->diffForHumans(),
-            'id'        => $this->id(),
-            'name'      => $this->name(),
-            'slug'      => $this->slug(),
+            'id' => $this->id(),
+            'name' => $this->name(),
+            'slug' => $this->slug(),
         ];
     }
 }

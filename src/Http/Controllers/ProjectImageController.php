@@ -18,7 +18,7 @@ class ProjectImageController extends Controller
     /**
      * Construct.
      *
-     * @param Larafolio\Http\Content\ContentImages $contentImages Service class for content images.
+     * @param \Larafolio\Http\Content\ContentImages $contentImages Service class for content images.
      */
     public function __construct(ContentImages $contentImages)
     {
@@ -30,8 +30,8 @@ class ProjectImageController extends Controller
     /**
      * Show images for project.
      *
-     * @param \Illuminate\Http\Request $request Request from user.
-     * @param Larafolio\Models\Project $project Project to show.
+     * @param \Illuminate\Http\Request  $request Request from user.
+     * @param \Larafolio\Models\Project $project Project to show.
      *
      * @return \Illuminate\Http\Response
      */
@@ -43,8 +43,8 @@ class ProjectImageController extends Controller
     /**
      * Add a new project image to the portfolio.
      *
-     * @param \Illuminate\Http\Request $request Form request.
-     * @param Larafolio\Models\Project $project The project to add the image too.
+     * @param \Illuminate\Http\Request  $request Form request.
+     * @param \Larafolio\Models\Project $project The project to add the image too.
      */
     public function store(Request $request, Project $project)
     {

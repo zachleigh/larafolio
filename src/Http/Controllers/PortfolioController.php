@@ -39,7 +39,7 @@ class PortfolioController extends Controller
     /**
      * Update project order in portfolio.
      *
-     * @param Request $request Request data containing all projects.
+     * @param \Illuminate\Http\Request $request Request data containing all projects.
      *
      * @return \Illuminate\Http\Response
      */

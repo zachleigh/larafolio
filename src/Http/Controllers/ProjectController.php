@@ -12,14 +12,14 @@ class ProjectController extends Controller
     /**
      * Service class for content crud.
      *
-     * @var Larafolio\Http\Content\ContentCrud
+     * @var \Larafolio\Http\Content\ContentCrud
      */
     protected $contentCrud;
 
     /**
      * Construct.
      *
-     * @param Larafolio\Http\Content\ContentCrud $contentCrud Service class for crud.
+     * @param \Larafolio\Http\Content\ContentCrud $contentCrud Service class for crud.
      */
     public function __construct(ContentCrud $contentCrud)
     {
@@ -65,7 +65,7 @@ class ProjectController extends Controller
     /**
      * Add a new project to the portfolio.
      *
-     * @param Larafolio\Http\Requests\AddResourceRequest $request Form request.
+     * @param \Larafolio\Http\Requests\AddResourceRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */

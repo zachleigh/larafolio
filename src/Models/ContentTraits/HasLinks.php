@@ -54,7 +54,7 @@ trait HasLinks
      *
      * @param string $name Name of link to get.
      *
-     * @return Larafolio\Models\Link|null
+     * @return \Larafolio\Models\Link|null
      */
     public function link($name)
     {

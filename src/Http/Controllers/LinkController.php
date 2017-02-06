@@ -11,7 +11,7 @@ class LinkController extends Controller
     /**
      * Remove a link.
      *
-     * @param Link $link Link to remove.
+     * @param \Larafolio\Models\Link $link Link to remove.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -25,8 +25,8 @@ class LinkController extends Controller
     /**
      * Check the status of a link and return json http code.
      *
-     * @param Request       $request       Http request with 'url'.
-     * @param HttpValidator $httpValidator Instance of http validator class.
+     * @param \Illuminate\Http\Request                    $request       Http request with 'url'.
+     * @param \Larafolio\Http\HttpValidator\HttpValidator $httpValidator Instance of http validator class.
      *
      * @return \Illuminate\Http\JsonResponse
      */

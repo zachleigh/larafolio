@@ -11,14 +11,14 @@ class PageImageController extends Controller
     /**
      * Service class for content images.
      *
-     * @var Larafolio\Http\Content\ContentImages
+     * @var \Larafolio\Http\Content\ContentImages
      */
     protected $contentImages;
 
     /**
      * Construct.
      *
-     * @param Larafolio\Http\Content\ContentImages $contentImages Service class for content images.
+     * @param \Larafolio\Http\Content\ContentImages $contentImages Service class for content images.
      */
     public function __construct(ContentImages $contentImages)
     {
@@ -31,7 +31,7 @@ class PageImageController extends Controller
      * Show images for project.
      *
      * @param \Illuminate\Http\Request $request Request from user.
-     * @param Larafolio\Models\Page    $page    Page to show.
+     * @param \Larafolio\Models\Page   $page    Page to show.
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,7 +44,7 @@ class PageImageController extends Controller
      * Add a new page image.
      *
      * @param \Illuminate\Http\Request $request Form request.
-     * @param Larafolio\Models\Page    $page    The page to add the image too.
+     * @param \Larafolio\Models\Page   $page    The page to add the image too.
      */
     public function store(Request $request, Page $page)
     {

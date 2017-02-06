@@ -9,7 +9,7 @@ class TextBlockController extends Controller
     /**
      * Remove a text block.
      *
-     * @param Larafolio\Models\TextBlock $block Text block to remove.
+     * @param \Larafolio\Models\TextBlock $block Text block to remove.
      *
      * @return \Illuminate\Http\Response
      */

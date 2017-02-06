@@ -10,27 +10,27 @@ trait ManagesPages
     /**
      * Add a blocks and links to model.
      *
-     * @param Larafolio\Models\HasContent $model Model to add extras to.
-     * @param array                       $data  Array of posted user data.
+     * @param \Larafolio\Models\HasContent $model Model to add extras to.
+     * @param array                        $data  Array of posted user data.
      *
-     * @return Larafolio\Models\HasContent
+     * @return \Larafolio\Models\HasContent
      */
     abstract protected function addModelExtras(HasContent $model, array $data);
 
     /**
      * Update a HasContent model and its children.
      *
-     * @param Larafolio\Models\HasContent $model Model to update.
-     * @param array                       $data  Array of posted user data.
+     * @param \Larafolio\Models\HasContent $model Model to update.
+     * @param array                        $data  Array of posted user data.
      *
-     * @return Larafolio\Models\HasContent
+     * @return \Larafolio\Models\HasContent
      */
     abstract protected function updateModel(HasContent $model, array $data);
 
     /**
      * Permanently delete a model.
      *
-     * @param Larafolio\Models\HasContent $model Model to delete.
+     * @param \Larafolio\Models\HasContent $model Model to delete.
      *
      * @return bool
      */
@@ -41,7 +41,7 @@ trait ManagesPages
      *
      * @param array $data Array of data to save.
      *
-     * @return Larafolio\Models\Page
+     * @return \Larafolio\Models\Page
      */
     public function addPage(array $data)
     {
@@ -55,10 +55,10 @@ trait ManagesPages
     /**
      * Update a page.
      *
-     * @param Larafolio\Models\Page $page Page to update.
-     * @param array                 $data Array of data to save.
+     * @param \Larafolio\Models\Page $page Page to update.
+     * @param array                  $data Array of data to save.
      *
-     * @return Larafolio\Models\Page
+     * @return \Larafolio\Models\Page
      */
     public function updatePage(Page $page, array $data)
     {
@@ -68,7 +68,7 @@ trait ManagesPages
     /**
      * Remove a page.
      *
-     * @param Larafolio\Models\Page $page Page to remove.
+     * @param \Larafolio\Models\Page $page Page to remove.
      *
      * @return bool|null
      */
@@ -80,7 +80,7 @@ trait ManagesPages
     /**
      * Restore a soft deleted page.
      *
-     * @param Larafolio\Models\Page $page Page to restore.
+     * @param \Larafolio\Models\Page $page Page to restore.
      *
      * @return bool|null
      */
@@ -94,7 +94,7 @@ trait ManagesPages
     /**
      * Hard delete a page from the portfolio.
      *
-     * @param Larafolio\Models\Page $page Page to purge.
+     * @param \Larafolio\Models\Page $page Page to purge.
      *
      * @return bool|null
      */

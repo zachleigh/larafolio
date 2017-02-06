@@ -12,9 +12,9 @@ class ContentImages
     /**
      * Get all images from resource.
      *
-     * @param \Illuminate\Http\Request    $request  Request from user.
-     * @param Larafolio\Models\HasContent $resource Resource to show images for.
-     * @param string                      $type     Resource type.
+     * @param \Illuminate\Http\Request     $request  Request from user.
+     * @param \Larafolio\Models\HasContent $resource Resource to show images for.
+     * @param string                       $type     Resource type.
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,9 +36,9 @@ class ContentImages
     /**
      * Store an image and attach to resource.
      *
-     * @param \Illuminate\Http\Request    $request  Request from user.
-     * @param Larafolio\Models\HasContent $resource Resource to show images for.
-     * @param User                        $user     User model.
+     * @param \Illuminate\Http\Request     $request  Request from user.
+     * @param \Larafolio\Models\HasContent $resource Resource to show images for.
+     * @param User                         $user     User model.
      */
     public function store(Request $request, HasContent $resource, $user)
     {

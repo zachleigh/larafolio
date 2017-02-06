@@ -203,7 +203,7 @@ class Project extends HasContent
     /**
      * Get formatted text of block with project name or first block.
      *
-     * @return Larafolio\Models\TextBlock
+     * @return \Larafolio\Models\TextBlock
      */
     public function getProjectBlock()
     {
@@ -239,7 +239,7 @@ class Project extends HasContent
     /**
      * Get url of small image with project name or first image in collection.
      *
-     * @return Larafolio\Models\Image
+     * @return \Larafolio\Models\Image
      */
     public function getProjectImage()
     {

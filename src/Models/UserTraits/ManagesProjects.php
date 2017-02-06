@@ -10,27 +10,27 @@ trait ManagesProjects
     /**
      * Add a blocks and links to model.
      *
-     * @param Larafolio\Models\HasContent $model Model to add extras to.
-     * @param array                       $data  Array of posted user data.
+     * @param \Larafolio\Models\HasContent $model Model to add extras to.
+     * @param array                        $data  Array of posted user data.
      *
-     * @return Larafolio\Models\HasContent
+     * @return \Larafolio\Models\HasContent
      */
     abstract protected function addModelExtras(HasContent $model, array $data);
 
     /**
      * Update a HasContent model and its children.
      *
-     * @param Larafolio\Models\HasContent $model Model to update.
-     * @param array                       $data  Array of posted user data.
+     * @param \Larafolio\Models\HasContent $model Model to update.
+     * @param array                        $data  Array of posted user data.
      *
-     * @return Larafolio\Models\HasContent
+     * @return \Larafolio\Models\HasContent
      */
     abstract protected function updateModel(HasContent $model, array $data);
 
     /**
      * Permanently delete a model.
      *
-     * @param Larafolio\Models\HasContent $model Model to delete.
+     * @param \Larafolio\Models\HasContent $model Model to delete.
      *
      * @return bool
      */
@@ -41,7 +41,7 @@ trait ManagesProjects
      *
      * @param array $data Array of data to save.
      *
-     * @return Larafolio\Models\Project
+     * @return \Larafolio\Models\Project
      */
     public function addProject(array $data)
     {
@@ -55,10 +55,10 @@ trait ManagesProjects
     /**
      * Update a project in the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project to update.
-     * @param array                    $data    Array of data to save.
+     * @param \Larafolio\Models\Project $project Project to update.
+     * @param array                     $data    Array of data to save.
      *
-     * @return Larafolio\Models\Project
+     * @return \Larafolio\Models\Project
      */
     public function updateProject(Project $project, array $data)
     {
@@ -68,7 +68,7 @@ trait ManagesProjects
     /**
      * Remove a project from the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project to remove.
+     * @param \Larafolio\Models\Project $project Project to remove.
      *
      * @return bool|null
      */
@@ -80,7 +80,7 @@ trait ManagesProjects
     /**
      * Restore a soft deleted project.
      *
-     * @param Larafolio\Models\Project $project Project to restore.
+     * @param \Larafolio\Models\Project $project Project to restore.
      *
      * @return bool|null
      */
@@ -94,7 +94,7 @@ trait ManagesProjects
     /**
      * Hard delete a project from the portfolio.
      *
-     * @param Larafolio\Models\Project $project Project to purge.
+     * @param \Larafolio\Models\Project $project Project to purge.
      *
      * @return bool|null
      */
