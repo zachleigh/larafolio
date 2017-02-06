@@ -15,6 +15,7 @@
         ]) }}"
         :next-block-order="{{ $nextBlock }}"
         :next-link-order="{{ $nextLink }}"
+        :next-line-order="{{ $nextLine }}"
         :project="{{ json_encode($project) }}"
         title="{{ $project->name() }}"
         type="update"

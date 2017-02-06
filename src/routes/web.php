@@ -48,6 +48,9 @@ Route::group(['middleware' => ['web', 'admin']], function () {
     // **TEXT BLOCKS** //
     Route::delete('/manager/blocks/{block}', 'Larafolio\Http\Controllers\TextBlockController@destroy')->name('remove-block');
 
+    // **TEXT LINES** //
+    Route::delete('/manager/lines/{line}', 'Larafolio\Http\Controllers\TextLineController@destroy')->name('remove-line');
+
     // **LINKS** //
     Route::post('/manager/links/check', 'Larafolio\Http\Controllers\LinkController@check')->name('check-link');
 

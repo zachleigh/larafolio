@@ -7,7 +7,7 @@
         >
             <div class="flash-message__top">
                 <div class="flash-message__lines">
-                    <lines></lines>
+                    <header-lines></header-lines>
                 </div>
                 <div v-on:click="close" class="flash-message__close">
                     ✕

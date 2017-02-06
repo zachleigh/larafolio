@@ -15,8 +15,8 @@ class CreateTextLinesTable extends Migration
     {
         Schema::create('text_lines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->index();
-            $table->string('text');
+            $table->string('name')->nullable()->index();
+            $table->string('text')->nullable();
             $table->integer('order');
             $table->integer('resource_id')->nullable()->unsigned()->index();
             $table->string('resource_type')->index()->default('Larafolio\\Models\\Project');

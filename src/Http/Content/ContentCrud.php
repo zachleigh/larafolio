@@ -88,10 +88,13 @@ class ContentCrud
 
         $nextLink = $model->links->pluck('order')->max() + 1;
 
+        $nextLine = $model->lines->pluck('order')->max() + 1;
+
         return view($this->makeRoute('edit', $type), [
             $type       => $model,
             'nextBlock' => $nextBlock,
             'nextLink'  => $nextLink,
+            'nextLine'  => $nextLine,
         ]);
     }
 

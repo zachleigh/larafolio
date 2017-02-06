@@ -2,7 +2,7 @@
     <div class="page">
         <div class="page__top">
             <div class="page__top-block">
-                <lines></lines>
+                <header-lines></header-lines>
                 <h1 class="page__top-title">{{ title }}</h1>
             </div>
         </div>
@@ -52,6 +52,13 @@
                         :icons="icons"
                         @change="updateLinks"
                     ></links>
+                    <h3 class="project-form__section-header">Text Lines</h3>
+                    <text-lines
+                        :passedLines="lines"
+                        :nextLinkOrder="nextLineOrder"
+                        :icons="icons"
+                        @change="updateLines"
+                    ></text-lines>
                     <h3 class="project-form__section-header">Text Blocks</h3>
                     <blocks
                         :passedBlocks="blocks"
@@ -117,6 +124,14 @@
                         {{ link.url }}
                     </a>
                 </link-preview>
+                <line-preview
+                    v-for="(line, index) in lines"
+                    :key="line.id"
+                    :id="'displayLine' + index"
+                    :height="getHeight('line' + index)"
+                >
+                    <span slot="text">{{ line.text }}</span>
+                </line-preview>
                 <block-preview
                     v-for="(block, index) in blocks"
                     :key="block.id"
@@ -163,6 +178,13 @@
                 links: [],
 
                 /**
+                 * Array of lines for project.
+                 *
+                 * @type {Array}
+                 */
+                lines: [],
+
+                /**
                  * Array of blocks for project.
                  *
                  * @type {Array}
@@ -170,7 +192,7 @@
                 blocks: [],
 
                 /**
-                 * If true, components (links, blocks) have changed.
+                 * If true, components (links, lines, blocks) have changed.
                  *
                  * @type {Boolean}
                  */
@@ -222,6 +244,13 @@
             },
 
             /**
+             * Next line id value.
+             */
+            nextLineOrder: {
+                type: Number
+            },
+
+            /**
              * The project to edit, if type is update.
              */
             project: {
@@ -267,6 +296,8 @@
 
             this.updateBlocks(this.blocks);
 
+            this.updateLines(this.lines);
+
             this.projectUpToDate();
 
             this.setHeights();
@@ -286,6 +317,10 @@
                 if (this.project.links.length >= 1) {
                     this.links = this.project.links;
                 }
+
+                if (this.project.lines.length >= 1) {
+                    this.lines = this.project.lines;
+                }
             },
 
             /**
@@ -298,6 +333,7 @@
                     name: this.name,
                     type: this.projectType,
                     links: this.links,
+                    lines: this.lines,
                     blocks: this.blocks
                 })
                 .then(function (response) {
@@ -324,6 +360,7 @@
                     name: this.name,
                     type: this.projectType,
                     links: this.links,
+                    lines: this.lines,
                     blocks: this.blocks
                 })
                 .then(function (response) {
@@ -363,6 +400,20 @@
              */
             updateLinks (links, changed) {
                 this.links = links;
+
+                if (changed) {
+                    this.projectChanged();
+                }
+            },
+
+            /**
+             * Update lines array.
+             *
+             * @param  {Array} lines   Array of updated lines.
+             * @param  {Bool}  changed True if change requires project save.
+             */
+            updateLines (lines, changed) {
+                this.lines = lines;
 
                 if (changed) {
                     this.projectChanged();

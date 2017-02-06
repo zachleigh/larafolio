@@ -2,7 +2,7 @@
     <div class="page">
         <div class="page__top">
             <div class="page__top-block">
-                <lines></lines>
+                <header-lines></header-lines>
                 <h1 class="page__top-title">{{ title }}</h1>
             </div>
         </div>

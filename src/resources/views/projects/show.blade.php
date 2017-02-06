@@ -42,6 +42,12 @@
                     @endforeach
                 </section>
                 <section class="section">
+                    <h3 class="section__header">Project Lines</h3>
+                    @foreach ($project->lines as $line)
+                        @include('larafolio::components.show-line')
+                    @endforeach
+                </section>
+                <section class="section">
                     <h3 class="section__header">Project Blocks</h3>
                     @foreach ($project->blocks as $block)
                         @include('larafolio::components.show-block')

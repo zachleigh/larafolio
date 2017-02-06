@@ -204,9 +204,9 @@
             },
 
             /**
-             * Move current block up one position in list.
+             * Move current link up one position in list.
              *
-             * @param  {Number} index Index of block object to move.
+             * @param  {Number} index Index of link object to move.
              */
             moveLinkUp (index) {
                 if (index > 0) {
@@ -219,9 +219,9 @@
             },
 
             /**
-             * Move current block down one position in list.
+             * Move current link down one position in list.
              *
-             * @param  {Number} index Index of block object to move.
+             * @param  {Number} index Index of link object to move.
              */
             moveLinkDown (index) {
                 let link = this.links.splice(index, 1);

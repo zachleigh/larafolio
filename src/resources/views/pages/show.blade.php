@@ -38,6 +38,12 @@
                     @endforeach
                 </section>
                 <section class="section">
+                    <h3 class="section__header">Page Lines</h3>
+                    @foreach ($page->lines as $line)
+                        @include('larafolio::components.show-line')
+                    @endforeach
+                </section>
+                <section class="section">
                     <h3 class="section__header">Page Blocks</h3>
                     @foreach ($page->blocks as $block)
                         @include('larafolio::components.show-block')
