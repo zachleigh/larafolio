@@ -34,7 +34,7 @@ class ContentCrud
         $images = $model->imagesWithProps();
 
         return view($this->makeRoute('show', $type), [
-            $type => $model,
+            $type    => $model,
             'images' => $images,
         ]);
     }
@@ -89,9 +89,9 @@ class ContentCrud
         $nextLink = $model->links->pluck('order')->max() + 1;
 
         return view($this->makeRoute('edit', $type), [
-            $type => $model,
+            $type       => $model,
             'nextBlock' => $nextBlock,
-            'nextLink' => $nextLink,
+            'nextLink'  => $nextLink,
         ]);
     }
 

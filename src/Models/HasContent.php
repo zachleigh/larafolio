@@ -182,9 +182,9 @@ class HasContent extends Model
     {
         return [
             'deletedAt' => $this->deleted_at->diffForHumans(),
-            'id' => $this->id(),
-            'name' => $this->name(),
-            'slug' => $this->slug(),
+            'id'        => $this->id(),
+            'name'      => $this->name(),
+            'slug'      => $this->slug(),
         ];
     }
 }

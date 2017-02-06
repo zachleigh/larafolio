@@ -28,11 +28,11 @@ class PortfolioController extends Controller
         $pages = Page::all()->sortBy('order')->values();
 
         return view('larafolio::projects.index', [
-            'projects' => $projects,
+            'projects'        => $projects,
             'projectImages'   => $projectImages,
             'projectBlocks'   => $projectBlocks,
-            'pages' => $pages,
-            'icons' => $this->dashboardIcons(),
+            'pages'           => $pages,
+            'icons'           => $this->dashboardIcons(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class PortfolioController extends Controller
     {
         if ($request->has('projects')) {
             $this->user->updateProjectOrder($request->get('projects'));
-        } else if ($request->has('pages')) {
+        } elseif ($request->has('pages')) {
             $this->user->updatePageOrder($request->get('pages'));
         }
     }
@@ -60,10 +60,10 @@ class PortfolioController extends Controller
     protected function dashboardIcons()
     {
         return [
-            'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
-            'up' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-up.svg')),
-            'hidden' => file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')),
-            'visible' => file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg'))
+            'down'    => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
+            'up'      => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-up.svg')),
+            'hidden'  => file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')),
+            'visible' => file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')),
         ];
     }
 }
