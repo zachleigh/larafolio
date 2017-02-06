@@ -27,9 +27,9 @@ class ContentImages
         }
 
         return view('larafolio::images.manage', [
-            'type' => $type,
+            'type'     => $type,
             'resource' => $resource,
-            'images' => $images,
+            'images'   => $images,
         ]);
     }
 

@@ -53,7 +53,7 @@ class ImagesTableSeeder extends Seeder
     /**
      * Make images for project.
      *
-     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
     protected function makeProjectImages(Filesystem $filesystem)
     {
@@ -73,7 +73,7 @@ class ImagesTableSeeder extends Seeder
     /**
      * Make images for project.
      *
-     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
     protected function makePageImages(Filesystem $filesystem)
     {

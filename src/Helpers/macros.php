@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Collection;
 
-if (! Collection::hasMacro('objectIfEmpty')) {
+if (!Collection::hasMacro('objectIfEmpty')) {
     /*
      * Dump the arguments given followed by the collection.
      */
