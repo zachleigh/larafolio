@@ -3,15 +3,16 @@
 namespace Larafolio\Models;
 
 use Larafolio\Helpers\Sluggable;
+use Illuminate\Database\Eloquent\Model;
+use Larafolio\Models\ContentTraits\HasLines;
 use Larafolio\Models\ContentTraits\HasLinks;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Larafolio\Models\ContentTraits\HasBlocks;
 use Larafolio\Models\ContentTraits\HasImages;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HasContent extends Model
 {
-    use HasBlocks, HasImages, HasLinks, Sluggable, SoftDeletes;
+    use HasBlocks, HasImages, HasLines, HasLinks, Sluggable, SoftDeletes;
 
     /**
      * Properties to always eager load.

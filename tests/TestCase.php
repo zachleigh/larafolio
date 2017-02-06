@@ -79,6 +79,20 @@ abstract class TestCase extends IlluminateTestCase
     }
 
     /**
+     * Create a project with a single text line.
+     *
+     * @param string $name Name of text line.
+     *
+     * @return Larafolio\Models\Project
+     */
+    protected function createProjectWithLine($name = 'name')
+    {
+        $project = factory(Project::class)->create();
+
+        return $this->addLineToModel($project, $name);
+    }
+
+    /**
      * Create a page with a single block.
      *
      * @param string $name Name of block.
@@ -106,6 +120,25 @@ abstract class TestCase extends IlluminateTestCase
             'name'           => $name,
             'text'           => 'text',
             'formatted_text' => 'formatted',
+            'order'          => 5,
+        ]);
+
+        return $model;
+    }
+
+    /**
+     * Add a line to a HasContent model.
+     *
+     * @param Larafolio\Models\HasContent $model Model to add line to.
+     * @param string                      $name  Name of line.
+     *
+     * @return Larafolio\Models\HasContent
+     */
+    private function addLineToModel(HasContent $model, $name)
+    {
+        $model->lines()->create([
+            'name'           => $name,
+            'text'           => 'text',
             'order'          => 5,
         ]);
 

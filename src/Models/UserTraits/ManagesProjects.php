@@ -8,14 +8,14 @@ use Larafolio\Models\HasContent;
 trait ManagesProjects
 {
     /**
-     * Add a blocks and links to model.
+     * Add children resources to model.
      *
-     * @param \Larafolio\Models\HasContent $model Model to add extras to.
+     * @param \Larafolio\Models\HasContent $model Model to add children to.
      * @param array                        $data  Array of posted user data.
      *
      * @return \Larafolio\Models\HasContent
      */
-    abstract protected function addModelExtras(HasContent $model, array $data);
+    abstract protected function addModelChildren(HasContent $model, array $data);
 
     /**
      * Update a HasContent model and its children.
@@ -49,7 +49,7 @@ trait ManagesProjects
 
         $project = Project::create($data);
 
-        return $this->addModelExtras($project, $data);
+        return $this->addModelChildren($project, $data);
     }
 
     /**

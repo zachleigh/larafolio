@@ -2,6 +2,7 @@
 
 namespace Larafolio\Models;
 
+use Larafolio\Models\TextLine;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Larafolio\Models\UserTraits\ManagesPages;
@@ -12,21 +13,30 @@ trait ManagesPortfolio
     use ManagesPages, ManagesProjects;
 
     /**
-     * Add a blocks and links to model.
+     * Child relationships for HasContent models.
      *
-     * @param \Larafolio\Models\HasContent $model Model to add extras to.
+     * @var array
+     */
+    protected $children = [
+        'blocks' => 'addBlockToModel',
+        'lines' => 'addLineToModel',
+        'links' => 'addLinkToModel',
+    ];
+
+    /**
+     * Add children resources to model.
+     *
+     * @param \Larafolio\Models\HasContent $model Model to add children to.
      * @param array                        $data  Array of posted user data.
      *
      * @return \Larafolio\Models\HasContent
      */
-    protected function addModelExtras(HasContent $model, array $data)
+    protected function addModelChildren(HasContent $model, array $data)
     {
-        foreach (collect($data)->get('blocks', []) as $block) {
-            $this->addBlockToModel($model, $block);
-        }
-
-        foreach (collect($data)->get('links', []) as $link) {
-            $this->addLinkToModel($model, $link);
+        foreach ($this->children as $key => $method) {
+            foreach (collect($data)->get($key, []) as $childData) {
+                $this->{$method}($model, $childData);
+            }
         }
 
         return $model;
@@ -45,6 +55,8 @@ trait ManagesPortfolio
         $model->update($data);
 
         $this->updateAllTextBlocks($model, $data);
+
+        $this->updateAllTextLines($model, $data);
 
         $this->updateAllLinks($model, $data);
 
@@ -145,6 +157,67 @@ trait ManagesPortfolio
     public function removeTextBlock(TextBlock $textBlock)
     {
         return $textBlock->delete();
+    }
+
+    /**
+     * Add a text line to a model.
+     *
+     * @param \Larafolio\Models\HasContent $model     Model to add text line to.
+     * @param array                        $lineData Array of text line data.
+     *
+     * @return \Larafolio\Models\HasContent
+     */
+    public function addLineToModel(HasContent $model, array $lineData)
+    {
+        return $model->lines()->create($lineData);
+    }
+
+    /**
+     * Update a text line.
+     *
+     * @param \Larafolio\Models\TextLine $textLine Text line to update.
+     * @param array                       $lineData Array of text line data.
+     *
+     * @return \Larafolio\Models\TextLine
+     */
+    public function updateTextLine(TextLine $textLine, array $lineData)
+    {
+        $textLine->update($lineData);
+
+        return $textLine;
+    }
+
+    /**
+     * Update model text lines by adding new ones and updating existing ones.
+     *
+     * @param \Larafolio\Models\HasContent $model Model that lines belong to.
+     * @param array                        $data  Array of model information.
+     */
+    public function updateAllTextLines(HasContent $model, array $data)
+    {
+        $lineData = collect($data)->get('lines', []);
+
+        $type = TextLine::class;
+
+        $this->updateContent(
+            $model,
+            $type,
+            $lineData,
+            [$this, 'updateTextLine'],
+            [$this, 'addLineToModel']
+        );
+    }
+
+    /**
+     * Remove a text line from a model.
+     *
+     * @param \Larafolio\Models\TextLine $textLine The text line to delete.
+     *
+     * @return bool|null
+     */
+    public function removeTextLine(TextLine $textLine)
+    {
+        return $textLine->delete();
     }
 
     /**

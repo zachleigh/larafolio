@@ -66,3 +66,11 @@ $factory->define(Larafolio\Models\Page::class, function () {
         'order' => rand(0, 10),
     ];
 });
+
+$factory->define(Larafolio\Models\TextLine::class, function (Faker\Generator $faker) {
+    return [
+        'name'           => $faker->word,
+        'text'           => $faker->sentence,
+        'order'          => rand(0, 10),
+    ];
+});
