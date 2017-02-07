@@ -5,7 +5,7 @@ namespace Larafolio\Http\Controllers;
 use Illuminate\Http\Request;
 use Larafolio\Models\Project;
 use Larafolio\Http\Content\ContentCrud;
-use Larafolio\Http\Requests\AddResourceRequest;
+use Larafolio\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -65,11 +65,11 @@ class ProjectController extends Controller
     /**
      * Add a new project to the portfolio.
      *
-     * @param \Larafolio\Http\Requests\AddResourceRequest $request Form request.
+     * @param \Larafolio\Http\Requests\ProjectRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AddResourceRequest $request)
+    public function store(ProjectRequest $request)
     {
         return $this->contentCrud->store($request, $this->user, 'project');
     }
@@ -91,12 +91,12 @@ class ProjectController extends Controller
     /**
      * Update a project.
      *
-     * @param \Illuminate\Http\Request $request Request data.
-     * @param string                   $slug    Slug of project to update.
+     * @param \Larafolio\Http\Requests\ProjectRequest $request Request data.
+     * @param string                                  $slug    Slug of project to update.
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(ProjectRequest $request, $slug)
     {
         $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
 

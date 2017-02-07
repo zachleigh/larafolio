@@ -39,7 +39,25 @@ class PagesCest
         $I->click('Add Page');
         $I->wait(1);
         $I->seeCurrentUrlEquals('/manager/pages/add');
-        $I->see('The name field is required.');
+        $I->see('Page name is required.');
+    }
+
+    public function page_name_must_be_unique_when_updating(AcceptanceTester $I)
+    {
+        $I->wantTo('Verify that page name must be unique when updating.');
+
+        $page1 = $I->getPage($I, 1);
+        $page2 = $I->getPage($I, 2);
+
+        $data = [
+            'name' => $page2->name()
+        ];
+
+        $I->login($I);
+        $I->amOnPage("/manager/pages/{$page1->slug()}/edit");
+        $I->fillForm($I, $data);
+        $I->click('Update Page');
+        $I->see('Page name is already taken.');
     }
 
     public function user_can_toggle_page_visibility(AcceptanceTester $I)

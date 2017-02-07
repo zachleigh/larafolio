@@ -20,7 +20,7 @@ class TextBlocksCest
         $I->click('Add Project');
         $I->wait(1);
         $I->confirmOnAddPage($I);
-        $I->see('The block text field is required.');
+        $I->see('All blocks must have text.');
     }
 
     public function user_can_add_new_text_block(AcceptanceTester $I)
@@ -159,21 +159,25 @@ class TextBlocksCest
         $I->login($I);
         $I->amOnPage("/manager/projects/{$project->slug()}/edit");
         $I->click('#addBlock');
-        $I->fillField('text3', 'block4');
+        $I->fillField('text5', 'block5');
+        $I->removeBlock($I, '#delete4');
+        $I->removeBlock($I, '#delete3');
         $I->removeBlock($I, '#delete2');
         $I->removeBlock($I, '#delete1');
         $I->removeBlock($I, '#delete0');
         $I->click('#addBlock');
-        $I->fillField('text1', 'block5');
+        $I->fillField('text1', 'block6');
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
         $I->amOnPage("/manager/projects/{$project->slug()}");
-        $I->see('block4');
         $I->see('block5');
+        $I->see('block6');
         $I->dontSee($blocks[0]->text());
         $I->dontSee($blocks[1]->text());
         $I->dontSee($blocks[2]->text());
+        $I->dontSee($blocks[3]->text());
+        $I->dontSee($blocks[4]->text());
     }
 
     public function user_can_move_block_up_while_editing(AcceptanceTester $I)

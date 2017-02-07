@@ -5,7 +5,7 @@ namespace Larafolio\Http\Controllers;
 use Larafolio\Models\Page;
 use Illuminate\Http\Request;
 use Larafolio\Http\Content\ContentCrud;
-use Larafolio\Http\Requests\AddResourceRequest;
+use Larafolio\Http\Requests\PageRequest;
 
 class PageController extends Controller
 {
@@ -65,11 +65,11 @@ class PageController extends Controller
     /**
      * Add a new page to the portfolio.
      *
-     * @param \Larafolio\Http\Requests\AddResourceRequest $request Form request.
+     * @param \Larafolio\Http\Requests\PageRequest $request Form request.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AddResourceRequest $request)
+    public function store(PageRequest $request)
     {
         return $this->contentCrud->store($request, $this->user, 'page');
     }
@@ -91,12 +91,12 @@ class PageController extends Controller
     /**
      * Update a page.
      *
-     * @param \Illuminate\Http\Request $request Request data.
-     * @param string                   $slug    Slug of page to update.
+     * @param \Larafolio\Http\Requests\PageRequest $request Request data.
+     * @param string                               $slug    Slug of page to update.
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(PageRequest $request, $slug)
     {
         $page = Page::withTrashed()->where('slug', $slug)->firstOrFail();
 

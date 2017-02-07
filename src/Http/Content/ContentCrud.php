@@ -5,7 +5,7 @@ namespace Larafolio\Http\Content;
 use Illuminate\Http\Request;
 use Larafolio\Models\HasContent;
 use Illuminate\Support\Collection;
-use Larafolio\Http\Requests\AddResourceRequest;
+use Larafolio\Http\Requests\ResourceRequest;
 
 class ContentCrud
 {
@@ -54,13 +54,13 @@ class ContentCrud
     /**
      * Add a new resource to the portfolio.
      *
-     * @param \Larafolio\Http\Requests\AddResourceRequest $request Form request.
-     * @param User                                        $user    User object.
-     * @param string                                      $type    Type of resource (page, project etc.).
+     * @param \Illuminate\Http\Request $request Form request.
+     * @param User                     $user    User object.
+     * @param string                   $type    Type of resource (page, project etc.).
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AddResourceRequest $request, $user, $type)
+    public function store(Request $request, $user, $type)
     {
         $addMethod = $this->makeMethod('add', $type);
 

@@ -357,6 +357,7 @@
                 this.saving = true;
 
                 this.ajax.patch(this.action, {
+                    id: this.project.id,
                     name: this.name,
                     type: this.projectType,
                     links: this.links,

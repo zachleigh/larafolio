@@ -326,6 +326,7 @@
                 this.saving = true;
 
                 this.ajax.patch(this.action, {
+                    id: this.page.id,
                     name: this.name,
                     links: this.links,
                     blocks: this.blocks,

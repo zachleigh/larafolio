@@ -40,7 +40,25 @@ class ProjectsCest
         $I->click('Add Project');
         $I->wait(1);
         $I->confirmOnAddPage($I);
-        $I->see('The name field is required.');
+        $I->see('Project name is required.');
+    }
+
+    public function project_name_must_be_unique_when_updating(AcceptanceTester $I)
+    {
+        $I->wantTo('Verify that project name must be unique when updating.');
+
+        $project1 = $I->getProject($I, 1);
+        $project2 = $I->getProject($I, 2);
+
+        $data = [
+            'name' => $project2->name()
+        ];
+
+        $I->login($I);
+        $I->amOnPage("/manager/projects/{$project1->slug()}/edit");
+        $I->fillForm($I, $data);
+        $I->click('Update Project');
+        $I->see('Project name is already taken.');
     }
 
     public function user_can_toggle_project_visibility(AcceptanceTester $I)
