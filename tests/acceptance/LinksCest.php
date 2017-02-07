@@ -148,7 +148,7 @@ class LinksCest
         $I->click('Add Project');
     }
 
-    public function user_can_move_text_block_down(AcceptanceTester $I)
+    public function user_can_move_link_down(AcceptanceTester $I)
     {
         $data = [
             'url0' => 'link0',
@@ -198,6 +198,7 @@ class LinksCest
         $I->dontSee($links[1]->url());
         $I->dontSee($links[2]->url());
     }
+
     public function user_can_move_link_up_while_editing(AcceptanceTester $I)
     {
         $project = $I->getProject($I);

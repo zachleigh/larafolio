@@ -36,6 +36,13 @@
                         :icons="icons"
                         @change="updateLinks"
                     ></links>
+                    <h3 class="project-form__section-header">Text Lines</h3>
+                    <text-lines
+                        :passedLines="lines"
+                        :nextLinkOrder="nextLineOrder"
+                        :icons="icons"
+                        @change="updateLines"
+                    ></text-lines>
                     <h3 class="project-form__section-header">Text Blocks</h3>
                     <blocks
                         :passedBlocks="blocks"
@@ -96,6 +103,14 @@
                         {{ link.url }}
                     </a>
                 </link-preview>
+                <line-preview
+                    v-for="(line, index) in lines"
+                    :key="line.id"
+                    :id="'displayLine' + index"
+                    :height="getHeight('line' + index)"
+                >
+                    <span slot="text">{{ line.text }}</span>
+                </line-preview>
                 <block-preview
                     v-for="(block, index) in blocks"
                     :key="block.id"
@@ -133,6 +148,13 @@
                  * @type {Array}
                  */
                 links: [],
+
+                /**
+                 * Array of lines for page.
+                 *
+                 * @type {Array}
+                 */
+                lines: [],
 
                 /**
                  * Array of blocks for page.
@@ -194,6 +216,13 @@
             },
 
             /**
+             * Next line id value.
+             */
+            nextLineOrder: {
+                type: Number
+            },
+
+            /**
              * The page to edit, if type is update.
              */
             page: {
@@ -239,6 +268,8 @@
 
             this.updateBlocks(this.blocks);
 
+            this.updateLines(this.lines);
+
             this.pageUpToDate();
 
             this.setHeights();
@@ -256,6 +287,10 @@
                 if (this.page.links.length >= 1) {
                     this.links = this.page.links;
                 }
+
+                if (this.page.lines.length >= 1) {
+                    this.lines = this.page.lines;
+                }
             },
 
             /**
@@ -267,7 +302,8 @@
                 this.ajax.post(this.action, {
                     name: this.name,
                     links: this.links,
-                    blocks: this.blocks
+                    blocks: this.blocks,
+                    lines: this.lines,
                 })
                 .then(function (response) {
                     let slug = response.data.page.slug;
@@ -292,7 +328,8 @@
                 this.ajax.patch(this.action, {
                     name: this.name,
                     links: this.links,
-                    blocks: this.blocks
+                    blocks: this.blocks,
+                    lines: this.lines,
                 })
                 .then(function (response) {
                     let slug = response.data.page.slug;
@@ -331,6 +368,20 @@
              */
             updateLinks (links, changed) {
                 this.links = links;
+
+                if (changed) {
+                    this.pageChanged();
+                }
+            },
+
+            /**
+             * Update lines array.
+             *
+             * @param  {Array} lines   Array of updated lines.
+             * @param  {Bool}  changed True if change requires project save.
+             */
+            updateLines (lines, changed) {
+                this.lines = lines;
 
                 if (changed) {
                     this.pageChanged();

@@ -480,4 +480,58 @@ class MobileCest
         $I->dontSeeElement('#linkText1');
         $I->click('Add Project');
     }
+
+    // **LINES** //
+    public function line_order_can_be_changed_on_mobile(AcceptanceTester $I)
+    {
+        $project = $I->getProject($I);
+        $data = [
+            'lineText0' => 'updatedText0',
+            'lineText1' => 'updatedText1',
+            'lineText2' => 'updatedText2',
+        ];
+
+        $I->wantTo('Change the order of lines on mobile.');
+        $I->login($I, 'mobile');
+        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->wait(1);
+        $I->fillForm($I, $data);
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->click('#downLine0');
+        $I->wait(1);
+        $I->click('#upLine2');
+        $I->wait(1);
+        $I->click('Update Project');
+        $I->wait(1);
+        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->click('Edit Project');
+        $I->removeLine($I, '#deleteLine2');
+        $I->removeLine($I, '#deleteLine0');
+        $I->wait(1);
+        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->see($data['lineText2']);
+        $I->dontSee($data['lineText0']);
+        $I->dontSee($data['lineText1']);
+    }
+
+    public function line_can_be_removed_on_mobile(AcceptanceTester $I)
+    {
+        $data = [
+            'lineName0' => 'Line name 0',
+            'lineText0' => 'Line text0',
+            'lineName1' => 'Line name 1',
+            'lineText1' => 'Line text1',
+        ];
+
+        $I->wantTo('Remove a line from a project on mobile.');
+        $I->login($I, 'mobile');
+        $I->amOnAddPage($I);
+        $I->click('#addLine');
+        $I->fillForm($I, $data);
+        $I->seeElement('#lineText1');
+        $I->removeLine($I, '#deleteLine1');
+        $I->dontSeeElement('#lineText1');
+        $I->click('Add Project');
+    }
 }

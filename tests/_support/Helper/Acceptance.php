@@ -265,4 +265,17 @@ class Acceptance extends \Codeception\Module
         $I->click('Remove Link');
         $I->wait(1);
     }
+
+    /**
+     * Remove a line.
+     *
+     * @param \AcceptanceTester $I
+     * @param string            $id Id of line to remove.
+     */
+    public function removeLine(\AcceptanceTester $I, $id)
+    {
+        $I->click($id);
+        $I->click('Remove Line');
+        $I->wait(1);
+    }
 }

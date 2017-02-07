@@ -16,7 +16,7 @@ class PortfolioController extends Controller
     public function index()
     {
         $projects = Project::all()->sortBy('order')->values();
-
+        
         $projectImages = $projects->mapWithKeys(function (Project $project) {
             return [$project->name() => $project->getProjectImageUrl()];
         })->objectIfEmpty();

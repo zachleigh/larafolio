@@ -80,6 +80,8 @@ class HasContent extends Model
 
         $query->orderRelationship('links');
 
+        $query->orderRelationship('lines');
+
         $query->orderRelationship('blocks');
 
         if ($group) {
@@ -156,6 +158,7 @@ class HasContent extends Model
     {
         return $query->orderRelationship('blocks')
             ->orderRelationship('links')
+            ->orderRelationship('lines')
             ->where('slug', $slug);
     }
 

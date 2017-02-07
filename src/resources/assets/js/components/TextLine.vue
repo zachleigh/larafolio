@@ -1,6 +1,6 @@
 <template>
-    <div v-bind:id="elementId('line')" class="line section">
-        <div class="link__control text-block__control">
+    <div v-bind:id="elementId('line')" class="text-line section">
+        <div class="text-block__control">
             <div>
                 <label v-bind:for="elementId('lineName')">Name: </label>
                 <input
