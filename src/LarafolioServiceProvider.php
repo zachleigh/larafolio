@@ -41,6 +41,20 @@ class LarafolioServiceProvider extends BaseProvider
 
         $this->loadViewsFrom(__DIR__.'/resources/views', 'larafolio');
 
+        $this->publishResources();
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                PublishSeeds::class,
+            ]);
+        }
+    }
+
+    /**
+     * Publish all pacakge resources.
+     */
+    protected function publishResources()
+    {
         $this->publishes([
             __DIR__.'/database/migrations/' => database_path('migrations'),
         ], 'migrations');
@@ -56,11 +70,5 @@ class LarafolioServiceProvider extends BaseProvider
         $this->publishes([
             __DIR__.'/config/imagecache.php' => config_path('imagecache.php'),
         ]);
-
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                PublishSeeds::class,
-            ]);
-        }
     }
 }

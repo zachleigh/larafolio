@@ -31,26 +31,14 @@ if (!function_exists('manager_cache_bust')) {
      *
      * @return string
      */
-    function manager_cache_bust($path, $jsonData = null, $root = 'vendor/larafolio/')
+    function manager_cache_bust($path, $jsonData = null, $root = 'vendor/larafolio')
     {
         $path = trim($path, '/');
 
-        $file = str_replace($root, '', $path);
+        $root = trim($root, '/');
 
-        if ($jsonData === null && file_exists(public_path($root.'rev-manifest.json'))) {
-            $jsonData = file_get_contents(public_path($root.'rev-manifest.json'));
-        }
+        $cacheBuster = app('Larafolio\Http\CacheBuster');
 
-        if ($jsonData !== null) {
-            $data = json_decode($jsonData, true);
-
-            if (array_key_exists($file, $data)) {
-                return '/'.$root.$data[$file];
-            }
-
-            return elixir($path);
-        }
-
-        abort(500, "Resource {$path} could not be resolved.");
+        return $cacheBuster->resolvePath($path, $jsonData, $root);
     }
 }
