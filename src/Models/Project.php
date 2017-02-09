@@ -26,39 +26,6 @@ class Project extends HasContent
     ];
 
     /**
-     * Properties to always eager load.
-     *
-     * @var array
-     */
-    protected $with = ['blocks', 'images', 'links'];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'visible' => 'boolean',
-    ];
-
-    /**
-     * Fields that are dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    /**
      * Return all visible projects.
      *
      * @param bool $group If true, group projects by 'type'.

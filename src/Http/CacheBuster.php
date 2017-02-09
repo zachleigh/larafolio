@@ -15,14 +15,14 @@ class CacheBuster
      */
     public function resolvePath($path, $jsonData, $root)
     {
-        $file = str_replace($root, '', $path);
+        $file = trim(str_replace($root, '', $path), '/');
 
         $jsonData = $this->validateJsonData($path, $jsonData, $root);
 
         $data = json_decode($jsonData, true);
 
         if (array_key_exists($file, $data)) {
-            return '/'.$root.$data[$file];
+            return '/'.$root.'/'.$data[$file];
         }
 
         return elixir($path);
