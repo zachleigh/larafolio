@@ -11,12 +11,14 @@ class ImageController extends Controller
      * Update image name and caption.
      *
      * @param \Illuminate\Http\Request $request Request object.
-     * @param \Larafolio\Models\Image  $image   Image to be updated.
+     * @param int                      $imageID ID of image to be updated.
      *
      * @return \Illuminate\Http\Response|bool
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request, $imageID)
     {
+        $image = Image::findOrFail($imageID);
+
         $imageData = $request->only(['name', 'caption', 'alt']);
 
         $this->user->updateImageInfo($image, $imageData);
@@ -31,12 +33,15 @@ class ImageController extends Controller
     /**
      * Remove image from portfolio.
      *
-     * @param \Larafolio\Models\Image $image Image to be removed.
+     * @param \Illuminate\Http\Request $request Request object.
+     * @param int                      $imageID ID of image to be removed.
      *
      * @return \Illuminate\Http\Response|bool
      */
-    public function destroy(Request $request, Image $image)
+    public function destroy(Request $request, $imageID)
     {
+        $image = Image::findOrFail($imageID);
+
         $this->user->removeImage($image);
 
         if ($request->ajax()) {

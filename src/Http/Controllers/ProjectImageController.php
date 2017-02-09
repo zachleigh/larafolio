@@ -30,24 +30,28 @@ class ProjectImageController extends Controller
     /**
      * Show images for project.
      *
-     * @param \Illuminate\Http\Request  $request Request from user.
-     * @param \Larafolio\Models\Project $project Project to show.
+     * @param \Illuminate\Http\Request $request Request from user.
+     * @param string                   $slug    Slug of project to show.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Project $project)
+    public function index(Request $request, $slug)
     {
+        $project = Project::full($slug)->firstOrFail();
+
         return $this->contentImages->getImages($request, $project, 'project');
     }
 
     /**
      * Add a new project image to the portfolio.
      *
-     * @param \Illuminate\Http\Request  $request Form request.
-     * @param \Larafolio\Models\Project $project The project to add the image too.
+     * @param \Illuminate\Http\Request $request Form request.
+     * @param string                   $slug    Slug of project to add image to.
      */
-    public function store(Request $request, Project $project)
+    public function store(Request $request, $slug)
     {
+        $project = Project::full($slug)->firstOrFail();
+
         $this->contentImages->store($request, $project, $this->user);
     }
 }

@@ -31,12 +31,14 @@ class PageImageController extends Controller
      * Show images for project.
      *
      * @param \Illuminate\Http\Request $request Request from user.
-     * @param \Larafolio\Models\Page   $page    Page to show.
+     * @param string                   $page    Slug of page to show.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Page $page)
+    public function index(Request $request, $slug)
     {
+        $page = Page::full($slug)->firstOrFail();
+
         return $this->contentImages->getImages($request, $page, 'page');
     }
 
@@ -44,10 +46,12 @@ class PageImageController extends Controller
      * Add a new page image.
      *
      * @param \Illuminate\Http\Request $request Form request.
-     * @param \Larafolio\Models\Page   $page    The page to add the image too.
+     * @param string                   $page    Slug of page to add image to.
      */
-    public function store(Request $request, Page $page)
+    public function store(Request $request, $slug)
     {
+        $page = Page::full($slug)->firstOrFail();
+
         $this->contentImages->store($request, $page, $this->user);
     }
 }

@@ -18,9 +18,9 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::patch('/manager/projects/{slug}/update', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');
 
-    Route::get('/manager/projects/{project}/images', 'Larafolio\Http\Controllers\ProjectImageController@index')->name('show-project-images');
+    Route::get('/manager/projects/{slug}/images', 'Larafolio\Http\Controllers\ProjectImageController@index')->name('show-project-images');
 
-    Route::post('/manager/projects/{project}/images', 'Larafolio\Http\Controllers\ProjectImageController@store')->name('store-project-image');
+    Route::post('/manager/projects/{slug}/images', 'Larafolio\Http\Controllers\ProjectImageController@store')->name('store-project-image');
 
     Route::delete('/manager/projects/{slug}', 'Larafolio\Http\Controllers\ProjectController@destroy')->name('remove-project');
 
@@ -37,9 +37,9 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::patch('/manager/pages/{slug}/update', 'Larafolio\Http\Controllers\PageController@update')->name('update-page');
 
-    Route::get('/manager/pages/{page}/images', 'Larafolio\Http\Controllers\PageImageController@index')->name('show-page-images');
+    Route::get('/manager/pages/{slug}/images', 'Larafolio\Http\Controllers\PageImageController@index')->name('show-page-images');
 
-    Route::post('/manager/pages/{page}/images', 'Larafolio\Http\Controllers\PageImageController@store')->name('store-page-image');
+    Route::post('/manager/pages/{slug}/images', 'Larafolio\Http\Controllers\PageImageController@store')->name('store-page-image');
 
     Route::delete('/manager/pages/{slug}', 'Larafolio\Http\Controllers\PageController@destroy')->name('remove-page');
 
@@ -57,9 +57,9 @@ Route::group(['middleware' => ['web', 'admin']], function () {
     Route::delete('/manager/links/{link}', 'Larafolio\Http\Controllers\LinkController@destroy')->name('remove-link');
 
     // **IMAGES** //
-    Route::patch('/manager/images/{image}', 'Larafolio\Http\Controllers\ImageController@update')->name('update-image');
+    Route::patch('/manager/images/{id}', 'Larafolio\Http\Controllers\ImageController@update')->name('update-image');
 
-    Route::delete('/manager/images/{image}', 'Larafolio\Http\Controllers\ImageController@destroy')->name('remove-image');
+    Route::delete('/manager/images/{id}', 'Larafolio\Http\Controllers\ImageController@destroy')->name('remove-image');
 
     // **SETTINGS** //
     Route::get('/manager/settings/{page}', 'Larafolio\Http\Controllers\SettingsController@show')->name('show-settings');
