@@ -57,6 +57,7 @@ class PagesCest
         $I->amOnPage("/manager/pages/{$page1->slug()}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Page');
+        $I->wait(1);
         $I->see('Page name is already taken.');
     }
 

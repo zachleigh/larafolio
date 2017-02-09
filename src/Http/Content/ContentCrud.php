@@ -5,7 +5,6 @@ namespace Larafolio\Http\Content;
 use Illuminate\Http\Request;
 use Larafolio\Models\HasContent;
 use Illuminate\Support\Collection;
-use Larafolio\Http\Requests\ResourceRequest;
 
 class ContentCrud
 {

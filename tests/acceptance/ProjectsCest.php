@@ -58,6 +58,7 @@ class ProjectsCest
         $I->amOnPage("/manager/projects/{$project1->slug()}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Project');
+        $I->wait(1);
         $I->see('Project name is already taken.');
     }
 
