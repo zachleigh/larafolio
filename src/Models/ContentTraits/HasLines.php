@@ -64,19 +64,14 @@ trait HasLines
     /**
      * Get line text by line name, if line exists.
      *
-     * @param string $name      Name of text line to get.
-     * @param bool   $formatted If true, return formmated text.
+     * @param string $name Name of text line to get.
      *
      * @return string|null
      */
-    public function lineText($name, $formatted = true)
+    public function lineText($name)
     {
         if (!$line = $this->line($name)) {
             return;
-        }
-
-        if ($formatted) {
-            return $line->formattedText();
         }
 
         return $line->text();
