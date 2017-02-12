@@ -42,12 +42,6 @@ class ImagesTableSeeder extends Seeder
         $this->makeProjectImages($filesystem);
 
         $this->makePageImages($filesystem);
-
-        // $old = umask(0);
-
-        // chmod(storage_path('app/public/images'), 0775);
-
-        // umask($old);
     }
 
     /**
