@@ -65,7 +65,7 @@ before_script:
 
 script:
     - phpunit
-    - php codecept.phar run acceptance --no-interaction
+    - php codecept.phar run acceptance --no-interaction -vvv
 
 cache:
     directories:
