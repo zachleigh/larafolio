@@ -118,63 +118,13 @@ class Project extends HasContent
     }
 
     /**
-     * Return the project id.
-     *
-     * @return int
-     */
-    public function id()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Return the project name.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Return the project type.
-     *
-     * @return string
-     */
-    public function type()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Return the project slug.
-     *
-     * @return string
-     */
-    public function slug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Return the project order value.
-     *
-     * @return int
-     */
-    public function order()
-    {
-        return $this->order;
-    }
-
-    /**
      * Get formatted text of block with project name or first block.
      *
      * @return \Larafolio\Models\TextBlock
      */
     public function getProjectBlock()
     {
-        $block = $this->block($this->name());
+        $block = $this->block($this->name);
 
         if ($block) {
             return $block;
@@ -195,9 +145,9 @@ class Project extends HasContent
         $block = $this->getProjectBlock();
 
         if ($block && $formatted) {
-            return $block->formattedText();
+            return $block->formattedText;
         } elseif ($block) {
-            return $block->text();
+            return $block->text;
         }
 
         return $block;
@@ -210,7 +160,7 @@ class Project extends HasContent
      */
     public function getProjectImage()
     {
-        $projectImage = $this->image($this->name());
+        $projectImage = $this->image($this->name);
 
         if ($projectImage) {
             return $projectImage;

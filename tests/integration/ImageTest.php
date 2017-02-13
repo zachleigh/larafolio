@@ -20,7 +20,7 @@ class ImageTest extends TestCase
 
         $project = factory(Project::class)->create();
 
-        $this->json('POST', "manager/projects/{$project->slug()}/images",
+        $this->json('POST', "manager/projects/{$project->slug}/images",
             ['path' => 'path']
         )
              ->seeStatusCode(302)
@@ -34,7 +34,7 @@ class ImageTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $this->visit('manager/projects/'.$project->slug().'/images')
+        $this->visit('manager/projects/'.$project->slug.'/images')
              ->seeStatusCode(200)
              ->seePageIs('/');
     }
@@ -46,9 +46,9 @@ class ImageTest extends TestCase
     {
         $image = factory(Image::class)->create();
 
-        $this->seeInDatabase('images', ['path' => $image->path()]);
+        $this->seeInDatabase('images', ['path' => $image->path]);
 
-        $this->json('PATCH', "manager/images/{$image->id()}",
+        $this->json('PATCH', "manager/images/{$image->id}",
             ['path' => 'new path']
         )
              ->seeStatusCode(302)
@@ -62,10 +62,10 @@ class ImageTest extends TestCase
     {
         $image = factory(Image::class)->create();
 
-        $this->seeInDatabase('images', ['id' => $image->id()]);
+        $this->seeInDatabase('images', ['id' => $image->id]);
 
-        $this->json('DELETE', "manager/images/{$image->id()}")
+        $this->json('DELETE', "manager/images/{$image->id}")
              ->seeStatusCode(302)
-             ->seeInDatabase('images', ['id' => $image->id()]);
+             ->seeInDatabase('images', ['id' => $image->id]);
     }
 }

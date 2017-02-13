@@ -16,7 +16,7 @@
         :next-block-order="{{ $nextBlock }}"
         :next-link-order="{{ $nextLink }}"
         :page="{{ json_encode($page) }}"
-        title="{{ $page->name() }}"
+        title="{{ $page->name }}"
         type="update"
     ></page-form>
 @stop

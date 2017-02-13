@@ -91,7 +91,7 @@ trait HasImages
             return;
         }
 
-        return $image->caption();
+        return $image->caption;
     }
 
     /**
@@ -107,7 +107,7 @@ trait HasImages
             return;
         }
 
-        return $image->alt();
+        return $image->alt;
     }
 
     /**

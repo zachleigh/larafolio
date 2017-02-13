@@ -71,9 +71,9 @@ class ProjectTest extends TestCase
 
         $project = $this->user->addProject($data);
 
-        $this->assertEquals('project_name', $project->slug());
+        $this->assertEquals('project_name', $project->slug);
 
-        $data['slug'] = $project->slug();
+        $data['slug'] = $project->slug;
 
         $this->seeInDatabase('projects', $data);
     }
@@ -104,7 +104,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => false,
         ]);
 
@@ -115,7 +115,7 @@ class ProjectTest extends TestCase
         $this->user->updateProject($project, $data);
 
         $this->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => true,
         ]);
     }
@@ -127,11 +127,11 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create(['name' => 'first name']);
 
-        $this->assertEquals('first_name', $project->slug());
+        $this->assertEquals('first_name', $project->slug);
 
         $project = $this->user->updateProject($project, ['name' => 'second name']);
 
-        $this->assertEquals('second_name', $project->slug());
+        $this->assertEquals('second_name', $project->slug);
     }
 
     /**
@@ -142,7 +142,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
 
@@ -151,12 +151,12 @@ class ProjectTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
 
         $this->seeInDatabase('projects', [
-            'id' => $project->id(),
+            'id' => $project->id,
         ]);
     }
 
@@ -168,7 +168,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
         
@@ -179,7 +179,7 @@ class ProjectTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('projects', [
-            'id'         => $project->id()
+            'id' => $project->id,
         ]);
     }
 
@@ -191,7 +191,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
 
@@ -200,14 +200,14 @@ class ProjectTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
 
         $this->user->restoreProject($project);
 
         $this->seeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
     }
@@ -368,7 +368,7 @@ class ProjectTest extends TestCase
         $projects->each(function ($project) {
             $block = $project->blocks[0];
 
-            $this->assertEquals('block name', $block->name());
+            $this->assertEquals('block name', $block->name);
         });
     }
 
@@ -389,7 +389,7 @@ class ProjectTest extends TestCase
         $projects->each(function ($project) {
             $image = $project->images[0];
 
-            $this->assertEquals('image name', $image->name());
+            $this->assertEquals('image name', $image->name);
         });
     }
 
@@ -410,7 +410,7 @@ class ProjectTest extends TestCase
         $projects->each(function ($project) {
             $link = $project->links[0];
 
-            $this->assertEquals('link name', $link->name());
+            $this->assertEquals('link name', $link->name);
         });
     }
 
@@ -497,7 +497,7 @@ class ProjectTest extends TestCase
         ]);
 
         $project->blocks()->create([
-            'name'           => $project->name(),
+            'name'           => $project->name,
             'text'           => 'text',
             'formatted_text' => 'formatted',
             'order' => 5
@@ -512,7 +512,7 @@ class ProjectTest extends TestCase
 
         $projectBlock = $project->getProjectBlock();
 
-        $this->assertEquals($project->name(), $projectBlock->name());
+        $this->assertEquals($project->name, $projectBlock->name);
     }
 
     /**
@@ -538,7 +538,7 @@ class ProjectTest extends TestCase
 
         $projectBlock = $project->getProjectBlock();
 
-        $this->assertEquals('name1', $projectBlock->name());
+        $this->assertEquals('name1', $projectBlock->name);
     }
 
     /**
@@ -589,7 +589,7 @@ class ProjectTest extends TestCase
         ]));
 
         $project->images()->save(factory(Image::class)->make([
-            'name' => $project->name(),
+            'name' => $project->name,
         ]));
 
         $project->images()->save(factory(Image::class)->make([
@@ -598,7 +598,7 @@ class ProjectTest extends TestCase
 
         $projectImage = $project->getProjectImage();
 
-        $this->assertEquals($project->name(), $projectImage->name());
+        $this->assertEquals($project->name, $projectImage->name);
     }
 
     /**
@@ -618,7 +618,7 @@ class ProjectTest extends TestCase
 
         $projectImage = $project->getProjectImage();
 
-        $this->assertEquals('name1', $projectImage->name());
+        $this->assertEquals('name1', $projectImage->name);
     }
 
 

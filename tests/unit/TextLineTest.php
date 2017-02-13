@@ -27,7 +27,7 @@ class TextLineTest extends TestCase
 
         $this->user->addLineToModel($project, $data);
 
-        $data['resource_id'] = $project->id();
+        $data['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_lines', $data);
     }
@@ -57,8 +57,8 @@ class TextLineTest extends TestCase
 
         $project = $this->user->addProject($data);
 
-        $firstLine['resource_id'] = $project->id();
-        $secondLine['resource_id'] = $project->id();
+        $firstLine['resource_id'] = $project->id;
+        $secondLine['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_lines', $firstLine);
         $this->seeInDatabase('text_lines', $secondLine);
@@ -72,9 +72,9 @@ class TextLineTest extends TestCase
         $textLine = factory(TextLine::class)->create();
 
         $this->seeInDatabase('text_lines', [
-            'id'   => $textLine->id(),
-            'name' => $textLine->name(),
-            'text' => $textLine->text(),
+            'id'   => $textLine->id,
+            'name' => $textLine->name,
+            'text' => $textLine->text,
         ]);
 
         $data = [
@@ -85,7 +85,7 @@ class TextLineTest extends TestCase
         $this->user->updateTextLine($textLine, $data);
 
         $this->seeInDatabase('text_lines', [
-            'id'   => $textLine->id(),
+            'id'   => $textLine->id,
             'name' => $data['name'],
             'text' => $data['text'],
         ]);
@@ -118,11 +118,11 @@ class TextLineTest extends TestCase
 
         $this->user->updateProject($project, $data);
 
-        $firstLine['resource_id'] = $project->id();
+        $firstLine['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_lines', $firstLine);
 
-        $secondLine['resource_id'] = $project->id();
+        $secondLine['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_lines', $secondLine);
 
@@ -131,8 +131,8 @@ class TextLineTest extends TestCase
         $firstLineUpdated = [
             'name'           => 'first text line name updated',
             'text'           => 'first text line text updated',
-            'resource_id'    => $project->id(),
-            'id'             => $firstLineModel->id()
+            'resource_id'    => $project->id,
+            'id'             => $firstLineModel->id
         ];
 
         $newData = [
@@ -172,12 +172,12 @@ class TextLineTest extends TestCase
         $project = $this->user->updateProject($project, $data);
 
         $firstLine['order'] = 0;
-        $firstLine['resource_id'] = $project->id();
+        $firstLine['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_lines', $firstLine);
 
         $secondLine['order'] = 1;
-        $secondLine['resource_id'] = $project->id();
+        $secondLine['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_lines', $secondLine);
     }
@@ -190,9 +190,9 @@ class TextLineTest extends TestCase
         $textLine = factory(TextLine::class)->create();
 
         $this->seeInDatabase('text_lines', [
-            'id'         => $textLine->id(),
-            'name'       => $textLine->name(),
-            'text'       => $textLine->text(),
+            'id'         => $textLine->id,
+            'name'       => $textLine->name,
+            'text'       => $textLine->text,
             'deleted_at' => null,
         ]);
 
@@ -201,15 +201,15 @@ class TextLineTest extends TestCase
         $this->assertTrue($success);
 
         $this->seeInDatabase('text_lines', [
-            'id'   => $textLine->id(),
-            'name' => $textLine->name(),
-            'text' => $textLine->text(),
+            'id'   => $textLine->id,
+            'name' => $textLine->name,
+            'text' => $textLine->text,
         ]);
 
         $this->dontSeeInDatabase('text_lines', [
-            'id'         => $textLine->id(),
-            'name'       => $textLine->name(),
-            'text'       => $textLine->text(),
+            'id'         => $textLine->id,
+            'name'       => $textLine->name,
+            'text'       => $textLine->text,
             'deleted_at' => null,
         ]);
     }
@@ -225,7 +225,7 @@ class TextLineTest extends TestCase
 
         $this->assertInstanceOf(TextLine::class, $line);
 
-        $this->assertEquals('name', $line->name());
+        $this->assertEquals('name', $line->name);
     }
 
     /**

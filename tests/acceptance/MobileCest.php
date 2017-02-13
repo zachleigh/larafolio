@@ -35,8 +35,8 @@ class MobileCest
 
         $I->wantTo('Access the project manager page on mobile.');
         $I->login($I, 'mobile');
-        $I->click('#projectManage'.$project->id());
-        $I->seeCurrentUrlEquals('/manager/projects/'.$project->slug());
+        $I->click('#projectManage'.$project->id);
+        $I->seeCurrentUrlEquals('/manager/projects/'.$project->slug);
     }
 
     public function project_order_can_be_changed(AcceptanceTester $I)
@@ -45,20 +45,20 @@ class MobileCest
         $I->login($I, 'mobile');
         $project = Project::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
-            $I->click('#projectUp'.$project->id());
+            $I->click('#projectUp'.$project->id);
         }
         $I->amOnPage('/manager');
         $I->seeInDatabase('projects', [
-            'id'    => $project->id(),
+            'id'    => $project->id,
             'order' => 0,
         ]);
         $project = Project::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
-            $I->click('#projectDown'.$project->id());
+            $I->click('#projectDown'.$project->id);
             $I->wait(1);
         }
         $I->seeInDatabase('projects', [
-            'id'    => $project->id(),
+            'id'    => $project->id,
             'order' => 4,
         ]);
     }
@@ -69,18 +69,18 @@ class MobileCest
 
         $I->wantTo('Toggle project visibility from the dashboard.');
         $I->login($I, 'mobile');
-        $I->click('#projectMakeVisible'.$project->id());
+        $I->click('#projectMakeVisible'.$project->id);
         $I->wait(1);
         $I->see('Resource Visible');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => true,
         ]);
-        $I->click('#projectMakeHidden'.$project->id());
+        $I->click('#projectMakeHidden'.$project->id);
         $I->wait(1);
         $I->see('Resource Hidden');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => false,
         ]);
     }
@@ -91,8 +91,8 @@ class MobileCest
 
         $I->wantTo('Access the page manager page on mobile.');
         $I->login($I, 'mobile');
-        $I->click('#pageManage'.$page->id());
-        $I->seeCurrentUrlEquals('/manager/pages/'.$page->slug());
+        $I->click('#pageManage'.$page->id);
+        $I->seeCurrentUrlEquals('/manager/pages/'.$page->slug);
     }
 
     public function page_order_can_be_changed(AcceptanceTester $I)
@@ -101,20 +101,20 @@ class MobileCest
         $I->login($I, 'mobile');
         $page = Page::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
-            $I->click('#pageUp'.$page->id());
+            $I->click('#pageUp'.$page->id);
         }
         $I->amOnPage('/manager');
         $I->seeInDatabase('pages', [
-            'id'    => $page->id(),
+            'id'    => $page->id,
             'order' => 0,
         ]);
         $page = Page::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
-            $I->click('#pageDown'.$page->id());
+            $I->click('#pageDown'.$page->id);
             $I->wait(1);
         }
         $I->seeInDatabase('pages', [
-            'id'    => $page->id(),
+            'id'    => $page->id,
             'order' => 4,
         ]);
     }
@@ -125,18 +125,18 @@ class MobileCest
 
         $I->wantTo('Toggle page visibility from the dashboard.');
         $I->login($I, 'mobile');
-        $I->click('#pageMakeVisible'.$page->id());
+        $I->click('#pageMakeVisible'.$page->id);
         $I->wait(1);
         $I->see('Resource Visible');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => true,
         ]);
-        $I->click('#pageMakeHidden'.$page->id());
+        $I->click('#pageMakeHidden'.$page->id);
         $I->wait(1);
         $I->see('Resource Hidden');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => false,
         ]);
     }
@@ -178,7 +178,7 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Update a project in the portfolio on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Project');
         $I->wait(1);
@@ -208,27 +208,27 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Toggle the visibility of a project from the project screen on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see('Hidden');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => false,
         ]);
         $I->click('#makeVisible');
         $I->see('Visible');
-        $I->see($project->name().' is now publicly viewable');
+        $I->see($project->name.' is now publicly viewable');
         $I->dontSee('Hidden');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => true,
         ]);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->click('#makeHidden');
         $I->see('Hidden');
-        $I->see($project->name().' is not publicly viewable');
+        $I->see($project->name.' is not publicly viewable');
         $I->dontSee('Visible');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => false,
         ]);
     }
@@ -238,20 +238,20 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Remove a project from the portfolio on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->seeInDatabase('projects', [
-            'id'         => $project->id(),
+            'id'         => $project->id,
             'deleted_at' => null,
         ]);
         $I->click('#removeResource');
         $I->click('Remove');
         $I->wait(1);
-        $I->seeInDatabase('projects', ['id' => $project->id()]);
+        $I->seeInDatabase('projects', ['id' => $project->id]);
         $I->dontseeInDatabase('projects', [
             'id'         => $project['id'],
             'deleted_at' => null,
         ]);
-        $I->see("{$project->name()} removed from portfolio");
+        $I->see("{$project->name} removed from portfolio");
     }
 
     // **PROJECT IMAGES** //
@@ -260,7 +260,7 @@ class MobileCest
         $project = $I->getProject($I);
         $I->wantTo('Add an image to a project on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}/images");
+        $I->amOnPage("/manager/projects/{$project->slug}/images");
         $I->waitForElement('.dz-hidden-input');
         $I->attachFile('.dz-hidden-input', 'new.jpg');
         $I->wait(1);
@@ -272,7 +272,7 @@ class MobileCest
     {
         $project = $I->getProject($I);
         $image = $I->getImageFromResourceArray($project);
-        $id = $image->id();
+        $id = $image->id;
 
         $data = [
             'name'.$id    => 'image name',
@@ -282,12 +282,12 @@ class MobileCest
 
         $I->wantTo('Update project image information on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}/images");
+        $I->amOnPage("/manager/projects/{$project->slug}/images");
         $I->fillForm($I, $data);
         $I->click('#button'.$id);
         $I->wait(1);
         $I->seeInDatabase('images', [
-            'path'    => $image->path(),
+            'path'    => $image->path,
             'name'    => 'image name',
             'caption' => 'image caption',
             'alt'     => 'image alt',
@@ -299,17 +299,17 @@ class MobileCest
     {
         $project = $I->getProject($I);
         $image = $I->getImageFromResourceArray($project);
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Remove an image from a project on mobile.');
         $I->login($I, 'mobile');
-        $I->seeInDatabase('images', ['path' => $image->path()]);
-        $I->amOnPage("/manager/projects/{$project->slug()}/images");
+        $I->seeInDatabase('images', ['path' => $image->path]);
+        $I->amOnPage("/manager/projects/{$project->slug}/images");
         $I->click('#remove'.$id);
         $I->wait(1);
         $I->click('Remove Image');
         $I->wait(1);
-        $I->dontSeeInDatabase('images', ['path' => $image->path()]);
+        $I->dontSeeInDatabase('images', ['path' => $image->path]);
         $I->see('Image removed from portfolio');
     }
 
@@ -319,7 +319,7 @@ class MobileCest
         $page = $I->getPage($I);
         $I->wantTo('Add an image to a page on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/pages/{$page->slug()}/images");
+        $I->amOnPage("/manager/pages/{$page->slug}/images");
         $I->waitForElement('.dz-hidden-input');
         $I->attachFile('.dz-hidden-input', 'new.jpg');
         $I->wait(1);
@@ -331,7 +331,7 @@ class MobileCest
     {
         $page = $I->getPage($I);
         $image = $I->getImageFromResourceArray($page);
-        $id = $image->id();
+        $id = $image->id;
 
         $data = [
             'name'.$id    => 'image name',
@@ -341,12 +341,12 @@ class MobileCest
 
         $I->wantTo('Update page image information on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/pages/{$page->slug()}/images");
+        $I->amOnPage("/manager/pages/{$page->slug}/images");
         $I->fillForm($I, $data);
         $I->click('#button'.$id);
         $I->wait(1);
         $I->seeInDatabase('images', [
-            'path'    => $image->path(),
+            'path'    => $image->path,
             'name'    => 'image name',
             'caption' => 'image caption',
             'alt'     => 'image alt',
@@ -358,17 +358,17 @@ class MobileCest
     {
         $page = $I->getPage($I);
         $image = $I->getImageFromResourceArray($page);
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Remove an image from a page on mobile.');
         $I->login($I, 'mobile');
-        $I->seeInDatabase('images', ['path' => $image->path()]);
-        $I->amOnPage("/manager/pages/{$page->slug()}/images");
+        $I->seeInDatabase('images', ['path' => $image->path]);
+        $I->amOnPage("/manager/pages/{$page->slug}/images");
         $I->click('#remove'.$id);
         $I->wait(1);
         $I->click('Remove Image');
         $I->wait(1);
-        $I->dontSeeInDatabase('images', ['path' => $image->path()]);
+        $I->dontSeeInDatabase('images', ['path' => $image->path]);
         $I->see('Image removed from portfolio');
     }
 
@@ -384,7 +384,7 @@ class MobileCest
 
         $I->wantTo('Change textblock order on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -395,12 +395,12 @@ class MobileCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->click('Edit Project');
         $I->removeBlock($I, '#delete2');
         $I->removeBlock($I, '#delete0');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['name2']);
         $I->dontSee($data['name0']);
         $I->dontSee($data['name1']);
@@ -437,7 +437,7 @@ class MobileCest
 
         $I->wantTo('Change the order of links on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -448,12 +448,12 @@ class MobileCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->click('Edit Project');
         $I->removeLink($I, '#deleteLink2');
         $I->removeLink($I, '#deleteLink0');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['url2']);
         $I->dontSee($data['url0']);
         $I->dontSee($data['url1']);
@@ -493,7 +493,7 @@ class MobileCest
 
         $I->wantTo('Change the order of lines on mobile.');
         $I->login($I, 'mobile');
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -504,12 +504,12 @@ class MobileCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->click('Edit Project');
         $I->removeLine($I, '#deleteLine2');
         $I->removeLine($I, '#deleteLine0');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['lineText2']);
         $I->dontSee($data['lineText0']);
         $I->dontSee($data['lineText1']);

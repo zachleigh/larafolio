@@ -1,7 +1,7 @@
 @extends('larafolio::master')
 
 @section('title')
-    {{ $project->name() }} - Larafolio
+    {{ $project->name }} - Larafolio
 @stop
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="page__top">
             <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="page__top-title">{{ $project->name() }}</h1>
+                <h1 class="page__top-title">{{ $project->name }}</h1>
             </div>
             <div>
                 <resource-controls
@@ -32,7 +32,7 @@
                 <section class="section">
                     <h3 class="section__header">Project Type</h3>
                     <div class="section__indented">
-                        <b>{{ $project->type() }}</b>
+                        <b>{{ $project->type }}</b>
                     </div>
                 </section>
                 <section class="section">

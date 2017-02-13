@@ -29,7 +29,7 @@ class ImageTest extends TestCase
 
         $this->assertInstanceOf(Image::class, $image);
 
-        $imageData['resource_id'] = $project->id();
+        $imageData['resource_id'] = $project->id;
 
         $this->seeInDatabase('images', $imageData);
     }
@@ -51,7 +51,7 @@ class ImageTest extends TestCase
 
         $this->user->updateImageInfo($image, $imageData);
 
-        $imageData['id'] = $image->id();
+        $imageData['id'] = $image->id;
 
         $this->seeInDatabase('images', $imageData);
     }
@@ -64,11 +64,11 @@ class ImageTest extends TestCase
         $project = $this->makeProjectWithImages();
 
         $project->images->each(function ($image) {
-            $this->seeInDatabase('images', ['id' => $image->id()]);
+            $this->seeInDatabase('images', ['id' => $image->id]);
 
             $this->user->removeImage($image);
 
-            $this->dontSeeInDatabase('images', ['id' => $image->id()]);
+            $this->dontSeeInDatabase('images', ['id' => $image->id]);
         });
     }
 
@@ -81,11 +81,11 @@ class ImageTest extends TestCase
 
         $firstImage = $project->images()->first();
 
-        $image = $project->image($firstImage->name());
+        $image = $project->image($firstImage->name);
 
         $this->assertInstanceOf(Image::class, $image);
 
-        $this->assertEquals($firstImage->name(), $image->name());
+        $this->assertEquals($firstImage->name, $image->name);
     }
 
     /**
@@ -97,7 +97,7 @@ class ImageTest extends TestCase
 
         $firstImage = $project->images()->first();
 
-        $url = $project->imageUrl($firstImage->name(), 'small');
+        $url = $project->imageUrl($firstImage->name, 'small');
 
         $this->assertEquals($firstImage->small(), $url);
     }
@@ -111,9 +111,9 @@ class ImageTest extends TestCase
 
         $firstImage = $project->images()->first();
 
-        $caption = $project->imageCaption($firstImage->name());
+        $caption = $project->imageCaption($firstImage->name);
 
-        $this->assertEquals($firstImage->caption(), $caption);
+        $this->assertEquals($firstImage->caption, $caption);
     }
 
     /**
@@ -125,8 +125,8 @@ class ImageTest extends TestCase
 
         $firstImage = $project->images()->first();
 
-        $alt = $project->imageAlt($firstImage->name());
+        $alt = $project->imageAlt($firstImage->name);
 
-        $this->assertEquals($firstImage->alt(), $alt);
+        $this->assertEquals($firstImage->alt, $alt);
     }
 }

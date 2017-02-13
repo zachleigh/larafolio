@@ -28,7 +28,7 @@ class TextBlockTest extends TestCase
 
         $this->user->addBlockToModel($project, $data);
 
-        $data['resource_id'] = $project->id();
+        $data['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_blocks', $data);
     }
@@ -60,8 +60,8 @@ class TextBlockTest extends TestCase
 
         $project = $this->user->addProject($data);
 
-        $firstBlock['resource_id'] = $project->id();
-        $secondBlock['resource_id'] = $project->id();
+        $firstBlock['resource_id'] = $project->id;
+        $secondBlock['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_blocks', $firstBlock);
         $this->seeInDatabase('text_blocks', $secondBlock);
@@ -75,9 +75,9 @@ class TextBlockTest extends TestCase
         $textBlock = factory(TextBlock::class)->create();
 
         $this->seeInDatabase('text_blocks', [
-            'id'   => $textBlock->id(),
-            'name' => $textBlock->name(),
-            'text' => $textBlock->text(),
+            'id'   => $textBlock->id,
+            'name' => $textBlock->name,
+            'text' => $textBlock->text,
         ]);
 
         $data = [
@@ -88,7 +88,7 @@ class TextBlockTest extends TestCase
         $this->user->updateTextBlock($textBlock, $data);
 
         $this->seeInDatabase('text_blocks', [
-            'id'   => $textBlock->id(),
+            'id'   => $textBlock->id,
             'name' => $data['name'],
             'text' => $data['text'],
         ]);
@@ -123,11 +123,11 @@ class TextBlockTest extends TestCase
 
         $this->user->updateProject($project, $data);
 
-        $firstBlock['resource_id'] = $project->id();
+        $firstBlock['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_blocks', $firstBlock);
 
-        $secondBlock['resource_id'] = $project->id();
+        $secondBlock['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_blocks', $secondBlock);
 
@@ -137,8 +137,8 @@ class TextBlockTest extends TestCase
             'name'           => 'first text block name updated',
             'text'           => 'first text block text updated',
             'formatted_text' => '<p>first text block text udpated</p>',
-            'resource_id'    => $project->id(),
-            'id'             => $firstBlockModel->id()
+            'resource_id'    => $project->id,
+            'id'             => $firstBlockModel->id
         ];
 
         $newData = [
@@ -180,12 +180,12 @@ class TextBlockTest extends TestCase
         $project = $this->user->updateProject($project, $data);
 
         $firstBlock['order'] = 0;
-        $firstBlock['resource_id'] = $project->id();
+        $firstBlock['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_blocks', $firstBlock);
 
         $secondBlock['order'] = 1;
-        $secondBlock['resource_id'] = $project->id();
+        $secondBlock['resource_id'] = $project->id;
 
         $this->seeInDatabase('text_blocks', $secondBlock);
     }
@@ -198,9 +198,9 @@ class TextBlockTest extends TestCase
         $textBlock = factory(TextBlock::class)->create();
 
         $this->seeInDatabase('text_blocks', [
-            'id'         => $textBlock->id(),
-            'name'       => $textBlock->name(),
-            'text'       => $textBlock->text(),
+            'id'         => $textBlock->id,
+            'name'       => $textBlock->name,
+            'text'       => $textBlock->text,
             'deleted_at' => null,
         ]);
 
@@ -209,15 +209,15 @@ class TextBlockTest extends TestCase
         $this->assertTrue($success);
 
         $this->seeInDatabase('text_blocks', [
-            'id'   => $textBlock->id(),
-            'name' => $textBlock->name(),
-            'text' => $textBlock->text(),
+            'id'   => $textBlock->id,
+            'name' => $textBlock->name,
+            'text' => $textBlock->text,
         ]);
 
         $this->dontSeeInDatabase('text_blocks', [
-            'id'         => $textBlock->id(),
-            'name'       => $textBlock->name(),
-            'text'       => $textBlock->text(),
+            'id'         => $textBlock->id,
+            'name'       => $textBlock->name,
+            'text'       => $textBlock->text,
             'deleted_at' => null,
         ]);
     }
@@ -233,7 +233,7 @@ class TextBlockTest extends TestCase
 
         $this->assertInstanceOf(TextBlock::class, $block);
 
-        $this->assertEquals('name', $block->name());
+        $this->assertEquals('name', $block->name);
     }
 
     /**
@@ -258,5 +258,21 @@ class TextBlockTest extends TestCase
         $unformattedText = $project->blockText('name', false);
 
         $this->assertEquals('text', $unformattedText);
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_formatted_text_through_camel_case_property()
+    {
+        $project = $this->createProjectWithBlock();
+
+        $block = $project->blocks()->first();
+
+        $snakeCase = $block->formatted_text;
+
+        $camelCase = $block->formattedText;
+
+        $this->assertEquals($snakeCase, $camelCase);
     }
 }

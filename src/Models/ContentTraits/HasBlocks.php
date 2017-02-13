@@ -76,9 +76,9 @@ trait HasBlocks
         }
 
         if ($formatted) {
-            return $block->formattedText();
+            return $block->formattedText;
         }
 
-        return $block->text();
+        return $block->text;
     }
 }

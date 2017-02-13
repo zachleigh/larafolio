@@ -74,6 +74,6 @@ trait HasLines
             return;
         }
 
-        return $line->text();
+        return $line->text;
     }
 }

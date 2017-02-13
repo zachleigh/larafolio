@@ -107,7 +107,7 @@ class Acceptance extends \Codeception\Module
     public function addImage(\AcceptanceTester $I, Project $project, $file = 'new.jpg')
     {
         $I->amOnProjectPage($I, $project);
-        $I->seeCurrentUrlEquals("/manager/projects/{$project->slug()}");
+        $I->seeCurrentUrlEquals("/manager/projects/{$project->slug}");
         $I->waitForElement('.dz-hidden-input');
         $I->attachFile('.dz-hidden-input', $file);
         $I->wait(1);
@@ -122,7 +122,7 @@ class Acceptance extends \Codeception\Module
     public function addImageToPage(\AcceptanceTester $I, Page $page, $file = 'new.jpg')
     {
         $I->amOnPagePage($I, $page);
-        $I->seeCurrentUrlEquals("/manager/pages/{$page->slug()}");
+        $I->seeCurrentUrlEquals("/manager/pages/{$page->slug}");
         $I->waitForElement('.dz-hidden-input');
         $I->attachFile('.dz-hidden-input', $file);
         $I->wait(1);
@@ -136,7 +136,7 @@ class Acceptance extends \Codeception\Module
      */
     public function amOnProjectPage(\AcceptanceTester $I, Project $project)
     {
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
     }
 
     /**
@@ -147,7 +147,7 @@ class Acceptance extends \Codeception\Module
      */
     public function amOnPagePage(\AcceptanceTester $I, Page $page)
     {
-        $I->amOnPage("/manager/pages/{$page->slug()}");
+        $I->amOnPage("/manager/pages/{$page->slug}");
     }
 
     /**
@@ -158,7 +158,7 @@ class Acceptance extends \Codeception\Module
      */
     public function amOnProjectImagePage(\AcceptanceTester $I, Project $project)
     {
-        $I->amOnPage("/manager/projects/{$project->slug()}/images");
+        $I->amOnPage("/manager/projects/{$project->slug}/images");
     }
 
     /**

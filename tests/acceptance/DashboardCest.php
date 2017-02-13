@@ -17,11 +17,11 @@ class DashboardCest
         $I->login($I);
         $project = Project::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
-            $I->click('#projectUp'.$project->id());
+            $I->click('#projectUp'.$project->id);
         }
         $I->amOnPage('/manager');
         $I->seeInDatabase('projects', [
-            'id'    => $project->id(),
+            'id'    => $project->id,
             'order' => 0,
         ]);
     }
@@ -32,11 +32,11 @@ class DashboardCest
         $I->login($I);
         $project = Project::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
-            $I->click('#projectDown'.$project->id());
+            $I->click('#projectDown'.$project->id);
             $I->wait(1);
         }
         $I->seeInDatabase('projects', [
-            'id'    => $project->id(),
+            'id'    => $project->id,
             'order' => 4,
         ]);
     }
@@ -47,18 +47,18 @@ class DashboardCest
 
         $I->wantTo('Toggle project visibility from the dashboard.');
         $I->login($I);
-        $I->click('#projectMakeVisible'.$project->id());
+        $I->click('#projectMakeVisible'.$project->id);
         $I->wait(1);
         $I->see('Resource Visible');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => true,
         ]);
-        $I->click('#projectMakeHidden'.$project->id());
+        $I->click('#projectMakeHidden'.$project->id);
         $I->wait(1);
         $I->see('Resource Hidden');
         $I->seeInDatabase('projects', [
-            'id'      => $project->id(),
+            'id'      => $project->id,
             'visible' => false,
         ]);
     }
@@ -70,11 +70,11 @@ class DashboardCest
         $I->login($I);
         $page = Page::all()->sortBy('order')->last();
         foreach (range(0, 4) as $time) {
-            $I->click('#pageUp'.$page->id());
+            $I->click('#pageUp'.$page->id);
         }
         $I->amOnPage('/manager');
         $I->seeInDatabase('pages', [
-            'id'    => $page->id(),
+            'id'    => $page->id,
             'order' => 0,
         ]);
     }
@@ -85,11 +85,11 @@ class DashboardCest
         $I->login($I);
         $page = Page::all()->sortBy('order')->first();
         foreach (range(0, 4) as $time) {
-            $I->click('#pageDown'.$page->id());
+            $I->click('#pageDown'.$page->id);
             $I->wait(1);
         }
         $I->seeInDatabase('pages', [
-            'id'    => $page->id(),
+            'id'    => $page->id,
             'order' => 4,
         ]);
     }
@@ -100,18 +100,18 @@ class DashboardCest
 
         $I->wantTo('Toggle page visibility from the dashboard.');
         $I->login($I);
-        $I->click('#pageMakeVisible'.$page->id());
+        $I->click('#pageMakeVisible'.$page->id);
         $I->wait(1);
         $I->see('Resource Visible');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => true,
         ]);
-        $I->click('#pageMakeHidden'.$page->id());
+        $I->click('#pageMakeHidden'.$page->id);
         $I->wait(1);
         $I->see('Resource Hidden');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => false,
         ]);
     }

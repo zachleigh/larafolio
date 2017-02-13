@@ -40,7 +40,7 @@ class TextLinesCest
         $project = $I->getProject($I);
         $I->wantTo('Update a project line.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Project');
         $I->wait(1);
@@ -173,7 +173,7 @@ class TextLinesCest
 
         $I->wantTo('Add and delete lines from a project when editing.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->click('#addLine');
         $I->fillField('lineText5', 'lineText5');
         $I->removeLine($I, '#deleteLine2');
@@ -185,12 +185,12 @@ class TextLinesCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see('lineText5');
         $I->see('lineText6');
-        $I->dontSee($lines[0]->text());
-        $I->dontSee($lines[1]->text());
-        $I->dontSee($lines[2]->text());
+        $I->dontSee($lines[0]->text);
+        $I->dontSee($lines[1]->text);
+        $I->dontSee($lines[2]->text);
     }
 
     public function user_can_move_line_up_while_editing(AcceptanceTester $I)
@@ -204,7 +204,7 @@ class TextLinesCest
 
         $I->wantTo('Move a line up while editing a project.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -217,7 +217,7 @@ class TextLinesCest
         $I->removeLine($I, '#deleteLine1');
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['lineText2']);
         $I->dontSee($data['lineText0']);
         $I->dontSee($data['lineText1']);
@@ -234,7 +234,7 @@ class TextLinesCest
 
         $I->wantTo('Move a line down while editing a project.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -247,7 +247,7 @@ class TextLinesCest
         $I->removeLine($I, '#deleteLine0');
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['lineText0']);
         $I->dontSee($data['lineText2']);
         $I->dontSee($data['lineText1']);
@@ -264,7 +264,7 @@ class TextLinesCest
 
         $I->wantTo('Change the order of lines and have that order remembered.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -275,12 +275,12 @@ class TextLinesCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->click('Edit Project');
         $I->removeLine($I, '#deleteLine2');
         $I->removeLine($I, '#deleteLine0');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['lineText2']);
         $I->dontSee($data['lineText0']);
         $I->dontSee($data['lineText1']);

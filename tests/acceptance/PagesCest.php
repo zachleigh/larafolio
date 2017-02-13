@@ -50,11 +50,11 @@ class PagesCest
         $page2 = $I->getPage($I, 2);
 
         $data = [
-            'name' => $page2->name()
+            'name' => $page2->name
         ];
 
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page1->slug()}/edit");
+        $I->amOnPage("/manager/pages/{$page1->slug}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Page');
         $I->wait(1);
@@ -66,27 +66,27 @@ class PagesCest
         $page = $I->getPage($I);
         $I->wantTo('Toggle the visibility of a page.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}");
+        $I->amOnPage("/manager/pages/{$page->slug}");
         $I->see('Hidden');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => false,
         ]);
         $I->click('#makeVisible');
         $I->see('Visible');
-        $I->see($page->name().' is now publicly viewable');
+        $I->see($page->name.' is now publicly viewable');
         $I->dontSee('Hidden');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => true,
         ]);
-        $I->amOnPage("/manager/pages/{$page->slug()}");
+        $I->amOnPage("/manager/pages/{$page->slug}");
         $I->click('#makeHidden');
         $I->see('Hidden');
-        $I->see($page->name().' is not publicly viewable');
+        $I->see($page->name.' is not publicly viewable');
         $I->dontSee('Visible');
         $I->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => false,
         ]);
     }
@@ -96,20 +96,20 @@ class PagesCest
         $page = $I->getPage($I);
         $I->wantTo('Remove a page from the portfolio.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}");
+        $I->amOnPage("/manager/pages/{$page->slug}");
         $I->seeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
         $I->click('#removeResource');
         $I->click('Remove');
         $I->wait(1);
-        $I->seeInDatabase('pages', ['id' => $page->id()]);
+        $I->seeInDatabase('pages', ['id' => $page->id]);
         $I->dontseeInDatabase('pages', [
             'id'         => $page['id'],
             'deleted_at' => null,
         ]);
-        $I->see("{$page->name()} removed from portfolio");
+        $I->see("{$page->name} removed from portfolio");
     }
 
     public function user_can_update_a_page(AcceptanceTester $I)
@@ -127,7 +127,7 @@ class PagesCest
         $page = $I->getPage($I);
         $I->wantTo('Update a page in the portfolio.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}/edit");
+        $I->amOnPage("/manager/pages/{$page->slug}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Page');
         $I->wait(1);
@@ -157,7 +157,7 @@ class PagesCest
 
         $I->wantTo('Be able to update a page if the name was changed.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}/edit");
+        $I->amOnPage("/manager/pages/{$page->slug}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'name'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -170,7 +170,7 @@ class PagesCest
 
         $I->wantTo('Be able to update a page if a link was changed.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}/edit");
+        $I->amOnPage("/manager/pages/{$page->slug}/edit");
         $I->seeElement('.button--green', ['disabled' => 'true']);
         $I->fillField(['name' => 'url0'], 'abc');
         $I->dontSeeElement('.button--green', ['disabled' => 'true']);
@@ -206,20 +206,20 @@ class PagesCest
 
         $I->wantTo('Force delete a page.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}");
+        $I->amOnPage("/manager/pages/{$page->slug}");
         $I->click('#removeResource');
         $I->click('Remove');
         $I->wait(1);
         $I->seeInDatabase('pages', [
-            'id' => $page->id()
+            'id' => $page->id
         ]);
         $I->amOnPage('/manager/settings/pages');
-        $I->click('#delete'.$page->id());
+        $I->click('#delete'.$page->id);
         $I->wait(1);
         $I->click('#confirmDelete');
         $I->wait(1);
         $I->dontseeInDatabase('pages', [
-            'id' => $page->id()
+            'id' => $page->id
         ]);
     }
 
@@ -229,19 +229,19 @@ class PagesCest
 
         $I->wantTo('Restore a deleted pages.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$pages->slug()}");
+        $I->amOnPage("/manager/pages/{$pages->slug}");
         $I->click('#removeResource');
         $I->click('Remove');
         $I->wait(1);
         $I->dontSeeInDatabase('pages', [
-            'id'         => $pages->id(),
+            'id'         => $pages->id,
             'deleted_at' => null,
         ]);
         $I->amOnPage('/manager/settings/pages');
-        $I->click('#restore'.$pages->id());
+        $I->click('#restore'.$pages->id);
         $I->wait(1);
         $I->seeInDatabase('pages', [
-            'id' => $pages->id(),
+            'id' => $pages->id,
             'deleted_at' => null,
         ]);
     }
@@ -252,18 +252,18 @@ class PagesCest
 
         $I->wantTo('Verify that when a page is restored, the nav menu refreshes.');
         $I->login($I);
-        $I->amOnPage("/manager/pages/{$page->slug()}");
+        $I->amOnPage("/manager/pages/{$page->slug}");
         $I->click('#removeResource');
         $I->click('Remove');
         $I->wait(1);
         $I->amOnPage('/manager/settings/pages');
         $I->dontSeeInPageSource('<span class="nav__dropdown-item-text">
-                '.$page->name().'
+                '.$page->name.'
             </span>');
-        $I->click('#restore'.$page->id());
+        $I->click('#restore'.$page->id);
         $I->wait(1);
         $I->seeInPageSource('<span class="nav__dropdown-item-text">
-                '.$page->name().'
+                '.$page->name.'
             </span>');
     }
 }

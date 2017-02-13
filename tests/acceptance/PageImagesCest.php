@@ -21,7 +21,7 @@ class PageImagesCest
     {
         $page = $I->getPage($I);
         $image = $I->getImageFromResourceArray($page);
-        $id = $image->id();
+        $id = $image->id;
 
         $data = [
             'name'.$id    => 'image name',
@@ -36,7 +36,7 @@ class PageImagesCest
         $I->click('#button'.$id);
         $I->wait(1);
         $I->seeInDatabase('images', [
-            'path'    => $image->path(),
+            'path'    => $image->path,
             'name'    => 'image name',
             'caption' => 'image caption',
             'alt'     => 'image alt',
@@ -48,17 +48,17 @@ class PageImagesCest
     {
         $page = $I->getPage($I);
         $image = $I->getImageFromResourceArray($page);
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Remove an image from a page.');
         $I->login($I);
-        $I->seeInDatabase('images', ['path' => $image->path()]);
+        $I->seeInDatabase('images', ['path' => $image->path]);
         $I->amOnPagePage($I, $page);
         $I->click('#remove'.$id);
         $I->wait(1);
         $I->click('Remove Image');
         $I->wait(1);
-        $I->dontSeeInDatabase('images', ['path' => $image->path()]);
+        $I->dontSeeInDatabase('images', ['path' => $image->path]);
         $I->see('Image removed from portfolio');
     }
 
@@ -68,7 +68,7 @@ class PageImagesCest
 
         $image = $I->getImageFromResourceArray($page);
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Be able to update a page image if the name has changed.');
         $I->login($I);
@@ -84,7 +84,7 @@ class PageImagesCest
 
         $image = $I->getImageFromResourceArray($page);
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Be able to update a page image if the alt text has changed.');
         $I->login($I);
@@ -100,7 +100,7 @@ class PageImagesCest
 
         $image = $I->getImageFromResourceArray($page);
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Be able to update a page image if the caption has changed.');
         $I->login($I);

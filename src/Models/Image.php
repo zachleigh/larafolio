@@ -21,56 +21,6 @@ class Image extends Model
     protected $fillable = ['path', 'name', 'caption', 'alt'];
 
     /**
-     * Return the image id.
-     *
-     * @return string
-     */
-    public function id()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Return the image path.
-     *
-     * @return string
-     */
-    public function path()
-    {
-        return $this->path;
-    }
-
-    /**
-     * Return the image name.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Return the image caption.
-     *
-     * @return string
-     */
-    public function caption()
-    {
-        return $this->caption;
-    }
-
-    /**
-     * Return the alt value.
-     *
-     * @return string
-     */
-    public function alt()
-    {
-        return $this->alt;
-    }
-
-    /**
      * Get route for thumbnail version of image.
      *
      * @return string
@@ -129,7 +79,7 @@ class Image extends Model
      */
     public function fileName()
     {
-        return collect(explode('/', $this->path()))->last();
+        return collect(explode('/', $this->path))->last();
     }
 
     /**
@@ -144,10 +94,10 @@ class Image extends Model
             'small'     => $this->small(),
             'medium'    => $this->medium(),
             'full'      => $this->full(),
-            'name'      => $this->name(),
-            'caption'   => $this->caption(),
-            'alt'       => $this->alt(),
-            'id'        => $this->id(),
+            'name'      => $this->name,
+            'caption'   => $this->caption,
+            'alt'       => $this->alt,
+            'id'        => $this->id,
         ];
     }
 }

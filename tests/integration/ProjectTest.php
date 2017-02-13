@@ -42,7 +42,7 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $this->visit('/manager/projects/'.$project->slug().'/edit')
+        $this->visit('/manager/projects/'.$project->slug.'/edit')
              ->seeStatusCode(200)
              ->seePageIs('/');
     }
@@ -54,8 +54,8 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $this->seeInDatabase('projects', ['id' => $project->id()])
-             ->json('PATCH', 'manager/projects/'.$project->slug().'/update', ['name' => 'new'])
+        $this->seeInDatabase('projects', ['id' => $project->id])
+             ->json('PATCH', 'manager/projects/'.$project->slug.'/update', ['name' => 'new'])
              ->seeStatusCode(302)
              ->dontSeeInDatabase('projects', ['name' => 'new']);
     }
@@ -67,9 +67,9 @@ class ProjectTest extends TestCase
     {
         $project = factory(Project::class)->create();
 
-        $this->seeInDatabase('projects', ['id' => $project->id()])
-             ->json('DELETE', "/manager/projects/{$project->slug()}")
+        $this->seeInDatabase('projects', ['id' => $project->id])
+             ->json('DELETE', "/manager/projects/{$project->slug}")
              ->seeStatusCode(302)
-             ->seeInDatabase('projects', ['id' => $project->id()]);
+             ->seeInDatabase('projects', ['id' => $project->id]);
     }
 }

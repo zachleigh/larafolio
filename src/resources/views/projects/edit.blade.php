@@ -17,7 +17,7 @@
         :next-link-order="{{ $nextLink }}"
         :next-line-order="{{ $nextLine }}"
         :project="{{ json_encode($project) }}"
-        title="{{ $project->name() }}"
+        title="{{ $project->name }}"
         type="update"
     ></project-form>
 @stop

@@ -43,7 +43,7 @@ class LinksCest
         $project = $I->getProject($I);
         $I->wantTo('Update a project link.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->fillForm($I, $data);
         $I->click('Update Project');
         $I->wait(1);
@@ -179,7 +179,7 @@ class LinksCest
 
         $I->wantTo('Add and delete links from a project when editing.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->click('#addLink');
         $I->fillField('url5', 'url5');
         $I->removeLink($I, '#deleteLink2');
@@ -191,12 +191,12 @@ class LinksCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see('url5');
         $I->see('url6');
-        $I->dontSee($links[0]->url());
-        $I->dontSee($links[1]->url());
-        $I->dontSee($links[2]->url());
+        $I->dontSee($links[0]->url);
+        $I->dontSee($links[1]->url);
+        $I->dontSee($links[2]->url);
     }
 
     public function user_can_move_link_up_while_editing(AcceptanceTester $I)
@@ -210,7 +210,7 @@ class LinksCest
 
         $I->wantTo('Move a link up while editing a project.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -223,7 +223,7 @@ class LinksCest
         $I->removeLink($I, '#deleteLink1');
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['url2']);
         $I->dontSee($data['url0']);
         $I->dontSee($data['url1']);
@@ -240,7 +240,7 @@ class LinksCest
 
         $I->wantTo('Move a link down while editing a project.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -253,7 +253,7 @@ class LinksCest
         $I->removeLink($I, '#deleteLink0');
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['url0']);
         $I->dontSee($data['url2']);
         $I->dontSee($data['url1']);
@@ -270,7 +270,7 @@ class LinksCest
 
         $I->wantTo('Change the order of links and have that order remembered.');
         $I->login($I);
-        $I->amOnPage("/manager/projects/{$project->slug()}/edit");
+        $I->amOnPage("/manager/projects/{$project->slug}/edit");
         $I->wait(1);
         $I->fillForm($I, $data);
         $I->click('Update Project');
@@ -281,12 +281,12 @@ class LinksCest
         $I->wait(1);
         $I->click('Update Project');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->click('Edit Project');
         $I->removeLink($I, '#deleteLink2');
         $I->removeLink($I, '#deleteLink0');
         $I->wait(1);
-        $I->amOnPage("/manager/projects/{$project->slug()}");
+        $I->amOnPage("/manager/projects/{$project->slug}");
         $I->see($data['url2']);
         $I->dontSee($data['url0']);
         $I->dontSee($data['url1']);

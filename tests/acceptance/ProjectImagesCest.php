@@ -21,7 +21,7 @@ class ProjectImagesCest
     {
         $project = $I->getProject($I);
         $image = $I->getImageFromProjectArray($project);
-        $id = $image->id();
+        $id = $image->id;
 
         $data = [
             'name'.$id    => 'image name',
@@ -36,7 +36,7 @@ class ProjectImagesCest
         $I->click('#button'.$id);
         $I->wait(1);
         $I->seeInDatabase('images', [
-            'path'    => $image->path(),
+            'path'    => $image->path,
             'name'    => 'image name',
             'caption' => 'image caption',
             'alt'     => 'image alt',
@@ -48,17 +48,17 @@ class ProjectImagesCest
     {
         $project = $I->getProject($I);
         $image = $I->getImageFromProjectArray($project);
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Remove an image from a project.');
         $I->login($I);
-        $I->seeInDatabase('images', ['path' => $image->path()]);
+        $I->seeInDatabase('images', ['path' => $image->path]);
         $I->amOnProjectPage($I, $project);
         $I->click('#remove'.$id);
         $I->wait(1);
         $I->click('Remove Image');
         $I->wait(1);
-        $I->dontSeeInDatabase('images', ['path' => $image->path()]);
+        $I->dontSeeInDatabase('images', ['path' => $image->path]);
         $I->see('Image removed from portfolio');
     }
 
@@ -68,7 +68,7 @@ class ProjectImagesCest
 
         $image = $I->getImageFromProjectArray($project);
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Be able to update a project image if the name has changed.');
         $I->login($I);
@@ -84,7 +84,7 @@ class ProjectImagesCest
 
         $image = $I->getImageFromProjectArray($project);
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Be able to update a project image if the alt text has changed.');
         $I->login($I);
@@ -100,7 +100,7 @@ class ProjectImagesCest
 
         $image = $I->getImageFromProjectArray($project);
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Be able to update a project image if the caption has changed.');
         $I->login($I);
@@ -116,12 +116,12 @@ class ProjectImagesCest
 
         $image = $project->images->last();
 
-        $id = $image->id();
+        $id = $image->id;
 
         $I->wantTo('Set the default project image by saving the project name as its name.');
         $I->login($I);
         $I->amOnProjectPage($I, $project);
-        $I->fillField(['name' => 'name'.$id], $project->name());
+        $I->fillField(['name' => 'name'.$id], $project->name);
         $I->click('#button'.$id);
         $I->wait(1);
         $I->amOnPage('/manager');

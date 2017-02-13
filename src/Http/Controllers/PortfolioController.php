@@ -18,11 +18,11 @@ class PortfolioController extends Controller
         $projects = Project::all()->sortBy('order')->values();
         
         $projectImages = $projects->mapWithKeys(function (Project $project) {
-            return [$project->name() => $project->getProjectImageUrl()];
+            return [$project->name => $project->getProjectImageUrl()];
         })->objectIfEmpty();
 
         $projectBlocks = $projects->mapWithKeys(function (Project $project) {
-            return [$project->name() => $project->getProjectBlockText()];
+            return [$project->name => $project->getProjectBlockText()];
         })->objectIfEmpty();
 
         $pages = Page::all()->sortBy('order')->values();

@@ -1,9 +1,9 @@
 <div class="section__item">
     <div class="">
-        Name: <b>{{ $line->name() }}</b>
+        Name: <b>{{ $line->name }}</b>
     </div>
     <div class="section__indented">
-        {{ $line->text() }}
+        {{ $line->text }}
     </div>
     </link-status>
 </div>

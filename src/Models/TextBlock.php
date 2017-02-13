@@ -31,52 +31,22 @@ class TextBlock extends Model
     protected $fillable = ['name', 'text', 'formatted_text', 'order'];
 
     /**
-     * Return the text block id.
+     * Convert camelCase properties to snake_case properties and try again.
      *
-     * @return int
+     * @param  string $key
+     *
+     * @return mixed
      */
-    public function id()
+    public function __get($key)
     {
-        return $this->id;
-    }
+        $attribute = parent::__get($key);
 
-    /**
-     * Return the text block name.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return $this->name;
-    }
+        if ($attribute === null) {
+            $snakeCase = snake_case($key);
 
-    /**
-     * Return the raw block text.
-     *
-     * @return string
-     */
-    public function text()
-    {
-        return $this->text;
-    }
+            $attribute = parent::__get($snakeCase);
+        }
 
-    /**
-     * Return the formatted block text.
-     *
-     * @return string
-     */
-    public function formattedText()
-    {
-        return $this->formatted_text;
-    }
-
-    /**
-     * Return the text block order value.
-     *
-     * @return int
-     */
-    public function order()
-    {
-        return $this->order;
+        return $attribute;
     }
 }

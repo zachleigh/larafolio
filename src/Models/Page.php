@@ -100,44 +100,4 @@ class Page extends HasContent
     {
         return static::hasRelationshipNamed('pages', 'links', $linkName);
     }
-
-    /**
-     * Return the page id.
-     *
-     * @return int
-     */
-    public function id()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Return the page name.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Return the page slug.
-     *
-     * @return string
-     */
-    public function slug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Return the page order value.
-     *
-     * @return int
-     */
-    public function order()
-    {
-        return $this->order;
-    }
 }

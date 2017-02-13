@@ -18,7 +18,7 @@ class TextBlocksTableSeeder extends Seeder
         $projects = Project::all();
 
         foreach ($projects as $project) {
-            factory(TextBlock::class, ['resource_id' => $project->id()])->create();
+            factory(TextBlock::class, ['resource_id' => $project->id])->create();
         }
     }
 }

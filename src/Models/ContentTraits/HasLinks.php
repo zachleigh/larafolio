@@ -74,7 +74,7 @@ trait HasLinks
             return;
         }
 
-        return $link->url();
+        return $link->url;
     }
 
     /**
@@ -90,6 +90,6 @@ trait HasLinks
             return;
         }
 
-        return $link->text();
+        return $link->text;
     }
 }

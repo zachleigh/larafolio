@@ -27,7 +27,7 @@ class LinkTest extends TestCase
 
         $this->user->addLinkToModel($project, $data);
 
-        $data['resource_id'] = $project->id();
+        $data['resource_id'] = $project->id;
 
         $this->seeInDatabase('links', $data);
     }
@@ -58,8 +58,8 @@ class LinkTest extends TestCase
 
         $project = $this->user->addProject($data);
 
-        $firstLink['resource_id'] = $project->id();
-        $secondLink['resource_id'] = $project->id();
+        $firstLink['resource_id'] = $project->id;
+        $secondLink['resource_id'] = $project->id;
 
         $this->seeInDatabase('links', $firstLink);
         $this->seeInDatabase('links', $secondLink);
@@ -73,8 +73,8 @@ class LinkTest extends TestCase
         $link = factory(Link::class)->create();
 
         $this->seeInDatabase('links', [
-            'name' => $link->name(),
-            'url'  => $link->url(),
+            'name' => $link->name,
+            'url'  => $link->url,
         ]);
 
         $data = [
@@ -86,7 +86,7 @@ class LinkTest extends TestCase
         $this->user->updateLink($link, $data);
 
         $this->seeInDatabase('links', [
-            'id'   => $link->id(),
+            'id'   => $link->id,
             'name' => $data['name'],
             'url'  => $data['url'],
         ]);
@@ -118,11 +118,11 @@ class LinkTest extends TestCase
 
         $this->user->updateProject($project, $data);
 
-        $firstLink['resource_id'] = $project->id();
+        $firstLink['resource_id'] = $project->id;
 
         $this->seeInDatabase('links', $firstLink);
 
-        $secondLink['resource_id'] = $project->id();
+        $secondLink['resource_id'] = $project->id;
 
         $this->seeInDatabase('links', $secondLink);
 
@@ -132,8 +132,8 @@ class LinkTest extends TestCase
             'name'        => 'first link name updated',
             'text'        => 'first link text updated',
             'url'         => 'first link url updated',
-            'resource_id' => $project->id(),
-            'id'          => $firstLinkModel->id()
+            'resource_id' => $project->id,
+            'id'          => $firstLinkModel->id,
         ];
 
         $newData = [
@@ -155,9 +155,9 @@ class LinkTest extends TestCase
         $link = factory(Link::class)->create();
 
         $this->seeInDatabase('links', [
-            'name'       => $link->name(),
-            'text'       => $link->text(),
-            'url'        => $link->url(),
+            'name'       => $link->name,
+            'text'       => $link->text,
+            'url'        => $link->url,
             'deleted_at' => null,
         ]);
 
@@ -166,14 +166,14 @@ class LinkTest extends TestCase
         $this->assertTrue($success);
 
         $this->seeInDatabase('links', [
-            'name' => $link->name(),
-            'url'  => $link->url(),
+            'name' => $link->name,
+            'url'  => $link->url,
         ]);
 
         $this->dontSeeInDatabase('links', [
-            'name'       => $link->name(),
-            'text'       => $link->text(),
-            'url'        => $link->url(),
+            'name'       => $link->name,
+            'text'       => $link->text,
+            'url'        => $link->url,
             'deleted_at' => null,
         ]);
     }
@@ -189,7 +189,7 @@ class LinkTest extends TestCase
 
         $this->assertInstanceOf(Link::class, $link);
 
-        $this->assertEquals('name', $link->name());
+        $this->assertEquals('name', $link->name);
     }
 
     /**

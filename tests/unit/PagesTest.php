@@ -67,9 +67,9 @@ class PagesTest extends TestCase
 
         $page = $this->user->addPage($data);
 
-        $this->assertEquals('page_name', $page->slug());
+        $this->assertEquals('page_name', $page->slug);
 
-        $data['slug'] = $page->slug();
+        $data['slug'] = $page->slug;
 
         $this->seeInDatabase('pages', $data);
     }
@@ -100,7 +100,7 @@ class PagesTest extends TestCase
         $page = factory(Page::class)->create();
 
         $this->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => false,
         ]);
 
@@ -111,7 +111,7 @@ class PagesTest extends TestCase
         $this->user->updatePage($page, $data);
 
         $this->seeInDatabase('pages', [
-            'id'      => $page->id(),
+            'id'      => $page->id,
             'visible' => true,
         ]);
     }
@@ -123,11 +123,11 @@ class PagesTest extends TestCase
     {
         $page = factory(Page::class)->create(['name' => 'first name']);
 
-        $this->assertEquals('first_name', $page->slug());
+        $this->assertEquals('first_name', $page->slug);
 
         $page = $this->user->updatePage($page, ['name' => 'second name']);
 
-        $this->assertEquals('second_name', $page->slug());
+        $this->assertEquals('second_name', $page->slug);
     }
 
     /**
@@ -138,7 +138,7 @@ class PagesTest extends TestCase
         $page = factory(Page::class)->create();
 
         $this->seeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
 
@@ -147,12 +147,12 @@ class PagesTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
 
         $this->seeInDatabase('pages', [
-            'id' => $page->id(),
+            'id' => $page->id,
         ]);
     }
 
@@ -164,7 +164,7 @@ class PagesTest extends TestCase
         $page = factory(Page::class)->create();
 
         $this->seeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
         
@@ -175,7 +175,7 @@ class PagesTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('pages', [
-            'id'         => $page->id()
+            'id' => $page->id,
         ]);
     }
 
@@ -187,7 +187,7 @@ class PagesTest extends TestCase
         $page = factory(Page::class)->create();
 
         $this->seeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
 
@@ -196,14 +196,14 @@ class PagesTest extends TestCase
         $this->assertTrue($deleted);
 
         $this->dontSeeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
 
         $this->user->restorePage($page);
 
         $this->seeInDatabase('pages', [
-            'id'         => $page->id(),
+            'id'         => $page->id,
             'deleted_at' => null,
         ]);
     }
@@ -301,7 +301,7 @@ class PagesTest extends TestCase
         $page->each(function ($page) {
             $block = $page->blocks[0];
 
-            $this->assertEquals('block name', $block->name());
+            $this->assertEquals('block name', $block->name);
         });
     }
 
@@ -322,7 +322,7 @@ class PagesTest extends TestCase
         $pages->each(function ($page) {
             $image = $page->images[0];
 
-            $this->assertEquals('image name', $image->name());
+            $this->assertEquals('image name', $image->name);
         });
     }
 
@@ -343,7 +343,7 @@ class PagesTest extends TestCase
         $pages->each(function ($page) {
             $link = $page->links[0];
 
-            $this->assertEquals('link name', $link->name());
+            $this->assertEquals('link name', $link->name);
         });
     }
 

@@ -1,7 +1,7 @@
 @extends('larafolio::master')
 
 @section('title')
-    {{ $page->name() }} - Larafolio
+    {{ $page->name }} - Larafolio
 @stop
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="page__top">
             <div class="page__top-block">
                 @include('larafolio::layout.lines')
-                <h1 class="page__top-title">{{ $page->name() }}</h1>
+                <h1 class="page__top-title">{{ $page->name }}</h1>
             </div>
             <div>
                 <resource-controls

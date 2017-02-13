@@ -260,7 +260,7 @@ trait ManagesPortfolio
         $count = Image::where('path', $image->path)->count();
 
         if ($count <= 1) {
-            Storage::delete($image->path());
+            Storage::delete($image->path);
         }
 
         return $image->delete();
