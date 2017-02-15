@@ -5,10 +5,30 @@ namespace Larafolio\Http\Controllers;
 use Larafolio\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Larafolio\Http\Content\ContentImages;
 use Intervention\Image\Facades\Image as Intervention;
 
 class ImageController extends Controller
 {
+    /**
+     * Service class for content images.
+     *
+     * @var \Larafolio\Http\Content\ContentImages
+     */
+    protected $contentImages;
+
+    /**
+     * Construct.
+     *
+     * @param \Larafolio\Http\Content\ContentImages $contentImages Service class for content images.
+     */
+    public function __construct(ContentImages $contentImages)
+    {
+        parent::__construct();
+
+        $this->contentImages = $contentImages;
+    }
+
     /**
      * Update image name and caption.
      *
@@ -65,11 +85,7 @@ class ImageController extends Controller
      */
     protected function updateImageInstance(Request $request, Image $image)
     {
-        $imagePath = $request->file('file')->store('public/images');
-
-        $imageFile = Intervention::make(Storage::get($imagePath))->encode('jpg', 50);
-
-        Storage::put($imagePath, $imageFile);
+        $imagePath = $this->contentImages->saveImage($request);
 
         Storage::delete($image->path);
 

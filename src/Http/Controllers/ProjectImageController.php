@@ -54,11 +54,4 @@ class ProjectImageController extends Controller
 
         $this->contentImages->store($request, $project, $this->user);
     }
-
-    public function update(Request $request, $id)
-    {
-        $image = Image::firstOrFail($id);
-
-        $this->contentImages->update($request, $image, $this->user);
-    }
 }

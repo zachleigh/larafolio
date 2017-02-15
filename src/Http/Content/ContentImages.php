@@ -42,12 +42,26 @@ class ContentImages
      */
     public function store(Request $request, HasContent $resource, $user)
     {
-        $imagePath = $request->file('file')->store('public/images');
-
-        $image = Intervention::make(Storage::get($imagePath))->encode('jpg', 50);
-
-        Storage::put($imagePath, $image);
+        $imagePath = $this->saveImage($request);
 
         $user->addImageToModel($resource, ['path' => $imagePath]);
+    }
+
+    /**
+     * Save an image in storage.
+     *
+     * @param \Illuminate\Http\Request $request  Request from user.
+     *
+     * @return string Path to image.
+     */
+    public function saveImage(Request $request)
+    {
+        $imagePath = $request->file('file')->store('public/images');
+
+        $imageFile = Intervention::make(Storage::get($imagePath))->encode('jpg', 50);
+
+        Storage::put($imagePath, $imageFile);
+
+        return $imagePath;
     }
 }
