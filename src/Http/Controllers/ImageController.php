@@ -6,7 +6,6 @@ use Larafolio\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Larafolio\Http\Content\ContentImages;
-use Intervention\Image\Facades\Image as Intervention;
 
 class ImageController extends Controller
 {
