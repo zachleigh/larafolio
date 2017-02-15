@@ -1,5 +1,7 @@
 <?php
 
+use Larafolio\Models\Image;
+
 class ProjectImagesCest
 {
     public function _before(\AcceptanceTester $I)
@@ -146,5 +148,37 @@ class ProjectImagesCest
         $I->see('This resource has no images');
         $I->addImage($I, $project);
         $I->dontSee('This resource has no images');
+    }
+
+    public function project_image_path_can_be_updated(AcceptanceTester $I)
+    {
+        $I->wantTo('Update the path/image for a project image.');
+
+        $project = $I->getProject($I);
+        $image = $I->getImageFromProjectArray($project);
+        $id = $image->id;
+        $path = $image->path;
+
+        $I->seeInDatabase('images', [
+            'id'   => $id,
+            'path' => $path
+        ]);
+
+        $I->login($I);
+        $I->amOnProjectPage($I, $project);
+        $I->click('#editPhotoModal'.$id);
+        $I->waitForElement(['xpath' => "//form[@id='updateImage".$id."']//input[@class='dz-hidden-input']"]);
+        $I->attachFile(['xpath' => "//form[@id='updateImage".$id."']//input[@class='dz-hidden-input']"], 'new.jpg');
+        $I->wait(1);
+
+        $I->dontSeeInDatabase('images', [
+            'id'   => $id,
+            'path' => $path
+        ]);
+
+        $I->seeInDatabase('images', [
+            'id'   => $id,
+            'path' => 'public/images/b9dc5a3f4e80d23072fdd43fd23ea635.jpeg'
+        ]);
     }
 }

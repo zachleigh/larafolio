@@ -22,15 +22,15 @@ class ImageController extends Controller
         $image = Image::findOrFail($imageID);
 
         if ($request->hasFile('file')) {
-            $this->updatePath($request, $image);
+            $imageData = $this->updateImageInstance($request, $image);
         } else {
             $imageData = $request->only(['name', 'caption', 'alt']);
-
-            $this->user->updateImageInfo($image, $imageData);
         }
 
+        $this->user->updateImageInfo($image, $imageData);
+
         if ($request->ajax()) {
-            return response()->json($image);
+            return response()->json(true);
         }
 
         return back();
@@ -63,7 +63,7 @@ class ImageController extends Controller
      * @param \Illuminate\Http\Request $request Request from user.
      * @param \Larafolio\Models\Image  $image   Image to update.
      */
-    protected function updatePath(Request $request, Image $image)
+    protected function updateImageInstance(Request $request, Image $image)
     {
         $imagePath = $request->file('file')->store('public/images');
 
@@ -73,6 +73,6 @@ class ImageController extends Controller
 
         Storage::delete($image->path);
 
-        $this->user->updateImageInfo($image, ['path' => $imagePath]);
+        return ['path' => $imagePath];
     }
 }

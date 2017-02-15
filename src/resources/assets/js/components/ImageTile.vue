@@ -216,6 +216,11 @@
                 }
             },
 
+            /**
+             * Return route for updating this image.
+             *
+             * @return {String}
+             */
             updateRoute () {
                 return '/manager/images/'+this.image.id;
             }
@@ -230,10 +235,16 @@
 
             Dropzone.options[id] = {
                 dictDefaultMessage: 'Drop new image here',
-                // hiddenInputContainer: id,
+                hiddenInputContainer: '#'+id,
                 init: function() {
+                    this.on('complete', function (file) {
+                        setTimeout(function () {
+                            this.removeFile(file);
+                        }.bind(this), 3000);
+                    });
                     this.on('success', function (file) {
                         instance.imageUpdated();
+                        
                     });
                     this.on('error', function (message) {
                         instance.imageUpdateErrored();
@@ -279,10 +290,16 @@
                 });
             },
 
+            /**
+             * Fire updated event after image is uploaded.
+             */
             imageUpdated () {
                 this.$emit('updated');
             },
 
+            /**
+             * Flash an error message for failed update.
+             */
             imageUpdateErrored () {
                 this.flash({
                     title: 'Error',
