@@ -20,12 +20,29 @@
         top: 0
         right: 0
 
+    +ele(edit-button-container)
+        position: absolute
+        top: 0
+        right: 0
+        height: 22px
+        width: 22px
+        background-color: $transBlack
+
+    +ele(edit-photo)
+        position: absolute
+        top: 5px
+        right: 5px
+
+        & svg, svg g
+            fill: $white    
+
     +ele(form-section)
         display: flex
         flex-direction: column
 
     +ele(image)
         display: flex
+        position: relative
 
     +ele(input)
         margin: 0 15px 0 5px

@@ -36,7 +36,7 @@
             v-bind:action="action"
             method="POST"
             class="dropzone image-manager__dropzone"
-            id="my-awesome-dropzone"
+            id="new-image"
         >
             <input type="hidden" name="_token" v-bind:value="token">
         </form>
@@ -52,7 +52,9 @@
                 :key="image.id"
                 :icons="icons"
                 :image="image"
+                :token="token"
                 @remove="toggleRemoveModal"
+                @updated="fetchImages"
             ></image-tile>
         </div>
     </div>
@@ -61,12 +63,8 @@
 <script>
     import Ajax from './../mixins/Ajax.js';
     import Flash from './../mixins/Flash.js';
-    import ImageTile from './ImageTile.vue';
-    import Modal from './Modal.vue';
 
     export default {
-        components: { ImageTile, Modal },
-
         mixins: [ Ajax, Flash ],
 
         data: function () {
@@ -158,8 +156,9 @@
 
             let instance = this;
 
-            Dropzone.options.myAwesomeDropzone = {
+            Dropzone.options.newImage = {
                 dictDefaultMessage: 'Drop images here to add',
+                hiddenInputContainer: '#new-image',
                 init: function() {
                     this.on('success', function (file) {
                         instance.uploaded();

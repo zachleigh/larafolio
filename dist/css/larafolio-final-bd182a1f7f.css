@@ -1741,6 +1741,25 @@ a:hover {
   right: 0;
 }
 
+.image-tile__edit-button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 22px;
+  width: 22px;
+  background-color: rgba(90, 90, 90, 0.6);
+}
+
+.image-tile__edit-photo {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.image-tile__edit-photo svg, .image-tile__edit-photo svg g {
+  fill: white;
+}
+
 .image-tile__form-section {
   display: -webkit-box;
   display: flex;
@@ -1752,6 +1771,7 @@ a:hover {
 .image-tile__image {
   display: -webkit-box;
   display: flex;
+  position: relative;
 }
 
 .image-tile__input {

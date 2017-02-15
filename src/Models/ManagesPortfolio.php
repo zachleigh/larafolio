@@ -248,6 +248,11 @@ trait ManagesPortfolio
         return $image;
     }
 
+    // public function updateImagePath()
+    // {
+        
+    // }
+
     /**
      * Remove image from storage and delete database info if path is unique.
      *

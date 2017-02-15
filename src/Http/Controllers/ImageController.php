@@ -4,6 +4,8 @@ namespace Larafolio\Http\Controllers;
 
 use Larafolio\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as Intervention;
 
 class ImageController extends Controller
 {
@@ -19,12 +21,16 @@ class ImageController extends Controller
     {
         $image = Image::findOrFail($imageID);
 
-        $imageData = $request->only(['name', 'caption', 'alt']);
+        if ($request->hasFile('file')) {
+            $this->updatePath($request, $image);
+        } else {
+            $imageData = $request->only(['name', 'caption', 'alt']);
 
-        $this->user->updateImageInfo($image, $imageData);
+            $this->user->updateImageInfo($image, $imageData);
+        }
 
         if ($request->ajax()) {
-            return response()->json(true);
+            return response()->json($image);
         }
 
         return back();
@@ -49,5 +55,24 @@ class ImageController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * Update an image path.
+     *
+     * @param \Illuminate\Http\Request $request Request from user.
+     * @param \Larafolio\Models\Image  $image   Image to update.
+     */
+    protected function updatePath(Request $request, Image $image)
+    {
+        $imagePath = $request->file('file')->store('public/images');
+
+        $imageFile = Intervention::make(Storage::get($imagePath))->encode('jpg', 50);
+
+        Storage::put($imagePath, $imageFile);
+
+        Storage::delete($image->path);
+
+        $this->user->updateImageInfo($image, ['path' => $imagePath]);
     }
 }

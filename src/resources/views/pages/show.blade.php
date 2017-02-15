@@ -74,6 +74,7 @@
                     fetch-action="{{ route('show-page-images', ['page' => $page]) }}"
                     :icons="{{ json_encode([
                         'down' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
+                        'edit' => file_get_contents(public_path('vendor/larafolio/zondicons/edit-pencil.svg')),
                         'remove' => file_get_contents(public_path('vendor/larafolio/zondicons/close.svg')),
                         'up' => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-up.svg'))
                     ]) }}"
