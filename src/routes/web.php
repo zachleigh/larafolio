@@ -16,7 +16,7 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::get('/manager/projects/{slug}/edit', 'Larafolio\Http\Controllers\ProjectController@edit')->name('edit-project');
 
-    Route::patch('/manager/projects/{slug}/update', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');
+    Route::patch('/manager/projects/{slug}', 'Larafolio\Http\Controllers\ProjectController@update')->name('update-project');
 
     Route::get('/manager/projects/{slug}/images', 'Larafolio\Http\Controllers\ProjectImageController@index')->name('show-project-images');
 
@@ -35,7 +35,7 @@ Route::group(['middleware' => ['web', 'admin']], function () {
 
     Route::get('/manager/pages/{slug}/edit', 'Larafolio\Http\Controllers\PageController@edit')->name('edit-page');
 
-    Route::patch('/manager/pages/{slug}/update', 'Larafolio\Http\Controllers\PageController@update')->name('update-page');
+    Route::patch('/manager/pages/{slug}', 'Larafolio\Http\Controllers\PageController@update')->name('update-page');
 
     Route::get('/manager/pages/{slug}/images', 'Larafolio\Http\Controllers\PageImageController@index')->name('show-page-images');
 

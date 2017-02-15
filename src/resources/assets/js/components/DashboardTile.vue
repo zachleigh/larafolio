@@ -142,7 +142,7 @@
             },
 
             updateAction () {
-                return '/manager/'+this.resourceType+'s/'+this.resource.slug+'/update';
+                return '/manager/'+this.resourceType+'s/'+this.resource.slug;
             }
         },
 

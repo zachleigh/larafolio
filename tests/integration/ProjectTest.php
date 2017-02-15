@@ -55,7 +55,7 @@ class ProjectTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->seeInDatabase('projects', ['id' => $project->id])
-             ->json('PATCH', 'manager/projects/'.$project->slug.'/update', ['name' => 'new'])
+             ->json('PATCH', 'manager/projects/'.$project->slug, ['name' => 'new'])
              ->seeStatusCode(302)
              ->dontSeeInDatabase('projects', ['name' => 'new']);
     }

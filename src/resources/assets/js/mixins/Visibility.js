@@ -62,7 +62,7 @@ export default {
          */
         getAction () {
             if (typeof this.updateAction === 'undefined') {
-                return '/manager/projects/'+this.resource.slug+'/update'
+                return '/manager/projects/'+this.resource.slug;
             }
 
             return this.updateAction;

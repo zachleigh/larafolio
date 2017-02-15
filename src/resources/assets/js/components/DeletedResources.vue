@@ -189,7 +189,7 @@
                 this.removeFromResources(index);
 
                 this.ajax.patch(
-                    '/manager/'+this.resourceTypePlural+'/'+resource.slug+'/update'
+                    '/manager/'+this.resourceTypePlural+'/'+resource.slug
                 )
                 .then(function (response) {
                     this.$bus.$emit(this.refreshNavEvent);
