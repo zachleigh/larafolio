@@ -2,9 +2,7 @@
 
 namespace Larafolio\Http\Controllers;
 
-use Larafolio\Models\Page;
 use Illuminate\Http\Request;
-use Larafolio\Models\Project;
 use Larafolio\Http\Content\ContentCrud;
 
 class PortfolioController extends Controller

@@ -29,12 +29,18 @@ class PageController extends Controller
     }
 
     /**
-     * Return all projects.
+     * Return all pages.
+     *
+     * @param \Illuminate\Http\Request $request Request data.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            return response()->json(Page::all());
+        }
+
         $pages = $this->contentCrud->getDashboardPages();
 
         return view('larafolio::pages.index', [

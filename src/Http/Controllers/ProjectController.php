@@ -31,10 +31,16 @@ class ProjectController extends Controller
     /**
      * Return all projects.
      *
+     * @param \Illuminate\Http\Request $request Request data.
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            return response()->json(Project::all());
+        }
+
         $projects = $this->contentCrud->getDashboardProjects();
         
         $projectImages = $this->contentCrud->getDashboardProjectImages($projects);
