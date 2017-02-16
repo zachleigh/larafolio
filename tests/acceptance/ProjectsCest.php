@@ -9,6 +9,16 @@ class ProjectsCest
         $I->migrate();
     }
 
+    public function projects_page_works(AcceptanceTester $I)
+    {
+        $I->wantTo('Visit the projects page.');
+        $I->login($I);
+        $I->amOnPage('/manager/projects');
+        $I->seeCurrentUrlEquals('/manager/projects');
+        $I->see('Projects');
+        $I->see('Add Project');
+    }
+
     public function user_can_add_a_project(AcceptanceTester $I)
     {
         $data = [

@@ -35,7 +35,18 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return $this->contentCrud->index(Project::all());
+        $projects = $this->contentCrud->getDashboardProjects();
+        
+        $projectImages = $this->contentCrud->getDashboardProjectImages($projects);
+
+        $projectBlocks = $this->contentCrud->getDashboardProjectBlocks($projects);
+
+        return view('larafolio::projects.index', [
+            'projects'        => $projects,
+            'projectImages'   => $projectImages,
+            'projectBlocks'   => $projectBlocks,
+            'icons'           => $this->contentCrud->dashboardIcons(),
+        ]);
     }
 
     /**

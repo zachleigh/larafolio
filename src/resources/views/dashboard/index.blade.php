@@ -1,7 +1,7 @@
 @extends('larafolio::master')
 
 @section('title')
-    Projects - Larafolio
+    Dashboard - Larafolio
 @stop
 
 @section('content')
@@ -13,5 +13,10 @@
             :images="{{ json_encode($projectImages) }}"
             :projects="{{ json_encode($projects) }}"
         ></dashboard-projects>
+        <dashboard-pages
+            action={{ route('update-portfolio')}}
+            :icons="{{ json_encode($icons) }}"
+            :pages="{{ json_encode($pages) }}"
+        ></dashboard-pages>
     </div>
 @stop

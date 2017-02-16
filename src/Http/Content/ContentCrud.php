@@ -2,22 +2,60 @@
 
 namespace Larafolio\Http\Content;
 
+use Larafolio\Models\Page;
 use Illuminate\Http\Request;
+use Larafolio\Models\Project;
 use Larafolio\Models\HasContent;
 use Illuminate\Support\Collection;
 
 class ContentCrud
 {
     /**
-     * Return all.
+     * Get all projects, sorted by oreder.
      *
-     * @param \Illuminate\Support\Collection $collection Colelction of all resources.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Support\Collection
      */
-    public function index(Collection $collection)
+    public function getDashboardProjects()
     {
-        return response()->json($collection);
+        return Project::all()->sortBy('order')->values();
+    }
+
+    /**
+     * Get collection of project image info: [project name => small url].
+     *
+     * @param  \Illuminate\Support\Collection $projects Collection of projects.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getDashboardProjectImages(Collection $projects)
+    {
+        return $projects->mapWithKeys(function (Project $project) {
+            return [$project->name => $project->getProjectImageUrl()];
+        })->objectIfEmpty();
+    }
+
+    /**
+     * Get collection of project block info: [project name => block text].
+     *
+     * @param  \Illuminate\Support\Collection $projects Collection of projects.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getDashboardProjectBlocks(Collection $projects)
+    {
+        return $projects->mapWithKeys(function (Project $project) {
+            return [$project->name => $project->getProjectBlockText()];
+        })->objectIfEmpty();
+    }
+
+    /**
+     * Get all pages, sorted by oreder.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getDashboardPages()
+    {
+        return Page::all()->sortBy('order')->values();
     }
 
     /**
@@ -195,5 +233,32 @@ class ContentCrud
         $reflection = new \ReflectionClass($model);
 
         return lcfirst($reflection->getShortName());
+    }
+
+    /**
+     * Icons needed for dashboard.
+     *
+     * @return array
+     */
+    public function dashboardIcons()
+    {
+        return [
+            'down'    => $this->getIcon('vendor/larafolio/zondicons/arrow-thin-down.svg'),
+            'up'      => $this->getIcon('vendor/larafolio/zondicons/arrow-thin-up.svg'),
+            'hidden'  => $this->getIcon('vendor/larafolio/zondicons/view-hide.svg'),
+            'visible' => $this->getIcon('vendor/larafolio/zondicons/view-show.svg'),
+        ];
+    }
+
+    /**
+     * Get icon file contents.
+     *
+     * @param  string $path Path to icon file, relative to public path.
+     *
+     * @return string
+     */
+    protected function getIcon($path)
+    {
+        return file_get_contents(public_path($path));
     }
 }

@@ -5,6 +5,14 @@
                 <header-lines></header-lines>
                 <h1 class="page__top-title">Pages</h1>
             </div>
+            <div>
+                <a
+                    href="/manager/pages/add"
+                    class="button button--small button--green"
+                >
+                    Add Page
+                </a>
+            </div>
         </div>
         <div v-show="count == 0">
             <h2>You have not added any pages yet.</h2>

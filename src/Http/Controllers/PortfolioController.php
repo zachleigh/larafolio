@@ -5,9 +5,29 @@ namespace Larafolio\Http\Controllers;
 use Larafolio\Models\Page;
 use Illuminate\Http\Request;
 use Larafolio\Models\Project;
+use Larafolio\Http\Content\ContentCrud;
 
 class PortfolioController extends Controller
 {
+    /**
+     * Service class for content crud.
+     *
+     * @var \Larafolio\Http\Content\ContentCrud
+     */
+    protected $contentCrud;
+
+    /**
+     * Construct.
+     *
+     * @param \Larafolio\Http\Content\ContentCrud $contentCrud Service class for crud.
+     */
+    public function __construct(ContentCrud $contentCrud)
+    {
+        parent::__construct();
+
+        $this->contentCrud = $contentCrud;
+    }
+
     /**
      * Show the manager dashboard.
      *
@@ -15,24 +35,20 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $projects = Project::all()->sortBy('order')->values();
+        $projects = $this->contentCrud->getDashboardProjects();
         
-        $projectImages = $projects->mapWithKeys(function (Project $project) {
-            return [$project->name => $project->getProjectImageUrl()];
-        })->objectIfEmpty();
+        $projectImages = $this->contentCrud->getDashboardProjectImages($projects);
 
-        $projectBlocks = $projects->mapWithKeys(function (Project $project) {
-            return [$project->name => $project->getProjectBlockText()];
-        })->objectIfEmpty();
+        $projectBlocks = $this->contentCrud->getDashboardProjectBlocks($projects);
 
-        $pages = Page::all()->sortBy('order')->values();
+        $pages = $this->contentCrud->getDashboardPages();
 
-        return view('larafolio::projects.index', [
+        return view('larafolio::dashboard.index', [
             'projects'        => $projects,
             'projectImages'   => $projectImages,
             'projectBlocks'   => $projectBlocks,
             'pages'           => $pages,
-            'icons'           => $this->dashboardIcons(),
+            'icons'           => $this->contentCrud->dashboardIcons(),
         ]);
     }
 
@@ -50,20 +66,5 @@ class PortfolioController extends Controller
         } elseif ($request->has('pages')) {
             $this->user->updatePageOrder($request->get('pages'));
         }
-    }
-
-    /**
-     * Icons needed for dashboard.
-     *
-     * @return array
-     */
-    protected function dashboardIcons()
-    {
-        return [
-            'down'    => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-down.svg')),
-            'up'      => file_get_contents(public_path('vendor/larafolio/zondicons/arrow-thin-up.svg')),
-            'hidden'  => file_get_contents(public_path('vendor/larafolio/zondicons/view-hide.svg')),
-            'visible' => file_get_contents(public_path('vendor/larafolio/zondicons/view-show.svg')),
-        ];
     }
 }

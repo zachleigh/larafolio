@@ -5,6 +5,14 @@
                 <header-lines></header-lines>
                 <h1 class="page__top-title">Projects</h1>
             </div>
+            <div>
+                <a
+                    href="/manager/projects/add"
+                    class="button button--small button--green"
+                >
+                    Add Project
+                </a>
+            </div>
         </div>
         <div v-show="count == 0">
             <h2>You have not added any projects yet.</h2>

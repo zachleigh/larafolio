@@ -35,7 +35,12 @@ class PageController extends Controller
      */
     public function index()
     {
-        return $this->contentCrud->index(Page::all());
+        $pages = $this->contentCrud->getDashboardPages();
+
+        return view('larafolio::pages.index', [
+            'pages' => $pages,
+            'icons' => $this->contentCrud->dashboardIcons(),
+        ]);
     }
 
     /**

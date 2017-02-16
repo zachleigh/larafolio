@@ -9,6 +9,16 @@ class PagesCest
         $I->migrate();
     }
 
+    public function pages_page_works(AcceptanceTester $I)
+    {
+        $I->wantTo('Visit the pages page.');
+        $I->login($I);
+        $I->amOnPage('/manager/pages');
+        $I->seeCurrentUrlEquals('/manager/pages');
+        $I->see('Pages');
+        $I->see('Add Page');
+    }
+
     public function user_can_add_a_page(AcceptanceTester $I)
     {
         $data = [
